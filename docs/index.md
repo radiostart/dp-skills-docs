@@ -8,10 +8,9 @@ hide:
 
 DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 *plan → critic → generate → evaluate* 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.
 
-!!! tip "v0.21.1"
-    - `plan-validate.py` OQ 게이트 — 미해결 Open Questions 카테고리별 처리 마커 강제 (a–d)
-    - `@ag-planner-critic` / `@ag-code-reviewer` 에이전트 정식 도입
-    - 신규 가이드: [Plan 검증 게이트 통과](how-to/plan-gates.md) · [도메인 지식 환류](how-to/knowledge-sync.md)
+!!! tip "v0.21.2"
+    - 유지보수 — `@ag-code-reviewer` 문서 정리 (비기능 `페르소나` 섹션 → `호출 인자`, 동작 무변경)
+    - 기능 하이라이트: OQ 게이트 · `@ag-planner-critic` / `@ag-code-reviewer` · [Plan 검증 게이트](how-to/plan-gates.md) · [도메인 지식 환류](how-to/knowledge-sync.md)
 
 ---
 

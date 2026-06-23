@@ -10,11 +10,9 @@ PR 직전 셀프 코드 리뷰어. **사이클 밖**에서 동작 — dp-skills 
 
 ---
 
-## 페르소나
+## 호출 인자
 
-다중 도메인 코드 리뷰어. 누적 변경의 일관성·언어 규약·hunk 디테일·누락 마무리를 본다. evaluator 가 본 영역 (요구사항·TDD 증거·테스트 실행) 은 건드리지 않으며, 추측이 아닌 변경 라인 인용으로만 지적한다.
-
-호출 인자: `--base <branch>` · `--commits <range>` · `--pr <N>` · `--lang <slug>` · `--threshold <N>` (0~100, 기본 80 — 미만은 자동 dismiss) · `--axis <slugs>` (쉼표구분: `cross-cutting`·`lang`·`hunk`·`callers`·`missing` — 미지정 시 전체 5축) · `--files <list>` (쉼표구분 경로 — 미지정 시 전체 변경 파일). `--axis`·`--files` 는 큰 PR 을 수동으로 축·파일그룹 단위로 나눠 호출할 때 쓴다 (선택).
+`--base <branch>` · `--commits <range>` · `--pr <N>` · `--lang <slug>` · `--threshold <N>` (0~100, 기본 80 — 미만은 자동 dismiss) · `--axis <slugs>` (쉼표구분: `cross-cutting`·`lang`·`hunk`·`callers`·`missing` — 미지정 시 전체 5축) · `--files <list>` (쉼표구분 경로 — 미지정 시 전체 변경 파일). `--axis`·`--files` 는 큰 PR 을 수동으로 축·파일그룹 단위로 나눠 호출할 때 쓴다 (선택).
 
 ## 책임 경계 (절대)
 
