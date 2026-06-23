@@ -1,0 +1,120 @@
+site_name: dp-skills
+site_description: DP팀 에이전트 오케스트레이션 플러그인 — 기획서 분석부터 코드 구현·리뷰까지
+site_url: https://radiostart.github.io/dp-skills-docs/
+repo_url: https://github.com/dealicious-inc/deali-skills-plugin
+repo_name: dealicious-inc/deali-skills-plugin
+edit_uri: edit/main/dp-skills/docs/
+
+docs_dir: docs
+site_dir: docs-site
+
+# 영구 exclude — docs/plans/ 는 SDLC 메타 산출물 (PLAN-*.md), 사이트 콘텐츠 아님.
+exclude_docs: |
+  plans/*
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang: ko
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)'
+  - literate-nav        # reference/{agents,skills,tools}/ 자동 인덱싱 (docs_build.py 산출물)
+  - mermaid2
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+
+extra:
+  version: "0.21.1"  # plugin.json 과 docs_build.py 가 동기화
+
+nav:
+  - Home: index.md
+  - Tutorial:
+      - tutorial/index.md
+      - 설치 및 초기 세팅: tutorial/installation.md
+      - Quick Start: tutorial/quick-start.md
+      - Deep Walkthrough: tutorial/getting-started.md
+  - How-to:
+      - how-to/index.md
+      - 부트스트랩:
+          - 팀 workspace 부트스트랩: how-to/team-bootstrap.md
+          - toolchain·언어 설정: how-to/configure-toolchain.md
+      - 개발 워크플로우:
+          - 미완료 feature 순차 자동 진행: how-to/run-cycle.md
+          - TDD 모드 활성화: how-to/tdd-mode.md
+          - Characterize 모드: how-to/characterize-mode.md
+          - Critic 으로 계획 챌린지: how-to/critic-review.md
+          - Plan 검증 게이트 통과: how-to/plan-gates.md
+          - Focus 로 방향 조정: how-to/focus-direction.md
+      - 컨텍스트 관리:
+          - 기획서로 features 일괄 생성: how-to/analyze-docs.md
+          - 기획서 없이 feature 추가: how-to/create-feature.md
+          - 도메인 스코프 추출: how-to/domain-discover.md
+          - 도메인 지식 환류: how-to/knowledge-sync.md
+          - 도메인 rules 작성: how-to/write-domain-rules.md
+          - Confluence 동기화: how-to/confluence-sync.md
+      - 코드 리뷰:
+          - PR 직전 셀프 코드 리뷰: how-to/self-code-review.md
+          - PR AI 리뷰 후속 처리: how-to/ai-review-followup.md
+      - 운영:
+          - Doctor 진단·마이그레이션: how-to/doctor-diagnose.md
+          - Slack 알림 설정: how-to/slack-notify.md
+          - QA 사이클 진행: how-to/qa-cycle.md
+  - Reference:
+      - reference/index.md
+      - Agents: reference/agents/   # literate-nav 가 docs_build.py 산출물을 자동 인덱싱
+      - Skills: reference/skills/
+      - Tools: reference/tools/
+  - Explanation:
+      - explanation/index.md
+      - 핵심 개념: explanation/concepts.md
+      - 에이전트 흐름: explanation/agent-flow.md
+      - Workspace 레이아웃: explanation/workspace-layout.md
+      - 워크스페이스 설정: explanation/workspace-config.md
+      - 모드 - Standard / TDD / Characterize: explanation/modes.md
+      - Lifecycle phases - development / qa: explanation/lifecycle-phases.md
