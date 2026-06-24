@@ -4,24 +4,49 @@
 
 ## 전체 구조
 
+한 장에 다 담으면 글자가 뭉개지므로, 위에서 아래로 4개 층으로 나눠 본다.
+
+**1. 최상위 골격**
+
 ```mermaid
 graph TD
-    W[workspace/]
-    W --> TEAM[TEAM.md<br/>기본 팀명]
-    W --> COMMON[_common/<br/>전사 공통]
-    W --> T["{TEAM}/"]
-    COMMON --> CFG[config.md<br/>toolchain·pr_default_base]
-    T --> STATE[STATE.md<br/>진행중 프로젝트 1행]
-    T --> CTX[context/<br/>팀 지식 — 수동 유지]
-    T --> PROJ[projects/·issues/<br/>작업 상태 — 스킬이 갱신]
-    CTX --> MAN[MANIFEST.md<br/>도메인 분류]
-    CTX --> TCFG[team.config.md]
-    CTX --> SCOPE["scope/·rules/<br/>{domain}.md"]
-    PROJ --> PM[project.md]
-    PROJ --> AST[.agent-state.yml]
-    PROJ --> AG["agents/<br/>planner·generator·evaluator.md"]
-    PROJ --> FEAT["features/<br/>NN-slug.md · .plan.md"]
-    PROJ --> QA["qa/<br/>{JIRA-KEY}.md (phase=qa)"]
+    W["workspace/"]
+    W --> TEAM["TEAM.md — 기본 팀명"]
+    W --> COMMON["_common/ — 전사 공통"]
+    W --> T["{TEAM}/ — 팀별 루트"]
+    COMMON --> CFG["config.md — toolchain · pr_default_base"]
+```
+
+**2. `{TEAM}/` — 팀 루트**
+
+```mermaid
+graph TD
+    T["{TEAM}/"]
+    T --> STATE["STATE.md — 진행중 프로젝트 1행"]
+    T --> CTX["context/ — 팀 지식 (수동 유지)"]
+    T --> PROJ["projects/ · issues/ — 작업 상태 (스킬 갱신)"]
+```
+
+**3. `context/` — 팀 지식 (수동 유지)**
+
+```mermaid
+graph TD
+    CTX["context/"]
+    CTX --> MAN["MANIFEST.md — 도메인 분류"]
+    CTX --> TCFG["team.config.md"]
+    CTX --> SCOPE["scope/ · rules/ — {domain}.md"]
+```
+
+**4. `projects/{PROJECT}/` — 작업 상태 (스킬 갱신)**
+
+```mermaid
+graph TD
+    PROJ["projects/{PROJECT}/"]
+    PROJ --> PM["project.md"]
+    PROJ --> AST[".agent-state.yml"]
+    PROJ --> AG["agents/ — planner · generator · evaluator.md"]
+    PROJ --> FEAT["features/ — NN-slug.md · .plan.md"]
+    PROJ --> QA["qa/ — {JIRA-KEY}.md (phase=qa)"]
 ```
 
 `qa/` 폴더는 project 가 **phase=qa** 로 전환된 뒤 `/dp-skills:qa {KEY}` 첫 호출에서 lazy 생성됩니다. Jira 키 1개당 파일 1개 (`qa/QAPRJ-1234.md`), 회신 이력은 Jira 코멘트가 SSOT 이므로 로컬 파일에는 회신 섹션이 없습니다 — 자세한 내용은 [Lifecycle phases](lifecycle-phases.md) 참조.
