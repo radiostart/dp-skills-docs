@@ -25,8 +25,8 @@ phase 는 `.agent-state.yml` 의 `phase` 필드로 표현됩니다 (default `dev
 
 ```mermaid
 flowchart TD
-    Dev[phase = development<br/>STATE: '| project | X | 진행중 |'<br/>features/ 쓰기 가능]
-    QA[phase = qa<br/>STATE: '| project | X | 진행중 |' 유지<br/>features/ 잠금 · qa/ 쓰기 가능]
+    Dev["phase = development<br/>STATE: project 행 status = 진행중<br/>features/ 쓰기 가능"]
+    QA["phase = qa<br/>STATE: project 행 status = 진행중 유지<br/>features/ 잠금 · qa/ 쓰기 가능"]
 
     Dev -->|"/dp-skills:project X --qa on<br/>(명시 전환)"| QA
     Dev -->|"/dp-skills:qa SHOP-1234<br/>(결함 직접 호출 시 자동 전환)"| QA
