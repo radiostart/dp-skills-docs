@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2545,10 +2575,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-2" class="md-nav__link">
+  <a href="#6-2-hotl-0260" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6-2. 생성 여부 질의
+        6-2. 생성 + 보고 (질의 없음 — HOTL 0.26.0)
       
     </span>
   </a>
@@ -2757,6 +2787,8 @@
       
         
       
+        
+      
     
     
     
@@ -2829,6 +2861,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3664,10 +3724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-2" class="md-nav__link">
+  <a href="#6-2-hotl-0260" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6-2. 생성 여부 질의
+        6-2. 생성 + 보고 (질의 없음 — HOTL 0.26.0)
       
     </span>
   </a>
@@ -3725,16 +3785,14 @@
 
 <h1 id="dp-skillsqa"><code>/dp-skills:qa</code><a class="headerlink" href="#dp-skillsqa" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>사용자가 <code>/dp-skills:qa {KEY}</code> 를 명시적으로 호출했을 때만 사용한다 — 대화에 Jira 티켓 링크·이슈 키가 보이는 것만으로는 발동하지 않는다 (링크 공유·메모는 처리 요청이 아니다). Jira QA 결함 처리 모드 진입 — 활성 project 의 qa/ 에 1건 처리. 인자로 Jira 이슈 키 (<code>^[A-Z]+-\d+$</code>) 가 필수다. 활성 project 컨텍스트 (features·scope·rules·agents) 를 그대로 이어받아 결함 1건의 분석·수정 사이클을 시작한다. development phase 에서 호출하면 qa phase 로 자동 전환 후 진행한다. <code>off</code> 인자로 development phase 로 복귀할 수 있다. 다건 추적·잔여 현황·재오픈은 Jira UI 가 SSOT — 본 스킬은 보드뷰·다건 조회를 하지 않는다.</p>
+<p>사용자가 <code>/dp-skills:qa {KEY}</code> 를 명시적으로 호출했을 때만 사용한다 — 대화에 Jira 티켓 링크·이슈 키가 보이는 것만으로는 발동하지 않는다 (링크 공유·메모는 처리 요청이 아니다). Jira QA 결함 처리 모드 진입 — 활성 project 의 qa/ 에 1건 처리. 인자로 Jira 이슈 키가 필수다. 활성 project 컨텍스트를 그대로 이어받아 결함 1건의 분석·수정 사이클을 시작한다. <code>off</code> 인자로 development phase 로 복귀할 수 있다. 다건 추적·잔여 현황·재오픈은 Jira UI 가 SSOT — 본 스킬은 보드뷰·다건 조회를 하지 않는다.</p>
 </blockquote>
 <p>QA phase 결함 처리 모드를 활성화한다.</p>
 <p>대상 Jira 키: $ARGUMENTS</p>
 <p><strong>전제:</strong></p>
 <ul>
 <li>활성 project 가 있어야 한다 (<code>/dp-skills:project {PROJECT}</code> 로 먼저 진입).</li>
-<li>phase 는 자동 전환된다 — development phase 에서 호출해도 qa phase 로 전환 후
-  진행한다. 수동 전환이 필요한 경우에만 <code>/dp-skills:project {PROJECT} --qa</code> 를
-  사용한다.</li>
+<li>phase 자동 전환은 수행 절차 3 참조 — 수동 전환이 필요할 때만 <code>/dp-skills:project {PROJECT} --qa</code>.</li>
 <li>단발 운영 이슈는 <code>/dp-skills:issue</code> 를 사용한다 — project 컨텍스트가 끊겨도
   되는 핫픽스·장애 분석용. QA 결함은 project 컨텍스트가 필수이므로 본 스킬.</li>
 </ul>
@@ -3918,24 +3976,28 @@ project 에 분산되면 추적이 어렵다.</p>
 <p>폴더가 없으면 <code>qa/</code> 폴더를 lazy 생성한다.</p>
 <h3 id="6">6. 작업 브랜치 생성 (선택)<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
 <p>신규 생성·기존 Read 두 경로 모두 공통으로 수행한다. @ag-planner 핸드오프
-(7 단계) 전에 결함 수정용 작업 브랜치를 만들지 사용자에게 묻는다.</p>
+(7 단계) 전에 결함 수정용 작업 브랜치를 만든다 (질의 없음 — 6-2 가 생성·보고).</p>
 <h4 id="6-1">6-1. 브랜치명 결정 (재작업 중복 방지)<a class="headerlink" href="#6-1" title="Permanent link">&para;</a></h4>
 <p>base 는 <code>fix/{KEY}</code>. 같은 티켓이 이전에 해결된 뒤 다시 수정이 진행되는
 경우(재작업)를 대비해, 기존 동일 base 브랜치(local + remote)를 조사하여 suffix
 최댓값 + 1 의 <code>fix/{KEY}-{N+1}</code> 로 충돌을 피한다 — 조사 명령·suffix 결정 예시:
 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/qa/references/branch-naming.md"><code>references/branch-naming.md</code></a>.</p>
-<h4 id="6-2">6-2. 생성 여부 질의<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h4>
-<p>결정된 브랜치명으로 사용자에게 묻는다 (둘째 줄은 재작업으로 충돌이 감지된
-경우에만 출력):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>작업 브랜치 &#39;{branch}&#39; 를 생성할까요? [Y/n]
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>(재작업 — 기존 &#39;fix/{KEY}&#39; 충돌 회피로 &#39;{branch}&#39;)
+<h4 id="6-2-hotl-0260">6-2. 생성 + 보고 (질의 없음 — HOTL 0.26.0)<a class="headerlink" href="#6-2-hotl-0260" title="Permanent link">&para;</a></h4>
+<p>결정된 브랜치명으로 <code>git checkout -b {branch}</code> 를 <strong>질의 없이 실행</strong>하고 1줄
+보고한다. 분기점 (현재 HEAD 의 브랜치명·short SHA) 을 반드시 포함한다 —
+잘못된 base 에서 분기했음을 사용자가 즉시 인지하고 개입할 수 있도록 (둘째
+줄은 재작업 충돌 감지 시에만):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>작업 브랜치 생성: &#39;{branch}&#39; (분기점: {현재 브랜치}@{short SHA})
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>(재작업 — 기존 &#39;fix/{KEY}&#39; 충돌 회피)
 </span></code></pre></div>
 <ul>
-<li><code>y</code>/<code>yes</code>/빈 응답(기본 Y) → <code>git checkout -b {branch}</code> 실행. 실패(이미 존재 등)
-  시 에러를 그대로 안내하고 브랜치 미생성 상태로 7 단계 진행.</li>
-<li><code>n</code>/<code>no</code> → 브랜치 생성 없이 현재 브랜치 유지하고 7 단계 진행.</li>
-<li>non-interactive (no TTY) → 생성하지 않고 7 단계 진행 (fail-safe: 사용자 의도
-  없이 브랜치를 만들지 않는다).</li>
+<li>생성 실패 (이미 존재 등) 시 에러를 그대로 안내하고 브랜치 미생성 상태로
+  7 단계 진행.</li>
+<li>다른 브랜치 전략이 필요하면 사용자가 사전에 말하면 반영한다 — 브랜치는
+  완전 가역 (삭제 후 재분기 가능) 이라 사후 교정 비용이 낮다.</li>
+<li>종전 [Y/n] 질의와 non-interactive fail-safe ("사용자 의도 없이 브랜치를
+  만들지 않는다") 는 본 개정으로 질의와 함께 제거됐다 — 스킬 호출 자체가
+  결함 수정 의도이며 브랜치 생성은 그 기본 동선이다.</li>
 </ul>
 <p>브랜치는 현재 HEAD 에서 분기한다. 특정 base(main/develop 등)에서 시작해야 하면
 사용자가 먼저 해당 브랜치로 이동한 뒤 본 스킬을 호출한다.</p>
@@ -4015,7 +4077,7 @@ project 에 분산되면 추적이 어렵다.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

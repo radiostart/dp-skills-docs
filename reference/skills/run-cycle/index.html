@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2448,7 +2478,7 @@
   <a href="#21-stateless" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 재개 지점 판정 (stateless)
+        2.1 재개 지점 판정 (stateless) — 항상 선행
       
     </span>
   </a>
@@ -2470,7 +2500,7 @@
   <a href="#23-critic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 critic
+        2.3 critic — 자동 진행의 판정자
       
     </span>
   </a>
@@ -2679,6 +2709,8 @@
       
         
       
+        
+      
     
     
     
@@ -2751,6 +2783,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3461,7 +3521,7 @@
   <a href="#21-stateless" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 재개 지점 판정 (stateless)
+        2.1 재개 지점 판정 (stateless) — 항상 선행
       
     </span>
   </a>
@@ -3483,7 +3543,7 @@
   <a href="#23-critic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3 critic
+        2.3 critic — 자동 진행의 판정자
       
     </span>
   </a>
@@ -3569,13 +3629,14 @@
 
 <h1 id="dp-skillsrun-cycle"><code>/dp-skills:run-cycle</code><a class="headerlink" href="#dp-skillsrun-cycle" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿. green 신호(critic 합의·evaluator READY)에는 자동 진행하고, plan 승인· critic blocking·NOT_READY·block 에서만 일시정지한다. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
+<p>활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿 (human-on-the-loop). green 신호에는 사전 승인 없이 자동 진행하고 Slack progress 로 사후 통지하며, critic blocking·NOT_READY 재시도 소진·block· wrapper 질의 등 red 에서만 정지한다 (판정 상세·정지 전수 목록은 본문 §2.3·§3). 종전 사전 승인 흐름은 <code>--gated</code> 로 회귀. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
 </blockquote>
-<p>활성 project 의 development phase 에서 미완료 feature 들을 순차 자동 처리하는
-오케스트레이터. 메인 루프에서 <code>@ag-planner</code>·<code>@ag-planner-critic</code>·
-<code>@ag-generator</code>·<code>@ag-evaluator</code> 를 순서대로 호출한다 (subagent 가 subagent 를
-띄우지 않음). 기존 수동 사이클은 그대로 — 본 스킬은 선택적 순차 러너.</p>
-<p>대상: $ARGUMENTS  (옵션: feature 부분집합 <code>#3-5</code> · <code>#3 #4</code>)</p>
+<p>메인 루프에서 <code>@ag-planner</code>·<code>@ag-planner-critic</code>·<code>@ag-generator</code>·<code>@ag-evaluator</code> 를
+순서대로 호출한다 (subagent 가 subagent 를 띄우지 않음). 사전 결재 대신
+<strong>검증 산출물 (critic 합의표·evaluator REPORT) 이 게이트</strong>다.</p>
+<p>대상: $ARGUMENTS  (옵션: feature 부분집합 <code>#3-5</code> · <code>#3 #4</code> · <strong><code>--gated</code></strong> — 종전
+human-in-the-loop 게이트 (plan 사전 승인·재개 재승인) 전부 복원. per-invocation
+플래그다 — 상태 파일에 저장되지 않으므로 (stateless) 정지 후 재실행 시 재지정한다.)</p>
 <h2 id="_1">사전 확인<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> <strong>P-1</strong>(TodoWrite 선로딩) · <strong>P1</strong>(팀) ·
 <strong>P2</strong>(활성 project) 수행. 활성 project 없으면 P2 메시지로 종료. <code>.agent-state.yml</code>
@@ -3587,30 +3648,79 @@
    재계산하지 않고 목록 순서를 신뢰한다.</li>
 <li>인자로 <code>#3-5</code>·<code>#3 #4</code> 명시 시 그 부분집합으로 필터.</li>
 <li>큐가 비면 → <code>"신규 작업 없음 (모든 목표 완료)"</code> 출력 후 종료.</li>
-<li>큐 표시 + 확인: <code>"큐: #3 {slug} → #4 {slug} → #5 {slug} (순서대로). 진행할까요?"</code>
-   — 사용자 승인 후 시작.</li>
+<li>큐를 표시하고 <strong>확인 없이 즉시 시작한다</strong> — 스킬 호출 자체가 진행 의도다.
+   시작 시 Slack 통지 1회:</li>
 </ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span>--event<span class="w"> </span>progress<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--workspace<span class="w"> </span>workspace<span class="w"> </span>--message<span class="w"> </span><span class="s2">&quot;run-cycle 시작: {큐 요약 (#3 → #4 → #5)}&quot;</span>
+</span></code></pre></div>
+<p>(<code>.slack.env</code> 부재 시 자동 no-op — 호출은 그대로 실행. 이하 모든 progress 동일.)</p>
 <h2 id="2-feature-1">2. feature 1건 사이클 루프<a class="headerlink" href="#2-feature-1" title="Permanent link">&para;</a></h2>
 <p>큐의 각 feature 를 순서대로 처리한다.</p>
-<h3 id="21-stateless">2.1 재개 지점 판정 (stateless)<a class="headerlink" href="#21-stateless" title="Permanent link">&para;</a></h3>
-<p>feature 산출물로 "가장 이른 미완료 단계" 를 정한다:</p>
+<h3 id="21-stateless">2.1 재개 지점 판정 (stateless) — 항상 선행<a class="headerlink" href="#21-stateless" title="Permanent link">&para;</a></h3>
+<p>feature 산출물로 "가장 이른 미완료 단계" 를 정한다. <strong>이 판정이 게이트 검사보다
+먼저다</strong> — 게이트 통과가 재개 지점을 앞당기지 않는다 (구현 완료 상태에서
+generator 를 재실행해 같은 feature 를 이중 적용하는 경로 봉쇄):</p>
 <ul>
-<li><code>features/NN-{slug}.plan.md</code> 없음 → <strong>planner 부터</strong></li>
-<li>유효한 <code>.plan.md</code> 있음 (<code>tools/plan-validate.py</code> 통과) → <strong>critic/generator 부터</strong></li>
-<li><code>features/NN-{slug}.eval.md</code> 가 <code>NOT_READY</code> → <strong>그 지점부터</strong></li>
+<li><code>features/NN-{slug}.plan.md</code> 없음 → <strong>planner 부터</strong> (§2.2)</li>
+<li>유효한 <code>.plan.md</code> 있음 (<code>tools/plan-validate.py</code> 통과) + <code>.eval.md</code> 없음 →
+  재개 지점을 먼저 정한다:</li>
+<li>plan 스텝에 미완료 진행 흔적이 있거나 판단이 애매하면 → 재개 지점 = critic/generator</li>
+<li>plan 전 스텝 완료 (<code>[x]</code>·[Green] 증거) + 구현이 끝난 상태 → 재개 지점 = <strong>evaluator</strong> (§2.5)</li>
 </ul>
+<p>그 다음 <strong>재개 게이트</strong> 를 통과시킨다 (승인 사실은 산출물에 없으므로 합의표가 증거):
+  - <code>.plan.critic.md</code> 존재 + critic-lint 통과 + blocking 미해결 (<code>open</code>/<code>deferred</code>) 0
+    → 재승인 없이 <strong>판정된 재개 지점부터</strong> 진행 + progress 통지 ("재개: #{N} {지점}").
+  - <code>.plan.critic.md</code> 없음 → <strong>critic 호출로 합의표 확보</strong> (§2.3) 후, blocking 0 이면
+    <strong>판정된 재개 지점부터</strong> (critic green 이 generator 를 강제하지 않는다 — 구현
+    완료 상태면 evaluator 로). blocking ≥ 1 → §3 정지.
+  - blocking <code>deferred</code>·<code>open</code> 잔존 → §3 정지 (§2.3 판정 준용).
+  - <code>--gated</code>: 합의표 유무와 무관하게 plan 을 사용자에게 재제시하고 승인 후 재개 (종전 동작).
+- <code>features/NN-{slug}.eval.md</code> 가 <code>NOT_READY</code> → <strong>generator 재작업부터</strong> (§2.4→§2.5).
+  이 경로의 재작업도 §2.5 의 재시도 1회에 계상한다 (세션 기준).</p>
 <p>완료(<code>[x]</code>) feature 는 큐에 없으므로 도달하지 않는다.</p>
 <h3 id="22-planner">2.2 planner<a class="headerlink" href="#22-planner" title="Permanent link">&para;</a></h3>
-<p><code>@ag-planner</code> 호출 → <code>.plan.md</code> 산출.
-<strong>⏸ plan 승인 게이트</strong>: 산출된 plan 을 사용자에게 제시하고 승인을 기다린다.
-승인 전 다음 단계 진행 금지 (feature 마다 1회). 미승인·거부 → §3 정지.</p>
-<h3 id="23-critic">2.3 critic<a class="headerlink" href="#23-critic" title="Permanent link">&para;</a></h3>
-<p><code>@ag-planner-critic</code> 호출 (기본 실행) → <code>.plan.critic.md</code> 의 합의 표 생성.</p>
-<p>판정은 합의 표를 읽어 결정한다 (열: <code>severity</code>=blocking/suggestion/nit · <code>status</code>=<code>open</code>/<code>accepted</code>/<code>rejected</code>/<code>deferred</code>. critic 이 행마다 <code>severity</code> + <code>status=open</code> 으로 emit — ag-planner-critic 절차 5):</p>
+<p><code>@ag-planner</code> 호출 → <code>.plan.md</code> 산출. 호출 프롬프트에 feature 번호·slug 와
+<strong><code>[orchestration: hotl]</code> 마커</strong>를 포함한다 — planner 가 절차 4 의 승인 대기를
+"계획 확정 보고" 로, 절차 7 의 approval Slack 통지를 생략 (통지는 본 스킬의
+progress 로 일원화 — 채널에 "⏸ 승인 필요" 거짓 신호 방지) 로 전환한다.</p>
 <ul>
-<li><strong>blocking 미해결 행</strong> (<code>severity</code>=blocking 이고 <code>status</code> ∈ {<code>open</code>, <code>deferred</code>}) 이 1개라도 있으면 → <strong>⏸ §3 정지</strong> (critic 규칙 — "blocking 미해소 시 generator 진행 금지". <code>deferred</code>=이월 도 미해결이므로 정지 — <code>accepted</code>·<code>rejected</code> 만 처리 완료로 본다).</li>
-<li>blocking 행이 없거나 모든 blocking 행이 <code>accepted</code>·<code>rejected</code> 로 처리됨(정지 대상 0) → <strong>합의 표를 수정하지 않고</strong> generator 진행. suggestion·nit 은 status 무관 비정지. 합의 표는 critic·planner 소유라 run-cycle 은 읽기만 한다 — <code>status</code> 전이는 planner (절차 10) 만 수행 (ag-planner-critic 절차 5).</li>
+<li><strong>기본 (HOTL)</strong>: plan 산출·plan-validate 통과 후 <strong>사용자 승인 대기 없이 §2.3
+  (critic) 으로 즉시 진행</strong>. plan 은 산출물로 남아 사후 감사 대상.</li>
+<li><strong><code>--gated</code></strong>: 마커를 넣지 않고 호출하며, 산출된 plan 을 사용자에게 제시하고
+  승인을 기다린다 (종전 ⏸ plan 승인 게이트). 미승인·거부 → §3 정지.</li>
 </ul>
+<h3 id="23-critic">2.3 critic — 자동 진행의 판정자<a class="headerlink" href="#23-critic" title="Permanent link">&para;</a></h3>
+<p><code>@ag-planner-critic</code> 호출 (<strong>HOTL 필수 — 스킵 없음</strong>) → <code>.plan.critic.md</code> 산출.
+호출 프롬프트에 <strong>feature 번호·slug·대상 plan 경로를 명시</strong>한다 — 큐 진행 중엔
+완료 feature 의 plan 이 잔존해 critic 절차 2 의 후보 탐색이 복수를 만나므로,
+명시 없이는 critic 이 후보 선택 질의로 정지한다.</p>
+<p>판정 절차:</p>
+<ol>
+<li><strong>[필수 선행] critic-lint</strong> — 합의표 무결성을 결정론 검증한다:</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/critic-lint.py<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>workspace/<span class="o">{</span>TEAM<span class="o">}</span>/projects/<span class="o">{</span>PROJECT<span class="o">}</span>/features/NN-<span class="o">{</span>slug<span class="o">}</span>.plan.critic.md
+</span></code></pre></div>
+<p>exit 1 (본문 챌린지 ↔ 표 불일치·행 누락·enum 위반) → <strong>§3 정지 (합의표 불일치)</strong>.
+   행 누락 산출물로 blocking 0 을 판독하는 거짓 통과 경로를 봉쇄한다.</p>
+<ol>
+<li><strong>합의 표 판독</strong> (열: <code>severity</code>·<code>status</code>. critic 이 행마다 <code>severity</code> +
+   <code>status=open</code> 으로 emit — ag-planner-critic 절차 5):</li>
+<li><strong>blocking 미해결 행</strong> (<code>severity</code>=blocking 이고 <code>status</code> ∈ {<code>open</code>, <code>deferred</code>})
+     이 1개라도 있으면 → <strong>§3 정지</strong> ("blocking 미해소 시 generator 진행 금지".
+     <code>deferred</code>=이월 도 미해결 — <code>accepted</code>·<code>rejected</code> 만 처리 완료).</li>
+<li>
+<p>blocking 0 (또는 전부 <code>accepted</code>·<code>rejected</code>) → <strong>합의 표를 수정하지 않고</strong>
+     자동 진행 + progress 통지:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span>--event<span class="w"> </span>progress<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--workspace<span class="w"> </span>workspace<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--message<span class="w"> </span><span class="s2">&quot;feature #{N} {slug} plan green (blocking 0·suggestion {M}·nit {K}) — 진행&quot;</span>
+</span></code></pre></div>
+<p>suggestion·nit 은 status 무관 비정지. 합의 표는 critic·planner 소유 —
+ run-cycle 은 읽기만 한다 (<code>status</code> 전이는 planner 절차 10 만 수행).</p>
+</li>
+</ol>
 <h3 id="24-generator">2.4 generator<a class="headerlink" href="#24-generator" title="Permanent link">&para;</a></h3>
 <p><code>@ag-generator</code> 호출 → 구현.</p>
 <h3 id="25-evaluator">2.5 evaluator<a class="headerlink" href="#25-evaluator" title="Permanent link">&para;</a></h3>
@@ -3619,23 +3729,43 @@
 <li><code>READY</code> → <code>project.md</code> 해당 feature 체크박스 <code>[x]</code> 갱신. REPORT 의
   <code>metrics.domain_impact</code> 가 <code>detected</code> 면 항목을 <strong>메모리에 누적</strong>하고
   (질의·정지 없음 — green 자동 진행 유지) → <strong>자동 다음 feature</strong>(2.1 로).</li>
-<li><code>NOT_READY</code>·<code>block</code> → <strong>⏸ §3 정지</strong>.</li>
+<li><code>NOT_READY</code> → <strong>bounded retry (feature 당 1회, 본 세션 한정)</strong>:</li>
+<li><code>issues_to_fix</code> 에 "planner 재호출 필요" 류 plan-level 반려가 있으면
+    <strong>재시도 없이 즉시 §3 정지</strong> — generator 재작업으로 못 고치는 구조적
+    실패라 자동 라운드가 낭비다.</li>
+<li>그 외 (구현 결함) → <code>issues_to_fix</code> 를 generator 재작업 프롬프트에 전달해
+    §2.4→§2.5 를 <strong>1회만</strong> 자동 재수행 + progress 통지 ("feature #{N} NOT_READY —
+    재작업 1회차"). 재평가도 <code>NOT_READY</code> 면 → §3 정지 (재시도 소진).</li>
+<li>재시도 카운트는 본 세션 컨텍스트로만 유지한다 (상태 파일 금지). 세션이
+    끊기고 재실행되면 리셋된다 — per-session bound 로 의도된 동작.</li>
+<li><code>block</code> → §3 정지.</li>
 </ul>
 <h2 id="3">3. 정지 정책<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>문제 게이트(plan 미승인·critic blocking·NOT_READY·block) 도달 시:</p>
+<p>정지 사유 (HOTL): <strong>critic blocking 미해소 · 합의표 불일치 (critic-lint FAIL) ·
+NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용자 질의 대기
+(OQ 게이트·모드 가드·도메인 복수 후보 등 — wrapper 유지 게이트가 발동한 경우) ·
+(<code>--gated</code> 한정) plan 미승인</strong>. 도달 시:</p>
 <ul>
 <li><strong>큐 전체 정지.</strong> 뒤 feature 로 진행하지 않는다 — N+1 이 N 에 의존할 수
   있고 의존성 데이터가 없어 알 길이 없다.</li>
-<li>정지 사유·해당 REPORT 출력.</li>
+<li>정지 사유·해당 산출물 (REPORT·합의표·critic-lint 출력) 과 <strong>게이트 이력 표</strong>
+  (§4 와 동일 형식 — 정지 시점까지 처리분) 를 출력한다.</li>
+<li>Slack approval 통지 1회: <code>--event approval --message "run-cycle 정지: #{N} {사유}"</code>
+  — 개입 요청은 approval, 자동 진행은 progress 로 채널에서 구분된다.</li>
 <li>안내: <code>/dp-skills:fix-review</code> 로 처리 → 수정 후 <strong><code>/dp-skills:run-cycle</code>
-  재실행(=재개)</strong>. 부분집합으로 돌렸다면 같은 인자를 다시 넘긴다.</li>
+  재실행(=재개)</strong>. 부분집합·<code>--gated</code> 로 돌렸다면 같은 인자를 다시 넘긴다.</li>
 <li>누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
   (누적)" 표를 함께 출력한다 — 처리 여부는 사용자 결정
   (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</li>
 </ul>
 <h2 id="4">4. 큐 완료<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>모든 feature READY → 완료 요약 출력 (처리한 feature 목록·각 verdict).
-누적된 domain_impact 항목이 있으면 "도메인 지식 환류 제안 (누적)" 표를
+<p>모든 feature READY → 완료 요약 + <strong>게이트 이력 표</strong> (사후 감사 뷰) 출력:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>| ------- | -------------------------------- | ----- | ------- |
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>| #3 slug | 0 / 2 / 1                        | 0     | READY   |
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| #4 slug | 0 / 0 / 0                        | 1     | READY   |
+</span></code></pre></div>
+<p>누적된 domain_impact 항목이 있으면 "도메인 지식 환류 제안 (누적)" 표를
 출력하고 기록 여부를 질의한다. 승인 시
 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § 기록 을
 수행한다 (항목 5건 이상이면 <code>/dp-skills:discover</code> 재실행 권장).</p>
@@ -3643,10 +3773,19 @@
 <ul>
 <li>feature 병렬 진행 금지 — 한 번에 1 feature (<code>.focus.md</code>·<code>STATE.md</code> 싱글톤·
   generator 파일 충돌 회피).</li>
-<li>plan 승인·NOT_READY·critic blocking 자동 통과 금지 — 반드시 정지.</li>
+<li><strong>무검증 자동 통과 금지</strong> — critic-lint 통과 + 합의표 blocking 0 없이 generator
+  진행 금지. critic 스킵 금지 (HOTL 에서 critic 은 필수 판정자다). NOT_READY·
+  block 자동 통과 금지.</li>
+<li>NOT_READY 재시도 1회 초과 금지 — 재실패는 정지 (수렴 루프 금지).</li>
+<li>재개 게이트 통과가 재개 지점을 앞당기는 것 금지 — §2.1 판정 지점이 우선
+  (구현 완료 feature 의 generator 재실행 = 이중 적용).</li>
+<li><code>--gated</code> 시 종전 게이트 전부 복원 — plan 사전 승인·재개 재승인을 생략하지
+  않는다 ([orchestration: hotl] 마커도 넣지 않는다).</li>
 <li>정지 후 뒤 feature 자동 진행 금지.</li>
-<li>상태 파일 생성 금지 — 큐·진행은 <code>project.md</code> + 산출물에서 파생.</li>
-<li>수동 사이클·<code>@ag-*</code> 동작 변경 금지 — 본 스킬은 호출 순서만 자동화.</li>
+<li>상태 파일 생성 금지 — 큐·진행·재시도 카운트는 project.md + 산출물 + 세션
+  컨텍스트에서 파생.</li>
+<li>수동 사이클·<code>@ag-*</code> 동작 변경 금지 — 본 스킬은 호출 순서와 오케스트레이션
+  마커만 관리한다.</li>
 <li>feature 마다 domain_impact 질의로 정지 금지 — 누적 후 큐 종료 시 일괄 질의.</li>
 </ul>
 
@@ -3704,7 +3843,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

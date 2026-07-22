@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2279,17 +2309,6 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        출력 예시
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         언제 실행하나
       
     </span>
@@ -2320,7 +2339,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         제약
@@ -2668,6 +2687,8 @@
       
         
       
+        
+      
     
     
     
@@ -2740,6 +2761,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3477,17 +3526,6 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        출력 예시
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         언제 실행하나
       
     </span>
@@ -3518,7 +3556,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         제약
@@ -3547,7 +3585,7 @@
 
 <h1 id="dp-skillsdoctor"><code>/dp-skills:doctor</code><a class="headerlink" href="#dp-skillsdoctor" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills 워크스페이스·팀·프로젝트의 정합성을 검사한다. 상태 이상· 드리프트·부분 설정이 의심될 때, 또는 정기 점검·진단을 원할 때 사용한다. TEAM.md·STATE.md·MANIFEST.md 존재 여부, <code>.agent-state.yml</code> 스키마, <code>analyzed</code>·<code>tdd</code> 플래그가 실제 파일 상태와 일치하는지 검사해 STATE corrupt 같은 조용한 문제를 조기 감지한다.</p>
+<p>dp-skills 워크스페이스·팀·프로젝트의 정합성을 검사한다. 상태 이상· 드리프트·부분 설정이 의심될 때, 또는 정기 점검·진단을 원할 때 사용한다. 구조 파일 존재·state 스키마·플래그 실상 일치를 검사해 STATE corrupt 같은 조용한 문제를 조기 감지한다.</p>
 </blockquote>
 <p>프로젝트·팀·workspace 정합성을 검사한다.</p>
 <p>대상: $ARGUMENTS (생략 시 STATE.md 의 <code>진행중</code> 프로젝트)</p>
@@ -3564,6 +3602,7 @@
 <li><code>0</code> — ERROR 없음 (PASS / WARN 만)</li>
 <li><code>1</code> — ERROR 1 건 이상</li>
 </ul>
+<p>출력 형식·문구의 SSOT 는 doctor.py stdout 이다 — 본 문서에 출력 예시를 두지 않는다 (버전·심각도 드리프트 방지).</p>
 <hr />
 <h2 id="_2">검사 범위<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="workspace">Workspace<a class="headerlink" href="#workspace" title="Permanent link">&para;</a></h3>
@@ -3580,7 +3619,7 @@
 </ul>
 <h3 id="project">Project<a class="headerlink" href="#project" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>.agent-state.yml</code> 존재 + <code>schema: v1.2</code> (v1·v1.1 은 업그레이드 권장 WARN)</li>
+<li><code>.agent-state.yml</code> 존재 + <code>schema: v1.3</code> (구버전 v1~v1.2 는 업그레이드 권장 WARN — SSOT: state-schema.md·doctor <code>SCHEMA_VERSION</code>)</li>
 <li><code>analyzed</code> 필드 ↔ <code>features/*.md</code> (<code>.plan.md</code> 제외) 실제 존재 일치</li>
 <li><code>tdd</code> 필드 ↔ <code>project.md</code> 의 <code>**TDD 모드**</code> 문자열 일치</li>
 <li><code>pr_base_branch</code> (있을 경우) ↔ <code>git ls-remote origin &lt;X&gt;</code> 존재 일치 (stale 시 WARN)</li>
@@ -3588,26 +3627,7 @@
 </ul>
 <p>스키마 상세: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md">state-schema.md</a></p>
 <hr />
-<h2 id="_3">출력 예시<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>dp-skills doctor  workspace: /path/to/workspace
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Workspace:
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  [PASS] workspace/TEAM.md: 존재
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Team (myteam):
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  [PASS] myteam/STATE.md: 진행중: MyProject
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  [PASS] myteam/context/MANIFEST.md: 존재
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Project (MyProject):
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  [PASS] MyProject/.agent-state.yml: schema v1
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  [WARN] MyProject analyzed: state.yml analyzed=false 이지만 features/ 에 3 개 존재
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>         → /dp-skills:analyze 재실행으로 state.yml 동기화
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>  [PASS] MyProject tdd: tdd=false, 일치
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>요약: 4 PASS · 1 WARN · 0 ERROR
-</span></code></pre></div>
-<hr />
-<h2 id="_4">언제 실행하나<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_3">언제 실행하나<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li>프로젝트 활성화 직후 상태 확인 (<code>/dp-skills:project {이름}</code> 후)</li>
 <li><code>analyze</code> · <code>tdd</code> 실행 직후 state 갱신 확인</li>
@@ -3618,8 +3638,8 @@
 <hr />
 <h2 id="-diagnose">실패 진단 모드 (<code>--diagnose</code>)<a class="headerlink" href="#-diagnose" title="Permanent link">&para;</a></h2>
 <p>기존 정합성 검사와 독립. 런타임 실패 패턴을 4-phase (capture → diagnose → reduce → report) 로 진단한다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--diagnose
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--diagnose<span class="w"> </span>--project<span class="w"> </span>MyProject
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--diagnose
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--diagnose<span class="w"> </span>--project<span class="w"> </span>MyProject
 </span></code></pre></div>
 <p>검출 패턴:</p>
 <table>
@@ -3659,14 +3679,14 @@
 </tbody>
 </table>
 <p>출력:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>## DIAGNOSIS
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>- project: MyProject
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>- pattern: red-miss | repeat-not-ready | loop | scope-violation | none
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- evidence: {근거 요약}
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- recommended_action: {권장 액션}
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- confidence: high | medium
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>## DIAGNOSIS
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>- project: MyProject
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>- pattern: red-miss | repeat-not-ready | loop | scope-violation | none
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>- evidence: {근거 요약}
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>- recommended_action: {권장 액션}
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- confidence: high | medium
 </span></code></pre></div>
-<p>exit code: <code>0</code> (pattern=none) · <code>1</code> (패턴 감지). 복수 패턴 동시 감지 시 우선순위는 <code>red-miss &gt; repeat-not-ready &gt; scope-violation &gt; loop</code> 이며 이 때 <code>confidence: medium</code>.</p>
+<p>exit code: <strong>항상 <code>0</code></strong> (진단이 정상 수행된 경우) — <code>--diagnose</code> 는 정보성 리포트로, 패턴 감지 여부는 exit code 가 아니라 DIAGNOSIS 블록 텍스트로 전달한다 (<code>--schema</code>/기본 모드의 <code>ERROR=1</code> 계약과의 충돌 방지 — diagnose.py 주석 참조). 복수 패턴 동시 감지 시 우선순위는 <code>red-miss &gt; repeat-not-ready &gt; scope-violation &gt; loop</code> 이며 이 때 <code>confidence: medium</code>.</p>
 <p>언제 호출:</p>
 <ul>
 <li>evaluator 가 같은 feature 에 <code>status: NOT_READY</code> 를 2회 출력했을 때</li>
@@ -3676,7 +3696,7 @@
 <hr />
 <h2 id="-schema">스키마 검사 모드 (<code>--schema</code>)<a class="headerlink" href="#-schema" title="Permanent link">&para;</a></h2>
 <p>플러그인 구조 전용 검사. workspace 와 무관.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>--schema
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>--schema
 </span></code></pre></div>
 <p>검사 범위: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/.claude-plugin/PLUGIN_SCHEMA_NOTES.md"><code>.claude-plugin/PLUGIN_SCHEMA_NOTES.md</code></a> 기준.</p>
 <ul>
@@ -3687,11 +3707,11 @@
 </ul>
 <p>CI 에서 자동 실행 — <code>.github/workflows/validate.yml</code>.</p>
 <hr />
-<h2 id="_5">제약<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_4">제약<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>스크립트는 순수 파이썬 stdlib 만 사용 (외부 의존 없음)</li>
-<li>검사는 <strong>비파괴</strong> — 읽기만 함, 파일 수정 안 함</li>
-<li>실패 시 fix 제안은 출력하되 자동 적용 안 함. 사용자가 해당 스킬을 재실행.</li>
+<li>기본 실행 검사는 <strong>비파괴</strong> — 읽기만 함, 파일 수정 안 함 (0.23.2 부터 <code>.gitignore</code> secret 패턴 주입도 기본 실행에서는 WARN 만 — 종전엔 자동 append 로 이 계약을 위반했다)</li>
+<li>실패 시 fix 제안은 출력하되 자동 적용 안 함. auto-fixable 표시가 붙은 항목만 사용자가 <strong><code>doctor --fix</code> 를 명시 실행</strong>했을 때 수정된다.</li>
 </ul>
 
 
@@ -3748,7 +3768,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

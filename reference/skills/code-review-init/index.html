@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2646,6 +2676,8 @@
       
         
       
+        
+      
     
     
     
@@ -2718,6 +2750,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3503,7 +3563,7 @@
 
 <h1 id="dp-skillscode-review-init"><code>/dp-skills:code-review-init</code><a class="headerlink" href="#dp-skillscode-review-init" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>워크스페이스에 언어별 코드 리뷰 룰 파일 (<code>{lang}.md</code>) 을 셋업한다. <code>@ag-code-reviewer</code> 가 변경 dominant 언어의 룰 파일 부재를 보고하면 본 스킬로 1 회성 생성. 3 가지 시작 전략 (예시 복사 / 빈 템플릿 / AI 생성) 중 사용자가 선택. 생성 후 사용자가 본문 편집해 팀 컨벤션 반영.</p>
+<p>워크스페이스에 언어별 코드 리뷰 룰 파일 (<code>{lang}.md</code>) 을 셋업한다. <code>@ag-code-reviewer</code> 가 변경 dominant 언어의 룰 파일 부재를 보고하면 본 스킬로 1 회성 생성.</p>
 </blockquote>
 <p>워크스페이스의 언어별 코드 리뷰 룰 파일 <code>{lang}.md</code> 를 셋업한다.</p>
 <p>대상 언어: $ARGUMENTS</p>
@@ -3550,16 +3610,10 @@
 <p><code>workspace/{TEAM}/context/code-review/rules.md</code> (또는 scope=common 선택 시 <code>workspace/_common/code-review/rules.md</code>) 부재 시 다음 안내 후 질의:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>팀 도메인 룰 파일 (rules.md) 도 함께 생성할까요?
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>rules.md 는 언어 무관 팀·도메인 룰을 담습니다. 5 카테고리 구조:
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  1. 보안          — 시크릿·SQL/XSS 인젝션·인증/권한
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  2. 로깅·관측      — PII·시크릿 노출·로그 레벨·trace ID
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  3. API 호환성     — public 시그니처·계약·deprecation
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  4. 의존성·설정    — env 변수·config·패키지·feature flag
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  5. 도메인 컨벤션  — 팀 service/controller/repository 패턴
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>{lang}.md 와 분리: 언어 문법·프레임워크 안티패턴 (Rails N+1·Spring @Transactional 등) 은 {lang}.md 에.
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>생성할까요? (예/아니오)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>언어 무관 5 카테고리 (보안 / 로깅·관측 / API 호환성 / 의존성·설정 / 도메인 컨벤션) 를 담습니다.
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>언어·프레임워크 특화 룰은 {lang}.md 로 분리 — 상세 구조·예시는 생성되는 파일 헤더에 있습니다.
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>생성할까요? (예/아니오)
 </span></code></pre></div>
 </li>
 <li>
@@ -3605,9 +3659,10 @@
 </span></code></pre></div>
 <p>상위 5~10 개 파일을 Read 해 패턴 파악 (사용 중인 logger·테스트 프레임워크·DI 컨테이너·ORM 등).
    <strong>Read 는 한 메시지에 묶어 fan-out</strong> — 5~10 개 Read 호출을 한 turn 의 parallel tool calls 로 보낸다 (read-only · 순서 의존 없음 — sequential Read 는 wall-clock 만 길어진다).
-2. <code>templates/code-review.lang.md.template</code> 형식을 베이스로, 발견된 컨벤션·안티패턴을 자동 추출해 룰화.
-3. 생성 결과를 사용자에게 <strong>미리보기</strong> 로 보여주고 "이대로 저장 / 수정 후 저장 / 취소" 질의.
-4. 확정 시 대상 경로에 Write.</p>
+2. <code>templates/code-review.lang.md.template</code> 형식을 베이스로, 발견된 컨벤션·안티패턴을 자동 추출해 룰화. <strong>Grep-friendly 룰의 정규식은 ERE/ripgrep 호환만</strong> — look-around (<code>(?!...)</code>)·backreference 금지 (reviewer 의 매칭 엔진이 파스 에러 — 0.23.1 감사에서 실사용 룰 파일에 비호환 lookahead 유입 확인).
+3. <strong>정규식 컴파일 검증</strong> — 생성한 grep 룰 각각을 <code>rg -n -e '{패턴}' --no-filename /dev/null 2&gt;&amp;1</code> 류로 컴파일만 확인한다 (매칭 결과 무관, 파스 에러만 감지). 에러 나는 룰은 ERE 호환으로 재작성하거나 judgment-based 로 강등.
+4. 생성 결과를 사용자에게 <strong>미리보기</strong> 로 보여주고 "이대로 저장 / 수정 후 저장 / 취소" 질의.
+5. 확정 시 대상 경로에 Write.</p>
 <p><strong>전략 C 주의</strong>: 생성된 룰은 LLM 추측 기반. 사용자가 검토·편집 필요. 본 스킬은 "draft" 생성기지 "정답" 생성기 아님.</p>
 <hr />
 <h2 id="_2">결과 출력<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -3697,7 +3752,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

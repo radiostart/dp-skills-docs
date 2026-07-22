@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2505,6 +2535,8 @@
       
         
       
+        
+      
     
     
     
@@ -2577,6 +2609,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3278,21 +3338,28 @@ self-contained 형태로 자체 컨텍스트를 로드한다.</p>
 <p>입력:
     --phase {planner|planner-critic|generator|evaluator}
     --workspace PATH              (default: ./workspace)
-    --project NAME                (optional — 미지정 시 STATE.md 진행중)</p>
+    --project NAME                (optional — 미지정 시 STATE.md 진행중.
+                                   명시 시 STATE 우회 project 모드 강제)</p>
 <p>출력 (stdout, JSON):
     {
       "phase": "planner",
       "team": "myteam",
-      "project": "MyProject",
+      "project": "MyProject",              # issue 모드에서는 이슈명
+      "work_mode": "project" | "issue",    # STATE.md mode 열 (issue 외 → project 폴백)
       "domain": "{도메인 식별자}" | null,
       "analyzed": bool,
       "tdd": bool,
-      "project_phase": "development" | "qa",
+      "project_phase": "development" | "qa",   # issue 모드는 "development" 고정
       "focus": string | null,
       "files_to_read": [...],   # 순서대로
       "hints": [...],           # 자유 형식 힌트 (래퍼 프롬프트에 포함)
       "error": string | null
     }</p>
+<p>issue 모드 (STATE.md <code>| issue | {이슈명} | 진행중 |</code>):
+    상태 파일 없이 <code>issues/{이슈명}/issue.md</code> 가 단건 명세다 (stateless).
+    analyzed=false (scope 원본 로드 경로), tdd=false, mode=null 고정.
+    domain 은 issue.md 의 <code>도메인:</code>/<code>domain:</code> 라인에서 파싱.
+    project.md·agents/* 는 로드하지 않는다. 계약 상세: PLAN-issue-cycle.</p>
 <p>Exit:
     0 — 성공
     1 — 치명 오류 (error 필드 참조)</p>
@@ -3353,7 +3420,7 @@ self-contained 형태로 자체 컨텍스트를 로드한다.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

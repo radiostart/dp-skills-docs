@@ -1383,6 +1383,8 @@
       
         
       
+        
+      
     
     
     
@@ -1654,6 +1656,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2666,6 +2696,8 @@
       
         
       
+        
+      
     
     
     
@@ -2735,6 +2767,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3532,11 +3592,11 @@
 <h1 id="slack">Slack 알림 설정<a class="headerlink" href="#slack" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">한 줄 요약</p>
-<p>프로젝트별 Slack Incoming Webhook 으로 작업 완료·승인 요청을 자동 알림합니다. 설정한 프로젝트만 활성화됩니다.</p>
+<p>프로젝트별 Slack Incoming Webhook 으로 작업 완료·승인 요청·자동 진행 (run-cycle progress) 을 자동 알림합니다. 설정한 프로젝트만 활성화됩니다.</p>
 </div>
 <h2 id="_1">언제 쓰나<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>에이전트 작업 <strong>완료</strong> 나 <strong>승인 요청</strong> 을 Slack 으로 받고 싶을 때</li>
+<li>에이전트 작업 <strong>완료</strong>·<strong>승인 요청</strong>·run-cycle 의 <strong>자동 진행 (progress)</strong> 을 Slack 으로 받고 싶을 때 — HOTL 감시 채널: 자동 진행은 <code>▶ progress</code>, 개입 요청은 <code>⏸ approval</code> 로 구분됩니다</li>
 </ul>
 <p>설정하지 않은 프로젝트는 완전 no-op 입니다 — 켜고 싶은 프로젝트에서만 설정합니다.</p>
 <h2 id="_2">전제<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -3551,14 +3611,20 @@
 <p>현재 활성 프로젝트에 <code>.slack.env</code> 를 생성하고 채널·이벤트를 대화식으로 설정합니다. SSOT 는 <code>workspace/{TEAM}/projects/{PROJECT}/.slack.env</code> 입니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>SLACK_CHANNEL=#my-channel          # 표시용 라벨
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>SLACK_EVENTS=complete,approval      # 생략 시 둘 다
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>SLACK_EVENTS=complete,approval,pr,progress   # 생략 시 전체
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">기존 프로젝트 주의 (0.26.0)</p>
+<p><code>.slack.env</code> 에 <code>SLACK_EVENTS</code> 를 이미 명시해 둔 프로젝트는 목록 밖 이벤트가 조용히 필터됩니다 — <code>progress</code> 를 직접 추가해야 run-cycle 자동 진행 (HOTL) 통지를 받습니다. 미명시 프로젝트는 기본값에 포함되어 있어 조치가 필요 없습니다.</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>
 </span></code></pre></div>
 <h3 id="2">2. 테스트 발송<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>/dp-skills:slack test
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/dp-skills:slack test
 </span></code></pre></div>
 <h3 id="3">3. 상태 확인 / 비활성화<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/dp-skills:slack status     # 설정·gitignore 보호·tracked 여부 요약
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>/dp-skills:slack disable    # 비활성화 안내
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/dp-skills:slack status     # 설정·gitignore 보호·tracked 여부 요약
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>/dp-skills:slack disable    # 비활성화 안내
 </span></code></pre></div>
 <h3 id="_4">발송 이벤트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <table>
@@ -3585,7 +3651,7 @@
 </table>
 <h2 id="_5">흔한 실수<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>.slack.env</code> 는 절대 커밋하지 않습니다.</strong> <code>/dp-skills:doctor</code> 가 리포 루트 <code>.gitignore</code> 에 패턴을 자동 주입합니다. tracked 상태로 발견되면 doctor 가 <code>[ERROR]</code> (exit 1) 로 차단하고, <code>slack-notify.py</code> 도 POST 전 <code>git ls-files</code> 로 이중 확인합니다.</li>
+<li><strong><code>.slack.env</code> 는 절대 커밋하지 않습니다.</strong> <code>/dp-skills:doctor</code> 가 리포 루트 <code>.gitignore</code> 의 패턴 누락을 WARN 으로 감지하며, 주입은 <code>doctor --fix</code> 옵트인으로 수행합니다 (0.24.0 — 기본 실행은 비파괴). tracked 상태로 발견되면 doctor 가 <code>[ERROR]</code> (exit 1) 로 차단하고, <code>slack-notify.py</code> 도 POST 전 <code>git ls-files</code> 로 이중 확인합니다.</li>
 <li>webhook URL 은 메시지 본문·<code>status</code> 출력에 노출되지 않습니다 — "설정됨 / 비어있음" 만 표시됩니다.</li>
 <li>훅 호출 이력이 필요하면 <code>export DP_SLACK_DEBUG=1</code> 후 Claude Code 를 재시작하면 <code>/tmp/dp-skills-slack-hook.log</code> 에 기록됩니다.</li>
 </ul>
@@ -3648,7 +3714,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

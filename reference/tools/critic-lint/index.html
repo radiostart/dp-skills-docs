@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/handoff-quality/">
+        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/critic-lint/">
       
       
-        <link rel="prev" href="../doctor/">
+        <link rel="prev" href="../confluence/">
       
       
-        <link rel="next" href="../jira/">
+        <link rel="next" href="../cross-ref/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>handoff-quality.py - dp-skills</title>
+        <title>critic-lint.py - dp-skills</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#handoff-qualitypy" class="md-skip">
+        <a href="#critic-lintpy" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              handoff-quality.py
+              critic-lint.py
             
           </span>
         </div>
@@ -2626,10 +2626,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../critic-lint/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2645,6 +2654,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -2738,19 +2748,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../handoff-quality/" class="md-nav__link">
         
   
   
@@ -2766,7 +2767,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -3328,30 +3328,30 @@
 
 
 
-<h1 id="handoff-qualitypy"><code>handoff-quality.py</code><a class="headerlink" href="#handoff-qualitypy" title="Permanent link">&para;</a></h1>
+<h1 id="critic-lintpy"><code>critic-lint.py</code><a class="headerlink" href="#critic-lintpy" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills handoff-quality — planner ↔ generator 인계 콘텐츠 품질 측정 (Phase β).</p>
-<p>plan-validate 가 검증하지 않는 영역 — <strong>콘텐츠 품질</strong> 정량 측정:</p>
-<ul>
-<li><strong>변경 파일 구체성</strong> (<code>### 변경 파일</code>): 각 항목이 실제 파일 경로 vs 모호 표현</li>
-<li><strong>변경 사유 명시도</strong>: 각 항목에 "왜" 가 있는가</li>
-<li><strong>Red 계약 구체성</strong> (TDD plan): 라벨 값이 placeholder vs 구체 텍스트</li>
-</ul>
+<p>dp-skills critic-lint — ag-planner-critic 합의표 무결성 검증.</p>
+<p>HOTL (0.26.0) 에서 run-cycle 의 plan 자동 진행 판정자는 critic 합의표다.
+본 도구는 run-cycle 이 표를 판독하기 <strong>전에</strong> 실행되어, 본문 챌린지 ↔ 합의 표의
+결정론 대조로 "행이 없으면 게이트가 거짓 통과한다" (ag-planner-critic.md 합의표
+규약이 명문화한 리스크) 를 봉쇄한다.</p>
+<p>검증 항목:
+- 본문 <code>### C{n}</code> 챌린지 블록의 개수·번호 집합 == <code>## 합의</code> 표 행의 개수·번호 집합
+- 챌린지 블록 severity ↔ 표 행 severity 일치
+- severity enum: blocking | suggestion | nit
+- status enum: open | accepted | rejected | deferred
+- 챌린지 0건: "검출된 결함 없음" 문구가 있으면 합의 표 생략 허용 (critic 규약).
+  문구도 표도 없으면 위반 (fail-closed — 판독 불가 산출물로 자동 진행 금지)</p>
 <p>Usage:
-    # 단일 plan 파일
-    python3 tools/handoff-quality.py path/to/03-foo.plan.md
-    python3 tools/handoff-quality.py path/to/03-foo.plan.md --mode tdd</p>
-<div class="language-text highlight"><pre><span></span><code># 디렉터리 일괄 (features/*.plan.md 모두)
-python3 tools/handoff-quality.py workspace/team1/projects/proj1/features/
-
-# JSON
-python3 tools/handoff-quality.py path/to/plan.md --json
-</code></pre></div>
+    python3 tools/critic-lint.py path/to/NN-{slug}.plan.critic.md
+    cat critic.md | python3 tools/critic-lint.py
+    python3 tools/critic-lint.py path --json</p>
 <p>Exit:
-    0 — 평가 정상 종료 (점수 무관)
-    1 — 입력 오류 (파일 없음 등)</p>
+    0 — 위반 없음 (PASS)
+    1 — 위반 있음 (FAIL)
+    2 — 입력 오류</p>
 </blockquote>
-<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/handoff-quality.py"><code>tools/handoff-quality.py</code></a></p>
+<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/critic-lint.py"><code>tools/critic-lint.py</code></a></p>
 
 
 

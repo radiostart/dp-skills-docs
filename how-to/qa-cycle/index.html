@@ -16,7 +16,7 @@
         <link rel="prev" href="../slack-notify/">
       
       
-        <link rel="next" href="../../reference/">
+        <link rel="next" href="../issue-cycle/">
       
       
         
@@ -1383,6 +1383,8 @@
       
         
       
+        
+      
     
     
     
@@ -1695,6 +1697,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2699,6 +2729,8 @@
       
         
       
+        
+      
     
     
     
@@ -2768,6 +2800,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3635,7 +3695,7 @@
 <li>활성 project 확인 + phase=qa 확인.</li>
 <li>같은 KEY 가 다른 project 에 이미 있으면 WARN + confirm.</li>
 <li>신규 진입이면 <code>python3 ${CLAUDE_PLUGIN_ROOT}/tools/jira.py fetch QAPRJ-1234</code> 로 본문 prefill 후 <code>qa/QAPRJ-1234.md</code> lazy 생성.</li>
-<li>@ag-planner 핸드오프 직전 <strong>작업 브랜치 생성 여부를 묻습니다</strong> — base 는 <code>fix/{KEY}</code>. 같은 티켓이 해결 후 다시 진행되는 재작업이면 기존 <code>fix/{KEY}</code> 브랜치와 충돌하지 않도록 <code>fix/{KEY}-2</code>·<code>-3</code> … 로 번호를 증가시킵니다. <code>Y</code> 면 현재 HEAD 에서 <code>git checkout -b</code> 로 생성, <code>n</code> 이면 현재 브랜치 유지.</li>
+<li>@ag-planner 핸드오프 직전 <strong>작업 브랜치를 자동 생성하고 보고합니다</strong> (질의 없음 — 0.26.0 HOTL) — base 는 <code>fix/{KEY}</code>. 같은 티켓이 해결 후 다시 진행되는 재작업이면 기존 <code>fix/{KEY}</code> 브랜치와 충돌하지 않도록 <code>fix/{KEY}-2</code>·<code>-3</code> … 로 번호를 증가시킵니다. 보고에 분기점 (현재 브랜치·SHA) 이 포함되므로 잘못된 base 면 즉시 개입하세요 (브랜치는 삭제 후 재분기 가능 — 완전 가역).</li>
 </ul>
 <p><code>qa/{KEY}.md</code> 는 다음 섹션을 갖습니다 — <strong>현상·연관 feature·재현 경로·원인·조치·회귀영향</strong>. <strong>회신 섹션은 없습니다</strong> — 회신 이력의 SSOT 는 Jira 코멘트입니다.</p>
 <h3 id="3-planner-generator-evaluator">3. planner → generator → evaluator 사이클<a class="headerlink" href="#3-planner-generator-evaluator" title="Permanent link">&para;</a></h3>
@@ -3663,7 +3723,7 @@
 </tr>
 <tr>
 <td><code>@ag-evaluator</code></td>
-<td><strong>회귀영향 평가 섹션 필수</strong> — 동일 호출 경로 feature 명단·영향 판단</td>
+<td><strong>회귀영향 평가 섹션 필수</strong> — 동일 호출 경로 feature 명단·영향 판단. <strong>회귀 재현 테스트를 mode 무관 직접 실행</strong>해 <code>test_run</code> 을 pass/fail 로 기록 (standard 여도 skip 금지 — 0.24.0)</td>
 </tr>
 </tbody>
 </table>
@@ -3756,7 +3816,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2574,6 +2604,8 @@
       
         
       
+        
+      
     
     
     
@@ -2646,6 +2678,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3373,7 +3433,7 @@
    - <code>hints</code> 내용을 본 세션 컨텍스트로 주입. 첫 항목이 <code>[역할] ...</code> 이면 본 wrapper 의 페르소나이므로 모든 후속 검토·반려 판정의 stance 로 채택한다.
    - <code>analyzed</code> / <code>tdd</code> / <code>domain</code> / <code>project_phase</code> 값을 이후 분기에 사용.</p>
 <p>상세 계약: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/orchestrate-load.py"><code>orchestrate-load.py</code></a> (persona 주입은 <code>identity.yml</code> SSOT), <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md"><code>state-schema.md</code></a>.</p>
-<p><strong>도메인 판정 실패 시:</strong> <code>domain: null</code> → 사용자 확인 후 scope/rules 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
+<p><strong>도메인 판정 실패 시:</strong> <code>domain: null</code> (단일 도메인 워크스페이스는 orchestrate-load 가 자동 채택 — null 은 복수 후보·미학습 상태) → 사용자 확인 후 scope/rules 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
 <p><strong>상태·유형 카테고리 부분 로드 (상태 전환이 포함된 기능일 때만, 2단계):</strong> orchestrate 결과와 별도로 수행한다. 대상은 팀 MANIFEST 가 선언한 상태 카테고리 (예: <code>enums</code>). 팀이 목차 파일을 운영하지 않으면 이 블록 생략:</p>
 <p>a. MANIFEST 가 선언한 <strong>목차/인덱스 파일</strong> 상단만 Read (<code>offset=0, limit=30</code>).
    b. 목차에서 관련 섹션 라인 번호 확인 후 offset/limit 으로 해당 섹션만 Read.</p>
@@ -3385,8 +3445,17 @@
      - (c) <strong>영향 없음</strong> — 후보였지만 실제 호출 경로 무관 (근거 명시).
    - <strong>qa/{KEY}.md 회귀영향 섹션 갱신</strong>: 활성 project 의 <code>qa/{KEY}.md</code> 의 <code>## 회귀영향</code> 섹션에 위 평가 결과를 동기화 기입 (Edit). <code>## 회신</code> 섹션은 만들지 말 것 — 회신 SSOT 는 Jira.
    - <strong>eval 저장 경로 (qa)</strong>: VERIFICATION REPORT 는 <code>qa/{KEY}.eval.md</code> 에 저장한다. 대응 plan 이 <code>qa/{KEY}.plan.r{N}.md</code> 면 <code>qa/{KEY}.eval.r{N}.md</code> — r 은 plan 과 동일하게 맞춘다 (규약 SSOT: qa/SKILL.md "qa/ 산출물 명명 규약").
+   - <strong>회귀 재현 테스트 실행 (mode 무관 — 0.23.2)</strong>: plan 의 "회귀 재현 테스트" 스텝 (planner qa 블록이 standard 포함 모든 mode 에서 필수 작성) 이 작성한 테스트를 <code>{test_command}</code> 로 <strong>직접 실행</strong>하고 결과를 REPORT 의 <code>test_run</code> gate 에 <code>pass|fail</code> 로 기록한다 — phase=qa 에서 <code>test_run: skip</code> 금지. standard 모드의 "테스트 자동 실행 없음" 규칙 (step 2) 은 이 항목이 오버라이드한다. (종전에는 planner 가 회귀 테스트 작성을 강제하면서 아무도 실행하지 않아, 문법 오류인 테스트로도 READY 가 가능했다 — 0.23.1 감사.) 실행 실패 → <code>test_run: fail</code> + <code>issues_to_fix</code> escalate.
    - <strong>반려 기준</strong>: 회귀영향 평가가 부족하면 <code>status: NOT_READY</code> + <code>issues_to_fix</code> 에 "planner 재호출 필요 — 회귀영향 후보 누락" 명시. 직접 planner 호출 금지 — 오케스트레이션이 라우팅한다. 구체 판정 기준: plan 의 "회귀영향 후보" 절이 존재하지 않거나, 0 건이면서 검색 범위·키워드 기록도 없으면 반려. "후보 0 건 + 검색 범위·키워드 기록 있음" 이 명시된 경우에 한해 통과 가능.
    - <strong>phase=qa 우선 (characterize 충돌 해소)</strong>: <code>mode: characterize</code> 의 <code>{source_root}</code> 잠금은 본 QA 사이클에 한해 해제 — 따라서 <code>capture_lockdown</code> 게이트도 <code>phase=qa</code> 일 때는 비활성. 회귀영향 평가가 대체 게이트 역할을 한다. characterize spec 추가는 본 사이클 외 작업으로 분리.</p>
+<p><strong>[필수] work_mode 확인</strong> — step 1 JSON 의 <code>work_mode</code> 가 <code>issue</code> 면 아래 <strong>이슈 수정 모드</strong> 블록을 활성화한다 (issue 는 standard 고정 — qa 블록과 동시 활성 없음). <code>project</code> (또는 필드 부재 — 구버전 출력) 면 평소대로.</p>
+<p><strong>이슈 수정 모드 (work_mode == issue).</strong> 결함 수정 모드 (phase == qa) 와 원형 동일 — 회귀영향 평가가 핵심 책임이며, 산출물 경로·완료 신호만 다르다.
+   - <strong>회귀영향 평가 섹션 필수</strong>: plan 의 "영향 범위 후보" 각 항목을 qa 블록과 동일한 3 분류·반려 기준대로 판정 + 사유 1 줄. plan 에 "영향 범위 후보" 절이 없거나, 0 건인데 검색 범위·키워드 기록도 없으면 <code>NOT_READY</code> 반려 ("planner 재호출 필요 — 영향 범위 후보 누락" 명시).
+   - <strong>회귀 재현 테스트 실행 (mode 무관)</strong>: qa 블록의 "회귀 재현 테스트 실행" 과 동일 — plan 의 해당 스텝 테스트를 직접 실행하고 <code>test_run</code> gate 에 pass|fail 기록, <code>skip</code> 금지 (<code>verify-report-lint.py</code> 도 <code>phase: issue</code> 에서 동일 강제).
+   - <strong>완료 신호 = issue.md 기입</strong>: <code>## 원인</code> (planner 책임)·<code>## 조치</code> (generator 책임) 가 실제 기입됐는지 확인한다 — <strong><code>## 조치</code> 미기입이면 READY 금지</strong> (issues_to_fix 에 escalate). <code>## 재발 방지</code> 미기입은 반려 사유가 아니다 — chat 보고에 "재발 방지 기록 권장" 1 줄만 덧붙인다.
+   - <strong>eval 저장 경로 (issue)</strong>: REPORT 는 <code>issues/{이슈명}/issue.eval.md</code> 에 저장한다. 대응 plan 이 <code>issue.plan.r{N}.md</code> 면 <code>issue.eval.r{N}.md</code> — r 은 plan 과 동일하게 맞춘다 (규약 SSOT: qa/SKILL.md "qa/ 산출물 명명 규약" 과 동일).
+   - <strong>REPORT 필드 매핑 (issue)</strong>: <code>feature:</code> → <code>{이슈명}</code>, <code>phase:</code> → <code>issue</code> (step 1 의 <code>project_phase</code> 는 development 고정값이므로 그대로 쓰지 않는다 — work_mode 가 SSOT).
+   - <strong>비적용 스텝</strong>: step 4 (agents/evaluator.md 체크박스 — 이슈엔 agents/ 없음)·step 5 (project.md 목표 <code>[x]</code>)·step 6 (에이전트 간 전달사항) 은 건너뛴다 — 유령 파일·폴더를 만들지 않는다. step 8 동기화 검증은 "REPORT ↔ issue.md <code>## 조치</code> 기입" 대조로 대체한다. step 9 Slack 은 <code>--feature-id {이슈명}</code> 으로 호출한다 (이슈 Slack 미지원 — notifier 자동 no-op, 호출 유지).</p>
 <ol>
 <li>모드별 검증 (<code>.agent-state.yml</code> 참조). 라벨·절차 매핑:</li>
 </ol>
@@ -3427,7 +3496,7 @@
        - 증거 누락 → Generator 에 <strong>TDD 사이클 재수행 요청</strong> (반려).
        - <code>[Red] 실패 유형: 인프라 오류</code> 로 기록된 스텝 → Generator 에 <strong>Red 재작성 요청</strong> (인프라 수정 후 구현 미완 실패로 재확인).
        - 실패 메시지 타당성 점검 — <code>기대 실패 유형</code> 과 일치하는지, 정말 미구현 징후인지 사람 판단.
-   - <strong>둘 다 아님 (standard)</strong> — 테스트 자동 실행 없음. 요구사항 체크리스트 검토만. <strong>spec 부재는 결함이 아니다</strong> — 비 TDD 프로젝트의 <code>## 검증 (비TDD — 수동)</code> 가이드 (dev server / console / 수기 시나리오 / 기존 spec 회귀) 를 적용하며, "spec 누락"·"테스트 커버리지 부족" 을 Major/Minor 이슈로 escalate 하지 않는다 (사용자가 명시 요청했거나 plan 에 spec 스텝이 명시된 경우만 미작성을 결함으로 판정).
+   - <strong>둘 다 아님 (standard)</strong> — 테스트 자동 실행 없음. 요구사항 체크리스트 검토만. <strong>spec 부재는 결함이 아니다</strong> — 비 TDD 프로젝트의 <code>## 검증 (비TDD — 수동)</code> 가이드 (dev server / console / 수기 시나리오 / 기존 spec 회귀) 를 적용하며, "spec 누락"·"테스트 커버리지 부족" 을 Major/Minor 이슈로 escalate 하지 않는다 (사용자가 명시 요청했거나 plan 에 spec 스텝이 명시된 경우만 미작성을 결함으로 판정). (예외: phase=qa·work_mode=issue — step 1 의 해당 모드 블록이 오버라이드, test_run pass|fail 필수.)
 3. 로드한 지침에 따라 검토를 수행한다.</p>
 <p><strong>[Open Questions 게이트]</strong> 판정 기준 SSOT: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/oq-gate.md"><code>oq-gate.md</code></a>. <code>features/NN-{slug}.md</code> 의 <code>## Open Questions</code> 를 확인한다:
    - <code>### (d) 비즈니스 결정 영역</code> 에 <code>- [ ]</code> 가 있는데 구현이 이를 임의로 결정했으면 → <strong>Major 이슈</strong> 로 escalate. 구현 반려.
@@ -3459,38 +3528,41 @@
    사용자 승인 후 메인 루프 (knowledge-sync.md § 기록).
    phase == qa (결함 수정 모드) 에서도 동일하게 적용한다.</p>
 <ol>
-<li><strong>[필수]</strong> 검토가 끝나면 <strong>반드시</strong> Edit 툴로 <code>workspace/{TEAM}/projects/{PROJECT}/agents/evaluator.md</code>의 <strong>모든</strong> 체크리스트 항목을 검토 결과에 따라 <code>[x]</code>(통과) / <code>[ ]</code>(미통과)로 업데이트한다. 검토 결과를 텍스트로만 보고하고 체크박스를 수정하지 않는 것은 금지한다.</li>
+<li><strong>[필수]</strong> 검토가 끝나면 <strong>반드시</strong> Edit 툴로 <code>workspace/{TEAM}/projects/{PROJECT}/agents/evaluator.md</code>의 <strong>모든</strong> 체크리스트 항목을 검토 결과에 따라 <code>[x]</code>(통과) / <code>[ ]</code>(미통과)로 업데이트한다. 검토 결과를 텍스트로만 보고하고 체크박스를 수정하지 않는 것은 금지한다. <strong>체크박스 토글 외에는 이 파일에 쓰지 않는다</strong> — 검증 리포트·로그·요약 본문을 append 하는 것 금지 (리포트 저장처는 step 7 의 <code>.eval.md</code> <strong>단독</strong>). 이 파일은 매 wrapper 호출마다 로드되므로 append 가 누적되면 호출당 수만 토큰이 낭비된다 (0.23.1 감사: 214KB 원장화 실사례 — doctor 가 WARN 으로 감지).</li>
 <li>전 항목 통과 시 Edit 툴로 <code>workspace/{TEAM}/projects/{PROJECT}/project.md</code>의 해당 목표를 <code>[x]</code>로 변경한다.</li>
 <li><strong>[전달사항]</strong> 다음 feature에 영향을 줄 수 있는 사항이 있으면, <code>project.md</code>의 <code>## 에이전트 간 전달사항</code> 섹션에 항목을 추가한다. 해당 섹션이 없으면 생성한다.</li>
 <li>형식: <code>- [ ] {내용} (from #{완료 feature 번호})</code></li>
 <li>예: <code>- [ ] order_service에 validate 추가됨 → #11에서 참조 필요 (from #10)</code></li>
 <li>전달사항이 없으면 이 단계는 건너뛴다.</li>
-<li><strong>[필수] VERIFICATION REPORT 출력</strong> — 메시지 끝에 아래 블록을 그대로 붙인다. 체크박스(step 4) 는 상세 기록, REPORT 는 요약이며 <code>status: READY</code> 는 전 gate pass + project.md <code>[x]</code> 완료와 동치.</li>
+<li><strong>[필수] VERIFICATION REPORT 출력</strong> — 메시지 끝에 아래 블록을 그대로 붙인다. 체크박스(step 4) 는 상세 기록, REPORT 는 요약이며 <code>status: READY</code> 는 전 gate pass + project.md <code>[x]</code> 완료와 동치. gate 별 skip 허용 조건은 아래 <strong>gate 매핑</strong> 이 SSOT — 템플릿 주석만 보고 skip 을 판정하지 않는다.</li>
 </ol>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>## VERIFICATION REPORT
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>- status: READY | NOT_READY
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>- feature: #NN {title}
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>- mode: {red_contract | characterize | standard}
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- gates:
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  - requirements:     pass | fail — {근거 경로:라인 or feature 파일 섹션}
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  - tdd_evidence:     pass | fail | skip — {.plan.md 스텝 범위, tdd:false &amp; mode≠characterize 면 skip}
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  - capture_lockdown: pass | fail | skip — {mode:characterize 에서 git diff --stat app/ 결과, 그 외 skip}
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  - test_run:         pass | fail | skip — {명령 + exit code, tdd:false &amp; mode≠characterize 면 skip}
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  - scope:            pass | fail — {.focus.md 범위 내}
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  - focus:            pass | fail | skip — {항목 N/M 반영 + 미반영 항목 요약, .focus.md 없으면 skip}
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  - open_questions:   pass | fail | skip — {(d) 임의결정 없음 / Major 이슈 / Open Questions 섹션 없으면 skip}
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  - drift:            none | detected — {drift-protocol A/B, detected 시 보고 링크. 3건 이상이면 `(count: N) — 일괄 정리 권장` 첨부}
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>- metrics:
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>  - coverage: {before%→after% / skip — coverage_command 미설정 또는 측정 실패}
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>  - domain_impact: none | detected | skip — {유형}: {요약} → {대상 문서} (항목 `;` 구분, skip 은 — domain: null 명시)
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>- issues_to_fix:
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>  - [severity] {요약} — {파일:라인}
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>- next: {다음 feature 후보 or null}
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- phase: {development | qa | issue}
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- gates:
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  - requirements:     pass | fail — {근거 경로:라인 or feature 파일 섹션}
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  - tdd_evidence:     pass | fail | skip — {.plan.md 스텝 범위 증거}
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  - capture_lockdown: pass | fail | skip — {git diff --stat {source_root} 결과}
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  - test_run:         pass | fail | skip — {명령 + exit code}
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  - scope:            pass | fail — {.focus.md 범위 내}
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  - focus:            pass | fail | skip — {항목 N/M 반영 + 미반영 항목 요약, .focus.md 없으면 skip}
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  - open_questions:   pass | fail | skip — {(d) 임의결정 없음 / Major 이슈 / Open Questions 섹션 없으면 skip}
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  - drift:            none | detected — {drift-protocol A/B, detected 시 보고 링크. 3건 이상이면 `(count: N) — 일괄 정리 권장` 첨부}
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>- metrics:
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>  - coverage: {before%→after% / skip — coverage_command 미설정 또는 측정 실패}
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>  - domain_impact: none | detected | skip — {유형}: {요약} → {대상 문서} (항목 `;` 구분, skip 은 — domain: null 명시)
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>- issues_to_fix:
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>  - [severity] {요약} — {파일:라인}
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>- next: {다음 feature 후보 or null}
 </span></code></pre></div>
 <p>gate 의 판정 근거는 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/guardrails.md"><code>guardrails.md</code></a> § 기본 판정 축 을 따른다. <code>status: NOT_READY</code> 인 경우 <code>issues_to_fix</code> 최소 1 항목. <code>status: READY</code> 인 경우 <code>issues_to_fix</code> 는 <code>- none</code> 으로 명시. 예시: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md"><code>messages.md</code></a> § <code>verification_report_example</code>.</p>
 <p><strong>gate 매핑:</strong>
+   - <code>phase</code> — step 1 의 <code>project_phase</code> 값을 그대로 기록 (0.23.2 — <code>verify-report-lint.py</code> 가 qa 의 test_run 오버라이드 판정에 사용. 필드 부재 시 lint 는 기존 mode 규칙으로 처리하므로 구형 REPORT 와 호환). <strong>예외 — work_mode=issue 면 <code>issue</code> 로 기록</strong> (이슈 수정 모드 블록 SSOT — project_phase 는 development 고정값이라 그대로 쓰면 test_run 오버라이드가 풀린다).
    - <code>tdd_evidence</code> — <code>mode:characterize</code> 에서는 <code>[Captured]</code> 증거 4 라인 존재 여부. <code>tdd: true</code> 에서는 <code>[Red] + [Green]</code> 증거. 둘 다 아니면 skip.
-   - <code>capture_lockdown</code> — <code>mode:characterize</code> 전용. <code>git diff --stat app/</code> 이 empty 면 pass, 1 줄이라도 있으면 fail. 다른 모드에서는 skip.
+   - <code>capture_lockdown</code> — <code>mode:characterize</code> 전용. <code>git diff --stat {source_root}</code> 이 empty 면 pass, 1 줄이라도 있으면 fail. 다른 모드에서는 skip (phase=qa 는 잠금 해제라 skip — step 1 블록).
+   - <code>test_run</code> — <code>phase=qa</code> 또는 work_mode=issue (REPORT 의 <code>phase: issue</code>) 면 mode 무관 <strong>pass|fail 필수</strong> (회귀 재현 테스트 실행 — step 1 블록). 그 외에는 <code>tdd:false &amp; mode≠characterize</code> 일 때만 skip.
    - <code>focus</code> — <code>.focus.md</code> 항목별 반영 판정 (step 3 [focus 게이트]). <code>.focus.md</code> 부재 시 skip. mode 와 직교. <code>scope</code> (범위 <em>이탈</em> 검사) 와 별개 축 — scope 는 "벗어나지 않았는가", focus 는 "각 지시가 실제 반영됐는가".</p>
 <p><strong>metrics.coverage</strong> 는 참고 지표 (gate 아님). orchestrate-load 의 <code>config.coverage_command</code> 가 있으면 실행 후 <code>{before→after}</code> 수치 기록. 없거나 측정 실패면 <code>skip</code>. status 판정에 영향 없음 — 데이터 축적 후 gate 승격 여부 판단.</p>
 <p><strong>metrics.domain_impact</strong> 는 참고 지표 (gate 아님). 판정 기준·기록 절차 SSOT:
@@ -3598,7 +3670,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2624,6 +2654,8 @@
       
         
       
+        
+      
     
     
     
@@ -2696,6 +2728,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3514,7 +3574,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>code-review 파일은 자동 생성하지 않는다.</strong> <code>rules.md</code> (팀 도메인 룰) 와 <code>{lang}.md</code> (언어 규약) 모두 코드 리뷰가 실제 필요해질 때 <code>/dp-skills:code-review-init</code> 로 셋업. 사용 안 하는 팀은 폴더 자체가 안 생김. 빠른 워크플로: 신규 팀 → <code>team-init</code> → 도메인 작업 → 첫 PR 직전 <code>@ag-code-reviewer</code> → 부재 안내 따라 <code>/dp-skills:code-review-init</code>.</p>
+<p><strong>code-review 파일은 자동 생성하지 않는다.</strong> <code>rules.md</code> (팀 도메인 룰) 와 <code>{lang}.md</code> (언어 규약) 모두 코드 리뷰가 실제 필요해질 때 <code>/dp-skills:code-review-init</code> 로 셋업. 사용 안 하는 팀은 폴더 자체가 안 생김.</p>
 <p><strong><code>_common/config.md</code> 추가 처리:</strong></p>
 <p><code>workspace/_common/config.md</code> 가 없으면 <code>templates/_common.config.md.template</code> 으로 생성 (idempotent — 이미 있으면 skip). MANIFEST.md (전사 도메인 지식) 는 다중팀 환경 선택 사항이라 자동 생성하지 않는다.</p>
 <p>템플릿 위치: <code>${CLAUDE_PLUGIN_ROOT}/skills/context/lifecycle/setup/templates/</code></p>
@@ -3561,8 +3621,7 @@
 <h2 id="_4">참고<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>이 스킬은 <strong>팀 단위 workspace 를 처음 만들 때만</strong> 사용한다. 기존 팀에 프로젝트를 추가하려면 <code>/dp-skills:project</code>.</li>
-<li>생성되는 모든 파일은 팀이 직접 채워야 하는 스켈레톤이다 (도메인·공통 모델·Ignore 등).</li>
-<li>생성 후 스켈레톤을 실제 값으로 채우는 작업은 이 스킬 범위 밖. 사용자가 문서를 편집한다.</li>
+<li>생성 파일은 전부 스켈레톤 — 실제 값 채우기는 사용자 편집 몫 (스킬 범위 밖).</li>
 <li>각 스켈레톤 상단에 "이 파일은 <code>/dp-skills:team-init</code> 가 생성했다" 주석이 있어, 어디서 왔는지 역추적 가능.</li>
 </ul>
 
@@ -3620,7 +3679,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

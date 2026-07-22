@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2596,6 +2626,8 @@
       
         
       
+        
+      
     
     
     
@@ -2668,6 +2700,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3424,13 +3484,16 @@
    - <code>focus</code> 값이 있으면 챌린지 작성 시 반드시 반영 (사용자 최근 지시).
    - <code>hints</code> 내용을 본 세션 컨텍스트로 주입. 첫 항목이 <code>[역할] ...</code> 이면 본 wrapper 의 페르소나(red-team)이므로 모든 챌린지 판단의 stance 로 채택한다.
    - <code>analyzed</code> / <code>tdd</code> / <code>domain</code> / <code>project_phase</code> 값을 이후 분기에 사용.</p>
-<p><strong>예외 — 도메인 판정 실패:</strong> <code>domain: null</code> 이면 hints 에 "사용자 확인 필요" 안내. 사용자에게 도메인을 질의하고 확정한 뒤, 해당 <code>workspace/{TEAM}/context/scope/{domain}.md</code> 와 <code>rules/{domain}.md</code> 를 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
+<p><strong>예외 — 도메인 판정 실패:</strong> <code>domain: null</code> (단일 도메인 워크스페이스는 orchestrate-load 가 자동 채택 — null 은 복수 후보·미학습 상태) → 사용자에게 도메인을 질의·확정한 뒤 scope/rules 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
+<p><strong>[필수] work_mode 확인</strong> — step 1 JSON 의 <code>work_mode</code> 가 <code>issue</code> 면 대상은 활성 issue 다: 후보 탐색 (절차 2)·입력 (절차 3) 이 <code>issues/{이슈명}/</code> 기준으로 바뀐다 (각 절차의 issue 분기 참조). 챌린지 기준·산출 형식은 동일.</p>
 <ol>
 <li><strong>[대상 plan 확정]</strong> 호출자 프롬프트 또는 <code>.focus.md</code> 에서 feature 번호·slug 를 추출한다. 명시되지 않은 경우 다음 우선순위로 후보를 결정:</li>
 </ol>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 가장 최근 수정된 plan.md 후보 (사용자 확인 필수) — qa phase 산출물 포함</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ls<span class="w"> </span>-t<span class="w"> </span>workspace/<span class="o">{</span>TEAM<span class="o">}</span>/projects/<span class="o">{</span>PROJECT<span class="o">}</span>/features/*.plan.md<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">      </span>workspace/<span class="o">{</span>TEAM<span class="o">}</span>/projects/<span class="o">{</span>PROJECT<span class="o">}</span>/qa/*.plan*.md<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># work_mode=issue 면 위 대신 활성 issue 의 plan 후보:</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>ls<span class="w"> </span>-t<span class="w"> </span>workspace/<span class="o">{</span>TEAM<span class="o">}</span>/issues/<span class="o">{</span>이슈명<span class="o">}</span>/issue.plan*.md<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
 </span></code></pre></div>
 <ul>
 <li>후보가 0 개 → "검토할 plan 이 없습니다. 먼저 <code>@ag-planner</code> 호출 필요." 보고 후 종료.</li>
@@ -3447,6 +3510,7 @@
 <li><code>workspace/{TEAM}/projects/{PROJECT}/features/NN-{slug}.plan.md</code> (planner 산출물)</li>
 <li>이미 존재하는 <code>features/NN-{slug}.plan.critic.md</code> (이전 비평이 있으면 — 중복 챌린지 재제기 방지용 참조. 출력은 덮어쓰기 — 절차 5)</li>
 <li>qa phase 면 features/ 대신 <code>qa/{KEY}.md</code> (결함 본문) + <code>qa/{KEY}.plan[.r{N}].md</code> 가 입력이다.</li>
+<li>work_mode=issue 면 features/ 대신 <code>issues/{이슈명}/issue.md</code> (현상·의심 영역) + <code>issues/{이슈명}/issue.plan[.r{N}].md</code> 가 입력이다.</li>
 </ul>
 <p>critic 산출물 파일명 = 대상 plan 파일명에서 <code>.plan</code> → <code>.plan.critic</code> 치환 — <code>.r{N}</code> 꼬리표는 그대로 유지 (예: <code>qa/QAPRJ-5438.plan.r1.md</code> → <code>qa/QAPRJ-5438.plan.critic.r1.md</code>. 규약 SSOT: qa/SKILL.md "qa/ 산출물 명명 규약").</p>
 <ol>
@@ -3522,7 +3586,7 @@
 </span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>| C2 | {severity} | open | |
 </span></code></pre></div>
 <ul>
-<li><strong>합의 표는 critic 이 각 챌린지마다 1 행씩 채워 emit 한다</strong> — <code>C#</code>·<code>severity</code>(챌린지 본문과 동일)·<code>status</code>=<code>open</code>·<code>메모</code>=빈칸. 빈 표(헤더만)로 두지 않는다 — <code>/dp-skills:run-cycle</code> 의 critic 게이트가 이 표에서 <code>severity</code>·<code>status</code> 를 직접 읽어 blocking 미합의를 판정하므로, 행이 없으면 게이트가 거짓 통과한다.</li>
+<li><strong>합의 표는 critic 이 각 챌린지마다 1 행씩 채워 emit 한다</strong> — <code>C#</code>·<code>severity</code>(챌린지 본문과 동일)·<code>status</code>=<code>open</code>·<code>메모</code>=빈칸. 빈 표(헤더만)로 두지 않는다 — <code>/dp-skills:run-cycle</code> 의 critic 게이트가 이 표에서 <code>severity</code>·<code>status</code> 를 직접 읽어 blocking 미합의를 판정하므로, 행이 없으면 게이트가 거짓 통과한다. (run-cycle 은 판독 전 <code>tools/critic-lint.py</code> 로 본문 <code>### C#</code> ↔ 표 행의 일치를 결정론 검증한다 — 행 누락·severity 불일치 시 자동 진행 대신 정지.)</li>
 <li><code>status</code> 값: <code>open</code>(미합의 — critic 초기값) · <code>accepted</code>(반영) · <code>rejected</code>(기각) · <code>deferred</code>(이월). <code>open</code> → 그 외 전이는 <strong>planner 만</strong> 수행한다 (재호출, ag-planner 절차 10). <strong>재호출 시 critic 은 현재 plan 기준으로 챌린지를 새로 도출해 전 행을 <code>status=open</code> 으로 emit 한다</strong> — 합의 표는 그 회차의 disposition 기록이지 회차 누적기가 아니다. 이전 표의 status 를 <code>C#</code> 번호로 옮겨 적지 않는다 (<code>C#</code> 는 회차별 위치 순번이라 같은 번호가 다른 챌린지를 가리킬 수 있어 오귀속됨). 해소된 챌린지는 재도출에서 사라지고 미해결은 다시 <code>open</code> 으로 잡힌다. 회차 간 이력은 git 으로 추적. run-cycle 등 오케스트레이터는 표를 읽기만 한다.</li>
 <li>챌린지가 0 개면 <code>## 챌린지</code> 아래에 "검출된 결함 없음. plan 통과." 한 줄만 적고 <code>## 합의</code> 표는 생략.</li>
 <li>기존 파일이 있으면 덮어쓴다 — 합의 표·본문 챌린지 모두 <strong>현재 회차의 최신 상태만</strong> 보존 (회차 누적은 git).</li>
@@ -3557,6 +3621,7 @@
 <ul>
 <li><code>@ag-planner</code> 와 동일한 컨텍스트(orchestrate-load) 위에서 동작하지만 페르소나만 정반대 (architect vs red-team).</li>
 <li>호출은 선택적이지만 <strong>스킵 여부는 사용자가 결정한다</strong> — 오케스트레이터가 자의로 생략하지 않는다. trivial 한 변경이라 불필요해 보이면 건너뛰기 전에 사용자에게 확인받거나, <code>/dp-skills:focus "critic 스킵"</code> 으로 명시 지시받는다.</li>
+<li><strong>run-cycle (HOTL 기본 모드) 에서는 선택이 아니라 필수 판정자다</strong> — plan 사전 승인을 대체하는 게이트로 자동 호출되며 (호출 프롬프트에 feature·plan 경로 명시), 합의표는 판독 전 <code>tools/critic-lint.py</code> 의 결정론 검증을 거친다 (run-cycle §2.3).</li>
 <li>흐름: <code>@ag-planner → @ag-planner-critic → (필요 시) @ag-planner 재호출 → @ag-generator → @ag-evaluator</code>.</li>
 </ul>
 <h2 id="_4">드리프트 대응<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -3616,7 +3681,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

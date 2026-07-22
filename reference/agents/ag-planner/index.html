@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -1880,6 +1910,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#work_mode-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이슈 수정 모드 (work_mode == issue)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tdd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1945,17 +1986,6 @@
     <span class="md-ellipsis">
       
         탐색 제약
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        드리프트 대응
       
     </span>
   </a>
@@ -2668,6 +2698,8 @@
       
         
       
+        
+      
     
     
     
@@ -2740,6 +2772,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3446,6 +3506,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#work_mode-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이슈 수정 모드 (work_mode == issue)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tdd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3517,17 +3588,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        드리프트 대응
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3576,8 +3636,9 @@
    - <code>hints</code> 내용을 본 세션 컨텍스트로 주입. 첫 항목이 <code>[역할] ...</code> 이면 본 wrapper 의 페르소나이므로 모든 후속 판단·표현·반려 기준의 stance 로 채택한다.
    - <code>analyzed</code> / <code>tdd</code> / <code>domain</code> / <code>project_phase</code> 값을 이후 분기에 사용.</p>
 <p>스크립트는 MANIFEST 로드, 도메인 판정, state.yml 스키마 검증, scope fallback, focus read, persona 주입 (<code>identity.yml</code> SSOT) 을 수행. 상세 계약: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/orchestrate-load.py"><code>orchestrate-load.py</code></a>, <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md"><code>state-schema.md</code></a>.</p>
-<p><strong>예외 — 도메인 판정 실패:</strong> <code>domain: null</code> 이면 hints 에 "사용자 확인 필요" 안내. 사용자에게 도메인을 질의하고 확정한 뒤, 해당 <code>workspace/{TEAM}/context/scope/{domain}.md</code> 와 <code>rules/{domain}.md</code> 를 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
+<p><strong>예외 — 도메인 판정 실패:</strong> <code>domain: null</code> (단일 도메인 워크스페이스는 orchestrate-load 가 자동 채택 — null 은 복수 후보·미학습 상태) → 사용자에게 도메인을 질의·확정한 뒤 scope/rules 수동 Read. 확정값은 <strong>세션 한정</strong> — <code>.agent-state.yml</code> 에 기록하지 않는다 (기록 주체는 <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 뿐 — state-schema.md § domain 생명주기).</p>
 <p><strong>[필수] phase 확인</strong> — step 1 JSON 의 <code>project_phase</code> 값을 사용한다. <code>qa</code> 이면 아래 <strong>"결함 수정 모드 (phase == qa)" 섹션</strong> 블록을 활성화한다 (mode 와 직교 — <code>tdd: true</code> 또는 <code>mode: characterize</code> 와 공존 가능). <code>development</code> 이면 평소대로 진행. 직접 grep 으로 재확인하지 않는다 — phase 파싱·검증(fail-closed)은 orchestrate-load 가 담당하며, 비정상 값이면 step 1 의 <code>error</code> 로 이미 중단됐다.</p>
+<p><strong>[필수] work_mode 확인</strong> — step 1 JSON 의 <code>work_mode</code> 가 <code>issue</code> 면 아래 <strong>"이슈 수정 모드 (work_mode == issue)" 섹션</strong> 블록을 활성화한다. issue 모드는 <code>project_phase</code> 가 <code>development</code> 고정이라 qa 블록과 동시 활성되지 않으며, tdd/characterize 도 standard 고정이다. <code>project</code> (또는 필드 부재 — 구버전 출력) 면 평소대로 진행.</p>
 <ol>
 <li>
 <p><strong>[필수 선행] 에이전트 간 전달사항 소비</strong> — <code>project.md</code> 의 <code>## 에이전트 간 전달사항</code> 섹션에 미처리(<code>[ ]</code>) 항목이 있으면 <strong>계획 수립보다 먼저</strong> 처리한다 (이전 feature evaluator 가 남긴 인수인계).</p>
@@ -3585,14 +3646,14 @@
 <li>
 <p><strong>현재 feature 와 관련된 항목</strong>: 계획 본문에 반영 방침 명시 → 계획 확정 후 Edit 으로 <code>[x]</code> 체크 (텍스트 보고만 금지).</p>
 </li>
-<li><strong>무관해 보이는 항목</strong>: 사용자에게 원문·판단 근거를 보고한 뒤 "이번 처리 / 다음 이월 / 불필요" 중 선택받는다. <strong>자체 판단으로 건너뛰거나 <code>[x]</code> 처리 금지</strong> — 체크 유실은 evaluator→planner 인수인계 단절로 이어진다.</li>
+<li><strong>무관해 보이는 항목</strong>: <strong>자동 이월한다</strong> — 원문·판단 근거를 보고하고 <code>[ ]</code> 는 유지한다 (다음 feature 의 planner 가 재검토. 질의로 정지하지 않는다 — HOTL 0.26.0). <strong>자체 판단 <code>[x]</code> 처리 금지</strong> — 체크 유실은 evaluator→planner 인수인계 단절로 이어진다. 항목의 <code>(from #N)</code> 과 현재 feature 번호가 3 이상 차이 나면 (장기 이월) 보고에 "정리 제안: 불필요 판단 시 사용자가 <code>[x]</code> 처리" 1줄을 덧붙인다.</li>
 <li>
 <p>모든 미처리 항목 소화 전에는 3번으로 넘어가지 않는다.</p>
 </li>
 <li>
-<p>컨텍스트 로드·코드베이스 분석 중 <code>workspace/</code> 하위 파일 (도메인 지식 <code>context/</code>, 프로젝트 산출물 <code>project.md</code>·<code>agents/*.md</code>) 에서 실제 코드와 다른 내용을 발견하면 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/drift-protocol.md"><code>drift-protocol.md</code></a> 를 따른다. 누적 임계(3 건 이상) 처리는 protocol § 누적 임계 처리 — Planner 행 참조.</p>
+<p>컨텍스트 로드·코드베이스 분석 중 <code>workspace/</code> 하위 파일 (도메인 지식 <code>context/</code>, 프로젝트 산출물 <code>project.md</code>·<code>agents/*.md</code>) 에서 실제 코드와 다른 내용을 발견하면 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/drift-protocol.md"><code>drift-protocol.md</code></a> 를 따른다. 누적 임계(3 건 이상) 처리는 protocol § 누적 임계 처리 — Planner 행 참조 (Planner 는 § A 도메인 지식·§ B 프로젝트 산출물 모두 대상).</p>
 </li>
-<li>로드한 지침에 따라 구현 계획을 수립하고 사용자에게 확인을 받는다. 모드별 계약 포맷:</li>
+<li>로드한 지침에 따라 구현 계획을 수립하고 사용자에게 확인을 받는다. <strong>예외 — 호출 프롬프트에 <code>[orchestration: hotl]</code> 마커가 있으면</strong> (run-cycle 기본 모드): 확인 대기 없이 계획을 확정·보고한다 — 게이트는 critic 합의표 (run-cycle §2.3, critic-lint 검증) 가 담당하고 사용자는 산출물·Slack progress 로 사후 감시한다. 마커 없는 호출 (수동·run-cycle <code>--gated</code>) 은 현행대로 확인을 받는다. 모드별 계약 포맷:</li>
 <li><strong><code>mode: characterize</code></strong> — <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/characterize.md"><code>characterize.md</code></a> § Planner — Characterization Contract. 3 축 (입력 / 현재 출력 / 관찰된 사이드 이펙트). "현재 출력" 은 Generator 실행 후 채움 — Planner 예측 기록 금지.</li>
 <li><strong><code>tdd: true</code> (mode 미설정)</strong> — <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/rgr.md"><code>rgr.md</code></a> § Planner — Red Contract. Red 계약 3 축 (spec 대상 경로 / 검증할 행동 / 기대 실패 유형).</li>
 <li>
@@ -3602,7 +3663,7 @@
 </ol>
 <p>공통: <strong>spec 코드는 작성하지 않는다</strong> — 실제 spec 파일 작성은 Generator 담당 (TDD·characterize 모드 한정).
 5. <strong>[필수]</strong> 계획 수립 과정에서 체크리스트(<code>[ ]</code>)를 작성했거나, 기존 체크리스트 항목을 완료한 경우 <strong>반드시</strong> Edit 툴로 해당 항목을 <code>[x]</code>로 업데이트한다. 체크 결과를 텍스트로만 보고하고 파일을 수정하지 않는 것은 금지한다.
-6. <strong>[계획 저장]</strong> <code>features/</code> 폴더가 있는 프로젝트에서, 계획이 확정되면 <code>features/NN-{slug}.plan.md</code>에 저장한다 (NN은 feature 번호, slug는 feature 파일명과 동일). phase=qa 면 결함 수정 모드 블록의 "plan 저장 경로 (qa)" 가 우선한다 (<code>qa/{KEY}.plan[.r{N}].md</code>).
+6. <strong>[계획 저장]</strong> <code>features/</code> 폴더가 있는 프로젝트에서, 계획이 확정되면 <code>features/NN-{slug}.plan.md</code>에 저장한다 (NN은 feature 번호, slug는 feature 파일명과 동일). phase=qa 면 결함 수정 모드 블록의 "plan 저장 경로 (qa)" 가 우선한다 (<code>qa/{KEY}.plan[.r{N}].md</code>). work_mode=issue 면 이슈 수정 모드 블록의 "plan 저장 경로 (issue)" 가 우선한다 (<code>issues/{이슈명}/issue.plan[.r{N}].md</code> — features/ 부재와 무관하게 저장한다).
    - 포함 내용: 변경 대상 파일 목록, 구현 순서, 스텝별 설명, 주의사항
    - TDD 모드 (<code>tdd: true</code>, mode 미설정): 스텝별 <strong>spec 대상 경로 / 검증할 행동 / 기대 실패 유형</strong> (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/rgr.md"><code>rgr.md</code></a> § Planner — Red Contract 참조)
    - Characterize 모드 (<code>mode: characterize</code>): 스텝별 <strong>spec 대상 경로 / 입력 / 현재 출력 / 관찰된 사이드 이펙트</strong> (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/characterize.md"><code>characterize.md</code></a> § Planner — Characterization Contract 참조)
@@ -3614,7 +3675,7 @@
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--mode<span class="w"> </span><span class="o">{</span>standard<span class="p">|</span>tdd<span class="p">|</span>characterize<span class="o">}</span>
 </span></code></pre></div>
 <ol>
-<li><strong>[조건부 필수] Slack 계획 승인 요청 알림</strong> — 계획이 확정되어 사용자 확인을 기다리는 시점에, <strong>반드시</strong> 아래 Bash 명령을 1회 실행한다. 생략 금지:</li>
+<li><strong>[조건부 필수] Slack 계획 승인 요청 알림</strong> — 계획이 확정되어 <strong>사용자 확인을 기다리며 종료하는 호출</strong>에서 반드시 아래 Bash 명령을 1회 실행한다 (생략 금지). <strong>예외 — <code>[orchestration: hotl]</code> 마커가 있으면 본 단계를 생략한다</strong>: 승인 대기가 없으므로 approval 통지는 거짓 신호가 되며, 통지는 run-cycle 의 progress 이벤트로 일원화된다.</li>
 </ol>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--event<span class="w"> </span>approval<span class="w"> </span><span class="se">\</span>
@@ -3637,7 +3698,7 @@
 </span></code></pre></div>
 <p>변경 파일 specificity 가 낮으면 ("vague" 항목 다수) 또는 Red 계약 specificity 가 낮으면 (placeholder 다수) plan 을 보완한 후 다음 단계로 넘어간다.</p>
 <ol>
-<li><strong>[필수] 신규 plan.md 작성 완료 — critic 단계 안내</strong> — 계획 확정 후 generator 를 자동 실행하지 않는다. 종료 보고에 다음 <strong>오케스트레이터 지시</strong>를 그대로 포함한다:</li>
+<li><strong>[필수] 신규 plan.md 작성 완료 — critic 단계 안내 (수동 사이클 한정)</strong> — 계획 확정 후 generator 를 자동 실행하지 않는다. 종료 보고에 다음 <strong>오케스트레이터 지시</strong>를 그대로 포함한다. run-cycle 은 §2.3 이 critic 을 필수 판정자로 자동 호출하므로 이 지시문의 스킵 확인 절차는 발동하지 않는다:</li>
 </ol>
 <blockquote>
 <p><strong>다음 단계는 <code>@ag-planner-critic</code> 호출입니다.</strong> 신규 plan.md 가 작성됐으므로 오케스트레이터는 critic 단계를 <strong>자의적으로 건너뛰지 않는다.</strong></p>
@@ -3671,6 +3732,19 @@
 <li><strong>plan.md 본문 필수 필드 — "결함 함수"</strong>: plan 본문에 "결함 함수: {file_path}#{symbol}" 형식 1 줄을 반드시 명시 (예: <code>app/services/order_service.rb#calculate_total</code> 또는 <code>services/foo.ts#FooService.bar</code>). 파일 단위만 명시하지 말 것 — generator 의 "동일 모듈 다른 함수 변경 금지" 가드의 게이트로 쓰인다.</li>
 <li><strong>회귀 재현 테스트 스텝 필수</strong>: QA 사이클의 plan 에 "회귀 재현 테스트" 스텝을 반드시 명시한다 (mode 가 tdd 든 standard 든). standard 모드의 "[모드 가드 — 비TDD 에서 자동 테스트 요청 감지]" 는 <code>phase=qa</code> 에서 해제 — 회귀 방지 테스트는 결함 수정 사이클의 일부이므로 사용자 재질의 없이 plan 에 포함한다.</li>
 <li><strong>phase=qa 우선 (characterize 충돌 해소)</strong>: <code>mode: characterize</code> 의 <code>{source_root}</code> 잠금은 본 QA 사이클에 한해 해제. 단, 변경은 본 사이클의 "결함 함수" 한 군데로 좁게 유지. characterize spec 추가가 필요하면 본 사이클 외 작업으로 분리.</li>
+</ul>
+<hr />
+<h2 id="work_mode-issue">이슈 수정 모드 (work_mode == issue)<a class="headerlink" href="#work_mode-issue" title="Permanent link">&para;</a></h2>
+<p>절차 1번의 work_mode 확인에서 <code>issue</code> 일 때만 활성화한다. 활성 issue (<code>workspace/{TEAM}/issues/{이슈명}/</code>) 의 운영 결함 1 건 해결이 목적 — 결함 수정 모드 (phase == qa) 와 원형이 같고 (최소 변경·회귀영향), 대상 (project 결함 티켓 ↔ 독립 운영 이슈) 과 산출물 경로만 다르다.</p>
+<ul>
+<li><strong>명세는 issue.md</strong>: <code>issues/{이슈명}/issue.md</code> 의 <code>## 현상</code>·<code>## 의심 영역</code> 이 요구사항이다. features/·project.md·agents/ 는 존재하지 않는다.</li>
+<li><strong>최소 변경·롤백 가능</strong>: 결함 지점만 좁게 수정. 인접 코드 개선·리팩터·신규 추상화 제안 금지. 수정은 롤백 가능하게 설계한다 (운영 안정성 — issues/GUIDE.md 원칙).</li>
+<li><strong><code>## 원인</code> 기입</strong>: 원인 분석이 확정되면 issue.md 의 <code>## 원인</code> 섹션을 Edit 으로 채운다 (qa 블록의 원인 기입 책임과 동일).</li>
+<li><strong>영향 범위 후보 필수</strong>: plan 본문에 "영향 범위 후보" 절을 반드시 포함 — 결함 지점과 동일 호출 경로를 공유하는 코드 후보를 명시적으로 나열 (grep/scan 결과 인용). 후보 0 건이면 "검색 범위·키워드" 를 함께 기록 — evaluator 가 반려 게이트로 사용.</li>
+<li><strong>결함 지점 1줄 필수</strong>: 코드 결함이면 "결함 함수: {file_path}#{symbol}" 1 줄을 plan 본문에 명시 (generator 의 변경 범위 게이트). 데이터 정합 이슈 (쿼리 조치 중심) 면 "조치 대상: {테이블·데이터 범위}" 로 대체한다.</li>
+<li><strong>회귀 재현 테스트 스텝 필수</strong>: plan 에 "회귀 재현 테스트" 스텝을 반드시 명시한다 — standard 모드의 "[모드 가드]" 재질의는 해제 (qa 블록과 동일 사유: 회귀 방지 테스트는 결함 수정 사이클의 일부).</li>
+<li><strong>plan 저장 경로 (issue)</strong>: <code>features/NN-{slug}.plan.md</code> 가 아니라 <code>issues/{이슈명}/issue.plan.md</code>. 재작업·사이클 내 대형 개정은 <code>issue.plan.r{N}.md</code> — <code>.r{N}</code> 규약 (항상 마지막 <code>.md</code> 직전, 기존 r 최대값 + 1) 은 qa/SKILL.md "qa/ 산출물 명명 규약" 과 동일하다. plan-validate 도 이 경로로 실행한다 (<code>--mode standard</code>).</li>
+<li><strong>비적용 절차</strong>: 절차 2 (에이전트 간 전달사항 — project.md 없음) 는 건너뛴다. 절차 7 Slack 메시지는 <code>계획 확인 필요: {이슈명}</code> 으로 치환한다 (이슈 Slack 미지원 — notifier 가 자동 no-op, 호출 자체는 유지).</li>
 </ul>
 <hr />
 <h2 id="tdd">모드 가드 — 비TDD 에서 자동 테스트 요청 감지<a class="headerlink" href="#tdd" title="Permanent link">&para;</a></h2>
@@ -3726,9 +3800,6 @@
 <hr />
 <h2 id="_4">탐색 제약<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/domain/scope-exploration.md"><code>scope-exploration.md</code></a> 을 따른다. Planner 는 도메인 전체 (models / services / controllers) 가 전형적 scope.</p>
-<hr />
-<h2 id="_5">드리프트 대응<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>작업 중 <code>workspace/</code> 하위 파일에서 실제와 다른 내용을 발견하면 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/drift-protocol.md"><code>drift-protocol.md</code></a> 를 따른다. Planner 는 § A (도메인 지식) 와 § B (프로젝트 산출물) 모두 대상.</p>
 
 
 
@@ -3784,7 +3855,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

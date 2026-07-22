@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2515,6 +2545,8 @@
       
         
       
+        
+      
     
     
     
@@ -2587,6 +2619,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3285,7 +3345,14 @@
 <hr />
 <h2 id="_3">작업 절차<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="1">1. 변경 범위 수집<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p><code>base</code> 미지정 시 <code>origin/HEAD</code> 또는 <code>workspace/_common/config.md</code> 의 <code>pr_default_base</code>:</p>
+<p><code>base</code> 미지정 시 <strong><code>/dp-skills:pr</code> 와 동일한 우선순위 체인</strong>으로 결정한다 (0.23.2 통일 — 종전 "origin/HEAD 또는 config" 는 순서 모호 + state 미참조로, <code>pr_base_branch</code> 가 project/* 인 프로젝트에서 누적 변경 전체를 리뷰하는 범위 왜곡이 있었다):</p>
+<ol>
+<li>활성 프로젝트 <code>.agent-state.yml</code> 의 <code>pr_base_branch</code></li>
+<li><code>workspace/{TEAM}/context/team.config.md</code> 의 <code>pr_default_base</code></li>
+<li><code>workspace/_common/config.md</code> 의 <code>pr_default_base</code></li>
+<li><code>origin/HEAD</code></li>
+</ol>
+<p>결정된 base 와 그 근거 (state / team.config / common config / origin-HEAD) 를 REPORT 의 <code>base:</code> 필드에 병기한다 — 오검출 시 사용자가 알아차릴 수 있게.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>diff<span class="w"> </span>--name-status<span class="w"> </span>&lt;base&gt;...HEAD
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>diff<span class="w"> </span>--stat<span class="w"> </span>&lt;base&gt;...HEAD
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>git<span class="w"> </span>diff<span class="w"> </span>--shortstat<span class="w"> </span>&lt;base&gt;...HEAD
@@ -3304,7 +3371,7 @@
 <li><code>workspace/{TEAM}/context/code-review/{rules,lang}.md</code></li>
 <li><code>workspace/{TEAM}/context/scope/{domain}.md</code> (활성 프로젝트만)</li>
 </ol>
-<p><strong>언어별 룰 (<code>{lang}.md</code>) 은 워크스페이스에서만 로드</strong> — 플러그인은 언어 중립이며 언어 룰을 ship 하지 않는다. 빈 형식만 필요하면 <code>${CLAUDE_PLUGIN_ROOT}/skills/context/lifecycle/setup/templates/code-review.lang.md.template</code>, 사전 작성된 예시가 필요하면 <code>${CLAUDE_PLUGIN_ROOT}/examples/code-review/{lang}.md</code> 를 복사. 워크스페이스에 <code>{lang}.md</code> 부재 → 축 2 (언어 규약) 축소 + <code>scope_skipped</code> 에 사유 기재.</p>
+<p><strong>언어별 룰 (<code>{lang}.md</code>) 은 워크스페이스에서만 로드</strong> — 플러그인은 언어 중립이며 언어 룰을 ship 하지 않는다. 빈 형식만 필요하면 <code>${CLAUDE_PLUGIN_ROOT}/skills/context/lifecycle/setup/templates/code-review.lang.md.template</code>, 사전 작성된 예시가 필요하면 <code>${CLAUDE_PLUGIN_ROOT}/examples/code-review/{lang}.md</code> 를 복사. 워크스페이스에 <code>{lang}.md</code> 부재 시 처리는 축 2 #3 및 출력 § 언어 룰 부재 보강 참조.</p>
 <p>팀 명: <code>cat workspace/TEAM.md | head -1</code>. 도메인: 활성 프로젝트의 <code>.agent-state.yml</code> 의 <code>domain</code> 키 또는 <code>project.md</code> 제한사항. 활성 프로젝트 없거나 domain 미식별 → scope 로드 skip (workspace-less 모드).</p>
 <h3 id="4-5">4. 검토 5축 실행<a class="headerlink" href="#4-5" title="Permanent link">&para;</a></h3>
 <p><strong>스코프 분기 (오케스트레이션용):</strong> <code>--axis</code> 가 주어지면 나열된 축만 실행한다 (slug→축: <code>cross-cutting</code>→1·<code>lang</code>→2·<code>hunk</code>→3·<code>callers</code>→4·<code>missing</code>→5). <code>--files</code> 가 주어지면 1단계 변경 범위 수집을 해당 파일로 한정한다. <strong>둘 다 미지정이면 종전대로 전체 변경 파일에 5축 전부 실행</strong> — 멘션 직접 호출 동작 불변.</p>
@@ -3318,9 +3385,9 @@
 </ol>
 <h4 id="2-out-rules">축 2 — 언어별 규약 (out: rules 미명시 취향)<a class="headerlink" href="#2-out-rules" title="Permanent link">&para;</a></h4>
 <ol>
-<li>로드된 <code>review/{lang}.md</code> 의 grep-friendly 룰을 <code>Grep -n -E</code> 로 변경 파일에 매칭</li>
+<li>로드된 <code>review/{lang}.md</code> 의 grep-friendly 룰을 <code>Grep -n -E</code> 로 변경 파일에 매칭. <strong>정규식 방언은 ERE/ripgrep 호환만</strong> — look-around (<code>(?!...)</code> 등)·backreference 는 매칭 엔진이 지원하지 않아 파스 에러가 난다. 룰이 파스 에러를 내면 해당 룰을 judgment-based 로 강등해 직접 판정하고, REPORT <code>scope_skipped</code> 에 <code>regex 비호환 룰: {룰}</code> 기재 + 룰 파일 수정 권고를 남긴다 (0.23.1 감사: 실사용 ruby.md 에 PCRE lookahead 룰 존재)</li>
 <li>judgment-based 룰은 hunk 를 Read 하고 직접 판정</li>
-<li><strong>워크스페이스에 <code>{lang}.md</code> 부재 시</strong> → <code>scope_skipped</code> 에 "언어 규약 파일 없음 — 축 2 축소" 기재 + <strong><code>next</code> 필드에 <code>/dp-skills:code-review-init {lang}</code> 명시 호출 안내</strong>. (메인 대화가 보고서 보고 사용자에게 실행 여부 확인 후 트리거.)</li>
+<li><strong>워크스페이스에 <code>{lang}.md</code> 부재 시</strong> → 축 2 축소 실행 + <code>scope_skipped</code> 에 "언어 규약 파일 없음 — 축 2 축소" 기재 + 출력 § 언어 룰 부재 보강 적용.</li>
 </ol>
 <h4 id="3-diff-hunk-level-out-tdd-plan-evaluator">축 3 — diff hunk-level 디테일 (out: TDD 증거·plan 충족 = evaluator)<a class="headerlink" href="#3-diff-hunk-level-out-tdd-plan-evaluator" title="Permanent link">&para;</a></h4>
 <ol>
@@ -3348,7 +3415,7 @@
 <p><strong>verdict</strong> (confidence 필터 통과 findings 만 집계):
 <code>critical</code>≥1 → <strong>block</strong> · <code>major</code>≥1 → <strong>block</strong> (소프트, 사용자 ack 시 진행) · <code>minor</code>/<code>nit</code> 만 → <strong>nit</strong> · 빈 → <strong>approve</strong> (<code>findings: - none</code>)</p>
 <p><strong>severity</strong>: <code>critical</code> (런타임 오류·데이터 손실·보안·호환 깨짐) / <code>major</code> (언어 규약·테스트 누락·docs 누락) / <code>minor</code> (네이밍·중복·rules 권고) / <code>nit</code> (포맷·minor 가독성)</p>
-<p><strong>confidence (0~100)</strong>: <code>100</code>=확실 / <code>75</code>=높음 / <code>50</code>=중간 / <code>25</code>=약함 / <code>0</code>=false positive. <code>--threshold &lt;N&gt;</code> (기본 80) 미만은 dismiss + <code>scope_skipped: low-confidence: N filtered (threshold T)</code>. rubric 상세: README § 8.</p>
+<p><strong>confidence (0~100, 연속값)</strong>: anchor 는 <strong>기준점일 뿐 5개 값만 허용되는 게 아니다</strong> — <code>100</code>=확실 / <code>75</code>=높음 / <code>50</code>=중간 / <code>25</code>=약함 / <code>0</code>=false positive 사이를 보간해 85·90 처럼 채점한다 (messages.md 예시와 동일). <strong>불변식: 룰/패턴이 분명히 매칭되고 회피 사유가 없는 finding 은 기본 컷 (80) 이상으로 채점한다</strong> — anchor-75 문구를 이유로 명백한 위반을 기본값에서 조용히 걸러내지 않는다 (0.23.1 감사: anchor 표·기본 컷·예시 3자 캘리브레이션 충돌). <code>--threshold &lt;N&gt;</code> (기본 80) 미만은 dismiss + <code>scope_skipped: low-confidence: N filtered (threshold T)</code>. rubric 상세: README § 8.</p>
 <p><strong>finding 1줄</strong>: <code>[severity][confidence:N][path:line] {위반} — {근거} → {제안}</code>. 모든 지적에 <code>path:line</code> 정량 첨부 (Do-NOT #4).</p>
 <p><strong>next 필드 (필수)</strong> — verdict 별 후속 명령 명시:</p>
 <ul>
@@ -3360,7 +3427,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>⚠️ {lang}.md 부재로 축 2 (언어 규약) 축소 실행. 정식 셋업 권장:
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    /dp-skills:code-review-init {lang}
 </span></code></pre></div>
-<p>상황 부연 ("critical 1·major 3" 등) 한 문장에 합쳐도 됨. 핵심: 사용자가 다음 명령 추측 안 하게.</p>
+<p>본 에이전트는 안내만 — 메인 대화가 보고서 확인 후 사용자 동의 하에 트리거한다. 상황 부연 ("critical 1·major 3" 등) 한 문장에 합쳐도 됨. 핵심: 사용자가 다음 명령 추측 안 하게.</p>
 <hr />
 <h2 id="do-not">Do-NOT 리스트 (노이즈 억제)<a class="headerlink" href="#do-not" title="Permanent link">&para;</a></h2>
 <ol>
@@ -3430,7 +3497,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

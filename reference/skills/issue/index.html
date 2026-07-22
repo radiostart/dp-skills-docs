@@ -1364,6 +1364,8 @@
       
         
       
+        
+      
     
     
     
@@ -1480,6 +1482,34 @@
     
   
     QA 사이클 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../how-to/issue-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 이슈 단건 처리
   
 
     
@@ -2574,6 +2604,8 @@
       
         
       
+        
+      
     
     
     
@@ -2646,6 +2678,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
   
 
     
@@ -3359,9 +3419,15 @@
 
 <h1 id="dp-skillsissue"><code>/dp-skills:issue</code><a class="headerlink" href="#dp-skillsissue" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>운영 이슈 처리 모드 활성화. <code>workspace/{TEAM}/issues/{이슈명}/</code> 폴더를 생성 또는 로드하고, STATE.md를 갱신하며, 도메인 컨텍스트를 로드한다. 버그 대응, 장애 분석, 핫픽스 등 단발성 이슈 단위 작업을 시작할 때 사용한다. 지속적인 기능 개발·feature 단위 작업은 <code>/dp-skills:project</code> 를 사용한다.</p>
+<p>운영 이슈 처리 모드 활성화 — <code>workspace/{TEAM}/issues/{이슈명}/</code> 를 생성·로드하고 팀 누적 컨텍스트 위에서 문제 1건을 해결한다. 코드 수정 시 project 와 동일한 planner→critic→generator→evaluator 사이클을 issue 단위로 사용 가능. 버그 대응·장애 분석·핫픽스 등 단발성 작업용. 지속적인 기능 개발·feature 단위 작업은 <code>/dp-skills:project</code> 를 사용한다.</p>
 </blockquote>
 <p>운영 이슈 처리 모드를 활성화한다.</p>
+<p><strong>정의</strong> — issue 는 <strong>기존에 누적된 컨텍스트를 기반으로 특정 문제를 해결하는 단건 처리</strong> 기능이다:</p>
+<ol>
+<li><strong>누적 컨텍스트 기반</strong>: projects/ 산출물과는 독립 — "프로젝트 컨텍스트 미참조" 는 projects/ 산출물 (project.md·features/·agents/) 한정이며, 팀 누적 컨텍스트 (<code>context/</code> 도메인 지식·과거 <code>issues/</code> 이력·메모리 P0) 는 진단의 기반이다.</li>
+<li><strong>project 유사 구조의 단건 처리</strong>: 이슈 폴더는 <code>issue.md</code> 1 건의 명세 + 사이클 파생 산출물로 구성된다 — feature N 건 대신 문제 1 건. 파생 산출물 명명은 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/issues/GUIDE.md">GUIDE.md</a> § 이슈 폴더 구조 (qa 산출물 명명 규약 준용) 를 따른다.</li>
+<li><strong>기본 사이클 유지</strong>: 코드 수정이 필요한 이슈는 <code>@ag-planner → @ag-planner-critic → @ag-generator → @ag-evaluator</code> 사이클을 그대로 사용한다 (orchestrate-load 가 STATE.md 의 <code>issue</code> 행을 인식해 issues/ 기반으로 로드 — <code>work_mode</code> 계약). 조사·회신만으로 끝나는 이슈는 사이클 없이 직접 처리해도 된다.</li>
+</ol>
 <blockquote>
 <p>QA 결함 처리는 <code>/dp-skills:qa</code> 를 사용하세요. issue 는 project 컨텍스트 독립 운영 장애 전용입니다.</p>
 </blockquote>
@@ -3375,14 +3441,25 @@
 </ul>
 <h2 id="_2">수행 절차<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ol>
-<li><code>$ARGUMENTS</code> 가 비어있으면 이슈명 없이 바로 처리 모드로 진입한다.</li>
-<li><code>$ARGUMENTS</code> 가 있으면 <code>workspace/{TEAM}/issues/{이슈명}/</code> 존재 여부를 Glob 으로 확인한다.</li>
-<li>없으면 <code>skills/issues/GUIDE.md</code> 를 로드하여 새 이슈 폴더를 생성한다.</li>
-<li>있으면 <code>issue.md</code> 만 로드한다 (GUIDE.md 는 로드하지 않는다).</li>
-<li><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P3</strong> 수행 — STATE.md 테이블 본문을 <code>| issue | {이슈명} | 진행중 |</code> <strong>1행으로 교체</strong>. 기존 다른 이름 행은 모두 삭제 (이력은 git log).</li>
-<li>이슈명이 없으면 <code>| issue | - | 진행중 |</code> 로 기록한다.</li>
-<li><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P4</strong> 수행 — 도메인 컨텍스트 로드.</li>
-<li>이슈 컨텍스트를 요약하고 다음 작업을 안내한다.</li>
+<li><strong>bare 진입</strong> — <code>$ARGUMENTS</code> 가 비어있으면: "이슈명 없이 진입합니다 — 폴더·기록이 남지 않고 사이클 (<code>@ag-*</code>) 도 비지원입니다. 기록과 사이클이 필요하면 <code>/dp-skills:issue {이슈명}</code> 으로 재진입하세요." 1 줄 고지 후 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/issues/GUIDE.md">GUIDE.md</a> 를 로드하고, 2·3 단계를 건너뛰어 4 단계부터 진행한다 (5 단계는 MANIFEST 까지만, 6 단계 안내에서 사이클 항목 제외).</li>
+<li><strong>유사 이슈 검색</strong> — <code>workspace/{TEAM}/issues/</code> 폴더 목록을 확인하고 이슈명·핵심 키워드로 유사 이슈를 찾는다 (과거 원인·조치가 이번 진단의 출발점).</li>
+<li>유사 폴더 발견 → 사용자에게 제시: "유사 이슈가 있습니다: {목록}. 해당 이슈를 재개할까요, 새 이슈로 진행할까요?"</li>
+<li>없으면 다음 단계로.</li>
+<li><strong>폴더 생성/로드</strong> — <code>workspace/{TEAM}/issues/{이슈명}/</code> 존재 여부를 확인한다:</li>
+<li><strong>없으면</strong>: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/issues/GUIDE.md">GUIDE.md</a> 를 로드하여 새 이슈 폴더 + <code>issue.md</code> 를 템플릿대로 생성한다 (<code>도메인:</code> 라인 포함 — 값은 5 단계에서 확정).</li>
+<li><strong>있으면</strong>: <code>issue.md</code> 만 Read 한다 (GUIDE.md 는 로드하지 않는다). 파생 산출물 (<code>issue.plan*.md</code>·<code>issue.eval*.md</code>) 이 있으면 진행 상태를 요약한다 (6 단계 재개 분기의 근거).</li>
+<li><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P3</strong> 수행 — STATE.md 테이블 본문을 <code>| issue | {이슈명} | 진행중 |</code> <strong>1행으로 교체</strong>. 기존 다른 이름 행은 모두 삭제 (이력의 SSOT 는 issues/ 로컬 폴더). 이슈명이 없으면 (bare) <code>| issue | - | 진행중 |</code> 로 기록한다.</li>
+<li><strong>도메인 확정 + 컨텍스트 로드</strong> — <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P4</strong> 수행 (issue 분기 — 도메인 소스가 issue.md 의 <code>도메인:</code> 라인이라는 계약과 wrapper 일치 사유는 P4 가 SSOT).</li>
+<li><code>도메인:</code> 라인 부재 시 <strong>1 회 질의</strong>: <code>## 의심 영역</code> 내용과 <code>context/scope/</code> 트리를 대조해 후보를 제시하고 사용자 확정을 받은 뒤, issue.md 상단에 <code>도메인: {값}</code> 1 줄을 Edit 으로 기입하고 scope/rules 를 로드한다. 판단이 어려우면 미정으로 진행 가능 (MANIFEST 까지만 — wrapper 진입 시 재질의된다).</li>
+<li>bare 모드는 질의 없이 MANIFEST 까지만.</li>
+<li><strong>결과 출력</strong> — 이슈 컨텍스트를 요약하고 다음 작업을 안내한다. 산출물 상태로 분기한다 (명시적 if / elif / else — 한 번에 하나의 안내만):</li>
+<li><strong><code>issue.eval*.md</code> 의 최신 REPORT 가 READY 면</strong>: "이슈 조치가 완료된 상태입니다. <code>## 재발 방지</code> 기록 여부를 확인하세요." 안내.</li>
+<li><strong>elif <code>issue.plan*.md</code> 존재</strong>: "작성된 plan 이 있습니다 — 재개: 챌린지 전이면 <code>@ag-planner-critic</code>, plan 승인 후면 <code>@ag-generator</code>." 안내 (승인 흔적은 산출물에 없으므로 기존 plan 재개 시 사용자 재확인).</li>
+<li><strong>else</strong>: 처리 경로를 분기해 안내한다:<ul>
+<li><strong>코드 수정형</strong> (원인이 코드 결함으로 추정): "<code>@ag-planner</code> 를 호출해 사이클을 시작하세요 — plan 은 <code>issues/{이슈명}/issue.plan.md</code> 에 저장되고, critic 챌린지 → generator 구현 → evaluator 검증 (회귀 재현 테스트 실행 포함) 이 이어집니다."</li>
+<li><strong>조사·경미형</strong> (원인 파악·회신·데이터 확인 중심): "GUIDE 의 진단 절차대로 직접 처리할 수 있습니다. 처리 후 issue.md 의 <code>## 원인</code>·<code>## 조치</code> 를 기록하세요."</li>
+</ul>
+</li>
 </ol>
 
 
@@ -3439,7 +3516,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.23.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
