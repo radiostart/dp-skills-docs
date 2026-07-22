@@ -3430,9 +3430,10 @@
 <h1 id="dp-skills">dp-skills<a class="headerlink" href="#dp-skills" title="Permanent link">&para;</a></h1>
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">v0.21.2</p>
+<p class="admonition-title">v0.26.0</p>
 <ul>
-<li>유지보수 — <code>@ag-code-reviewer</code> 문서 정리 (비기능 <code>페르소나</code> 섹션 → <code>호출 인자</code>, 동작 무변경)</li>
+<li><strong>human-on-the-loop 전환</strong> — <a href="how-to/run-cycle/">run-cycle</a> 이 plan 사전 승인 없이 critic 합의표 (critic-lint 결정론 검증) 로 자동 진행하고 Slack <code>progress</code> 로 사후 통지합니다 (<code>--gated</code> 로 종전 흐름 회귀)</li>
+<li><strong>운영 이슈 단건 사이클</strong> (0.25.0) — <a href="how-to/issue-cycle/">issue</a> 가 누적 컨텍스트 위에서 planner→critic→generator→evaluator 사이클을 단건 단위로 지원</li>
 <li>기능 하이라이트: OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></li>
 </ul>
 </div>

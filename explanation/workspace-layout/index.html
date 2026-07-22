@@ -1510,6 +1510,13 @@
     PROJ --&gt; QA["qa/ — {JIRA-KEY}.md (phase=qa)"]
 </code></pre>
 <p><code>qa/</code> 폴더는 project 가 <strong>phase=qa</strong> 로 전환된 뒤 <code>/dp-skills:qa {KEY}</code> 첫 호출에서 lazy 생성됩니다. Jira 키 1개당 파일 1개 (<code>qa/QAPRJ-1234.md</code>), 회신 이력은 Jira 코멘트가 SSOT 이므로 로컬 파일에는 회신 섹션이 없습니다 — 자세한 내용은 <a href="../lifecycle-phases/">Lifecycle phases</a> 참조.</p>
+<p><strong>5. <code>issues/{이슈명}/</code> — 단발 운영 이슈 (0.25.0 부터 사이클 지원)</strong></p>
+<pre class="mermaid"><code>graph TD
+    ISS["issues/{이슈명}/"]
+    ISS --&gt; IMD["issue.md — 도메인·현상·원인·조치 (명세이자 기록)"]
+    ISS --&gt; IDER["issue.plan / .plan.critic / .eval — 사이클 파생 산출물"]
+</code></pre>
+<p>project 와 달리 상태 파일 (<code>.agent-state.yml</code>) 이 없습니다 — 도메인 기록처는 issue.md 의 <code>도메인:</code> 라인이고, 사이클 재개 지점은 파생 산출물에서 파생됩니다 (stateless). 상세: <a href="../../how-to/issue-cycle/">운영 이슈 단건 처리</a>.</p>
 <h2 id="_2">두 개의 경계<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <p>레이아웃을 이해하는 핵심은 두 가지 경계입니다.</p>
 <p><strong>1. 지식 저장소 vs 작업 상태</strong></p>

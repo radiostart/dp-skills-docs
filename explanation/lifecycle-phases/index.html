@@ -1581,7 +1581,7 @@
 <p>phase 는 mode 와 직교하므로, qa phase 에서 TDD 모드를 함께 켜면 결함 재현 테스트를 먼저 작성한 뒤(Red) 국소 수정으로 통과시키는(Green) 사이클이 됩니다.</p>
 <h2 id="qa">QA 가 선택적인 이유<a class="headerlink" href="#qa" title="Permanent link">¶</a></h2>
 <p>기획·구현이 끝나도 QA 가 결함을 보고하지 않는 project 는 QA phase 로 전환할 필요가 없습니다. development 만으로 lifecycle 이 종료되며, 후에 QA 결함이 들어오면 그때 <code>--qa on</code> 으로 전환합니다. phase=qa 에서 <code>/dp-skills:qa off</code> (또는 <code>--qa off</code>) 로 development 로 되돌릴 수도 있어, 회귀 sprint 등 양방향 전환이 가능합니다.</p>
-<p>운영 장애·핫픽스처럼 project 컨텍스트가 필요 없는 단발 처리는 <a href="../../reference/skills/issue/"><code>/dp-skills:issue</code></a> 가 담당합니다 — QA phase 와 issue 모드는 공존합니다.</p>
+<p>운영 장애·핫픽스처럼 project 컨텍스트가 필요 없는 단발 처리는 <a href="../../reference/skills/issue/"><code>/dp-skills:issue</code></a> 가 담당합니다 — QA phase 와 issue 모드는 공존합니다. 0.25.0 부터 issue 도 동일한 planner→critic→generator→evaluator 사이클을 단건 단위로 지원합니다 (<a href="../../how-to/issue-cycle/">운영 이슈 단건 처리</a>).</p>
 <h2 id="_3">다음 단계<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
 <ul>
 <li>How-to: <a href="../../how-to/qa-cycle/">QA 사이클 진행</a> — 절차 5분 분량.</li>
