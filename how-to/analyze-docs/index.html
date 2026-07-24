@@ -1183,6 +1183,17 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        (조건부) 사전 인터뷰
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         신규 도메인이면
       
     </span>
@@ -1212,7 +1223,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         흔한 실수
@@ -1223,7 +1234,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -3512,6 +3523,17 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        (조건부) 사전 인터뷰
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         신규 도메인이면
       
     </span>
@@ -3541,7 +3563,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         흔한 실수
@@ -3552,7 +3574,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -3603,7 +3625,9 @@
 <p>키워드·파일명으로 범위를 좁힐 수도 있습니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/dp-skills:analyze 배송상태
 </span></code></pre></div>
-<h4 id="_4">신규 도메인이면<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="_4">(조건부) 사전 인터뷰<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>분할된 feature 에 <strong>(d) 비즈니스 결정</strong> 미해결 항목이 있으면 — 기획서 해석이 갈리는 지점 포함 — 해당 feature 들을 묶어 선택지 질문 1회 (최대 4문항) 로 물어봅니다. 기획서가 충분하면 질문 없이 통과합니다. 답변은 Open Questions 에 <code>[x] … — 결정: …</code> 으로 기록되며 <code>--force</code> 재분석에도 보존됩니다 (재질의 없음). "모름 / 일단 진행" 은 미해결로 남아 planner 단계의 기존 게이트가 받습니다. 규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>.</p>
+<h4 id="_5">신규 도메인이면<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>도메인 확인 질의에서 미등재 도메인을 입력하면 analyze 를 중단하지 않고 그
 자리에서 등재까지 진행됩니다 — 승인 후 MANIFEST 행과 <code>scope/{domain}.md</code> 시드
 (features 기반 예정 항목) 가 생성되고, <code>rules/{domain}.md</code> 빈 스켈레톤은 없을
@@ -3615,13 +3639,13 @@
 <p>생성된 features 는 자동 구현되지 않습니다. <code>@ag-planner</code> 부터 명시 호출합니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>@ag-planner → (선택) @ag-planner-critic → @ag-generator → @ag-evaluator
 </span></code></pre></div>
-<h2 id="_5">흔한 실수<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">흔한 실수<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>--force</code> 는 기존 features 를 덮어씁니다.</strong> prompt-origin features 가 감지되면 데이터 손실 방지를 위해 사용자 승인을 기다립니다 — 무심코 승인하지 마세요.</li>
 <li><code>--regen-agents</code> 는 docs 변화가 없어도 <code>agents/*.md</code> 만 재작성합니다 (drift 대응). 자동 백업(<code>.agents.bak/{timestamp}/</code>) 후 중복 섹션을 post-check 합니다.</li>
 <li>analyze 는 <code>docs/</code> 를 입력으로 씁니다 — 기획서를 먼저 <code>/dp-skills:confl</code> 로 저장해야 합니다.</li>
 </ul>
-<h2 id="_6">다음 단계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_7">다음 단계<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li>How-to: <a href="../confluence-sync/">Confluence 동기화</a> — <code>docs/</code> 채우기</li>
 <li>How-to: <a href="../create-feature/">기획서 없이 feature 추가</a></li>
@@ -3682,7 +3706,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

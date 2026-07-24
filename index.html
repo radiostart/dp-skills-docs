@@ -3430,10 +3430,10 @@
 <h1 id="dp-skills">dp-skills<a class="headerlink" href="#dp-skills" title="Permanent link">&para;</a></h1>
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">v0.26.0</p>
+<p class="admonition-title">v0.27.0</p>
 <ul>
-<li><strong>human-on-the-loop 전환</strong> — <a href="how-to/run-cycle/">run-cycle</a> 이 plan 사전 승인 없이 critic 합의표 (critic-lint 결정론 검증) 로 자동 진행하고 Slack <code>progress</code> 로 사후 통지합니다 (<code>--gated</code> 로 종전 흐름 회귀)</li>
-<li><strong>운영 이슈 단건 사이클</strong> (0.25.0) — <a href="how-to/issue-cycle/">issue</a> 가 누적 컨텍스트 위에서 planner→critic→generator→evaluator 사이클을 단건 단위로 지원</li>
+<li><strong>플래닝 사전 인터뷰</strong> — feature/issue 명세 생성 시점에 사용자만 답할 수 있는 갭 ((d) 비즈니스 결정·기대결과·이슈 현상 축) 이 있을 때만 선택지 질문 1회 (최대 4문항) 로 선해소합니다 (<a href="how-to/create-feature/">기획서 없이 feature 추가</a> · <a href="how-to/analyze-docs/">기획서로 features 일괄 생성</a> · <a href="how-to/issue-cycle/">운영 이슈 단건 처리</a>)</li>
+<li><strong>human-on-the-loop 전환</strong> (0.26.0) — <a href="how-to/run-cycle/">run-cycle</a> 이 plan 사전 승인 없이 critic 합의표 (critic-lint 결정론 검증) 로 자동 진행하고 Slack <code>progress</code> 로 사후 통지합니다 (<code>--gated</code> 로 종전 흐름 회귀)</li>
 <li>기능 하이라이트: OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></li>
 </ul>
 </div>
@@ -3535,7 +3535,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>

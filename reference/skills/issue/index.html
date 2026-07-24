@@ -3450,17 +3450,24 @@
 <li><strong>있으면</strong>: <code>issue.md</code> 만 Read 한다 (GUIDE.md 는 로드하지 않는다). 파생 산출물 (<code>issue.plan*.md</code>·<code>issue.eval*.md</code>) 이 있으면 진행 상태를 요약한다 (6 단계 재개 분기의 근거).</li>
 <li><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P3</strong> 수행 — STATE.md 테이블 본문을 <code>| issue | {이슈명} | 진행중 |</code> <strong>1행으로 교체</strong>. 기존 다른 이름 행은 모두 삭제 (이력의 SSOT 는 issues/ 로컬 폴더). 이슈명이 없으면 (bare) <code>| issue | - | 진행중 |</code> 로 기록한다.</li>
 <li><strong>도메인 확정 + 컨텍스트 로드</strong> — <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> 의 <strong>P4</strong> 수행 (issue 분기 — 도메인 소스가 issue.md 의 <code>도메인:</code> 라인이라는 계약과 wrapper 일치 사유는 P4 가 SSOT).</li>
-<li><code>도메인:</code> 라인 부재 시 <strong>1 회 질의</strong>: <code>## 의심 영역</code> 내용과 <code>context/scope/</code> 트리를 대조해 후보를 제시하고 사용자 확정을 받은 뒤, issue.md 상단에 <code>도메인: {값}</code> 1 줄을 Edit 으로 기입하고 scope/rules 를 로드한다. 판단이 어려우면 미정으로 진행 가능 (MANIFEST 까지만 — wrapper 진입 시 재질의된다).</li>
+<li><strong>신규 생성 경로</strong> (절차 3 에서 issue.md 를 방금 생성) 는 5-bis 사전 인터뷰가 도메인 질의를 흡수한다 — 인터뷰 발동 시 본 항의 자유 질의는 수행하지 않는다 (P4 "1 회 질의" 계약의 이행 수단만 교체, 재질의 없음).</li>
+<li>그 외 경로에서 <code>도메인:</code> 라인 부재 시 <strong>1 회 질의</strong>: <code>## 의심 영역</code> 내용과 <code>context/scope/</code> 트리를 대조해 후보를 제시하고 사용자 확정을 받은 뒤, issue.md 상단에 <code>도메인: {값}</code> 1 줄을 Edit 으로 기입하고 scope/rules 를 로드한다. 판단이 어려우면 미정으로 진행 가능 (MANIFEST 까지만 — wrapper 진입 시 재질의된다).</li>
 <li>bare 모드는 질의 없이 MANIFEST 까지만.</li>
-<li><strong>결과 출력</strong> — 이슈 컨텍스트를 요약하고 다음 작업을 안내한다. 산출물 상태로 분기한다 (명시적 if / elif / else — 한 번에 하나의 안내만):</li>
-<li><strong><code>issue.eval*.md</code> 의 최신 REPORT 가 READY 면</strong>: "이슈 조치가 완료된 상태입니다. <code>## 재발 방지</code> 기록 여부를 확인하세요." 안내.</li>
-<li><strong>elif <code>issue.plan*.md</code> 존재</strong>: "작성된 plan 이 있습니다 — 재개: 챌린지 전이면 <code>@ag-planner-critic</code>, plan 승인 후면 <code>@ag-generator</code>." 안내 (승인 흔적은 산출물에 없으므로 기존 plan 재개 시 사용자 재확인).</li>
-<li><strong>else</strong>: 처리 경로를 분기해 안내한다:<ul>
-<li><strong>코드 수정형</strong> (원인이 코드 결함으로 추정): "<code>@ag-planner</code> 를 호출해 사이클을 시작하세요 — plan 은 <code>issues/{이슈명}/issue.plan.md</code> 에 저장되고, critic 챌린지 → generator 구현 → evaluator 검증 (회귀 재현 테스트 실행 포함) 이 이어집니다."</li>
-<li><strong>조사·경미형</strong> (원인 파악·회신·데이터 확인 중심): "GUIDE 의 진단 절차대로 직접 처리할 수 있습니다. 처리 후 issue.md 의 <code>## 원인</code>·<code>## 조치</code> 를 기록하세요."</li>
-</ul>
-</li>
 </ol>
+<p><strong>5-bis. 사전 인터뷰 (조건부 — 신규 생성 경로 한정).</strong> 공통 규약 (질의 상한·탈출구·갭 앵커·JIT 로드·미해소 처리): <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>.
+   - <strong>발동 판정</strong> — 현상 3축 (<strong>재현 조건 · 기대 동작 · 영향 범위</strong>) 중 <code>$ARGUMENTS</code>·대화 맥락에서 채울 수 없는 축이 있으면 발동. 대화에 이미 서술된 축은 해당 bullet 에 채우고, 전부 채워지면 질의 없이 통과. 통상 사용례 (이슈명 한 줄 진입) 에서는 사실상 항상 발동한다 — 이는 신규 마찰이 아니라 기존 "사용자가 issue.md 를 직접 채우는" 현상 작성 단계의 구조화 대체다.
+   - 질문 생성 전 그 시점 가용 컨텍스트 (P0 유사 이슈 메모 · <code>context/scope/</code> 트리 · MANIFEST) 를 대조한다 — 답이 있는 것은 질문 금지 (지식 우선).
+   - 발동 시 <code>ToolSearch select:AskUserQuestion</code> 선로딩 후 <strong>1 회 질의</strong> (최대 4 문항). 우선순위: 도메인 (라인 부재 시 — 절차 5 질의 흡수) &gt; 현상 3축 &gt; (d)-성 발견분 (interview.md § 갭 앵커 규칙으로 선기록).
+   - 답변은 issue.md 에 Edit 반영 — 현상 bullet·<code>도메인:</code> 라인 (도메인 확정 시 scope/rules 로드는 절차 5 본류와 동일). 도메인 "모름" 답변 → 미정 진행 (P4 허용 — 재질의 없음). 미해소 축은 해당 bullet <code>(미확인)</code> 잔존.
+   - (d)-성 미해소는 <code>## Open Questions</code> 를 <strong>4 카테고리 H3 형식</strong>으로 신설해 <code>- [ ]</code> 기입 (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/issues/GUIDE.md">GUIDE.md</a> § 섹션 구조 — H3 없는 bare 항목은 기계 검증에 계수되지 않는다).
+   - <strong>비발동</strong>: bare 모드 (기록처 없음) · 기존 이슈 재로드.
+   - A2 runtime fallback: 질의 실패·도구 로드 실패 시 → 진행 (abort 안 함). 빈 축은 사용자가 직접 기입하는 기존 흐름으로 폴백.
+6. <strong>결과 출력</strong> — 이슈 컨텍스트를 요약하고 다음 작업을 안내한다. 산출물 상태로 분기한다 (명시적 if / elif / else — 한 번에 하나의 안내만):
+   1. <strong><code>issue.eval*.md</code> 의 최신 REPORT 가 READY 면</strong>: "이슈 조치가 완료된 상태입니다. <code>## 재발 방지</code> 기록 여부를 확인하세요." 안내.
+   2. <strong>elif <code>issue.plan*.md</code> 존재</strong>: "작성된 plan 이 있습니다 — 재개: 챌린지 전이면 <code>@ag-planner-critic</code>, plan 승인 후면 <code>@ag-generator</code>." 안내 (승인 흔적은 산출물에 없으므로 기존 plan 재개 시 사용자 재확인).
+   3. <strong>else</strong>: 처리 경로를 분기해 안내한다:
+      - <strong>코드 수정형</strong> (원인이 코드 결함으로 추정): "<code>@ag-planner</code> 를 호출해 사이클을 시작하세요 — plan 은 <code>issues/{이슈명}/issue.plan.md</code> 에 저장되고, critic 챌린지 → generator 구현 → evaluator 검증 (회귀 재현 테스트 실행 포함) 이 이어집니다."
+      - <strong>조사·경미형</strong> (원인 파악·회신·데이터 확인 중심): "GUIDE 의 진단 절차대로 직접 처리할 수 있습니다. 처리 후 issue.md 의 <code>## 원인</code>·<code>## 조치</code> 를 기록하세요."</p>
 
 
 
@@ -3516,7 +3523,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

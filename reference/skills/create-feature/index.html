@@ -2273,6 +2273,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#3-ter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-ter. 사전 인터뷰 (조건부 — 사용자만 답할 수 있는 갭)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#4-projectmd-agents" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3585,6 +3596,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#3-ter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-ter. 사전 인터뷰 (조건부 — 사용자만 답할 수 있는 갭)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#4-projectmd-agents" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3724,6 +3746,23 @@
 <p>의도된 비대칭 — MANIFEST 게이트는 <code>project</code>/<code>issue</code> 진입 (preamble P4) 이 이미 수행했고, 여기서 MANIFEST 는 cross-domain detect enrichment 용도다. 활성 프로젝트 안에서 부재가 발견되면 (사후 드리프트) 작성 중인 feature spec 을 버리지 않고 detect 만 생략한다 (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/INDEX.md">INDEX.md</a> § MANIFEST 부재 정책).</p>
 <p><strong>편집물 보존 가드</strong> — 신규 <code>features/NN-{slug}.md</code> 는 Write (파일 없음). 기존 파일 (<code>project.md</code>·<code>agents/*.md</code>·<code>.agent-state.yml</code>·다른 <code>features/*.md</code>) 은 <strong>Edit</strong> 으로 splice. PreToolUse 훅 <code>protect-managed.sh</code> 가 강제. NN 충돌 시 다음 번호로 재할당.</p>
 </blockquote>
+<h3 id="3-ter">3-ter. 사전 인터뷰 (조건부 — 사용자만 답할 수 있는 갭)<a class="headerlink" href="#3-ter" title="Permanent link">&para;</a></h3>
+<p>공통 규약 (질의 상한·탈출구·갭 앵커·JIT 로드·미해소 처리): <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>.</p>
+<p><strong>발동 판정</strong> — 둘 중 하나라도 참이면 발동, 아니면 본 단계 생략:</p>
+<ul>
+<li>Open Questions <strong>(d)</strong> 에 <code>- [ ]</code> 항목 존재 (3-bis 분류분 + 프롬프트 해석이 갈리는 지점의 선기록분 — interview.md § 갭 앵커 규칙).</li>
+<li>요구사항 <strong>기대결과</strong> 축이 placeholder 잔존 (프롬프트에서 추출 실패 = 사용자 의도 갭). placeholder 는 <code>_(상세 필요 …)_</code> · <code>_({프롬프트에서 추출 가능한 결과})_</code> 두 형태 모두 포괄.</li>
+</ul>
+<p><strong>조건/트리거 placeholder 는 발동 비대상</strong> — 템플릿 원문대로 <code>@ag-planner</code> 영향 분석 보강 소관.</p>
+<p>발동 시 <code>ToolSearch select:AskUserQuestion</code> 선로딩 후 <strong>1회 질의</strong> (최대 4문항, 우선순위 (d) &gt; 기대결과, 문항마다 "모름 / 일단 진행" 상당 선택지 포함). 답변은 방금 Write 한 파일에 Edit 반영:</p>
+<ul>
+<li>(d) 답변 → <code>- [x] {항목} — 결정: {내용}</code></li>
+<li>기대결과 답변 → 요구사항 섹션 기대결과 축 갱신</li>
+</ul>
+<p>스킵·무응답 항목은 추정으로 채우지 않는다 — <code>- [ ]</code> · placeholder 잔존 (기존 게이트 경로).</p>
+<blockquote>
+<p><strong>A2 runtime fallback</strong>: 질의 실패·도구 로드 실패 시 → spec 진행 (abort 안 함). 잔존 갭은 planner 의 OQ 게이트·3축 보강이 그대로 받는다.</p>
+</blockquote>
 <h3 id="4-projectmd-agents">4. <code>project.md</code> 및 <code>agents/*</code> 자동 갱신<a class="headerlink" href="#4-projectmd-agents" title="Permanent link">&para;</a></h3>
 <p>신규 feature 파일 생성 후 <code>project.md</code> (목표·관련 파일) 와 <code>agents/*</code> 를 <strong>현재 features/ 전체</strong> 기준으로 갱신한다. 항목별 상세는 아래 각 reference 를 직접 따른다 — <code>analyze/SKILL.md</code> 는 읽지 않는다 (analyze 와 동일 절차이며 소스만 docs/ 가 아닌 features/ 전체).</p>
 <p>수행 항목:</p>
@@ -3827,7 +3866,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

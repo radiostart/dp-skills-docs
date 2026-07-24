@@ -1632,7 +1632,7 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 현상 작성
+        2. 현상 확인·보강
       
     </span>
   </a>
@@ -3505,7 +3505,7 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 현상 작성
+        2. 현상 확인·보강
       
     </span>
   </a>
@@ -3591,11 +3591,11 @@
 <ul>
 <li><code>workspace/{TEAM}/issues/</code> 에서 <strong>유사 이슈를 먼저 검색</strong>해 재개/신규를 확인합니다 (과거 원인·조치가 출발점).</li>
 <li>신규면 <code>issues/{이슈명}/issue.md</code> 를 템플릿으로 생성하고, STATE.md 를 <code>| issue | {이슈명} | 진행중 |</code> 로 교체합니다.</li>
-<li><strong>도메인을 1회 질의</strong>해 issue.md 상단에 <code>도메인: {값}</code> 으로 기입하고, 해당 <code>scope/</code>·<code>rules/</code> 를 로드합니다 (상태 파일 없음 — 기록처는 issue.md 자신).</li>
+<li>신규 이슈면 <strong>사전 인터뷰</strong>가 도메인 + 현상 3축 (재현 조건·기대 동작·영향 범위) 을 선택지 질문 1회 (최대 4문항) 로 묶어 묻고, 답변을 issue.md 에 기입한 뒤 해당 <code>scope/</code>·<code>rules/</code> 를 로드합니다 (상태 파일 없음 — 기록처는 issue.md 자신). 대화에 이미 서술한 축은 질문 없이 채워집니다. 규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>.</li>
 </ul>
 <p>이슈명 없이 <code>/dp-skills:issue</code> (bare) 로 진입하면 폴더·기록이 남지 않고 사이클도 비지원입니다 — 짧은 조사 전용.</p>
-<h3 id="2">2. 현상 작성<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p><code>issue.md</code> 의 <code>## 현상</code> (증상·에러·재현 경로) 과 선택적으로 <code>## 의심 영역</code> 을 채웁니다 — AI 탐색 범위와 도메인 후보 제시가 좁아집니다.</p>
+<h3 id="2">2. 현상 확인·보강<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>신규 이슈는 사전 인터뷰 답변으로 <code>## 현상</code> (증상·에러·재현 경로·기대 동작·영향 범위) 이 채워집니다 — "모름" 으로 남긴 축은 <code>(미확인)</code> 으로 표시됩니다. 필요하면 <code>issue.md</code> 를 직접 편집해 보강하고, 선택적으로 <code>## 의심 영역</code> 을 채웁니다 — AI 탐색 범위와 도메인 후보 제시가 좁아집니다.</p>
 <h3 id="3">3. 처리 경로 선택<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>조사·경미형</strong> (원인 파악·회신·1줄 수정): 진단 절차대로 직접 처리하고 issue.md 의 <code>## 원인</code>·<code>## 조치</code> 를 기록합니다.</li>
@@ -3704,7 +3704,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

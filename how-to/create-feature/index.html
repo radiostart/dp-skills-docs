@@ -1210,7 +1210,18 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 구현 시작
+        2. (조건부) 사전 인터뷰
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 구현 시작
       
     </span>
   </a>
@@ -3494,7 +3505,18 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 구현 시작
+        2. (조건부) 사전 인터뷰
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 구현 시작
       
     </span>
   </a>
@@ -3566,7 +3588,15 @@
 </span></code></pre></div>
 <p><code>features/NN-{slug}.md</code> 가 prompt-origin 템플릿으로 생성됩니다. 그리고 <code>/dp-skills:analyze</code> 와 <strong>동일한 절차</strong> 로 <code>project.md</code>(목표·관련 파일)와 <code>agents/*.md</code>(planner·generator·evaluator)가 자동 동기화됩니다.</p>
 <p>도메인을 지정하지 않으면 한 번 질의한 뒤 <code>.agent-state.yml</code> 에 기록합니다.</p>
-<h3 id="2">2. 구현 시작<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h3 id="2">2. (조건부) 사전 인터뷰<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>명세에 <strong>사용자만 답할 수 있는 갭</strong> 이 남으면 — (d) 비즈니스 결정 미해결 항목이 있거나 기대결과를 프롬프트에서 추출하지 못했을 때 — 선택지 질문 1회 (최대 4문항) 로 물어봅니다. 갭이 없으면 질문 없이 통과합니다.</p>
+<ul>
+<li>답변은 명세에 바로 반영됩니다 — (d) 는 <code>[x] … — 결정: …</code>, 기대결과는 요구사항 섹션.</li>
+<li>"모름 / 일단 진행" 을 고르면 추정으로 채우지 않고 기존 게이트 (planner 의 Open Questions 처리) 로 넘어갑니다.</li>
+<li>조건/트리거 상세는 묻지 않습니다 — planner 가 코드 영향 분석으로 보강하는 영역입니다.</li>
+</ul>
+<p>규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>. 오발동·무의미 질문이 반복되면 다음 릴리스에서 철회를 판정하는 관측 단계입니다.</p>
+<h3 id="3">3. 구현 시작<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>@ag-planner → (선택) @ag-planner-critic → @ag-generator → @ag-evaluator
 </span></code></pre></div>
 <h2 id="_4">흔한 실수<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -3634,7 +3664,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.26.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.27.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
