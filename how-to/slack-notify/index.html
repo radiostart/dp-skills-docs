@@ -2346,14 +2346,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/skills/doctor/" class="md-nav__link">
+      <a href="../../reference/skills/dp-doctor/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    /dp-skills:doctor
+    /dp-skills:dp-doctor
   
 
     
@@ -3651,7 +3651,7 @@
 </table>
 <h2 id="_5">흔한 실수<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>.slack.env</code> 는 절대 커밋하지 않습니다.</strong> <code>/dp-skills:doctor</code> 가 리포 루트 <code>.gitignore</code> 의 패턴 누락을 WARN 으로 감지하며, 주입은 <code>doctor --fix</code> 옵트인으로 수행합니다 (0.24.0 — 기본 실행은 비파괴). tracked 상태로 발견되면 doctor 가 <code>[ERROR]</code> (exit 1) 로 차단하고, <code>slack-notify.py</code> 도 POST 전 <code>git ls-files</code> 로 이중 확인합니다.</li>
+<li><strong><code>.slack.env</code> 는 절대 커밋하지 않습니다.</strong> <code>/dp-skills:dp-doctor</code> 가 리포 루트 <code>.gitignore</code> 의 패턴 누락을 WARN 으로 감지하며, 주입은 <code>doctor --fix</code> 옵트인으로 수행합니다 (0.24.0 — 기본 실행은 비파괴). tracked 상태로 발견되면 doctor 가 <code>[ERROR]</code> (exit 1) 로 차단하고, <code>slack-notify.py</code> 도 POST 전 <code>git ls-files</code> 로 이중 확인합니다.</li>
 <li>webhook URL 은 메시지 본문·<code>status</code> 출력에 노출되지 않습니다 — "설정됨 / 비어있음" 만 표시됩니다.</li>
 <li>훅 호출 이력이 필요하면 <code>export DP_SLACK_DEBUG=1</code> 후 Claude Code 를 재시작하면 <code>/tmp/dp-skills-slack-hook.log</code> 에 기록됩니다.</li>
 </ul>
@@ -3714,7 +3714,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.28.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.29.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
