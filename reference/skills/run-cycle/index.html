@@ -3629,16 +3629,18 @@
 
 <h1 id="dp-skillsrun-cycle"><code>/dp-skills:run-cycle</code><a class="headerlink" href="#dp-skillsrun-cycle" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿 (human-on-the-loop). green 신호에는 사전 승인 없이 자동 진행하고 Slack progress 로 사후 통지하며, critic blocking·NOT_READY 재시도 소진·block· wrapper 질의 등 red 에서만 정지한다 (판정 상세·정지 전수 목록은 본문 §2.3·§3). 종전 사전 승인 흐름은 <code>--gated</code> 로 회귀. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
+<p>사용자가 자동 순회를 명시 요청했을 때만 사용한다 (<code>/dp-skills:run-cycle</code> 호출 또는 그에 상당하는 지시) — "계속·이어서 진행해줘" 류 발화만으로 모델이 자발 발동하지 않는다 (자발 발동이 필요해 보이면 큐를 제시하고 확인 1회). 활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿 (human-on-the-loop). green 신호에는 사전 승인 없이 자동 진행하고 Slack progress 로 사후 통지하며, critic blocking·NOT_READY 재시도 소진·block· wrapper 질의 등 red 에서만 정지한다 (판정 상세·정지 전수 목록은 본문 §2.3·§3). 종전 사전 승인 흐름은 <code>--gated</code> 로 회귀. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
 </blockquote>
 <p>메인 루프에서 <code>@ag-planner</code>·<code>@ag-planner-critic</code>·<code>@ag-generator</code>·<code>@ag-evaluator</code> 를
-순서대로 호출한다 (subagent 가 subagent 를 띄우지 않음). 사전 결재 대신
-<strong>검증 산출물 (critic 합의표·evaluator REPORT) 이 게이트</strong>다.</p>
+순서대로 호출한다 (subagent 가 subagent 를 띄우지 않음). <strong>wrapper 호출은 동기
+실행이다</strong> — 직전 단계 산출물을 수신·판독하기 전에 다음 단계를 기동하지 않는다
+(background·병행 기동 금지 — 하니스가 background 를 기본으로 제공해도 사용하지
+않는다). 사전 결재 대신 <strong>검증 산출물 (critic 합의표·evaluator REPORT) 이 게이트</strong>다.</p>
 <p>대상: $ARGUMENTS  (옵션: feature 부분집합 <code>#3-5</code> · <code>#3 #4</code> · <strong><code>--gated</code></strong> — 종전
 human-in-the-loop 게이트 (plan 사전 승인·재개 재승인) 전부 복원. per-invocation
 플래그다 — 상태 파일에 저장되지 않으므로 (stateless) 정지 후 재실행 시 재지정한다.)</p>
 <h2 id="_1">사전 확인<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> <strong>P-1</strong>(TodoWrite 선로딩) · <strong>P1</strong>(팀) ·
+<p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/preamble.md">preamble.md</a> <strong>P-1</strong>(진행 보드 선로딩) · <strong>P1</strong>(팀) ·
 <strong>P2</strong>(활성 project) 수행. 활성 project 없으면 P2 메시지로 종료. <code>.agent-state.yml</code>
 의 <code>phase</code> 가 <code>qa</code> 면 "run-cycle 은 development phase 전용" 안내 후 종료.</p>
 <h2 id="1-projectmd">1. 큐 구성 (project.md 파생)<a class="headerlink" href="#1-projectmd" title="Permanent link">&para;</a></h2>
@@ -3648,7 +3650,8 @@ human-in-the-loop 게이트 (plan 사전 승인·재개 재승인) 전부 복원
    재계산하지 않고 목록 순서를 신뢰한다.</li>
 <li>인자로 <code>#3-5</code>·<code>#3 #4</code> 명시 시 그 부분집합으로 필터.</li>
 <li>큐가 비면 → <code>"신규 작업 없음 (모든 목표 완료)"</code> 출력 후 종료.</li>
-<li>큐를 표시하고 <strong>확인 없이 즉시 시작한다</strong> — 스킬 호출 자체가 진행 의도다.
+<li>큐를 표시하고 <strong>확인 없이 즉시 시작한다</strong> — 본 스킬은 사용자 명시 호출
+   전용 (description 발동 조건) 이므로 스킬 호출 자체가 진행 의도다.
    시작 시 Slack 통지 1회:</li>
 </ol>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span>--event<span class="w"> </span>progress<span class="w"> </span><span class="se">\</span>
@@ -3728,18 +3731,23 @@ progress 로 일원화 — 채널에 "⏸ 승인 필요" 거짓 신호 방지) �
 <ul>
 <li><code>READY</code> → <code>project.md</code> 해당 feature 체크박스 <code>[x]</code> 갱신. REPORT 의
   <code>metrics.domain_impact</code> 가 <code>detected</code> 면 항목을 <strong>메모리에 누적</strong>하고
-  (질의·정지 없음 — green 자동 진행 유지) → <strong>자동 다음 feature</strong>(2.1 로).</li>
-<li><code>NOT_READY</code> → <strong>bounded retry (feature 당 1회, 본 세션 한정)</strong>:</li>
-<li><code>issues_to_fix</code> 에 "planner 재호출 필요" 류 plan-level 반려가 있으면
-    <strong>재시도 없이 즉시 §3 정지</strong> — generator 재작업으로 못 고치는 구조적
-    실패라 자동 라운드가 낭비다.</li>
-<li>그 외 (구현 결함) → <code>issues_to_fix</code> 를 generator 재작업 프롬프트에 전달해
-    §2.4→§2.5 를 <strong>1회만</strong> 자동 재수행 + progress 통지 ("feature #{N} NOT_READY —
-    재작업 1회차"). 재평가도 <code>NOT_READY</code> 면 → §3 정지 (재시도 소진).</li>
-<li>재시도 카운트는 본 세션 컨텍스트로만 유지한다 (상태 파일 금지). 세션이
-    끊기고 재실행되면 리셋된다 — per-session bound 로 의도된 동작.</li>
-<li><code>block</code> → §3 정지.</li>
+  (질의·정지 없음 — green 자동 진행 유지) → <strong>게이트 이력 1줄을 사용자 대면
+  텍스트로 출력</strong> 후 <strong>자동 다음 feature</strong>(2.1 로):</li>
 </ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>#N {slug}: critic {b}/{s}/{n} · retry {r} · READY · 인자 {부분집합·--gated 또는 &quot;없음&quot;}
+</span></code></pre></div>
+<p>긴 큐에서 컨텍스트가 요약돼도 재시도 카운트·호출 인자가 대화에 앵커로 남아
+  재시도 상한 (1회)·인자 유지가 복원된다 (상태 파일 아님 — Do-NOT 정합).
+- <code>NOT_READY</code> → <strong>bounded retry (feature 당 1회, 본 세션 한정)</strong>:
+  - <code>issues_to_fix</code> 에 "planner 재호출 필요" 류 plan-level 반려가 있으면
+    <strong>재시도 없이 즉시 §3 정지</strong> — generator 재작업으로 못 고치는 구조적
+    실패라 자동 라운드가 낭비다.
+  - 그 외 (구현 결함) → <code>issues_to_fix</code> 를 generator 재작업 프롬프트에 전달해
+    §2.4→§2.5 를 <strong>1회만</strong> 자동 재수행 + progress 통지 ("feature #{N} NOT_READY —
+    재작업 1회차"). 재평가도 <code>NOT_READY</code> 면 → §3 정지 (재시도 소진).
+  - 재시도 카운트는 본 세션 컨텍스트로만 유지한다 (상태 파일 금지). 세션이
+    끊기고 재실행되면 리셋된다 — per-session bound 로 의도된 동작.
+- <code>block</code> → §3 정지.</p>
 <h2 id="3">3. 정지 정책<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>정지 사유 (HOTL): <strong>critic blocking 미해소 · 합의표 불일치 (critic-lint FAIL) ·
 NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용자 질의 대기
@@ -3747,7 +3755,9 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
 (<code>--gated</code> 한정) plan 미승인</strong>. 도달 시:</p>
 <ul>
 <li><strong>큐 전체 정지.</strong> 뒤 feature 로 진행하지 않는다 — N+1 이 N 에 의존할 수
-  있고 의존성 데이터가 없어 알 길이 없다.</li>
+  있고 의존성 데이터가 없어 알 길이 없다. 본 정지는 <strong>사용자만 해소할 수 있는
+  입력 대기</strong>다 — "완료까지 계속" 류 자율 진행 지침의 예외에 해당하며, 정지
+  사유를 모델이 자체 해소·우회해 재개하지 않는다.</li>
 <li>정지 사유·해당 산출물 (REPORT·합의표·critic-lint 출력) 과 <strong>게이트 이력 표</strong>
   (§4 와 동일 형식 — 정지 시점까지 처리분) 를 출력한다.</li>
 <li>Slack approval 통지 1회: <code>--event approval --message "run-cycle 정지: #{N} {사유}"</code>
@@ -3760,10 +3770,10 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
 </ul>
 <h2 id="4">4. 큐 완료<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>모든 feature READY → 완료 요약 + <strong>게이트 이력 표</strong> (사후 감사 뷰) 출력:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>| ------- | -------------------------------- | ----- | ------- |
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>| #3 slug | 0 / 2 / 1                        | 0     | READY   |
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>| #4 slug | 0 / 0 / 0                        | 1     | READY   |
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| ------- | -------------------------------- | ----- | ------- |
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| #3 slug | 0 / 2 / 1                        | 0     | READY   |
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| #4 slug | 0 / 0 / 0                        | 1     | READY   |
 </span></code></pre></div>
 <p>누적된 domain_impact 항목이 있으면 "도메인 지식 환류 제안 (누적)" 표를
 출력하고 기록 여부를 질의한다. 승인 시
@@ -3772,7 +3782,8 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
 <h2 id="do-not">Do-NOT<a class="headerlink" href="#do-not" title="Permanent link">&para;</a></h2>
 <ul>
 <li>feature 병렬 진행 금지 — 한 번에 1 feature (<code>.focus.md</code>·<code>STATE.md</code> 싱글톤·
-  generator 파일 충돌 회피).</li>
+  generator 파일 충돌 회피). 단계 단위도 동일 — wrapper 는 동기 호출이며, 직전
+  산출물 수신 전 다음 단계 기동은 무검증 진행이다.</li>
 <li><strong>무검증 자동 통과 금지</strong> — critic-lint 통과 + 합의표 blocking 0 없이 generator
   진행 금지. critic 스킵 금지 (HOTL 에서 critic 은 필수 판정자다). NOT_READY·
   block 자동 통과 금지.</li>
@@ -3843,7 +3854,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
