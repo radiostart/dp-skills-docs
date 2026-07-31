@@ -3595,13 +3595,14 @@
 <li>"모름 / 일단 진행" 을 고르면 추정으로 채우지 않고 기존 게이트 (planner 의 Open Questions 처리) 로 넘어갑니다.</li>
 <li>조건/트리거 상세는 묻지 않습니다 — planner 가 코드 영향 분석으로 보강하는 영역입니다.</li>
 </ul>
-<p>규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>. 오발동·무의미 질문이 반복되면 다음 릴리스에서 철회를 판정하는 관측 단계입니다.</p>
+<p>규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>. 도입 관측은 0.30.1 에서 종료됐습니다 — 오발동·무의미 질문 없음, 유지 확정.</p>
 <h3 id="3">3. 구현 시작<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>@ag-planner → (선택) @ag-planner-critic → @ag-generator → @ag-evaluator
 </span></code></pre></div>
+<p>미완료 feature 가 여러 개 쌓여 있으면 <a href="../run-cycle/"><code>/dp-skills:run-cycle</code></a> 로 위 사이클을 순서대로 자동 순회할 수 있습니다 (정지 지점에서만 개입).</p>
 <h2 id="_4">흔한 실수<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
-<li>create-feature 는 <strong>자동 파이프라인이 아닙니다.</strong> 명세 생성까지만 하고, 구현은 <code>@ag-planner</code> 부터 사용자가 명시 호출합니다.</li>
+<li>create-feature 는 <strong>자동 파이프라인이 아닙니다.</strong> 명세 생성까지만 하고, 구현은 <code>@ag-planner</code> (단건 수동) 또는 <code>/dp-skills:run-cycle</code> (자동 순회) 로 사용자가 시작합니다.</li>
 <li>기존 features 의 <code>[analyze-managed]</code> 섹션 내용은 보존됩니다 — create-feature 가 덮어쓰지 않습니다.</li>
 </ul>
 <h2 id="_5">다음 단계<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -3664,7 +3665,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.1"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

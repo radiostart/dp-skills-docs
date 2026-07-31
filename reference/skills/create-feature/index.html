@@ -3795,12 +3795,13 @@
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>다음 단계:
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>→ 명세가 부족하면 features/{NN}-{slug}.md 직접 편집
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>→ `@ag-planner` 를 호출해 구현 계획을 수립하세요.
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>→ 이 feature 만 진행: `@ag-planner` 호출 (수동 사이클)
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>→ 미완료 feature 전체 자동 순회: `/dp-skills:run-cycle`
 </span></code></pre></div>
 <hr />
 <h2 id="_3">제약<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>이 스킬은 에이전트를 자동 호출하지 않는다.</strong> Planner → Generator → Evaluator 흐름은 사용자가 각각 명시 호출. feature 의 시작점은 <code>@ag-planner</code>.</li>
+<li><strong>이 스킬은 에이전트를 자동 호출하지 않는다.</strong> Planner → Generator → Evaluator 흐름은 사용자가 각각 명시 호출하거나 <code>/dp-skills:run-cycle</code> 로 자동 순회. feature 의 시작점은 <code>@ag-planner</code> (단건 수동) 또는 <code>/dp-skills:run-cycle</code> (자동 순회).</li>
 <li><strong>prompt-origin feature 는 <code>&gt; source: prompt</code></strong> 로 표시된다. <code>/dp-skills:analyze --force</code> 실행 시 이 tag 를 감지해 사용자에게 덮어쓰기 여부를 확인한다 (의도되지 않은 데이터 손실 방지).</li>
 <li><strong>docs 기반 feature 생성은 <code>/dp-skills:analyze</code></strong> 사용. 이 스킬은 docs 없이 단건 추가 용도.</li>
 </ul>
@@ -3810,6 +3811,7 @@
 <li><code>/dp-skills:analyze</code> — docs/ 기획서 벌크 분석</li>
 <li><code>/dp-skills:focus</code> — ad-hoc 사용자 지시 기록 (features/ 밖)</li>
 <li><code>@ag-planner</code> — features/{NN}-{slug}.md 를 읽어 구현 계획 수립</li>
+<li><code>/dp-skills:run-cycle</code> — 미완료 feature 순차 자동 순회 (human-on-the-loop)</li>
 </ul>
 
 
@@ -3866,7 +3868,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.1"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

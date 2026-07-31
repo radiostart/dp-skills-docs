@@ -3902,12 +3902,12 @@ project 행을 <code>| project | {PROJECT} | 진행중 |</code> 로 둔다. stat
 <p><strong>다음 단계 안내</strong> — <code>.agent-state.yml</code> 의 <code>phase</code> 와 features/ 존재 여부로 분기. 아래 순서를 <strong>명시적 if / elif / else</strong> 로 적용해 한 LLM 호출에 두 안내가 동시에 나오지 않도록 한다:</p>
 <ol>
 <li><strong>phase == qa 면</strong>: "이 project 는 QA phase 입니다. 결함 처리는 <code>/dp-skills:qa {JIRA-KEY}</code> 로 진입." 한 줄 출력 후 종료. (features/ 유무 별도 분기 없음 — qa phase 진입 자체가 features 완료 전제.)</li>
-<li><strong>elif (phase != qa) features/ 가 비어있지 않으면</strong>: 생성된 features 와 갱신된 파일을 요약하고 "<code>@ag-planner</code> 를 호출해 구현을 시작하세요." 안내.</li>
+<li><strong>elif (phase != qa) features/ 가 비어있지 않으면</strong>: 생성된 features 와 갱신된 파일을 요약하고 "미완료 feature 는 <code>/dp-skills:run-cycle</code> 로 자동 순회하세요 (권장 — 정지 지점에서만 개입). 단건·세밀 제어는 <code>@ag-planner</code> 직접 호출." 안내.</li>
 <li><strong>else (phase != qa, features/ 비어있음)</strong>: 생성된 파일(<code>project.md</code>, <code>agents/</code>)을 요약하고 아래 순서 안내:</li>
 <li><code>project.md</code> 의 개요·목표·관련 파일을 채운다</li>
 <li><strong>기획서 기반 다건 생성</strong> — <code>/dp-skills:confl {url}</code> → <code>/dp-skills:analyze</code></li>
 <li><strong>프롬프트 기반 단건 생성</strong> — <code>/dp-skills:create-feature "&lt;원하는 기능 설명&gt;"</code> (기획서 없을 때 — 한 줄 요약이 아니라 원하는 기능을 충분히 서술)</li>
-<li>준비되면 <code>@ag-planner</code> 호출</li>
+<li>준비되면 <code>/dp-skills:run-cycle</code> (미완료 feature 자동 순회 — 권장) 또는 <code>@ag-planner</code> (단건 수동 사이클) 호출</li>
 </ol>
 <p><strong>선택 안내 (공통):</strong> "작업 완료·승인 알림을 Slack 으로 받고 싶으면 <code>/dp-skills:slack</code> 으로 활성화하세요." 한 줄을 덧붙인다. 기존 프로젝트 재활성화 시에는 출력하지 않는다 (이미 알고 있거나 의도적으로 비활성).</p>
 
@@ -3965,7 +3965,7 @@ project 행을 <code>| project | {PROJECT} | 진행중 |</code> 로 둔다. stat
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.30.1"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
