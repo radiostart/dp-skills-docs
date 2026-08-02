@@ -3663,25 +3663,50 @@ human-in-the-loop 게이트 (plan 사전 승인·재개 재승인) 전부 복원
 <h3 id="21-stateless">2.1 재개 지점 판정 (stateless) — 항상 선행<a class="headerlink" href="#21-stateless" title="Permanent link">&para;</a></h3>
 <p>feature 산출물로 "가장 이른 미완료 단계" 를 정한다. <strong>이 판정이 게이트 검사보다
 먼저다</strong> — 게이트 통과가 재개 지점을 앞당기지 않는다 (구현 완료 상태에서
-generator 를 재실행해 같은 feature 를 이중 적용하는 경로 봉쇄):</p>
-<ul>
-<li><code>features/NN-{slug}.plan.md</code> 없음 → <strong>planner 부터</strong> (§2.2)</li>
-<li>유효한 <code>.plan.md</code> 있음 (<code>tools/plan-validate.py</code> 통과) + <code>.eval.md</code> 없음 →
-  재개 지점을 먼저 정한다:</li>
-<li>plan 스텝에 미완료 진행 흔적이 있거나 판단이 애매하면 → 재개 지점 = critic/generator</li>
+generator 를 재실행해 같은 feature 를 이중 적용하는 경로 봉쇄).</p>
+<p>아래 분기를 <strong>위에서부터 순서대로</strong> 검사하고 <strong>처음 매칭된 하나만</strong> 적용한다.
+조건이 동시에 성립하는 입력이 있으므로 (예: <code>.plan.md</code> 만 지워진 <code>READY</code>
+feature) 순서 자체가 판정의 일부다 — <code>.eval.md</code> 판정을 앞에 두는 이유는 그것이
+사이클의 <strong>최종</strong> 산출물이기 때문이다 (뒤 단계의 증거가 앞 단계의 부재를 이긴다):</p>
+<ol>
+<li><strong><code>.eval.md</code> 의 <code>status</code> 가 <code>READY</code></strong> — <code>status:</code> 값이 정확히 <code>READY</code> 인
+   경우만 해당한다. <code>NOT_READY</code> 는 2 번 분기다 (부분 문자열 매칭으로 삼키지
+   않는다 — <code>READY</code> 는 <code>NOT_READY</code> 에 포함된다). 큐에 있다는 건 <code>project.md</code>
+   체크박스가 <code>[ ]</code> 라는 뜻이다 → <strong>사이클을 재실행하지 않는다.</strong> <code>[x]</code> 갱신만
+   수행하고 §2.5 의 READY 후처리 (domain_impact 누적·게이트 이력 1줄) 를 거쳐
+   다음 feature 로 넘어간다. 평가는 이미 통과했으므로 어느 단계든 재실행은 이중
+   적용이다. 이번 큐에서 사이클을 돌지 않았으므로 이력 1줄의 <code>critic</code>·<code>retry</code> 는
+   <strong>둘 다 <code>-</code></strong> 로 적고 (지어내지 않는다) 끝에 <code>(체크박스 보정)</code> 을 덧붙인다.
+   이 상태는 evaluator step 5 의 Edit 실패·§2.5 갱신 직전 세션 중단·사용자의
+   수동 <code>[ ]</code> 되돌림으로 생긴다 — 되돌림이 <strong>재작업 의도</strong>였다면 <code>.eval.md</code> 를
+   지운 뒤 재실행한다. 본 분기는 산출물만 보고 판정하며 <code>.focus.md</code> 는 읽지
+   않는다 (focus 로 재작업을 지시해도 이 분기를 되돌리지 못한다).</li>
+<li><strong><code>.eval.md</code> 의 <code>status</code> 가 <code>NOT_READY</code></strong> → <strong>generator 재작업부터</strong>
+   (§2.4→§2.5). 이 경로의 재작업도 §2.5 의 재시도 1회에 계상한다 (세션 기준).</li>
+<li><strong><code>features/NN-{slug}.plan.md</code> 없음</strong> → <strong>planner 부터</strong> (§2.2). plan 이
+   있으나 <code>plan-validate</code> 가 실패하는 (invalid) 경우도 본 분기로 취급한다 —
+   보완 주체가 planner 이므로 §2.2 부터다.</li>
+<li>
+<p><strong>유효한 <code>.plan.md</code> 있음</strong> (<code>tools/plan-validate.py</code> 통과) <strong>+ <code>.eval.md</code> 없음</strong> →
+   재개 지점을 먼저 정한다:</p>
+</li>
+<li>
+<p>plan 스텝에 미완료 진행 흔적이 있거나 판단이 애매하면 → 재개 지점 = critic/generator</p>
+</li>
 <li>plan 전 스텝 완료 (<code>[x]</code>·[Green] 증거) + 구현이 끝난 상태 → 재개 지점 = <strong>evaluator</strong> (§2.5)</li>
+</ol>
+<p>그 다음 <strong>재개 게이트</strong> 를 통과시킨다 (승인 사실은 산출물에 없으므로 합의표가 증거):</p>
+<ul>
+<li><code>.plan.critic.md</code> 존재 + critic-lint 통과 + blocking 미해결 (<code>open</code>/<code>deferred</code>) 0
+     → 재승인 없이 <strong>판정된 재개 지점부터</strong> 진행 + progress 통지 ("재개: #{N} {지점}").</li>
+<li><code>.plan.critic.md</code> 없음 → <strong>critic 호출로 합의표 확보</strong> (§2.3) 후, blocking 0 이면
+     <strong>판정된 재개 지점부터</strong> (critic green 이 generator 를 강제하지 않는다 — 구현
+     완료 상태면 evaluator 로). blocking ≥ 1 → §3 정지.</li>
+<li>blocking <code>deferred</code>·<code>open</code> 잔존 → §3 정지 (§2.3 판정 준용).</li>
+<li><code>--gated</code>: 합의표 유무와 무관하게 plan 을 사용자에게 재제시하고 승인 후 재개 (종전 동작).</li>
 </ul>
-<p>그 다음 <strong>재개 게이트</strong> 를 통과시킨다 (승인 사실은 산출물에 없으므로 합의표가 증거):
-  - <code>.plan.critic.md</code> 존재 + critic-lint 통과 + blocking 미해결 (<code>open</code>/<code>deferred</code>) 0
-    → 재승인 없이 <strong>판정된 재개 지점부터</strong> 진행 + progress 통지 ("재개: #{N} {지점}").
-  - <code>.plan.critic.md</code> 없음 → <strong>critic 호출로 합의표 확보</strong> (§2.3) 후, blocking 0 이면
-    <strong>판정된 재개 지점부터</strong> (critic green 이 generator 를 강제하지 않는다 — 구현
-    완료 상태면 evaluator 로). blocking ≥ 1 → §3 정지.
-  - blocking <code>deferred</code>·<code>open</code> 잔존 → §3 정지 (§2.3 판정 준용).
-  - <code>--gated</code>: 합의표 유무와 무관하게 plan 을 사용자에게 재제시하고 승인 후 재개 (종전 동작).
-- <code>features/NN-{slug}.eval.md</code> 가 <code>NOT_READY</code> → <strong>generator 재작업부터</strong> (§2.4→§2.5).
-  이 경로의 재작업도 §2.5 의 재시도 1회에 계상한다 (세션 기준).</p>
-<p>완료(<code>[x]</code>) feature 는 큐에 없으므로 도달하지 않는다.</p>
+<p>완료(<code>[x]</code>) feature 는 큐에 없으므로 도달하지 않는다 — 단 <code>[x]</code> 부재가 미완료를
+보장하지는 않으므로 (분기 1) 큐 소속만으로 사이클 재실행을 결정하지 않는다.</p>
 <h3 id="22-planner">2.2 planner<a class="headerlink" href="#22-planner" title="Permanent link">&para;</a></h3>
 <p><code>@ag-planner</code> 호출 → <code>.plan.md</code> 산출. 호출 프롬프트에 feature 번호·slug 와
 <strong><code>[orchestration: hotl]</code> 마커</strong>를 포함한다 — planner 가 절차 4 의 승인 대기를
@@ -3725,9 +3750,15 @@ progress 로 일원화 — 채널에 "⏸ 승인 필요" 거짓 신호 방지) �
 </li>
 </ol>
 <h3 id="24-generator">2.4 generator<a class="headerlink" href="#24-generator" title="Permanent link">&para;</a></h3>
-<p><code>@ag-generator</code> 호출 → 구현.</p>
+<p><code>@ag-generator</code> 호출 → 구현. 호출 프롬프트에 <strong>feature 번호·slug·대상 plan
+경로를 명시</strong>한다 (§2.3 과 동일 사유 — 큐 진행 중엔 완료 feature 의 plan 이
+잔존한다). generator 는 후보가 복수면 선택 질의로 정지하지만 <strong>후보가 1 개면
+질의 없이 채택</strong>하므로 (ag-generator step 2), 잔존 plan 이 1 개뿐인 상태에서
+미명시는 그대로 <strong>무음 오작동</strong>이 된다.</p>
 <h3 id="25-evaluator">2.5 evaluator<a class="headerlink" href="#25-evaluator" title="Permanent link">&para;</a></h3>
-<p><code>@ag-evaluator</code> 호출 → VERIFICATION REPORT.</p>
+<p><code>@ag-evaluator</code> 호출 → VERIFICATION REPORT. generator 와 동일하게 <strong>feature
+번호·slug·대상 plan 경로를 명시</strong>한다 — 미명시는 다른 feature 를 평가하고 그
+<code>.eval.md</code> 를 덮어쓰는 경로다.</p>
 <ul>
 <li><code>READY</code> → <code>project.md</code> 해당 feature 체크박스 <code>[x]</code> 갱신. REPORT 의
   <code>metrics.domain_impact</code> 가 <code>detected</code> 면 항목을 <strong>메모리에 누적</strong>하고
@@ -3762,12 +3793,58 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
   (§4 와 동일 형식 — 정지 시점까지 처리분) 를 출력한다.</li>
 <li>Slack approval 통지 1회: <code>--event approval --message "run-cycle 정지: #{N} {사유}"</code>
   — 개입 요청은 approval, 자동 진행은 progress 로 채널에서 구분된다.</li>
-<li>안내: <code>/dp-skills:fix-review</code> 로 처리 → 수정 후 <strong><code>/dp-skills:run-cycle</code>
-  재실행(=재개)</strong>. 부분집합·<code>--gated</code> 로 돌렸다면 같은 인자를 다시 넘긴다.</li>
-<li>누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
-  (누적)" 표를 함께 출력한다 — 처리 여부는 사용자 결정
-  (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</li>
+<li>안내: <strong>사유별 조치</strong>를 아래 표에서 골라 제시한 뒤 → 수정 후
+  <strong><code>/dp-skills:run-cycle</code> 재실행(=재개)</strong>. 부분집합·<code>--gated</code> 로 돌렸다면 같은
+  인자를 다시 넘긴다.</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>정지 사유</th>
+<th>해소 조치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>critic blocking 미해소</td>
+<td><code>@ag-planner</code> 재호출 — 챌린지 반영 후 합의표 <code>status</code> 갱신 (ag-planner 절차 10)</td>
+</tr>
+<tr>
+<td>합의표 불일치 (critic-lint FAIL)</td>
+<td><code>@ag-planner-critic</code> 재호출 — 본문 챌린지와 맞춰 표 재 emit</td>
+</tr>
+<tr>
+<td>NOT_READY 재시도 소진</td>
+<td><code>.eval.md</code> 의 <code>issues_to_fix</code> 확인 → 구현 결함이면 <code>@ag-generator</code> 수동 재작업, 계획 결함이면 <code>@ag-planner</code> 재호출</td>
+</tr>
+<tr>
+<td>plan-level 반려</td>
+<td><code>@ag-planner</code> 재호출 (재계획)</td>
+</tr>
+<tr>
+<td><code>block</code> (wrapper 실행 불가 보고)</td>
+<td>보고된 차단 원인 해소 후 해당 단계부터 수동 재개</td>
+</tr>
+<tr>
+<td>wrapper 질의 대기 — <strong>OQ 게이트</strong></td>
+<td><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/oq-gate.md">oq-gate.md</a> § 에스컬레이션 두 갈래: <code>@ag-planner</code> 재호출 (plan 에 처리 마커 보완) 또는 메인 세션이 feature 파일 항목을 <code>[x] {항목} — 결정: {내용}</code> 으로 Edit. <strong>focus 로는 안 풀린다</strong> — <code>plan-validate</code> 의 <code>oq</code> 검증은 feature 체크박스·plan 마커만 본다</td>
+</tr>
+<tr>
+<td>wrapper 질의 대기 — 그 외 (모드 가드·도메인 복수 후보 등)</td>
+<td>질의에 답한다 — 후속 호출에도 남겨야 하는 결정이면 <code>/dp-skills:focus</code> 로 기록</td>
+</tr>
+<tr>
+<td>(<code>--gated</code>) plan 미승인</td>
+<td>plan 검토 후 승인, 또는 <code>@ag-planner</code> 재호출로 수정</td>
+</tr>
+</tbody>
+</table>
+<p><code>/dp-skills:fix-review</code> 는 본 정지의 처방이 <strong>아니다</strong> — CODE REVIEW REPORT
+  (사이클 밖 <code>@ag-code-reviewer</code> 산출물) 전용이라 REPORT 없이 호출하면 "REPORT
+  없음" 안내만 하고 종료한다.
+- 누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
+  (누적)" 표를 함께 출력한다 — 처리 여부는 사용자 결정
+  (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</p>
 <h2 id="4">4. 큐 완료<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>모든 feature READY → 완료 요약 + <strong>게이트 이력 표</strong> (사후 감사 뷰) 출력:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
@@ -3790,6 +3867,11 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
 <li>NOT_READY 재시도 1회 초과 금지 — 재실패는 정지 (수렴 루프 금지).</li>
 <li>재개 게이트 통과가 재개 지점을 앞당기는 것 금지 — §2.1 판정 지점이 우선
   (구현 완료 feature 의 generator 재실행 = 이중 적용).</li>
+<li>wrapper 호출 시 대상 feature 미명시 금지 — critic·generator·evaluator 세
+  호출 모두 번호·slug·plan 경로를 프롬프트에 넣는다 (§2.3~§2.5). 대상 추론을
+  wrapper 에 떠넘기지 않는다.</li>
+<li><code>READY</code> <code>.eval.md</code> 가 있는 feature 의 사이클 재실행 금지 — 체크박스 보정만
+  (§2.1). 재작업이 필요하면 사용자가 산출물을 지우고 재실행한다.</li>
 <li><code>--gated</code> 시 종전 게이트 전부 복원 — plan 사전 승인·재개 재승인을 생략하지
   않는다 ([orchestration: hotl] 마커도 넣지 않는다).</li>
 <li>정지 후 뒤 feature 자동 진행 금지.</li>
@@ -3854,7 +3936,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.1"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
