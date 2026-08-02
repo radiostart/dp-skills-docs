@@ -3629,7 +3629,7 @@
 
 <h1 id="dp-skillsrun-cycle"><code>/dp-skills:run-cycle</code><a class="headerlink" href="#dp-skillsrun-cycle" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>사용자가 자동 순회를 명시 요청했을 때만 사용한다 (<code>/dp-skills:run-cycle</code> 호출 또는 그에 상당하는 지시) — "계속·이어서 진행해줘" 류 발화만으로 모델이 자발 발동하지 않는다 (자발 발동이 필요해 보이면 큐를 제시하고 확인 1회). 활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿 (human-on-the-loop). green 신호에는 사전 승인 없이 자동 진행하고 Slack progress 로 사후 통지하며, critic blocking·NOT_READY 재시도 소진·block· wrapper 질의 등 red 에서만 정지한다 (판정 상세·정지 전수 목록은 본문 §2.3·§3). 종전 사전 승인 흐름은 <code>--gated</code> 로 회귀. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
+<p>사용자가 자동 순회를 명시 요청했을 때만 사용한다 (<code>/dp-skills:run-cycle</code> 호출 또는 그에 상당하는 지시) — "계속·이어서 진행해줘" 류 발화만으로 모델이 자발 발동하지 않는다 (자발 발동이 필요해 보이면 큐를 제시하고 확인 1회). 활성 project 의 미완료 feature 들을 순서대로 자동 순회하며 planner→critic→generator→evaluator 사이클을 진행하는 순차 오토파일럿 (human-on-the-loop). green 신호에는 사전 승인 없이 자동 진행하고 Slack progress 로 사후 통지하며, critic blocking·NOT_READY 소진·wrapper 비정상 종료·질의 등 red 에서만 정지한다 (판정 상세·정지 전수 목록은 본문 §2.3·§3). 종전 사전 승인 흐름은 <code>--gated</code> 로 회귀. 큐는 project.md 의 [ ] 미완료 feature 에서 파생하며 별도 상태 파일을 쓰지 않는다 (stateless, 재실행=재개). 병렬 아님 — 한 번에 1 feature. 수동 @mention 사이클은 불변.</p>
 </blockquote>
 <p>메인 루프에서 <code>@ag-planner</code>·<code>@ag-planner-critic</code>·<code>@ag-generator</code>·<code>@ag-evaluator</code> 를
 순서대로 호출한다 (subagent 가 subagent 를 띄우지 않음). <strong>wrapper 호출은 동기
@@ -3778,10 +3778,14 @@ progress 로 일원화 — 채널에 "⏸ 승인 필요" 거짓 신호 방지) �
     재작업 1회차"). 재평가도 <code>NOT_READY</code> 면 → §3 정지 (재시도 소진).
   - 재시도 카운트는 본 세션 컨텍스트로만 유지한다 (상태 파일 금지). 세션이
     끊기고 재실행되면 리셋된다 — per-session bound 로 의도된 동작.
-- <code>block</code> → §3 정지.</p>
+- <strong>wrapper 비정상 종료</strong> (REPORT 없이 끝남 — <code>orchestrate-load</code> error·<code>plan-validate</code>
+  invalid·모드 게이트 중단 등) → §3 정지. REPORT 의 <code>status</code> 는 <code>READY | NOT_READY</code>
+  둘뿐이므로 (<code>verify-report-lint.py</code> 의 <code>VALID_STATUS</code> 가 강제) 제 3 의 판정값을
+  기다리지 않는다 — 산출물이 없는 종료가 곧 이 사유다. (<code>block</code> 은
+  <code>@ag-code-reviewer</code> 의 verdict 어휘이며 사이클 안에서는 쓰이지 않는다.)</p>
 <h2 id="3">3. 정지 정책<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>정지 사유 (HOTL): <strong>critic blocking 미해소 · 합의표 불일치 (critic-lint FAIL) ·
-NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용자 질의 대기
+NOT_READY 재시도 소진 · plan-level 반려 · wrapper 비정상 종료 · wrapper 의 사용자 질의 대기
 (OQ 게이트·모드 가드·도메인 복수 후보 등 — wrapper 유지 게이트가 발동한 경우) ·
 (<code>--gated</code> 한정) plan 미승인</strong>. 도달 시:</p>
 <ul>
@@ -3822,8 +3826,8 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
 <td><code>@ag-planner</code> 재호출 (재계획)</td>
 </tr>
 <tr>
-<td><code>block</code> (wrapper 실행 불가 보고)</td>
-<td>보고된 차단 원인 해소 후 해당 단계부터 수동 재개</td>
+<td>wrapper 비정상 종료 (REPORT 없이 끝남)</td>
+<td>wrapper 가 보고한 원인을 먼저 해소한다 — <code>orchestrate-load</code> error 는 원문의 처방 (state 재생성·팀 활성화 등), <code>plan-validate</code> invalid 는 <code>@ag-planner</code> 재호출. 해소 후 그 단계부터 수동 재개</td>
 </tr>
 <tr>
 <td>wrapper 질의 대기 — <strong>OQ 게이트</strong></td>
@@ -3863,7 +3867,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
   산출물 수신 전 다음 단계 기동은 무검증 진행이다.</li>
 <li><strong>무검증 자동 통과 금지</strong> — critic-lint 통과 + 합의표 blocking 0 없이 generator
   진행 금지. critic 스킵 금지 (HOTL 에서 critic 은 필수 판정자다). NOT_READY·
-  block 자동 통과 금지.</li>
+  wrapper 비정상 종료 자동 통과 금지.</li>
 <li>NOT_READY 재시도 1회 초과 금지 — 재실패는 정지 (수렴 루프 금지).</li>
 <li>재개 게이트 통과가 재개 지점을 앞당기는 것 금지 — §2.1 판정 지점이 우선
   (구현 완료 feature 의 generator 재실행 = 이중 적용).</li>
@@ -3936,7 +3940,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · block · wrapper 의 사용�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

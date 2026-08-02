@@ -3673,13 +3673,13 @@
 <tr>
 <td>evaluator</td>
 <td>VERIFICATION REPORT</td>
-<td><code>READY</code> → <code>[x]</code> 갱신 후 다음 feature / <code>NOT_READY</code> → <strong>재작업 1회 자동</strong> (plan-level 반려는 즉시 ⏸) → 재실패 ⏸ / <code>block</code> → ⏸</td>
+<td><code>READY</code> → <code>[x]</code> 갱신 후 다음 feature / <code>NOT_READY</code> → <strong>재작업 1회 자동</strong> (plan-level 반려는 즉시 ⏸) → 재실패 ⏸ / REPORT 없이 종료 ⏸</td>
 </tr>
 </tbody>
 </table>
 <p>green 신호 (critic 합의표 blocking 0·evaluator <code>READY</code>) 에는 멈추지 않고 다음으로 넘어갑니다. feature 가 READY 될 때마다 게이트 이력 1줄 (critic 수치·retry·인자) 이 대화에 남고, 자동 진행마다 Slack progress 가 남으므로 채널이 곧 진행 로그입니다.</p>
 <h3 id="4">4. 정지 시 대응<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>정지 사유 — critic blocking 미해소·합의표 불일치 (critic-lint FAIL)·NOT_READY 재시도 소진·plan-level 반려·<code>block</code>·wrapper 의 사용자 질의 대기 (OQ 게이트·모드 가드 등)·(<code>--gated</code> 한정) plan 미승인 — 에 걸리면 <strong>큐 전체가 멈추고</strong> 사유·산출물·<strong>사유별 해소 조치</strong>·게이트 이력 표를 보여주며 Slack approval 로 개입을 요청합니다. 뒤 feature 로 자동 진행하지 않습니다.</p>
+<p>정지 사유 — critic blocking 미해소·합의표 불일치 (critic-lint FAIL)·NOT_READY 재시도 소진·plan-level 반려·wrapper 비정상 종료 (REPORT 없이 끝남)·wrapper 의 사용자 질의 대기 (OQ 게이트·모드 가드 등)·(<code>--gated</code> 한정) plan 미승인 — 에 걸리면 <strong>큐 전체가 멈추고</strong> 사유·산출물·<strong>사유별 해소 조치</strong>·게이트 이력 표를 보여주며 Slack approval 로 개입을 요청합니다. 뒤 feature 로 자동 진행하지 않습니다.</p>
 <p>대부분은 멈춘 단계의 에이전트를 다시 부르는 것으로 풀립니다 — critic blocking 이면 <code>@ag-planner</code> (챌린지 반영 + 합의표 <code>status</code> 채우기), 합의표 불일치면 <code>@ag-planner-critic</code> (표 재작성), <code>NOT_READY</code> 재시도 소진이면 <code>.eval.md</code> 의 <code>issues_to_fix</code> 를 보고 <code>@ag-generator</code> (구현 결함) 또는 <code>@ag-planner</code> (계획 결함). 사유별 전체 표는 <a href="../../reference/skills/run-cycle/"><code>/dp-skills:run-cycle</code> 레퍼런스</a> 의 정지 정책 절에 있습니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>@ag-planner               # (예) critic blocking 해소 — 실제 조치는 정지 보고가 사유별로 안내
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a># … 수정 …
@@ -3761,7 +3761,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.2"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
