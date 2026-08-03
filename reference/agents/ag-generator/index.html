@@ -3454,40 +3454,12 @@
 <ol>
 <li><strong>[대상 plan 확정]</strong> 호출자 프롬프트 또는 <code>.focus.md</code> 에서 feature 번호·slug 를 확보한다 (<code>/dp-skills:run-cycle</code> 은 §2.4 에서 명시한다). 명시가 없으면 <strong>Glob 도구로</strong> 후보를 조사한다 — 멋대로 고르면 <strong>다른 feature 의 계획을 구현</strong>하게 되고, critic 과 달리 그 사실이 사후에 드러나지 않는다:</li>
 </ol>
-<table>
-<thead>
-<tr>
-<th>상황</th>
-<th>Glob 패턴 (모드별 택일)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>기본 (development)</td>
-<td><code>workspace/{TEAM}/projects/{PROJECT}/features/*.plan.md</code></td>
-</tr>
-<tr>
-<td><code>project_phase == qa</code></td>
-<td><code>workspace/{TEAM}/projects/{PROJECT}/qa/*.plan.md</code> · <code>…/qa/*.plan.r*.md</code></td>
-</tr>
-<tr>
-<td><code>work_mode == issue</code></td>
-<td><code>workspace/{TEAM}/issues/{이슈명}/issue.plan.md</code> · <code>…/issue.plan.r*.md</code> (TEAM 레벨 — <code>projects/</code> 하위가 아니다)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>셸 글롭 (<code>ls a/*.md b/*.md</code>) 을 쓰지 않는다</strong> — zsh 는 패턴 하나라도 안 맞으면 (<code>nomatch</code>) 명령 전체가 실행되지 않아 매칭되던 쪽 결과까지 사라지고, <code>2&gt;/dev/null</code> 로도 잠기지 않는다. <code>qa/</code> 부재는 development 의 정상 상태이므로 이 함정은 예외가 아니라 기본 경로다 — "후보 0 건" 이 실제 부재인지 셸 실패인지 구분할 수 없게 된다.</p>
-<p>집계 규칙:</p>
-<ul>
-<li><code>.plan.critic.md</code>·<code>.plan.critic.r{N}.md</code> 는 <strong>후보가 아니다</strong> (critic 산출물 — generator 는 critic 직후에 호출되므로 포함하면 상시 복수가 된다).</li>
-<li>대응 <code>.eval.md</code> 의 <code>status</code> 가 <strong><code>READY</code> 인 plan 도 후보가 아니다</strong> (처리 완료된 feature). plan 산출물은 삭제되지 않고 누적되므로 이 필터가 없으면 두 번째 feature 이후 후보가 <strong>상시 복수</strong>가 되어 확정 절차가 매번 발동한다. <code>NOT_READY</code> 는 재작업 대상이므로 후보로 남긴다 — <code>READY</code> 판정은 <code>status:</code> 값 전체 일치로 한다 (<code>NOT_READY</code> 가 <code>READY</code> 를 부분 문자열로 포함).</li>
-<li>같은 대상의 <code>.r{N}</code> 이 여러 개면 <strong>r 최대값 1 개</strong>로 센다. <code>.eval.md</code> 짝은 같은 r 을 본다 (규약 SSOT: qa/SKILL.md "qa/ 산출물 명명 규약").</li>
-</ul>
-<p><code>READY</code> 인 feature 를 재작업해야 하면 호출 프롬프트로 대상을 명시한다 (프롬프트가 후보 조사에 우선한다).</p>
+<p><strong>조사·집계 규약 SSOT</strong>: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/plan-target.md"><code>plan-target.md</code></a> 를 Read 하고 그대로 적용한다 — 모드별 Glob 패턴 · 셸 글롭 금지 · <code>.plan.critic*</code> 제외 · 대응 <code>.eval.md</code> 가 <code>READY</code> 인 plan 제외 · <code>.r{N}</code> 최대값 1 개. 직접 재판정하지 않는다.</p>
+<p>후보 수별 판정 (0 개 분기는 generator 고유):</p>
 <ul>
 <li>후보 1 개 → 그 plan 으로 진행 + "이 plan 으로 구현합니다: {경로}" 명시.</li>
 <li>후보 2 개 이상 → 후보 목록을 보여주고 1 개 선택 요청 후 <strong>종료</strong>. 구현을 시작하지 않는다.</li>
-<li>후보 0 개 + 위 표의 폴더가 <strong>존재</strong> → <strong>보고 후 종료</strong> ("plan 이 없습니다 — <code>@ag-planner</code> 를 먼저 호출하세요"). 무계획 구현을 시작하지 않는다.</li>
+<li>후보 0 개 + 대상 폴더가 <strong>존재</strong> → <strong>보고 후 종료</strong> ("plan 이 없습니다 — <code>@ag-planner</code> 를 먼저 호출하세요"). 무계획 구현을 시작하지 않는다.</li>
 <li>후보 0 개 + 폴더 자체가 없음 → plan 없이 진행 (아래 로드·검증 건너뜀). <code>features/</code> 가 없는 프로젝트의 정식 흐름이다 (ag-planner 절차 6 — "features/ 폴더가 없는 프로젝트에서는 이 단계를 건너뛴다").</li>
 </ul>
 <p>확정된 plan 을 로드하여 구현 지침으로 사용한다. plan 파일에 변경 대상 파일, 구현 순서, 주의사항이 명시되어 있으므로 추가 탐색을 최소화한다.</p>
@@ -3604,7 +3576,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
