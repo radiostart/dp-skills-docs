@@ -3541,7 +3541,7 @@
 
 <h1 id="dp-skillsslack"><code>/dp-skills:slack</code><a class="headerlink" href="#dp-skillsslack" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>현재 진행중인 프로젝트의 Slack 알림을 설정·테스트·확인·해제할 때 사용한다. 활성화 시 작업 완료·사용자 승인·자동 진행 (progress) 이벤트가 해당 프로젝트 채널로 전송된다. 설정은 <code>workspace/{TEAM}/projects/{PROJECT}/.slack.env</code> 를 SSOT 로 관리한다.</p>
+<p>현재 진행중인 프로젝트의 Slack 알림을 설정·테스트·확인·해제할 때 사용한다. 활성화 시 작업 완료 (complete)·사용자 승인 (approval)·PR 생성 (pr)·자동 진행 (progress) 이벤트가 해당 프로젝트 채널로 전송된다. 설정은 <code>workspace/{TEAM}/projects/{PROJECT}/.slack.env</code> 를 SSOT 로 관리한다.</p>
 </blockquote>
 <p>현재 진행중인 프로젝트에 Slack 알림을 설정한다.</p>
 <p>사용법: $ARGUMENTS</p>
@@ -3598,7 +3598,7 @@
 <li><strong>있으면</strong>: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>slack.already_active</code> 출력 후 종료. 파일 편집·<code>slack status</code>·<code>slack disable</code> 을 안내한다.</li>
 <li><strong>대화식 입력:</strong></li>
 <li>채널명 (예: <code>#project-x</code>) — 필수. 빈 값이면 재질의.</li>
-<li>이벤트 — 기본값 <code>complete,approval,pr,progress</code> (전체). 사용자가 엔터만 치면 기본값 적용. 별도 입력 시 <code>complete</code>·<code>approval</code>·<code>pr</code>·<code>progress</code> 중 쉼표 구분 (progress 는 run-cycle HOTL 자동 진행 통지 — 0.26.0).</li>
+<li>이벤트 — 기본값 <code>complete,approval,pr,progress</code> (전체). 사용자가 엔터만 치면 기본값 적용. 별도 입력 시 <code>complete</code>·<code>approval</code>·<code>pr</code>·<code>progress</code> 중 쉼표 구분 (progress 는 run-cycle HOTL 자동 진행 통지 — 0.26.0). <strong>지원·기본 목록 SSOT 는 <code>tools/slack-notify.py</code> 의 <code>SUPPORTED_EVENTS</code>/<code>DEFAULT_EVENTS</code> 상수다</strong> — 이벤트 추가 시 상수를 먼저 고치고 본 문서·messages.md 를 맞춘다.</li>
 <li><strong>기존 프로젝트 마이그레이션 주의 (0.26.0)</strong>: <code>.slack.env</code> 에 <code>SLACK_EVENTS</code> 를 이미 명시해 둔 프로젝트는 목록 밖 이벤트가 조용히 필터되므로, <code>progress</code> 를 직접 추가해야 run-cycle 자동 진행 통지를 받는다 (미명시 프로젝트는 기본값으로 자동 포함).</li>
 <li><code>{PROJECT_DIR}/.slack.env</code> 를 아래 내용으로 <strong>Write</strong> (파일 퍼미션 <code>0600</code>):</li>
 </ol>
@@ -3742,7 +3742,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.3"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

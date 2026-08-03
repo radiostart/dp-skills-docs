@@ -3544,7 +3544,10 @@
 <li>파일이 없으면: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/setup/templates/TEAM.md.template">TEAM.md.template</a> 을 Read 하고 <code>{TEAM}</code> 치환 후 Write.</li>
 <li>파일이 있으면:</li>
 <li>첫 줄이 <code>{TEAM}</code> 과 동일 → skip (이미 동일 팀).</li>
-<li>첫 줄이 다른 팀명 → <strong>"이 workspace 는 이미 <code>{기존팀}</code> 팀 소유. 다른 디렉토리에서 실행하거나 먼저 기존 구조를 옮기세요."</strong> 안내 후 종료. <strong>덮어쓰지 않음.</strong></li>
+<li>첫 줄이 다른 팀명 → <strong>"이 workspace 는 이미 <code>{기존팀}</code> 팀 소유. 다른 디렉토리에서 실행하거나 먼저 기존 구조를 옮기세요."</strong> 안내 후 종료. <strong>덮어쓰지 않음.</strong><ul>
+<li>안내에 1줄 덧붙인다: <strong><code>workspace/TEAM.md</code> 가 git 추적 중이면</strong> 다른 팀이 커밋한 값이 이 체크아웃에 전파된 것일 수 있다 — <code>git rm --cached workspace/TEAM.md</code> 로 추적을 해제하고 <code>.gitignore</code> 에 추가한 뒤 재시도. TEAM.md 는 체크아웃 로컬 기본 팀이라 커밋 대상이 아니다 (<code>docs/explanation/workspace-layout.md</code> § 두 개의 경계).</li>
+</ul>
+</li>
 </ul>
 <h3 id="2">2. 팀 폴더 스켈레톤 생성<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>아래 각 파일에 대해 <strong>대상 존재 시 skip, 없으면 템플릿으로 생성</strong> (idempotent):</p>
@@ -3679,7 +3682,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.3"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

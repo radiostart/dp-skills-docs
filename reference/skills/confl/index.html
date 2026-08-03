@@ -3637,13 +3637,14 @@ docs/ 파일은 이 커맨드를 통해서만 접근한다. 직접 Read하지 �
 <li>검색 결과가 있으면, 그 결과를 컨텍스트로 활용해 <code>{작업지시}</code>를 수행한다.</li>
 <li>결과 출처가 <code>rovo-mcp</code> 인 경우 작업 산출물(예: project.md, evaluator.md)에 직접 인용하지 말고 요약·참조로만 사용한다.</li>
 <li>원문 인용이 필요한 작업이라면 사용자에게 <code>/dp-skills:confl {page_id}</code> 로 fetch 후 재실행을 권한다.</li>
+<li><strong><code>agents/*.md</code> 의 <code>[analyze-managed]</code> 섹션은 편집 대상에서 제외한다</strong> — <code>/dp-skills:analyze</code>·<code>/dp-skills:create-feature</code> 가 features 전체 기준으로 regen 하므로 여기서 추가한 항목은 다음 실행에서 소리 없이 유실된다. 도메인 지식을 남겨야 하면 <code>features/NN-*.md</code> 나 <code>project.md</code> 의 수동 편집 영역에 쓴다.</li>
 <li>검색 결과가 없으면 Search 모드의 안내 메시지를 출력하고 종료한다.</li>
 <li>검색어에 <code>--local</code> 플래그가 포함되어 있으면 1번을 <strong>Search:local 모드</strong>로 실행한다 (정책 점검 모드 호환).</li>
 </ol>
 <p>사용 예시:</p>
 <ul>
 <li><code>/dp-skills:confl 배송상태 &gt; project.md에 요구사항 정리</code></li>
-<li><code>/dp-skills:confl 주문취소 &gt; evaluator.md 체크리스트 항목 추가</code></li>
+<li><code>/dp-skills:confl 주문취소 &gt; features/03-order-cancel.md 의 예외 케이스 보강</code></li>
 <li><code>/dp-skills:confl 정산 &gt; 이 기능의 비즈니스 룰 요약해줘</code></li>
 </ul>
 <hr />
@@ -3713,7 +3714,7 @@ docs/ 파일은 이 커맨드를 통해서만 접근한다. 직접 Read하지 �
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.31.3"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
