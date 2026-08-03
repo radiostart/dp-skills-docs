@@ -3799,58 +3799,21 @@ NOT_READY 재시도 소진 · plan-level 반려 · wrapper 비정상 종료 · w
   (§4 와 동일 형식 — 정지 시점까지 처리분) 를 출력한다.</li>
 <li>Slack approval 통지 1회: <code>--event approval --message "run-cycle 정지: #{N} {사유}"</code>
   — 개입 요청은 approval, 자동 진행은 progress 로 채널에서 구분된다.</li>
-<li>안내: <strong>사유별 조치</strong>를 아래 표에서 골라 제시한 뒤 → 수정 후
+<li>안내: <strong>사유별 조치</strong>를 제시한 뒤 → 수정 후
   <strong><code>/dp-skills:run-cycle</code> 재실행(=재개)</strong>. 부분집합·<code>--gated</code> 로 돌렸다면 같은
   인자를 다시 넘긴다.</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th>정지 사유</th>
-<th>해소 조치</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>critic blocking 미해소</td>
-<td><code>@ag-planner</code> 재호출 — 챌린지 반영 후 합의표 <code>status</code> 갱신 (ag-planner 절차 10)</td>
-</tr>
-<tr>
-<td>합의표 불일치 (critic-lint FAIL)</td>
-<td><code>@ag-planner-critic</code> 재호출 — 본문 챌린지와 맞춰 표 재 emit</td>
-</tr>
-<tr>
-<td>NOT_READY 재시도 소진</td>
-<td><code>.eval.md</code> 의 <code>issues_to_fix</code> 확인 → 구현 결함이면 <code>@ag-generator</code> 수동 재작업, 계획 결함이면 <code>@ag-planner</code> 재호출</td>
-</tr>
-<tr>
-<td>plan-level 반려</td>
-<td><code>@ag-planner</code> 재호출 (재계획)</td>
-</tr>
-<tr>
-<td>wrapper 비정상 종료 (REPORT 없이 끝남)</td>
-<td>wrapper 가 보고한 원인을 먼저 해소한다 — <code>orchestrate-load</code> error 는 원문의 처방 (state 재생성·팀 활성화 등), <code>plan-validate</code> invalid 는 <code>@ag-planner</code> 재호출. 해소 후 그 단계부터 수동 재개</td>
-</tr>
-<tr>
-<td>wrapper 질의 대기 — <strong>OQ 게이트</strong></td>
-<td><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/oq-gate.md">oq-gate.md</a> § 에스컬레이션 두 갈래: <code>@ag-planner</code> 재호출 (plan 에 처리 마커 보완) 또는 메인 세션이 feature 파일 항목을 <code>[x] {항목} — 결정: {내용}</code> 으로 Edit. <strong>focus 로는 안 풀린다</strong> — <code>plan-validate</code> 의 <code>oq</code> 검증은 feature 체크박스·plan 마커만 본다</td>
-</tr>
-<tr>
-<td>wrapper 질의 대기 — 그 외 (모드 가드·도메인 복수 후보 등)</td>
-<td>질의에 답한다 — 후속 호출에도 남겨야 하는 결정이면 <code>/dp-skills:focus</code> 로 기록</td>
-</tr>
-<tr>
-<td>(<code>--gated</code>) plan 미승인</td>
-<td>plan 검토 후 승인, 또는 <code>@ag-planner</code> 재호출로 수정</td>
-</tr>
-</tbody>
-</table>
-<p><code>/dp-skills:fix-review</code> 는 본 정지의 처방이 <strong>아니다</strong> — CODE REVIEW REPORT
-  (사이클 밖 <code>@ag-code-reviewer</code> 산출물) 전용이라 REPORT 없이 호출하면 "REPORT
-  없음" 안내만 하고 종료한다.
-- 누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
+<p>조치표는 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/run-cycle/references/stop-remediation.md"><code>references/stop-remediation.md</code></a> 에 있다 —
+  <strong>정지가 실제로 발생한 시점에</strong> Read 해서 해당 사유의 행을 제시한다 (정지 없이
+  완주하는 호출에서는 읽지 않는다).</p>
+<p><strong>금지</strong> — <code>/dp-skills:fix-review</code> 는 본 정지의 처방이 <strong>아니다</strong> (CODE REVIEW
+  REPORT 전용). <strong>OQ 게이트 정지는 <code>/dp-skills:focus</code> 로 안 풀린다</strong> — <code>plan-validate</code>
+  의 <code>oq</code> 검증은 feature 체크박스·plan 마커만 본다.</p>
+<ul>
+<li>누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
   (누적)" 표를 함께 출력한다 — 처리 여부는 사용자 결정
-  (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</p>
+  (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</li>
+</ul>
 <h2 id="4">4. 큐 완료<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>모든 feature READY → 완료 요약 + <strong>게이트 이력 표</strong> (사후 감사 뷰) 출력:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
@@ -3942,7 +3905,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · wrapper 비정상 종료 · w
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.1"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
