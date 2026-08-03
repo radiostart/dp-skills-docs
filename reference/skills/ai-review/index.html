@@ -3607,7 +3607,7 @@
 
 <h1 id="dp-skillsai-review"><code>/dp-skills:ai-review</code><a class="headerlink" href="#dp-skillsai-review" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>PR의 AI 리뷰 코멘트(devops-deali 작성)에서 필수 수정사항만 추출해 새 fix 브랜치에서 적용하고, 원본 PR의 base branch로 후속 PR을 자동 생성한다. 권장 사항이나 "런타임 오류 없음"으로 판정된 항목은 제외한다.</p>
+<p>PR의 AI 리뷰 봇 코멘트에서 필수 수정사항만 추출해 새 fix 브랜치에서 적용하고, 원본 PR의 base branch로 후속 PR을 자동 생성한다. 권장 사항이나 "런타임 오류 없음"으로 판정된 항목은 제외한다.</p>
 </blockquote>
 <p>PR의 AI 리뷰 결과를 분석하고, 필수 수정사항을 새 브랜치에서 수정한 뒤 PR을 생성한다.</p>
 <p>대상 PR: $ARGUMENTS</p>
@@ -3624,7 +3624,8 @@
 <h3 id="2-ai">2. 최신 AI 리뷰 코멘트 조회<a class="headerlink" href="#2-ai" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>gh api repos/{OWNER}/{REPO}/issues/{PR_NUMBER}/comments</code> 로 코멘트 목록을 조회한다.</li>
-<li><code>devops-deali</code> 가 작성한 가장 마지막 코멘트를 찾는다.</li>
+<li>봇 계정명 <code>{BOT}</code> 결정 — <code>workspace/{TEAM}/context/team.config.md</code> 에 <code>ai_review_bot</code> 이 정의되어 있으면 그 값, 없으면 <code>workspace/_common/config.md</code>, 둘 다 없으면 하드 fallback <code>devops-deali</code> (<code>pr_default_base</code> 와 동일 우선순위). 본 스킬은 P1 미적용이라 <strong>workspace 부재는 종료 사유가 아니다</strong> — 조회 실패 시 fallback 으로 진행한다.</li>
+<li><code>{BOT}</code> 이 작성한 가장 마지막 코멘트를 찾는다.</li>
 <li>해당 코멘트에서 <strong><code>## 1. 필수 수정사항</code> → <code>### 1.1 런타임 오류 검사</code></strong> 섹션의 내용만 추출한다.</li>
 <li><code>## 2.</code> 이후 내용(권장 사항)은 수정 대상에서 제외한다.</li>
 <li>"런타임 오류 없음", "실질적 런타임 오류 위험은 낮습니다" 등 실제 수정이 불필요한 항목도 제외한다.</li>
@@ -3740,7 +3741,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
