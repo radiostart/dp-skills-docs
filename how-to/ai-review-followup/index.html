@@ -3530,9 +3530,16 @@
 </div>
 <h2 id="_1">언제 쓰나<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>PR 을 올린 뒤 <strong>AI 리뷰(devops-deali 작성)</strong> 코멘트가 달렸을 때</li>
+<li>PR 을 올린 뒤 <strong>AI 리뷰 봇</strong> 코멘트가 달렸을 때</li>
 <li>그 코멘트 중 <strong>필수 수정사항만</strong> 골라 반영하고 싶을 때</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">봇 계정명 (0.32.2+)</p>
+<p>기본값은 <code>devops-deali</code> 입니다. 다른 봇을 쓰는 팀은 <code>_common/config.md</code> 또는
+<code>team.config.md</code> 의 <code>ai_review_bot</code> 키로 바꿉니다
+(<a href="../configure-toolchain/">toolchain 설정</a>). 설정이 없으면 기본값으로 동작하므로
+별도 조치는 필요 없습니다.</p>
+</div>
 <p>PR 을 올리기 <em>전</em> 셀프 리뷰는 <a href="../self-code-review/">PR 직전 셀프 코드 리뷰</a>입니다. 이 페이지는 PR <em>후</em> 외부 AI 리뷰 처리입니다.</p>
 <h2 id="_2">전제<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
