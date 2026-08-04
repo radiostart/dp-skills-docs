@@ -3670,7 +3670,7 @@
 <h3 id="2-ai">2. 최신 AI 리뷰 코멘트 조회<a class="headerlink" href="#2-ai" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>gh api repos/{OWNER}/{REPO}/issues/{PR_NUMBER}/comments</code> 로 코멘트 목록을 조회한다.</li>
-<li>봇 계정명 <code>{BOT}</code> 결정 — <code>workspace/{TEAM}/context/team.config.md</code> 에 <code>ai_review_bot</code> 이 정의되어 있으면 그 값, 없으면 <code>workspace/_common/config.md</code>, 둘 다 없으면 하드 fallback <code>devops-deali</code> (<code>pr_default_base</code> 와 동일 우선순위). 본 스킬은 P1 미적용이라 <strong>workspace 부재는 종료 사유가 아니다</strong> — 조회 실패 시 fallback 으로 진행한다.</li>
+<li>봇 계정명 <code>{BOT}</code> 결정 — 기본값 <code>devops-deali</code> (사내 표준 봇, <strong>미선언이 정상</strong>). 다른 봇을 쓰는 예외 팀만 override 하므로 <code>workspace/{TEAM}/context/team.config.md</code> 의 <code>ai_review_bot</code> → <code>workspace/_common/config.md</code> 순으로 보고, 없으면 기본값을 쓴다 (<code>pr_default_base</code> 와 동일 우선순위). 본 스킬은 P1 미적용이라 <strong>workspace 부재·조회 실패는 종료 사유가 아니다</strong> — 기본값으로 진행한다.</li>
 <li><code>{BOT}</code> 이 작성한 가장 마지막 코멘트를 찾는다.</li>
 <li>해당 코멘트에서 <strong><code>## 1. 필수 수정사항</code> → <code>### 1.1 런타임 오류 검사</code></strong> 섹션의 내용만 추출한다.</li>
 <li><code>## 2.</code> 이후 내용(권장 사항)은 수정 대상에서 제외한다.</li>

@@ -3700,7 +3700,7 @@
 </div>
 <h2 id="v0322">v0.32.2<a class="headerlink" href="#v0322" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>AI 리뷰 봇 계정명을 팀 설정으로 뺐습니다</strong> — <code>/dp-skills:ai-review</code> 가 찾는 리뷰 코멘트 작성자가 <code>devops-deali</code> 로 하드코딩돼 있어, 다른 봇을 쓰는 팀은 스킬 본문을 고쳐야 했습니다. <code>team.config.md</code> → <code>_common/config.md</code> → 하드 fallback <code>devops-deali</code> 순으로 읽는 <code>ai_review_bot</code> 키를 추가했습니다 (<code>pr_default_base</code> 와 동일 계층). <strong>설정이 없어도 종전과 똑같이 동작합니다</strong> — 이 스킬은 PR 전용이라 workspace 가 없어도 돌아야 하므로, 조회 실패는 종료 사유가 아니라 기본값 사용입니다 (<a href="../how-to/configure-toolchain/">toolchain 설정</a>)</li>
+<li><strong>AI 리뷰 봇 계정명에 예외 팀용 override 를 열었습니다</strong> — 사내 표준 봇은 <code>devops-deali</code> 이고 <strong>기본값 그대로입니다. 설정할 것도, 달라지는 것도 없습니다.</strong> 다른 봇을 쓰는 예외 팀만 <code>ai_review_bot</code> 키로 덮어쓸 수 있게 <code>team.config.md</code> → <code>_common/config.md</code> → 기본값 <code>devops-deali</code> 순으로 읽습니다 (<code>pr_default_base</code> 와 동일 계층). 종전에는 스킬 본문에 하드코딩돼 있어 예외 팀이 플러그인 파일을 직접 고쳐야 했습니다 (<a href="../how-to/configure-toolchain/">toolchain 설정</a>)</li>
 </ul>
 <h2 id="v0321">v0.32.1<a class="headerlink" href="#v0321" title="Permanent link">&para;</a></h2>
 <ul>
