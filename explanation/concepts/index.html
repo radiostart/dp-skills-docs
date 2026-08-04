@@ -3666,6 +3666,7 @@
 </tbody>
 </table>
 <p><code>.agent-state.yml</code> 은 machine-readable 계약이라 문자열 detection 으로 인한 drift 를 구조적으로 차단합니다. 특히 <code>analyzed</code> 필드는 <strong>수동 편집 금지</strong> — <code>/dp-skills:analyze</code> 가 유일한 정식 writer 입니다.</p>
+<p>"이력은 폴더가 SSOT" 원칙의 사용자 접점이 <a href="../../how-to/switch-work/"><code>/dp-skills:switch</code></a> 입니다 — 과거 작업 목록을 어디에도 저장하지 않고 <code>projects/</code>·<code>issues/</code> 폴더에서 <strong>호출 시점에 파생</strong>해 보여주고, 전환은 project/issue 스킬에 위임합니다 (STATE.md 는 여전히 활성 1행만).</p>
 <h2 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Explanation: <a href="../agent-flow/">에이전트 흐름</a> · <a href="../workspace-layout/">workspace 레이아웃</a></li>
