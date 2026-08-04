@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/verify-report-lint/">
+        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/switch-scan/">
       
       
-        <link rel="prev" href="../switch-scan/">
+        <link rel="prev" href="../slack-notify/">
       
       
-        <link rel="next" href="../../../explanation/">
+        <link rel="next" href="../verify-report-lint/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>verify-report-lint.py - dp-skills</title>
+        <title>switch-scan.py - dp-skills</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#verify-report-lintpy" class="md-skip">
+        <a href="#switch-scanpy" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              verify-report-lint.py
+              switch-scan.py
             
           </span>
         </div>
@@ -3071,34 +3071,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../switch-scan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    switch-scan.py
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -3118,7 +3090,7 @@
   <span class="md-ellipsis">
     
   
-    verify-report-lint.py
+    switch-scan.py
   
 
     
@@ -3128,6 +3100,34 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../verify-report-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    verify-report-lint.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3464,35 +3464,34 @@
 
 
 
-<h1 id="verify-report-lintpy"><code>verify-report-lint.py</code><a class="headerlink" href="#verify-report-lintpy" title="Permanent link">&para;</a></h1>
+<h1 id="switch-scanpy"><code>switch-scan.py</code><a class="headerlink" href="#switch-scanpy" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills verify-report-lint — evaluator VERIFICATION REPORT 형식·일관성 검증.</p>
-<p>evaluator wrapper step 7 이 출력하는 <code>## VERIFICATION REPORT</code> 블록을
-결정론적으로 파싱해 다음을 검증:</p>
-<ul>
-<li>필수 섹션 / gate 존재</li>
-<li>각 gate 값 enum (pass/fail/skip/none/detected)</li>
-<li>status (READY|NOT_READY) ↔ gates 일관성</li>
-<li>mode (red_contract|characterize|standard) ↔ gate skip 매핑</li>
-<li>phase (development|qa|issue, optional — 0.23.2, issue 는 0.25.0): <code>phase: qa</code>
-  또는 <code>phase: issue</code> 면 mode 와 무관하게 test_run 실행 필수 (회귀 재현 테스트
-  스텝 — ag-planner qa 블록·이슈 수정 모드 블록 SSOT).
-  부재 시 현행 mode 규칙 그대로 (기존 .eval.md 하위호환).</li>
-<li>status: NOT_READY ↔ issues_to_fix 비어있지 않음</li>
-<li>drift: detected → issues_to_fix 에 언급</li>
-<li>focus gate 부재 시 warn (구형 REPORT 호환 — missing_gate_legacy)</li>
-<li>metrics.domain_impact enum (none/detected/skip) — 부재 시 warn (legacy 호환)</li>
-</ul>
+<p>dp-skills switch-scan — workspace 의 projects/·issues/ 에서 최근 작업 목록을 파생.</p>
+<p><code>/dp-skills:switch</code> 스킬이 Bash 1회로 호출하는 읽기 전용 조회 도구.
+목록은 호출 시점에 폴더에서 파생한다 — 저장 상태를 만들지 않는다 (stateless,
+이력의 SSOT 는 폴더 자체). STATE.md 는 활성 마커 표시 용도로만 읽으며,
+어떤 파일도 쓰지 않는다. 표준 라이브러리만 사용한다 (pre-push 훅이 시스템
+python 으로 실행 — 다른 tools/*.py 와 동일한 컨트랙트).</p>
 <p>Usage:
-    cat report.md | python3 tools/verify-report-lint.py
-    python3 tools/verify-report-lint.py path/to/report.md
-    python3 tools/verify-report-lint.py path/to/report.md --json</p>
+    python3 switch-scan.py WORKSPACE_PATH           # markdown 표 (최근순 상위 10건)
+    python3 switch-scan.py WORKSPACE_PATH --all     # cap 없이 전체
+    python3 switch-scan.py WORKSPACE_PATH --json    # 전체 목록 JSON (테스트·기계 소비용)</p>
+<p>출력 컬럼:
+    mode(project|issue) · 이름(STATE 활성 행 일치 시 ◀ 활성) ·
+    phase(+·tdd/·chr 부기) · 진행(목표 [x]/전체) · 최근(YYYY-MM-DD) · 요약</p>
+<p>파생 규칙 (전부 관대 fallback — 폴더 상태 검증은 dp-doctor 소관):
+    - 진행: project.md <code>## 목표</code> 체크박스 계수. 파일·섹션·체크박스 부재 또는
+      항목 전부 placeholder (<code>{</code> 시작) → <code>-</code>. issue 는 항상 <code>-</code> (진행 판정은
+      실 이슈 누적 후 후속 — PLAN-switch-skill 비범위).
+    - 요약: project = 개요 첫 줄 → (placeholder 면) 목표 첫 비-placeholder
+      항목 → 폴더명. issue = issue.md H1 → 폴더명.
+    - 최근: 폴더 내 파일 최대 mtime (깊이 2, <code>*.bak</code>·<code>.agents.bak/</code> 제외).
+      동률은 이름 오름차순.</p>
 <p>Exit:
-    0 — 위반 없음 (PASS)
-    1 — 위반 있음 (FAIL) 또는 REPORT 블록 부재
-    2 — 입력 오류</p>
+    0 — 성공 (degraded WARN 포함 — corrupt STATE·활성 폴더 부재는 WARN 후 계속)
+    1 — workspace 또는 TEAM.md 부재</p>
 </blockquote>
-<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/verify-report-lint.py"><code>tools/verify-report-lint.py</code></a></p>
+<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/switch-scan.py"><code>tools/switch-scan.py</code></a></p>
 
 
 

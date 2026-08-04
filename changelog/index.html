@@ -1383,6 +1383,8 @@
       
         
       
+        
+      
     
     
     
@@ -1427,6 +1429,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/switch-work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    최근 작업 목록·전환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1864,6 +1894,8 @@
       
         
           
+        
+      
         
       
         
@@ -2441,6 +2473,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../reference/skills/switch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    /dp-skills:switch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../reference/skills/tdd/" class="md-nav__link">
         
   
@@ -2509,6 +2569,8 @@
       
         
           
+        
+      
         
       
         
@@ -2994,6 +3056,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../reference/tools/switch-scan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    switch-scan.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../reference/tools/verify-report-lint/" class="md-nav__link">
         
   
@@ -3351,6 +3441,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.33.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0322" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3528,6 +3629,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.33.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0322" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3698,6 +3810,10 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0330">v0.33.0<a class="headerlink" href="#v0330" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>/dp-skills:switch</code> — 최근 작업 목록·전환 스킬이 생겼습니다</strong> — 진행하던 project·issue 이름이 기억나지 않을 때 목록을 보고 바로 전환합니다. 목록은 workspace 폴더에서 호출 시점에 파생하며 (저장 상태 없음 — STATE.md 는 여전히 "지금 활성 1행"만), 전환은 기존 <code>/dp-skills:project</code>·<code>/dp-skills:issue</code> 절차에 위임돼 어떤 게이트도 건너뛰지 않습니다. 목록에 없는 이름은 신규 생성으로 직행하지 않고 안내만 합니다 — 오타가 확인 없는 신규 폴더 생성으로 이어지는 것을 막기 위한 의도적 단절입니다. <code>project_name_required</code>·<code>no_active_project</code>·<code>state_corrupt</code> 안내 메시지에도 힌트 한 줄이 추가됐습니다 (<a href="../how-to/switch-work/">최근 작업 목록·전환</a>)</li>
+</ul>
 <h2 id="v0322">v0.32.2<a class="headerlink" href="#v0322" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>AI 리뷰 봇 계정명에 예외 팀용 override 를 열었습니다</strong> — 사내 표준 봇은 <code>devops-deali</code> 이고 <strong>기본값 그대로입니다. 설정할 것도, 달라지는 것도 없습니다.</strong> 다른 봇을 쓰는 예외 팀만 <code>ai_review_bot</code> 키로 덮어쓸 수 있게 <code>team.config.md</code> → <code>_common/config.md</code> → 기본값 <code>devops-deali</code> 순으로 읽습니다 (<code>pr_default_base</code> 와 동일 계층). 종전에는 스킬 본문에 하드코딩돼 있어 예외 팀이 플러그인 파일을 직접 고쳐야 했습니다 (<a href="../how-to/configure-toolchain/">toolchain 설정</a>)</li>
@@ -3808,7 +3924,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.32.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
