@@ -3441,6 +3441,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.33.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0330" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3629,6 +3640,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.33.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0330" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3810,6 +3832,10 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0331">v0.33.1<a class="headerlink" href="#v0331" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>스킬 목록 설명 6종이 가벼워졌습니다 (발동 규칙은 그대로)</strong> — run-cycle·qa·tdd·create-feature·discover·issue 의 description 에서 운용 상세를 본문으로 위임해, 모든 세션에 상주하는 스킬 목록 컨텍스트를 ~13% 줄였습니다. "명시 호출일 때만 발동" 류 오발동 방지 문구는 <strong>원문 그대로 문두에 보존</strong>됩니다 — 동작·발동 조건 변화는 없습니다. 재발 방지로 description byte 예산 (스킬당 650B·합계 7,200B) 과 anti-trigger 카나리 게이트가 pre-push 에 추가돼, 이후 스킬 추가·수정 시 예산 초과나 안전 문구 훼손이 push 단계에서 차단됩니다 (<a href="../explanation/concepts/">핵심 개념 § 스킬 description 계약</a>)</li>
+</ul>
 <h2 id="v0330">v0.33.0<a class="headerlink" href="#v0330" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>/dp-skills:switch</code> — 최근 작업 목록·전환 스킬이 생겼습니다</strong> — 진행하던 project·issue 이름이 기억나지 않을 때 목록을 보고 바로 전환합니다. 목록은 workspace 폴더에서 호출 시점에 파생하며 (저장 상태 없음 — STATE.md 는 여전히 "지금 활성 1행"만), 전환은 기존 <code>/dp-skills:project</code>·<code>/dp-skills:issue</code> 절차에 위임돼 어떤 게이트도 건너뛰지 않습니다. 목록에 없는 이름은 신규 생성으로 직행하지 않고 안내만 합니다 — 오타가 확인 없는 신규 폴더 생성으로 이어지는 것을 막기 위한 의도적 단절입니다. <code>project_name_required</code>·<code>no_active_project</code>·<code>state_corrupt</code> 안내 메시지에도 힌트 한 줄이 추가됐습니다 (<a href="../how-to/switch-work/">최근 작업 목록·전환</a>)</li>
@@ -3924,7 +3950,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

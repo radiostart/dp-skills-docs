@@ -3306,6 +3306,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스킬 description 계약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3559,6 +3570,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스킬 description 계약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3667,6 +3689,16 @@
 </table>
 <p><code>.agent-state.yml</code> 은 machine-readable 계약이라 문자열 detection 으로 인한 drift 를 구조적으로 차단합니다. 특히 <code>analyzed</code> 필드는 <strong>수동 편집 금지</strong> — <code>/dp-skills:analyze</code> 가 유일한 정식 writer 입니다.</p>
 <p>"이력은 폴더가 SSOT" 원칙의 사용자 접점이 <a href="../../how-to/switch-work/"><code>/dp-skills:switch</code></a> 입니다 — 과거 작업 목록을 어디에도 저장하지 않고 <code>projects/</code>·<code>issues/</code> 폴더에서 <strong>호출 시점에 파생</strong>해 보여주고, 전환은 project/issue 스킬에 위임합니다 (STATE.md 는 여전히 활성 1행만).</p>
+<h2 id="description">스킬 description 계약<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>스킬 목록 (name + description) 은 <strong>모든 세션에 상주</strong>하는 컨텍스트입니다. Claude Code 는 목록 예산을 컨텍스트 윈도우의 ~1% 로 잡고 초과분을 잘라내므로, description 이 비대해지면 조용히 스킬 라우팅이 퇴화합니다. 그래서 description 의 유일한 소비자를 "이 스킬을 지금 부를까" 를 판단하는 모델로 못박고, 아래 5요소만 담습니다 (순서 자유·생략 가능·추가 금지):</p>
+<ol>
+<li><strong>정체</strong> — 무엇을 하는 스킬인지 1문장</li>
+<li><strong>트리거</strong> — 발동해야 할 사용자 요청 (실발화 표면 어휘 유지)</li>
+<li><strong>anti-trigger</strong> — 발동 금지 상황. <strong>본문 이동 금지 + 문두 고정</strong>: 본문은 호출 후에만 로드되고, 목록 잘림 시 살아남는 것은 앞부분입니다</li>
+<li><strong>인접 스킬 구분</strong> — 혼동 경로 1–2개 (<code>신규는 /dp-skills:project</code> 류)</li>
+<li><strong>본문 위임 포인터</strong> — 상세는 본문이 정의함을 1구로</li>
+</ol>
+<p>그 외 운용 상세 (판정 세부·플래그·경로 규칙) 는 호출 시 로드되는 본문에 둡니다. 예산 (per-skill ≤ 650B · 합계 ≤ 7,200B) 과 qa·run-cycle 의 anti-trigger 문두 배치는 <code>tests/tools/test_skill_descriptions.py</code> 가 pre-push 에서 기계 강제합니다 — 예산 상향은 사유를 명기한 PR 로만 합니다.</p>
 <h2 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Explanation: <a href="../agent-flow/">에이전트 흐름</a> · <a href="../workspace-layout/">workspace 레이아웃</a></li>
@@ -3727,7 +3759,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
