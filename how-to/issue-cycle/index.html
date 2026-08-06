@@ -3778,15 +3778,15 @@
 <h3 id="4">4. 마무리<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>evaluator READY 후 <code>## 재발 방지</code> 를 기록해 두면 다음 유사 이슈 진단의 출발점이 됩니다.</li>
-<li>커밋·PR 은 평소처럼 <a href="../../reference/skills/commit/"><code>/dp-skills:commit</code></a>·<a href="../../reference/skills/pr/"><code>/dp-skills:pr</code></a> 를 사용합니다.</li>
+<li>커밋은 평소처럼 <a href="../../reference/skills/commit/"><code>/dp-skills:commit</code></a> 를 사용합니다. <strong>PR 은 <code>gh pr create</code> 로 직접 올립니다</strong> — <a href="../../reference/skills/pr/"><code>/dp-skills:pr</code></a> 는 issue 모드에서 지원하지 않습니다 (아래 주의 참조).</li>
 <li>다른 작업으로 전환: <code>/dp-skills:project {프로젝트명}</code> (이슈 폴더·기록은 그대로 남습니다).</li>
 </ul>
 <h2 id="_4">주의<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>issue 활성 중 project 전용 스킬은 실행되지 않습니다</strong> — <code>analyze</code>·<code>confl</code>·<code>tdd</code>·<code>create-feature</code>·<code>run-cycle</code>·<code>pr base 저장</code> 등은 issue 행을 감지하면 명확히 종료합니다 (preamble P2 mode 판정). <code>focus</code> 는 예외로 이슈 폴더에 기록됩니다.</li>
+<li><strong>issue 활성 중 project 전용 스킬은 실행되지 않습니다</strong> — <code>analyze</code>·<code>confl</code>·<code>tdd</code>·<code>create-feature</code>·<code>run-cycle</code>·<code>pr</code> 등은 issue 행을 감지하면 명확히 종료합니다 (preamble P2 mode 판정). <code>pr</code> 은 base 저장뿐 아니라 <strong>스킬 전체가 종료</strong>됩니다 — <code>projects/{PROJECT}/</code> state·컨텍스트를 5 지점에서 소비하기 때문입니다. <code>focus</code> 는 예외로 이슈 폴더에 기록됩니다.</li>
 <li>기존 이슈 파일은 hook 이 보호합니다 — 재진입 시 Write 덮어쓰기가 차단되고 Edit (원인·조치 기입) 만 허용됩니다.</li>
 <li>tdd/characterize 모드는 issue 사이클에서 지원하지 않습니다 (standard 고정).</li>
-<li>Slack 알림은 이슈 모드 미지원입니다 (자동 no-op).</li>
+<li>Slack 알림은 이슈 모드 미지원입니다 — 활성 행이 <code>issue</code> 면 전송하지 않습니다 (0.33.2 부터 도구가 mode 를 검사해 보장. 종전에는 이슈 slug 와 동명인 프로젝트가 있으면 그 채널로 샐 수 있었습니다).</li>
 </ul>
 
 
@@ -3843,7 +3843,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.2"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -3718,12 +3718,23 @@
 <p><code>{PROJECT_DIR}</code> = <code>workspace/{TEAM}/projects/{PROJECT}</code>.</p>
 <hr />
 <h2 id="_2">공통 선행 절차 (모든 서브커맨드)<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>모든 서브커맨드는 <strong>먼저 doctor 로 .gitignore 보호 상태를 점검</strong>한다. 누락 시 즉시 주입되므로 secret 이 절대 커밋되지 않도록 보장.</p>
+<p>모든 서브커맨드는 <strong>먼저 doctor 로 secret 노출 상태를 점검</strong>한다. doctor 는 <strong>진단만 한다</strong> — 기본 실행은 비파괴라 <code>.gitignore</code> 를 수정하지 않는다 (0.23.2 계약, <a href="../dp-doctor/">dp-doctor/SKILL.md</a> § 제약).</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;\.gitignore secrets|\[CRITICAL\]&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
 <ul>
-<li><code>[CRITICAL]</code> 이 출력되면 <strong>즉시 중단</strong>하고 사용자에게 원문을 그대로 보여준다. 이후 서브커맨드 수행 금지 — 사용자의 <code>git rm --cached</code> + webhook 재발급이 선행되어야 한다.</li>
-<li><code>.gitignore secrets: 누락 패턴 자동 주입</code> 이 출력되면 사용자에게 "리포 루트 <code>.gitignore</code> 에 <code>.slack.env</code> 가 자동 추가되었습니다. 이 변경을 커밋하세요." 안내.</li>
+<li><code>[CRITICAL]</code> 이 출력되면 <strong>즉시 중단</strong>하고 사용자에게 원문을 그대로 보여준다. 이후 서브커맨드 수행 금지 — 사용자의 <code>git rm --cached</code> + webhook 재발급이 선행되어야 한다. (이미 추적 중인 파일이라는 확정 사실이므로 판정을 다시 하지 않는다.)</li>
+<li><code>.gitignore secrets</code> WARN 이 출력돼도 <strong>그것만으로 미보호라고 단정하지 않는다.</strong> doctor 의 이 검사는 리포 루트 <code>.gitignore</code> 만 훑는 근사 휴리스틱이라 (<code>integrity.py</code> <code>_gitignore_covers</code> 자체 docstring), 상위 경로 패턴 (<code>workspace/*/projects/</code>) ·<code>.git/info/exclude</code>·global excludes 로 이미 보호된 경우를 <strong>위양성으로 잡는다</strong>. 판정은 git 본체에 맡긴다:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>check-ignore<span class="w"> </span>-q<span class="w"> </span><span class="o">{</span>PROJECT_DIR<span class="o">}</span>/.slack.env
+</span></code></pre></div>
+<ul>
+<li><strong>exit 0</strong> — 실제로 보호됨. WARN 은 위양성이므로 doctor 원문을 1줄 고지만 하고 그대로 진행한다.</li>
+<li>
+<p><strong>exit ≠ 0</strong> — 실제 미보호. <strong>활성화 (인자 없는 서브커맨드) 만 중단</strong>하고 아래를 안내한다. <code>status</code>·<code>disable</code> 은 진단·해제 경로라 막지 않는다 — 보호가 안 된 상태일수록 현황을 보고 끄는 길은 열려 있어야 한다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--fix
+</span></code></pre></div>
+<p><code>--fix</code> 는 사용자 옵트인 경로다 — 리포 <code>.gitignore</code> 는 공유 자산이라 스킬이 대신 변경을 결정하지 않는다. 중앙 관리라 편집할 수 없으면 체크아웃 로컬 <code>.git/info/exclude</code> 에 <code>.slack.env</code> 를 추가해도 된다 (커밋 불필요·본인 체크아웃 한정).</p>
+</li>
 </ul>
 <hr />
 <h2 id="_3">수행 절차<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -3738,23 +3749,23 @@
 <li><strong>기존 프로젝트 마이그레이션 주의 (0.26.0)</strong>: <code>.slack.env</code> 에 <code>SLACK_EVENTS</code> 를 이미 명시해 둔 프로젝트는 목록 밖 이벤트가 조용히 필터되므로, <code>progress</code> 를 직접 추가해야 run-cycle 자동 진행 통지를 받는다 (미명시 프로젝트는 기본값으로 자동 포함).</li>
 <li><code>{PROJECT_DIR}/.slack.env</code> 를 아래 내용으로 <strong>Write</strong> (파일 퍼미션 <code>0600</code>):</li>
 </ol>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># dp-skills Slack notifier — do NOT commit
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a># 리포 루트 .gitignore 에 `.slack.env` 가 있어야 안전합니다.
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>SLACK_WEBHOOK_URL=
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>SLACK_CHANNEL={채널명}
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>SLACK_EVENTS={이벤트목록}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># dp-skills Slack notifier — do NOT commit
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a># 리포 루트 .gitignore 에 `.slack.env` 가 있어야 안전합니다.
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>SLACK_WEBHOOK_URL=
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>SLACK_CHANNEL={채널명}
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>SLACK_EVENTS={이벤트목록}
 </span></code></pre></div>
 <ol>
 <li>퍼미션 설정:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="o">{</span>PROJECT_DIR<span class="o">}</span>/.slack.env
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="o">{</span>PROJECT_DIR<span class="o">}</span>/.slack.env
 </span></code></pre></div>
 <ol>
 <li>
 <p><code>git check-ignore {PROJECT_DIR}/.slack.env</code> 실행. exit code ≠ 0 이면 <code>.gitignore</code> 가 제대로 동작하지 않는 것 — <strong>파일을 즉시 삭제하고</strong> <code>slack.tracked_critical</code> 요지의 경고를 출력한 뒤 종료.</p>
 </li>
 <li>
-<p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>slack.activated</code> 를 <code>{채널명}</code>·<code>{이벤트목록}</code>·<code>{파일경로}</code> 로 치환해 출력.</p>
+<p><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>slack.activated</code> 를 <code>{채널명}</code>·<code>{이벤트목록}</code>·<code>{프로젝트경로}</code> 로 치환해 출력.</p>
 </li>
 <li>
 <p>사용자에게 "SLACK_WEBHOOK_URL 을 파일에 붙여넣으셨다면 <code>/dp-skills:slack test</code> 를 실행하세요." 안내.</p>
@@ -3765,10 +3776,10 @@
 <li><code>{PROJECT_DIR}/.slack.env</code> 없으면 <code>"활성화된 Slack 설정이 없습니다. /dp-skills:slack 으로 먼저 활성화하세요."</code> 출력 후 종료.</li>
 <li>아래 Bash 명령 실행:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--event<span class="w"> </span>approval<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--workspace<span class="w"> </span>workspace<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--message<span class="w"> </span><span class="s2">&quot;테스트 메시지입니다 (/dp-skills:slack test)&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/slack-notify.py<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--event<span class="w"> </span>approval<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>--workspace<span class="w"> </span>workspace<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>--message<span class="w"> </span><span class="s2">&quot;테스트 메시지입니다 (/dp-skills:slack test)&quot;</span>
 </span></code></pre></div>
 <ol>
 <li>stderr 가 비어 있으면 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>slack.test_ok</code> 출력.</li>
@@ -3813,10 +3824,10 @@
 </tbody>
 </table>
 <p>판단 명령:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># tracked 검사</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>PROJECT_DIR<span class="o">}</span><span class="w"> </span>ls-files<span class="w"> </span>--error-unmatch<span class="w"> </span>.slack.env
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># gitignore 패턴</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;^\.slack\.env</span>$<span class="s2">&quot;</span><span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--show-toplevel<span class="k">)</span>/.gitignore
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># tracked 검사</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>git<span class="w"> </span>-C<span class="w"> </span><span class="o">{</span>PROJECT_DIR<span class="o">}</span><span class="w"> </span>ls-files<span class="w"> </span>--error-unmatch<span class="w"> </span>.slack.env
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># gitignore 패턴</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;^\.slack\.env</span>$<span class="s2">&quot;</span><span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--show-toplevel<span class="k">)</span>/.gitignore
 </span></code></pre></div>
 <ol>
 <li><code>git tracked: 위험</code> 이면 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>slack.tracked_critical</code> 의 <code>git rm --cached</code> 명령을 실제 경로로 치환해 함께 출력.</li>
@@ -3878,7 +3889,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

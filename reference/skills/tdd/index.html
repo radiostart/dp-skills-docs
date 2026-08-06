@@ -3571,10 +3571,8 @@
 <li><strong>이미 있으면</strong>: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/shared/messages.md">messages.md</a> 의 <code>tdd_already_active</code> 출력 후 2단계에서 누락된 항목만 보완한다.</li>
 <li><strong>없으면</strong>: 2단계를 수행한다.</li>
 <li><a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/tdd-activation.md">tdd-activation.md</a> 절차에 따라 <code>project.md</code>, <code>agents/planner.md</code>, <code>agents/generator.md</code>, <code>agents/evaluator.md</code> 를 갱신한다. 각 단계는 idempotent 하므로 이미 적용된 항목은 자동으로 건너뛴다.</li>
-<li>적용 결과를 요약 출력한다:</li>
-<li>수정된 파일: <code>project.md</code>, <code>agents/planner.md</code>, <code>agents/generator.md</code>, <code>agents/evaluator.md</code></li>
-<li>참조 문서: <code>skills/rgr.md</code></li>
-<li>다음 작업 안내: <strong>"TDD 모드 활성화 완료. <code>@ag-planner</code> 를 호출해 기능을 스텝 단위로 분할하고 실패 테스트를 작성하세요."</strong></li>
+<li>적용 결과를 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/modes/tdd-activation.md">tdd-activation.md</a> 의 <strong>§ 완료 후 요약 출력</strong> 형식대로 안내한다 (수정된 파일·참조 문서 목록의 SSOT — 여기에 복제하지 않는다. 종전 복제본이 <code>.agent-state.yml</code> 과 <code>state-schema.md</code> 를 빠뜨린 채 드리프트했다).</li>
+<li>이어서 다음 작업을 안내한다: <strong>"TDD 모드 활성화 완료. <code>@ag-planner</code> 를 호출해 기능을 스텝 단위로 분할하고 실패 테스트를 작성하세요."</strong></li>
 </ol>
 
 
@@ -3631,7 +3629,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

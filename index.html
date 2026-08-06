@@ -3567,10 +3567,14 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.33.0 — <code>/dp-skills:switch</code> 최근 작업 목록·전환</p>
-<p>진행하던 project·issue <strong>이름이 기억나지 않을 때</strong> <code>/dp-skills:switch</code> 로
-최근 작업 목록을 보고 바로 전환합니다. 목록은 폴더에서 호출 시점에
-파생하고 (저장 상태 없음), 전환은 기존 스킬 절차에 위임됩니다
+<p class="admonition-title">v0.33.2 — 문서와 실제 동작의 어긋남 정정</p>
+<p>이슈 모드에서 Slack 알림이 <strong>이름이 같은 다른 프로젝트 채널로 나갈 수 있던
+경로</strong>를 막았습니다. <code>/dp-skills:slack</code> 의 <code>.gitignore</code> 보호 판정은 이제 git
+기준이고, <code>/dp-skills:discover</code> 의 인용 규격은 실사용 표기 (심볼 앵커) 를
+따릅니다. 이슈 모드에서 <code>/dp-skills:pr</code> 은 실행되지 않으니 PR 은
+<code>gh pr create</code> 로 올립니다 (<a href="how-to/issue-cycle/">이슈 사이클</a>).</p>
+<p>바로 앞 릴리스에서는 <code>/dp-skills:switch</code> 로 <strong>진행하던 작업 이름이 기억나지
+않을 때</strong> 목록을 보고 전환할 수 있게 됐습니다
 (<a href="how-to/switch-work/">최근 작업 목록·전환</a>).</p>
 <p>이전 릴리스는 <a href="changelog/">변경 이력</a> 에 있습니다.</p>
 </div>
@@ -3672,7 +3676,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.2"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -2315,45 +2315,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="검사 범위">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#workspace" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Workspace
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#team" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Team
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#project" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2383,6 +2344,17 @@
     <span class="md-ellipsis">
       
         스키마 검사 모드 (--schema)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-oq-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        측정 모드 (--oq-stats)
       
     </span>
   </a>
@@ -3617,45 +3589,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="검사 범위">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#workspace" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Workspace
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#team" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Team
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#project" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Project
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3692,6 +3625,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#-oq-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        측정 모드 (--oq-stats)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3721,7 +3665,7 @@
 
 <h1 id="dp-skillsdp-doctor"><code>/dp-skills:dp-doctor</code><a class="headerlink" href="#dp-skillsdp-doctor" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills 워크스페이스·팀·프로젝트의 정합성을 검사한다. 상태 이상· 드리프트·부분 설정이 의심될 때, 또는 정기 점검·진단을 원할 때 사용한다. 구조 파일 존재·state 스키마·플래그 실상 일치를 검사해 STATE corrupt 같은 조용한 문제를 조기 감지한다.</p>
+<p>dp-skills 워크스페이스·팀·프로젝트의 정합성을 검사한다. 상태 이상·드리프트·부분 설정이 의심될 때, 또는 정기 점검·진단을 원할 때 사용한다. 구조 파일 존재·state 스키마·플래그 실상 일치를 검사해 STATE corrupt 같은 조용한 문제를 조기 감지한다.</p>
 </blockquote>
 <p>프로젝트·팀·workspace 정합성을 검사한다.</p>
 <p>대상: $ARGUMENTS (생략 시 STATE.md 의 <code>진행중</code> 프로젝트)</p>
@@ -3741,27 +3685,9 @@
 <p>출력 형식·문구의 SSOT 는 doctor.py stdout 이다 — 본 문서에 출력 예시를 두지 않는다 (버전·심각도 드리프트 방지).</p>
 <hr />
 <h2 id="_2">검사 범위<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="workspace">Workspace<a class="headerlink" href="#workspace" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>workspace/TEAM.md</code> 존재</li>
-</ul>
-<h3 id="team">Team<a class="headerlink" href="#team" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>workspace/{TEAM}/STATE.md</code> 존재 + <code>진행중</code> 행 정확히 1 개 (0 = WARN, 2+ = ERROR)</li>
-<li><code>workspace/{TEAM}/context/MANIFEST.md</code> 존재 + 옛 파서 섹션 (<code>## Ignore</code> / <code>## 언어·도구 기본값</code> / <code>## 팀 설정</code>) 잔존 검사 (0.3.0 split)</li>
-<li><code>workspace/{TEAM}/context/team.config.md</code> 존재 (0.3.0+)</li>
-<li><code>workspace/_common/config.md</code> 존재</li>
-<li><strong>공유 context 프로젝트 식별자 잔존</strong> — scope·rules·enums·boundaries·MANIFEST 에서 프로젝트 feature ID (<code>F9</code>)·Jira 키 (<code>ABC-123</code>) 패턴 감지 시 WARN. 공유 context 는 프로젝트-무관 지식이라 도메인 표현으로 치환 대상 (discover extraction § 프로젝트 식별자 배제). <code>F1 score</code>·<code>UTF-8</code> 등 오탐 문맥은 제외하지만 자동 수정은 하지 않는다 — 판단은 사용자 몫.</li>
-</ul>
-<h3 id="project">Project<a class="headerlink" href="#project" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>.agent-state.yml</code> 존재 + <code>schema: v1.3</code> (구버전 v1~v1.2 는 업그레이드 권장 WARN — SSOT: state-schema.md·doctor <code>SCHEMA_VERSION</code>)</li>
-<li><code>analyzed</code> 필드 ↔ <code>features/*.md</code> (<code>.plan.md</code> 제외) 실제 존재 일치</li>
-<li><code>tdd</code> 필드 ↔ <code>project.md</code> 의 <code>**TDD 모드**</code> 문자열 일치</li>
-<li><code>pr_base_branch</code> (있을 경우) ↔ <code>git ls-remote origin &lt;X&gt;</code> 존재 일치 (stale 시 WARN)</li>
-<li><strong>관리외 파일 inventory</strong> — 플러그인이 정의한 managed 패턴 외 파일·폴더 목록을 INFO 로 표시 (사용자 메모·스크래치 보존 확인용)</li>
-</ul>
-<p>스키마 상세: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md">state-schema.md</a></p>
+<p>workspace · 팀 · 프로젝트 세 계층의 <strong>구조 파일 존재 · state 스키마 · 플래그와 실상의 일치 · 공유 context 위생</strong>을 검사한다.</p>
+<p><strong>개별 검사 목록은 여기에 두지 않는다</strong> — 무엇을 검사하는지의 SSOT 는 <code>doctor.py</code> 실행 결과다 (<code>:37</code> 의 출력 SSOT 조항과 같은 이유). 검사는 릴리즈마다 늘어나므로 문서에 목록을 두면 그 목록이 곧 드리프트한다. <strong>지금 무엇을 검사하는지 알고 싶으면 실행해 보는 것이 정확하다</strong> — 각 항목은 심각도 라벨·근거·처방을 함께 출력한다.</p>
+<p>state 필드의 의미·허용값: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md">state-schema.md</a></p>
 <hr />
 <h2 id="_3">언제 실행하나<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3843,6 +3769,13 @@
 </ul>
 <p>CI 에서 자동 실행 — <code>.github/workflows/validate.yml</code>.</p>
 <hr />
+<h2 id="-oq-stats">측정 모드 (<code>--oq-stats</code>)<a class="headerlink" href="#-oq-stats" title="Permanent link">&para;</a></h2>
+<p>Open Questions 통계를 JSON 으로 출력한다 — planner 의 OQ 가드가 실제로 작동하는지 측정하는 용도라 일상 진단 경로는 아니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--oq-stats
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--oq-stats<span class="w"> </span>--stale-days<span class="w"> </span><span class="m">14</span>
+</span></code></pre></div>
+<p><code>--stale-days</code> 는 stale 판정 임계값 (기본 7일, feature 파일 mtime 기준).</p>
+<hr />
 <h2 id="_4">제약<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>스크립트는 순수 파이썬 stdlib 만 사용 (외부 의존 없음)</li>
@@ -3904,7 +3837,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
