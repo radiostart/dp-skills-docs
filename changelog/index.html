@@ -3441,6 +3441,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0340" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.34.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0333" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3662,6 +3673,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0340" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.34.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0333" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3876,6 +3898,11 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0340">v0.34.0<a class="headerlink" href="#v0340" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>/dp-skills:switch</code> 가 이슈의 미완/조치완을 표시합니다</strong> — 이슈를 진행하다 다른 작업으로 전환하면 STATE.md 활성 행이 교체되므로 (1행 규약 — 이력의 SSOT 는 폴더), 하다 만 이슈가 목록 어디에도 "미완" 으로 보이지 않았습니다. 이제 진행 컬럼이 issue.md 의 <code>## 조치</code> 기입 여부로 <code>미완</code>/<code>조치완</code> 을 보여주고 (조치 절이 없는 legacy 는 종전대로 <code>-</code>), 상위 10건 밖으로 밀린 미완 이슈는 <code>외 N건 (미완 이슈 M건 포함)</code> 으로 존재를 알립니다 (<a href="../how-to/switch-work/">최근 작업 목록·전환</a>)</li>
+<li><strong>미완 이슈로 돌아가는 길이 곳곳에 안내됩니다</strong> — 인자 없는 <code>/dp-skills:issue</code> 진입 고지와 작업 전환 시 STATE.md 교체 안내가 <code>/dp-skills:switch</code> 와 mode 에 맞는 재진입 명령을 알려줍니다. 완료된 이슈 폴더를 옮기거나 지우지 않는 이유 (잔존 원인·조치 기록이 유사 이슈 검색의 원료) 도 이슈 가이드에 명문화됐습니다 (<a href="../how-to/issue-cycle/">이슈 사이클</a>)</li>
+</ul>
 <h2 id="v0333">v0.33.3<a class="headerlink" href="#v0333" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>/dp-skills:discover</code> 가 구현을 문서로 옮기지 않습니다</strong> — 산출물에 계산식·조건 분기 순서·반환 키 전수 목록·라인 범위 인용 (<code>파일:100-160</code>) 이 실리는 경우가 있었습니다. 코드가 바뀌면 그 문장은 조용히 오답이 되고, scope 는 모든 phase 에서 로드되므로 토큰 비용도 영구적입니다. 이제 기재 대상이 <strong>위치</strong> (경로·심볼) 와 <strong>계약·함정</strong> (시그니처·상태값·트랜잭션 경계·암묵 필터·소유권) 으로 고정되고, 구현은 <code>로직 상세는 {파일#메서드} 에서 파악</code> 처럼 위치만 남습니다. 판정 기준은 유용성이 아니라 <strong>휘발성</strong>입니다 — "다음 릴리즈에 코드가 바뀌면 이 문장이 틀리는가" 가 기준이라, 유용하지만 휘발성이 큰 항목 (계산식이 대표) 은 문서에 두지 않습니다. 소스에 맡긴 영역이 있으면 문서 상단에 <code>기재 범위</code> 고지 1 줄이 붙습니다 (<a href="../how-to/domain-discover/">도메인 스코프 추출</a>)</li>
@@ -4009,7 +4036,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

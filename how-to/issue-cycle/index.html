@@ -3732,7 +3732,7 @@
 <li>신규 이슈면 <strong>사전 인터뷰</strong>가 도메인 + 현상 3축 (재현 조건·기대 동작·영향 범위) 을 선택지 질문 1회 (최대 4문항) 로 묶어 묻고, 답변을 issue.md 에 기입한 뒤 해당 <code>scope/</code>·<code>rules/</code> 를 로드합니다 (상태 파일 없음 — 기록처는 issue.md 자신). 대화에 이미 서술한 축은 질문 없이 채워집니다. 규약 전문: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/interview.md"><code>interview.md</code></a>.</li>
 </ul>
 <p>slug 는 팀 용어의 <strong>코드 표기를 우선</strong> 채택합니다 — "미사입" 은 <code>rules/retail.md</code> 가 코드 표기를 <code>not_bought</code> 로 명시하므로 <code>not-bought-bulk-refund-fail</code> 이 됩니다. 폴더명으로 소스를 grep 할 수 있게 하려는 것입니다. 입력에 축이 여러 개 섞여 용어 매핑이 갈리면 후보 2~3개를 제시하고 확인을 받습니다.</p>
-<p>인자 없이 <code>/dp-skills:issue</code> (bare) 로 진입하면 폴더·기록이 남지 않고 사이클도 비지원입니다 — 짧은 조사 전용.</p>
+<p>인자 없이 <code>/dp-skills:issue</code> (bare) 로 진입하면 폴더·기록이 남지 않고 사이클도 비지원입니다 — 짧은 조사 전용. 진행하던 이슈를 찾으려면 <a href="../switch-work/"><code>/dp-skills:switch</code></a> 를 사용하세요.</p>
 <h3 id="2">2. 현상 확인·보강<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>신규 이슈는 사전 인터뷰 답변으로 <code>## 현상</code> (증상·에러·재현 경로·기대 동작·영향 범위) 이 채워집니다 — "모름" 으로 남긴 축은 <code>(미확인)</code> 으로 표시됩니다. 필요하면 <code>issue.md</code> 를 직접 편집해 보강하고, 선택적으로 <code>## 의심 영역</code> 을 채웁니다 — AI 탐색 범위와 도메인 후보 제시가 좁아집니다.</p>
 <h3 id="3">3. 처리 경로 선택<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -3779,7 +3779,7 @@
 <ul>
 <li>evaluator READY 후 <code>## 재발 방지</code> 를 기록해 두면 다음 유사 이슈 진단의 출발점이 됩니다.</li>
 <li>커밋은 평소처럼 <a href="../../reference/skills/commit/"><code>/dp-skills:commit</code></a> 를 사용합니다. <strong>PR 은 <code>gh pr create</code> 로 직접 올립니다</strong> — <a href="../../reference/skills/pr/"><code>/dp-skills:pr</code></a> 는 issue 모드에서 지원하지 않습니다 (아래 주의 참조).</li>
-<li>다른 작업으로 전환: <code>/dp-skills:project {프로젝트명}</code> (이슈 폴더·기록은 그대로 남습니다).</li>
+<li>다른 작업으로 전환: <code>/dp-skills:project {프로젝트명}</code> (이슈 폴더·기록은 그대로 남습니다). <code>## 조치</code> 기입 전에 전환한 미완 이슈는 <a href="../switch-work/"><code>/dp-skills:switch</code></a> 목록에 <code>미완</code> 으로 표시되어 다시 찾을 수 있습니다.</li>
 </ul>
 <h2 id="_4">주의<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3843,7 +3843,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

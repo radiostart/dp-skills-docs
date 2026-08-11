@@ -3478,11 +3478,16 @@ python 으로 실행 — 다른 tools/*.py 와 동일한 컨트랙트).</p>
     python3 switch-scan.py WORKSPACE_PATH --json    # 전체 목록 JSON (테스트·기계 소비용)</p>
 <p>출력 컬럼:
     mode(project|issue) · 이름(STATE 활성 행 일치 시 ◀ 활성) ·
-    phase(+·tdd/·chr 부기) · 진행(목표 [x]/전체) · 최근(YYYY-MM-DD) · 요약</p>
+    phase(+·tdd/·chr 부기) · 진행(project 목표 [x]/전체 · issue 조치완/미완) ·
+    최근(YYYY-MM-DD) · 요약</p>
 <p>파생 규칙 (전부 관대 fallback — 폴더 상태 검증은 dp-doctor 소관):
-    - 진행: project.md <code>## 목표</code> 체크박스 계수. 파일·섹션·체크박스 부재 또는
-      항목 전부 placeholder (<code>{</code> 시작) → <code>-</code>. issue 는 항상 <code>-</code> (진행 판정은
-      실 이슈 누적 후 후속 — PLAN-switch-skill 비범위).
+    - 진행: project = project.md <code>## 목표</code> 체크박스 계수. 파일·섹션·체크박스
+      부재 또는 항목 전부 placeholder (<code>{</code> 시작) → <code>-</code>.
+      issue = issue.md <code>## 조치</code> 섹션 기반 3값 — 실내용 있음 <code>조치완</code> /
+      템플릿 placeholder·빈 내용뿐 <code>미완</code> / 섹션 부재 (비템플릿 legacy) <code>-</code>
+      (PLAN-issue-resume-visibility — 조치 기입이 완료 신호라는 issues/GUIDE
+      계약의 프록시).
+    - cap 초과 시 <code>외 N건</code> 문구에 밀린 <code>미완</code> 이슈 수를 병기 (침묵 절단 금지).
     - 요약: project = 개요 첫 줄 → (placeholder 면) 목표 첫 비-placeholder
       항목 → 폴더명. issue = issue.md H1 → 폴더명.
     - 최근: 폴더 내 파일 최대 mtime (깊이 2, <code>*.bak</code>·<code>.agents.bak/</code> 제외).
@@ -3547,7 +3552,7 @@ python 으로 실행 — 다른 tools/*.py 와 동일한 컨트랙트).</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

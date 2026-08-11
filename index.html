@@ -3567,15 +3567,16 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.33.3 — discover 는 구현을 옮겨 적지 않습니다</p>
-<p><code>/dp-skills:discover</code> 산출물이 담는 것은 <strong>위치와 계약·함정</strong>입니다. 계산식·
-조건 분기 순서·반환 키 전수 목록·라인 범위 인용은 들어가지 않고 <code>로직 상세는
-{파일#메서드} 에서 파악</code> 처럼 위치만 남습니다 — 구현의 SSOT 는 소스이고,
-코드가 바뀌면 틀리는 문장은 유용해도 문서에 두지 않습니다
+<p class="admonition-title">v0.34.0 — 미완 이슈가 switch 목록에 보입니다</p>
+<p>이슈를 진행하다 다른 작업으로 전환해도 <strong>하다 만 이슈를 다시 찾을 수
+있습니다</strong> — <code>/dp-skills:switch</code> 목록의 진행 컬럼이 issue.md 의 <code>## 조치</code>
+기입 여부로 <code>미완</code>/<code>조치완</code> 을 표시하고, 상위 10건 밖으로 밀린 미완 이슈는
+<code>외 N건 (미완 이슈 M건 포함)</code> 으로 알립니다. 완료된 이슈 폴더를 옮기거나
+지우지 않는 이유도 가이드에 명문화됐습니다 (<a href="how-to/issue-cycle/">이슈 사이클</a>).</p>
+<p>바로 앞 릴리스에서는 <code>/dp-skills:discover</code> 가 <strong>구현을 문서로 옮기지 않도록</strong>
+기재 규격이 바뀌었습니다 — 계산식·조건 분기 순서·반환 키 전수 목록 대신
+위치와 계약·함정만 남습니다
 (<a href="how-to/domain-discover/">도메인 스코프 추출</a>).</p>
-<p>바로 앞 릴리스에서는 이슈 모드 Slack 알림이 <strong>이름이 같은 다른 프로젝트
-채널로 나갈 수 있던 경로</strong>를 막았습니다
-(<a href="how-to/issue-cycle/">이슈 사이클</a>).</p>
 <p>이전 릴리스는 <a href="changelog/">변경 이력</a> 에 있습니다.</p>
 </div>
 <hr />
@@ -3676,7 +3677,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.0"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>

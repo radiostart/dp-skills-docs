@@ -3701,7 +3701,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/dp-skills:switch              # 목록 → 선택 질의 → 전환
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>/dp-skills:switch purchased    # 이름 부분 일치 → 단일 매치면 즉시 전환
 </span></code></pre></div>
-<p>목록 표는 읽기 전용 스캐너 (<code>tools/switch-scan.py</code>) 가 <strong>호출 시점에 폴더에서 파생</strong>합니다 — 어디에도 저장되지 않으며, 최근 수정순 상위 10건 + <code>외 N건</code> 으로 표시됩니다.</p>
+<p>목록 표는 읽기 전용 스캐너 (<code>tools/switch-scan.py</code>) 가 <strong>호출 시점에 폴더에서 파생</strong>합니다 — 어디에도 저장되지 않으며, 최근 수정순 상위 10건 + <code>외 N건</code> 으로 표시됩니다. 상위 10건 밖으로 밀린 항목에 미완 이슈가 있으면 <code>외 N건 (미완 이슈 M건 포함)</code> 으로 존재를 알립니다.</p>
 <h3 id="_5">표 읽는 법<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3725,7 +3725,7 @@
 </tr>
 <tr>
 <td><code>진행</code></td>
-<td>project.md 목표 체크박스 <code>[x]/전체</code>. 미기입 (placeholder)·부재는 <code>-</code></td>
+<td>project: project.md 목표 체크박스 <code>[x]/전체</code> (미기입·부재는 <code>-</code>). issue: issue.md <code>## 조치</code> 기입 기준 <code>조치완</code>/<code>미완</code> (조치 절이 없는 legacy 는 <code>-</code>)</td>
 </tr>
 <tr>
 <td><code>최근</code></td>
@@ -3808,7 +3808,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.33.3"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
