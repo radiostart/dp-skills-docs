@@ -1023,6 +1023,8 @@
       
         
       
+        
+      
     
     
     
@@ -1139,6 +1141,34 @@
     
   
     도메인 스코프 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/ask-implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구현 질의
   
 
     
@@ -1936,6 +1966,8 @@
       
         
       
+        
+      
     
     
     
@@ -2033,6 +2065,34 @@
     
   
     /dp-skills:analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/skills/ask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    /dp-skills:ask
   
 
     
@@ -3441,6 +3501,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.35.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0341" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3684,6 +3755,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0350" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.35.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0341" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3920,6 +4002,11 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0350">v0.35.0<a class="headerlink" href="#v0350" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>작업과 무관하게 구현 내용을 물을 수 있습니다 — <code>/dp-skills:ask</code> 신설</strong> — 팀 컨텍스트 (MANIFEST·scope) 는 지금까지 project/issue 진입 시에만 로드돼, 평시 질문은 도메인 지식 없이 소스를 맨바닥부터 탐색했습니다. 이제 <code>/dp-skills:ask {질문}</code> 이 팀 컨텍스트 → 소스 순의 고정 경로로 탐색해 소스 <code>file:line</code> 인용으로 답합니다. 읽기 전용 — 활성 작업 (STATE.md) 을 바꾸지 않고 답변을 어디에도 저장하지 않으며, 컨텍스트↔소스 불일치를 발견하면 <code>/dp-skills:discover</code> 갱신을 제안합니다. 질문에 가정형 개선 의도가 있으면 개선안과 실행 경로 (issue / create-feature) 도 안내합니다 (<a href="../how-to/ask-implementation/">구현 질의</a>)</li>
+<li><strong>스킬 목록 예산 확보 — 5종 description 압축 (동작 무변경)</strong> — 스킬 목록 (name+description) 은 전 세션 상주 컨텍스트라 합계 예산 게이트 (7,200B) 가 있습니다. ask 수용을 위해 commit·pr·switch·slack·run-cycle 의 description 에서 본문으로 위임 가능한 상세 (파일 전체 경로·이벤트 키 병기·절 번호) 를 걷어냈습니다 (−342B). 스킬의 동작·발동 조건은 그대로입니다</li>
+</ul>
 <h2 id="v0341">v0.34.1<a class="headerlink" href="#v0341" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>@ag-planner</code> 가 빨라집니다 (속도 실험)</strong> — planner 의 사고 예산이 <code>effort: xhigh</code> 에서 <code>high</code> 로 내려갔습니다. planner 는 컨텍스트 로드부터 plan 검증까지 8~12턴을 도는데 매 턴 xhigh 사고 비용을 지불하는 것이 체감 지연의 지배 요인이었습니다. 품질 방어선인 <code>@ag-planner-critic</code> 은 xhigh 를 유지합니다 — critic 챌린지 반려율이 악화되는 것이 실관측되면 원복합니다. 사용자 조작은 없습니다</li>
@@ -4062,7 +4149,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.35.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

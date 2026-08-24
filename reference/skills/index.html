@@ -1025,6 +1025,8 @@
       
         
       
+        
+      
     
     
     
@@ -1141,6 +1143,34 @@
     
   
     도메인 스코프 추출
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to/ask-implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    구현 질의
   
 
     
@@ -1948,6 +1978,8 @@
       
         
       
+        
+      
     
     
     
@@ -2048,6 +2080,34 @@
     
   
     /dp-skills:analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ask/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    /dp-skills:ask
   
 
     
@@ -3455,13 +3515,14 @@
 
 
 <h1 id="skills">Skills<a class="headerlink" href="#skills" title="Permanent link">&para;</a></h1>
-<p>전체 20 항목 — <code>dp-skills/</code> SSOT 에서 자동 추출.</p>
+<p>전체 21 항목 — <code>dp-skills/</code> SSOT 에서 자동 추출.</p>
 <ul>
 <li><a href="ai-review/"><code>ai-review</code></a> — PR의 AI 리뷰 봇 코멘트에서 필수 수정사항만 추출해 새 fix 브랜치에서 적용하고, 원본 PR의 base branch로 후속 PR을 자동 생성한다. 권장 사항이나 "런타임 오류 없음"으로 판정된 항목은 제외한다.</li>
 <li><a href="analyze/"><code>analyze</code></a> — 이미 저장된 docs/ 기획서를 features/ 기능 명세로 분할·구조화할 때 사용한다. PM 작성 표 중심 기획서를 기능 단위 문서로 변환하고 project.md 의 목표 섹션 과 agents/ 파일(planner·generator·evaluator)을 자동 갱신한다. 기획서 fetch 는 <code>/dp-skills:confl</code>, 프롬프트 기반 단일 기능 추가는 <code>/dp-skills:create-feature</code> 를 사용한다.</li>
+<li><a href="ask/"><code>ask</code></a> — 사용자가 구현된 기능의 동작·위치를 물을 때 사용한다 — 팀 컨텍스트 → 소스 순 탐색으로 답하는 읽기 전용 질의. 활성 작업과 무관한 질문도 대상. 코드 수정·구현 요청에는 발동하지 않고, 같은 세션의 후속 질문에도 재발동하지 않는다. 기획서 검색은 <code>/dp-skills:confl</code>, 컨텍스트 누적은 <code>/dp-skills:discover</code>. 탐색 순서·개선 모드는 본문.</li>
 <li><a href="characterize/"><code>characterize</code></a> — Characterization test 모드로 전환/복귀한다. 기존 레거시 코드의 현재 동작을 spec 으로 포착하기 위한 모드. 구현 변경 없음 (<code>{source_root}</code> 잠금). 리팩터는 별도 사이클.</li>
 <li><a href="code-review-init/"><code>code-review-init</code></a> — 워크스페이스에 언어별 코드 리뷰 룰 파일 (<code>{lang}.md</code>) 을 셋업한다. <code>@ag-code-reviewer</code> 가 변경 dominant 언어의 룰 파일 부재를 보고하면 본 스킬로 1 회성 생성.</li>
-<li><a href="commit/"><code>commit</code></a> — 사용자가 "커밋해줘", "변경 묶어서 커밋" 등 git 커밋 작성을 요청할 때 사용한다. 플러그인 공통 커밋 규칙 (<code>skills/context/shared/commit.md</code>) 과 팀 <code>commit_scopes</code> 에 맞춰 메시지를 작성해 커밋한다.</li>
+<li><a href="commit/"><code>commit</code></a> — 사용자가 "커밋해줘" 등 git 커밋 작성을 요청할 때 사용한다. 공통 커밋 규칙과 팀 <code>commit_scopes</code> 에 맞춰 메시지를 작성해 커밋한다 — 규칙 상세는 본문.</li>
 <li><a href="confl/"><code>confl</code></a> — Confluence 기획서를 프로젝트 docs/ 폴더에 fetch 하거나 저장된 docs/ 를 search·all·search+action 모드로 조회할 때 사용한다. 저장된 docs/ 를 features/ 로 가공하는 작업은 <code>/dp-skills:analyze</code> 가 담당한다.</li>
 <li><a href="create-feature/"><code>create-feature</code></a> — 활성 프로젝트에 사용자 프롬프트(원하는 기능 서술)로 단일 feature 명세를 추가한다 — features/NN-{slug}.md 생성 + project.md·agents/* 동기화. 기획서(docs/) 기반 다건 분할은 <code>/dp-skills:analyze</code>. 실행은 @ag-planner 호출로 시작 — 자동 파이프라인 아님.</li>
 <li><a href="discover/"><code>discover</code></a> — 코드베이스 진입점(controller·service·폴더)에서 도메인 지식을 추출해 팀 context (scope·MANIFEST) 에 누적한다. 신규 도메인 작성·기존 보강·갱신 모두 본 스킬로 수행. cross-domain 호출 표면은 <code>--boundary</code> 모드로 경량 포착. 산출 경로·스켈레톤 규칙은 본문 참조.</li>
@@ -3469,12 +3530,12 @@
 <li><a href="fix-review/"><code>fix-review</code></a> — CODE REVIEW REPORT 의 finding 별 처리 경로를 추천한다 — <code>trivial</code> (직접 Edit) / <code>one-shot</code> (<code>@ag-generator</code>) / <code>full-cycle</code> (<code>@ag-planner</code>) / <code>new-feature</code> (<code>/dp-skills:create-feature</code>) / <code>dismiss</code> (룰 보강·acknowledgement). 자동 실행은 안 함 — 사용자가 표를 보고 명시 호출. <code>@ag-code-reviewer</code> 출력 다음 단계.</li>
 <li><a href="focus/"><code>focus</code></a> — 사용자가 대화 중 내린 결정·방향 조정(예: "소프트 딜리트 빼줘", "Goal 5 먼저")을 다음 서브에이전트 호출(@ag-planner·@ag-planner-critic·@ag-generator·@ag-evaluator)에 전달해야 할 때 사용한다. 메인 대화의 결정이 서브에이전트에겐 보이지 않는 문제를 <code>.focus.md</code> 파일 매개로 해소한다.</li>
 <li><a href="issue/"><code>issue</code></a> — 운영 이슈 처리 모드 — issues/{이슈명}/ 를 생성·로드해 팀 누적 컨텍스트 위에서 문제 1건을 해결한다 (버그 대응·장애 분석·핫픽스 등 단발성). 코드 수정 시 project 와 동일한 planner→critic→generator→evaluator 사이클 사용 가능. 지속적 기능 개발·feature 단위 작업은 <code>/dp-skills:project</code>.</li>
-<li><a href="pr/"><code>pr</code></a> — 사용자가 "PR 올려줘", "풀 리퀘스트 생성" 등 현재 브랜치를 GitHub Pull Request 로 올리길 요청할 때 사용한다. base branch 는 자동 결정하며 사용자 명시 입력이 우선한다. 제목·본문 컨벤션은 <code>skills/context/shared/pr.md</code> 를 따른다.</li>
+<li><a href="pr/"><code>pr</code></a> — 사용자가 "PR 올려줘" 등 현재 브랜치의 GitHub Pull Request 생성을 요청할 때 사용한다. base branch 는 자동 결정 (사용자 명시가 우선), 제목·본문 컨벤션은 본문 규약을 따른다.</li>
 <li><a href="project/"><code>project</code></a> — 새 프로젝트를 시작하거나 기존 프로젝트를 재개할 때 사용한다. <code>workspace/{TEAM}/projects/{PROJECT}/</code> 폴더를 생성·로드하고 STATE.md 를 갱신한 뒤 도메인 컨텍스트를 적재한다. 인자로 Confluence URL 이 오면 내부적으로 confl·analyze 를 위임 호출하고, <code>--tdd</code> 플래그로 TDD 모드를 켤 수 있다. 단발 이슈는 <code>/dp-skills:issue</code> 를 사용한다.</li>
 <li><a href="qa/"><code>qa</code></a> — 사용자가 <code>/dp-skills:qa {KEY}</code> 를 명시적으로 호출했을 때만 사용한다 — 대화에 Jira 티켓 링크·이슈 키가 보이는 것만으로는 발동하지 않는다 (링크 공유·메모는 처리 요청이 아니다). Jira QA 결함 처리 모드 진입 — 활성 project 의 qa/ 에서 결함 1건의 분석·수정 사이클을 시작한다 (이슈 키 인자 필수, <code>off</code> 로 development 복귀). 다건 추적·잔여 현황·재오픈은 Jira UI 가 SSOT — 본 스킬은 보드뷰·다건 조회를 하지 않는다.</li>
-<li><a href="run-cycle/"><code>run-cycle</code></a> — 사용자가 자동 순회를 명시 요청했을 때만 사용한다 (<code>/dp-skills:run-cycle</code> 호출 또는 그에 상당하는 지시) — "계속·이어서 진행해줘" 류 발화만으로 모델이 자발 발동하지 않는다 (자발 발동이 필요해 보이면 큐를 제시하고 확인 1회). 활성 project 의 미완료 feature 를 순서대로 planner→critic→generator→evaluator 로 자동 순회하는 순차 오토파일럿 (human-on-the-loop) — 한 번에 1 feature, 수동 @mention 사이클은 불변. green 자동 진행/red 정지 판정·<code>--gated</code>·큐 파생 규칙은 본문 §1·§2.3·§3 이 정의한다.</li>
-<li><a href="slack/"><code>slack</code></a> — 현재 진행중인 프로젝트의 Slack 알림을 설정·테스트·확인·해제할 때 사용한다. 활성화 시 작업 완료 (complete)·사용자 승인 (approval)·PR 생성 (pr)·자동 진행 (progress) 이벤트가 해당 프로젝트 채널로 전송된다. 설정은 <code>workspace/{TEAM}/projects/{PROJECT}/.slack.env</code> 를 SSOT 로 관리한다.</li>
-<li><a href="switch/"><code>switch</code></a> — 최근 진행한 project·issue 목록을 조회하고 그중 하나로 전환할 때 사용한다. 진행하던 작업 이름이 기억나지 않을 때의 진입점. 새 프로젝트 생성은 <code>/dp-skills:project</code>, 새 이슈 생성은 <code>/dp-skills:issue</code> 를 직접 사용한다.</li>
+<li><a href="run-cycle/"><code>run-cycle</code></a> — 사용자가 자동 순회를 명시 요청했을 때만 사용한다 (<code>/dp-skills:run-cycle</code> 또는 상당 지시) — "계속·이어서 진행해줘" 류 발화만으로 자발 발동하지 않는다 (필요해 보이면 큐 제시 후 확인 1회). 활성 project 의 미완료 feature 를 에이전트 사이클 (planner→critic→generator→evaluator) 로 자동 순회하는 순차 오토파일럿 (HOTL) — 한 번에 1 feature, 수동 @mention 사이클 불변. green 진행/red 정지 판정·<code>--gated</code>·큐 규칙은 본문이 정의한다.</li>
+<li><a href="slack/"><code>slack</code></a> — 현재 진행중인 프로젝트의 Slack 알림을 설정·테스트·확인·해제할 때 사용한다. 활성화 시 완료·승인·PR·자동진행 이벤트를 프로젝트 채널로 전송한다. 설정 SSOT (<code>.slack.env</code>)·이벤트 상세는 본문.</li>
+<li><a href="switch/"><code>switch</code></a> — 최근 진행한 project·issue 목록을 조회하고 그중 하나로 전환할 때 사용한다 — 작업 이름이 기억나지 않을 때의 진입점. 신규 생성은 <code>/dp-skills:project</code>·<code>/dp-skills:issue</code> 를 직접 사용한다.</li>
 <li><a href="tdd/"><code>tdd</code></a> — 이미 구현된 코드가 있는 기존 프로젝트에 TDD (Red-Green-Refactor) 모드를 사후 적용한다 — project.md 제한사항·agents/ 를 TDD 버전으로 갱신. 신규 프로젝트는 <code>/dp-skills:project --tdd</code>, 기존 동작을 spec 으로 포착하는 전환은 <code>/dp-skills:characterize</code> — 본 스킬은 새 spec 의 RGR 도입 전용.</li>
 <li><a href="team-init/"><code>team-init</code></a> — 새 팀 셋업 — workspace 구조를 초기화한다. <code>workspace/TEAM.md</code> 와 <code>workspace/{TEAM}/context/</code> 하위의 MANIFEST · rules · scope · enums 스켈레톤을 일괄 생성한다. 처음 dp-skills 를 도입·셋업하는 팀, 또는 기존 팀 구조를 기준으로 새 팀을 추가할 때 사용한다.</li>
 </ul>
@@ -3533,7 +3594,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.34.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.35.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
