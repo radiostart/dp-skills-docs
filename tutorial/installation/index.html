@@ -588,6 +588,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 스킬이 발동하지 않을 때 (트러블슈팅)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3641,6 +3652,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 스킬이 발동하지 않을 때 (트러블슈팅)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3718,6 +3740,19 @@
 <div class="admonition note">
 <p class="admonition-title">Python 의존성 없음</p>
 <p>모든 <code>tools/*.py</code> 는 표준 라이브러리만 사용합니다 (Confluence fetch 포함). 별도 <code>pip install</code> 이 필요 없습니다.</p>
+</div>
+<h2 id="5">5. 스킬이 발동하지 않을 때 (트러블슈팅)<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>정당한 요청인데 dp-skills 스킬이 제안·발동되지 않으면, 스킬 목록이 컨텍스트에서 잘렸을 수 있습니다.</p>
+<p>Claude Code 는 스킬 목록 (name + description) 에 컨텍스트 예산을 두고, 초과 시 <strong>경고 없이</strong> 설명을 줄이거나 이름만 남깁니다 — 이 예산은 <strong>설치된 모든 플러그인·내장 스킬이 공유</strong>하므로, dp-skills 자체는 예산 게이트로 관리되고 있어도 다른 플러그인을 많이 켠 환경에서는 합산 초과로 잘릴 수 있습니다.</p>
+<p>확인·완화:</p>
+<ol>
+<li><strong><code>/context</code> 로 확인</strong> — 스킬 목록이 잘렸는지 (설명 축약·이름만 표시) 를 봅니다.</li>
+<li><strong>미사용 플러그인·스킬 비활성화</strong> — 공유 예산에서 가장 확실한 회수.</li>
+<li><strong>예산 상향</strong> — <code>settings.json</code> 의 <code>env</code> 에 <code>SLASH_COMMAND_TOOL_CHAR_BUDGET</code> 값을 키워 지정.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">비공식 동작</p>
+<p>위 예산 메커니즘은 공식 문서화되지 않은 하니스 동작입니다 (커뮤니티 분석 기준, 2026-08 시점 — Claude Code 버전에 따라 바뀔 수 있습니다). 환경변수가 듣지 않으면 1·2번으로 대응하세요.</p>
 </div>
 <h2 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
