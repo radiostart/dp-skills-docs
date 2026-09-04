@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/critic-lint/">
+        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/context-search/">
       
       
-        <link rel="prev" href="../context-search/">
+        <link rel="prev" href="../confluence/">
       
       
-        <link rel="next" href="../cross-ref/">
+        <link rel="next" href="../critic-lint/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>critic-lint.py - dp-skills</title>
+        <title>context-search.py - dp-skills</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#critic-lintpy" class="md-skip">
+        <a href="#context-searchpy" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              critic-lint.py
+              context-search.py
             
           </span>
         </div>
@@ -2773,34 +2773,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../context-search/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    context-search.py
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -2820,7 +2792,7 @@
   <span class="md-ellipsis">
     
   
-    critic-lint.py
+    context-search.py
   
 
     
@@ -2830,6 +2802,34 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../critic-lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    critic-lint.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -3614,30 +3614,38 @@
 
 
 
-<h1 id="critic-lintpy"><code>critic-lint.py</code><a class="headerlink" href="#critic-lintpy" title="Permanent link">&para;</a></h1>
+<h1 id="context-searchpy"><code>context-search.py</code><a class="headerlink" href="#context-searchpy" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills critic-lint — ag-planner-critic 합의표 무결성 검증.</p>
-<p>HOTL (0.26.0) 에서 run-cycle 의 plan 자동 진행 판정자는 critic 합의표다.
-본 도구는 run-cycle 이 표를 판독하기 <strong>전에</strong> 실행되어, 본문 챌린지 ↔ 합의 표의
-결정론 대조로 "행이 없으면 게이트가 거짓 통과한다" (ag-planner-critic.md 합의표
-규약이 명문화한 리스크) 를 봉쇄한다.</p>
-<p>검증 항목:
-- 본문 <code>### C{n}</code> 챌린지 블록의 개수·번호 집합 == <code>## 합의</code> 표 행의 개수·번호 집합
-- 챌린지 블록 severity ↔ 표 행 severity 일치
-- severity enum: blocking | suggestion | nit
-- status enum: open | accepted | rejected | deferred
-- 챌린지 0건: "검출된 결함 없음" 문구가 있으면 합의 표 생략 허용 (critic 규약).
-  문구도 표도 없으면 위반 (fail-closed — 판독 불가 산출물로 자동 진행 금지)</p>
-<p>Usage:
-    python3 tools/critic-lint.py path/to/NN-{slug}.plan.critic.md
-    cat critic.md | python3 tools/critic-lint.py
-    python3 tools/critic-lint.py path --json</p>
+<p>dp-skills context-search — 팀 도메인 지식을 섹션 단위로 검색한다.</p>
+<p><code>workspace/{TEAM}/context/**/*.md</code> 를 H2·H3 섹션으로 쪼개 결정적 점수로 순위를
+매기고, <strong>어느 파일의 어느 라인 범위를 Read 하면 되는지</strong>까지 돌려준다. 파일을
+통째로 Read 하거나 무차별 Grep 하는 대신 쓴다.</p>
+<div class="language-text highlight"><pre><span></span><code>python3 tools/context-search.py &quot;&lt;질의&gt;&quot; [--scope {domain}] [--limit 5]
+</code></pre></div>
+<p>질의 3형식:
+    select:{path}            직접 지정 — 그 파일의 전 섹션 (점수 없이)
+    select:{path}#{heading}  헤딩 부분 일치로 좁힌 섹션
+    +필수어 나머지 토큰       필수어를 가진 섹션만 후보로 두고 나머지로 순위
+    키워드 나열               공백 분리</p>
+<p>점수 (질의 토큰마다 합산, 신호별 섹션당 1회 — 빈도 미반영):
+    헤딩 토큰 정확 일치        10
+    파일 경로 세그먼트 일치      8   (도메인명·카테고리·모델 파일명)
+    인용 경로 세그먼트 일치      6   (<code>app/models/order.rb#cancel!</code> 같은 심볼 앵커 포함)
+    헤딩 토큰 부분 일치         5
+    frontmatter description   4   (있는 문서만 — 없어도 검색 대상에서 빠지지 않는다)
+    본문 단어경계 일치          2   ← <strong>섹션 크기로 감쇠</strong></p>
+<p>본문 점수만 감쇠시키는 이유: 변별력 있는 신호 (헤딩·경로·인용) 가 0 이면 본문
+2점만 남는데, 본문 점수는 섹션이 클수록 유리하다 (서로 다른 토큰을 더 많이 품는다).
+실측상 24KB 짜리 단일 섹션이 막연한 질의에서 1위로 올라왔다. 구조 신호까지 함께
+나누면 (전체 정규화) 헤딩 일치의 변별력이 죽고 작은 섹션이 과도하게 유리해져,
+본문에만 적용한다. 근거·수치: <code>docs/plans/PLAN-context-retrieval.md</code> §5-⑤.</p>
+<p>읽기 전용 — 지식 파일을 수정하지 않는다. 외부 인덱스·임베딩 없이 표준 라이브러리만
+쓰며, 같은 코퍼스·질의면 항상 같은 출력·같은 순서를 낸다.</p>
 <p>Exit:
-    0 — 위반 없음 (PASS)
-    1 — 위반 있음 (FAIL)
-    2 — 입력 오류</p>
+    0 — 성공 (0건도 성공. 결과 대신 안내를 낸다)
+    2 — 질의가 비었거나 토큰이 전부 제거됨 / 코퍼스 밖 경로 지정</p>
 </blockquote>
-<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/critic-lint.py"><code>tools/critic-lint.py</code></a></p>
+<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/context-search.py"><code>tools/context-search.py</code></a></p>
 
 
 

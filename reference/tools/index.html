@@ -2678,6 +2678,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2750,6 +2756,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="context-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context-search.py
   
 
     
@@ -2882,6 +2916,34 @@
   
   
     <li class="md-nav__item">
+      <a href="domain-pointer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    domain-pointer.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="handoff-quality/" class="md-nav__link">
         
   
@@ -2918,6 +2980,34 @@
     
   
     jira.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migrate-context-frontmatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    migrate-context-frontmatter.py
   
 
     
@@ -3515,15 +3605,18 @@
 
 
 <h1 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h1>
-<p>전체 16 항목 — <code>dp-skills/</code> SSOT 에서 자동 추출.</p>
+<p>전체 19 항목 — <code>dp-skills/</code> SSOT 에서 자동 추출.</p>
 <ul>
 <li><a href="confluence/"><code>confluence</code></a> — Confluence docs fetcher / searcher.</li>
+<li><a href="context-search/"><code>context-search</code></a> — dp-skills context-search — 팀 도메인 지식을 섹션 단위로 검색한다.</li>
 <li><a href="critic-lint/"><code>critic-lint</code></a> — dp-skills critic-lint — ag-planner-critic 합의표 무결성 검증.</li>
 <li><a href="cross-ref/"><code>cross-ref</code></a> — dp-skills cross-ref — features ↔ MCP search 결과 cross-reference 매핑.</li>
 <li><a href="docs_build/"><code>docs_build</code></a> — dp-skills docs_build — agents/skills/tools SSOT 를 docs/reference/ 로 추출.</li>
 <li><a href="doctor/"><code>doctor</code></a> — dp-skills doctor — workspace / team / project 정합성 검사.</li>
+<li><a href="domain-pointer/"><code>domain-pointer</code></a> — dp-skills domain-pointer — 소스 파일이 속한 도메인의 지식 포인터를 만든다.</li>
 <li><a href="handoff-quality/"><code>handoff-quality</code></a> — dp-skills handoff-quality — planner ↔ generator 인계 콘텐츠 품질 측정 (Phase β).</li>
 <li><a href="jira/"><code>jira</code></a> — Jira issue fetcher / commenter (QA phase 어댑터).</li>
+<li><a href="migrate-context-frontmatter/"><code>migrate-context-frontmatter</code></a> — dp-skills migrate-context-frontmatter — 축적된 팀 컨텍스트에 frontmatter 를 채운다.</li>
 <li><a href="migrate-manifest-split/"><code>migrate-manifest-split</code></a> — migrate-manifest-split.py — 0.3.0 split 일회성 마이그레이션. [ARCHIVED]</li>
 <li><a href="migrate-state/"><code>migrate-state</code></a> — .agent-state.yml migration for existing dp-skills projects.</li>
 <li><a href="oq-eval/"><code>oq-eval</code></a> — dp-skills oq-eval — Open Questions 분류 정확도 평가 도구 (Phase 2).</li>
@@ -3589,7 +3682,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.35.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.36.0"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

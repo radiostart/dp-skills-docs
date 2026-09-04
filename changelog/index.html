@@ -2663,6 +2663,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2732,6 +2738,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/tools/context-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context-search.py
   
 
     
@@ -2864,6 +2898,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../reference/tools/domain-pointer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    domain-pointer.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../reference/tools/handoff-quality/" class="md-nav__link">
         
   
@@ -2900,6 +2962,34 @@
     
   
     jira.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/tools/migrate-context-frontmatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    migrate-context-frontmatter.py
   
 
     
@@ -3501,6 +3591,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.36.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0351" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.35.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0350" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3755,6 +3867,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0360" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.36.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0351" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.35.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0350" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4002,6 +4136,19 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0360">v0.36.0<a class="headerlink" href="#v0360" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>소스 파일이 어느 도메인인지 물어볼 수 있습니다 — <code>domain-pointer</code></strong> — <code>python3 tools/domain-pointer.py --file app/models/order.rb</code> 가 그 파일을 다루는 도메인과 진입·규칙·경계 문서 경로를 6~8 줄 포인터로 알려줍니다 (본문은 복사하지 않습니다). 판정은 <strong>그 파일을 직접 인용한 지식 문서</strong>를 최우선으로 하고, <code>sources</code> glob 은 구체적인 패턴이 우선합니다 — 디렉터리 단위로 넓히면 변별력이 사라집니다 (실측: 7 개 도메인이 모두 <code>app/models/**</code> 를 인용해 소매 모델이 무관한 도메인으로 잡혔습니다). <strong>자동 발동은 넣지 않았습니다</strong> — 소스를 고칠 때마다 훅으로 주입하는 안은 모든 세션에서 상시 실행되는 변경이라, 이득이 실제로 관측된 뒤에 결정합니다 (<a href="../reference/tools/domain-pointer/">domain-pointer</a>)</li>
+<li><strong>컨텍스트 문서에 frontmatter 가 붙습니다 — 열어보기 전에 아는 한 줄</strong> — 지금까지는 파일을 열기 전에 무엇이 든 문서인지 알 수 없었습니다. 이제 <code>scope</code>·<code>rules</code>·<code>boundaries</code>·<code>enums</code> 산출물이 <code>description</code>·<code>domain</code>·<code>type</code>·<code>sources</code> 를 갖고, 검색 (<code>context-search</code>) 이 <code>description</code> 을 가중치로 씁니다. <strong>이미 쌓인 문서</strong>는 <code>python3 tools/migrate-context-frontmatter.py</code> 로 채웁니다 — <strong>기본이 dry-run</strong> 이라 <code>--apply</code> 를 명시해야 파일을 건드리고, 본문은 한 바이트도 바뀌지 않습니다 (기입 직후 자체 검증). <code>description</code> 은 <strong>경계 계약만 자동 기입</strong>되고 (표 행 수 집계라 추측이 없습니다) 나머지 계층은 후보만 제시합니다 — 본문 요약은 추측이 섞이므로 사람이 확정합니다. <code>MANIFEST.md</code>·<code>team.config.md</code> 는 색인·설정이라 대상이 아닙니다. <strong><code>/dp-skills:dp-doctor</code> 가 기입 상태를 알려줍니다</strong> — 미도입이면 마이그레이션 명령을, 일부만 기입됐으면 남은 파일을 안내하며, 파일마다 경고를 쏟지 않고 집계 1 줄로 냅니다 (<a href="../reference/skills/discover/">discover</a>)</li>
+<li><strong>경계 계약의 호출 표면이 클래스별로 나뉩니다</strong> — 종전에는 호출 표면 전체가 표 하나여서, 실측상 그 한 섹션이 24KB 에 달했습니다. 섹션 단위로 골라 읽어도 24KB 를 읽게 되니 부분 로드가 무력했습니다. 이제 <code>/dp-skills:discover --boundary</code> 가 표 12 행·소유 클래스 3 개를 넘으면 <strong>클래스별 <code>###</code></strong> 로 나눠 기록합니다 — 같은 질의의 검색 1 위가 24KB 에서 2.9KB 로 바뀌고, 로드 절감이 55~64% 에서 <strong>78~89%</strong> 로 올라갑니다. 나누는 축은 소유 클래스이며 기능·목적으로는 묶지 않습니다 (추측 방지). <strong>기존 산출물은 자동으로 바뀌지 않습니다</strong> — 해당 경계에 <code>--boundary</code> 를 재실행해야 적용됩니다 (<a href="../reference/skills/discover/">discover</a>)</li>
+<li><strong>경계 계약이 많은 도메인에서 로드량이 크게 줄었습니다</strong> — 종전에는 도메인 관련 경계 문서를 최대 6건까지 <strong>본문째로</strong> 넘겼고, 그것만으로 로드량의 75% 를 차지했습니다 (실측: retail 6건 113KB). 이제 합계가 예산 (48KB) 을 넘으면 본문 대신 <strong>목록</strong>을 줍니다 — 파일마다 방향 (내가 호출 / 나를 호출)·크기·섹션별 표 행 수가 함께 나와, 무엇이 있는지는 전량 보이고 필요한 것만 골라 Read 합니다. 실측으로 팀 컨텍스트 로드가 <strong>150KB → 37KB</strong> 로 줄었습니다. <strong>예산 이하면 동작이 종전과 같아</strong> 작은 워크스페이스는 영향이 없고, 목록으로 내려간 문서도 신선도 검사 대상에 그대로 남습니다 (<a href="../reference/tools/orchestrate-load/">orchestrate-load</a>)</li>
+<li><strong>도메인 지식을 섹션 단위로 검색합니다 — <code>context-search</code> 신설</strong> — 지금까지 도메인 지식은 파일 단위로만 접근했습니다. 경계 문서는 하나가 30KB 에 이르러 한 줄이 필요해도 파일을 통째로 읽어야 했고, 대안은 무차별 Grep 이었습니다. 이제 <code>python3 tools/context-search.py "&lt;키워드&gt;" --scope {domain}</code> 이 H2·H3 섹션을 결정적 점수로 순위 매겨 <strong>어느 파일의 몇 번째 줄부터 읽으면 되는지</strong> (<code>read_hint</code>) 까지 돌려줍니다 — 실측 절감은 질의에 따라 64~87% 입니다. <code>select:{path}#{heading}</code> 직접 지정과 <code>+필수어</code> 사전 필터를 지원하고, 0건이면 실패 대신 재질의 방법을 안내합니다. 벡터 DB·임베딩 없이 표준 라이브러리만 쓰며 같은 질의는 항상 같은 결과를 냅니다. 에이전트에는 <strong>권장</strong>으로만 배선돼 (필수 절차 추가 없음) 기존 로드 흐름은 그대로입니다 (<a href="../reference/tools/context-search/">context-search</a>)</li>
+<li><strong>도메인 지식이 낡았을 가능성을 로드 시점에 알려줍니다</strong> — "이 문서가 인용한 소스가 그 뒤에 바뀌었다" 는 사실은 지금까지 <code>/dp-skills:dp-doctor</code> 를 돌려야만 보였고, 에이전트는 stale 가능성이 있는 문서를 그대로 사실로 읽었습니다. 이제 컨텍스트를 로드할 때 <code>[신선도] 학습 이후 변경된 소스를 인용하는 문서 5건: boundaries/global--retail.md (7/24) …</code> 힌트가 함께 옵니다. <strong>이상 없는 문서는 표시하지 않아</strong> 확인이 필요한 것만 남고, 인용이 없어 판정할 수 없는 문서는 <code>판정 불가</code> 로 따로 알립니다 — 경고가 없다는 것이 최신이라는 뜻은 아니기 때문입니다. 판정은 <code>dp-doctor</code> 와 같은 계산·같은 범위 (scope·boundaries) 이며, 힌트는 신호일 뿐 자동 수정·자동 재학습을 트리거하지 않습니다 (<a href="../reference/tools/orchestrate-load/">orchestrate-load</a>)</li>
+</ul>
+<h2 id="v0351">v0.35.1<a class="headerlink" href="#v0351" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>run-cycle 정지 보고가 "다음 행동" 으로 끝납니다</strong> — critic blocking 등으로 큐가 멈추면 사유·산출물·조치를 보여주긴 했지만 출력 형태가 정해져 있지 않아, 스킬 내부 어휘 (재개 판정·합의표 status 갱신) 가 그대로 노출되고 조치 안내 뒤에 참고 문단이 붙어 사용자가 "다음 진행 사항은?" 을 되묻는 일이 있었습니다. 이제 정지 보고는 고정 블록으로 끝납니다 — 사용자가 <strong>판단할 내용</strong> ("결정 필요": critic blocking 이면 챌린지별 요약과 반영 시 영향) 과 <strong>답하는 방법</strong> (a. "진행" → 멈춘 단계 에이전트 재호출을 대행 · b. 다르게 → 결정 내용 전달 · c. 중단) 이 마지막에 오고, 마지막 줄은 답 하나를 요구하는 질문입니다. 정지 의미와 게이트는 그대로입니다 — "진행" 뒤 재개는 종전처럼 <code>/dp-skills:run-cycle</code> 재호출입니다 (<a href="../how-to/run-cycle/">자동 순회</a>)</li>
+</ul>
 <h2 id="v0350">v0.35.0<a class="headerlink" href="#v0350" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>작업과 무관하게 구현 내용을 물을 수 있습니다 — <code>/dp-skills:ask</code> 신설</strong> — 팀 컨텍스트 (MANIFEST·scope) 는 지금까지 project/issue 진입 시에만 로드돼, 평시 질문은 도메인 지식 없이 소스를 맨바닥부터 탐색했습니다. 이제 <code>/dp-skills:ask {질문}</code> 이 팀 컨텍스트 → 소스 순의 고정 경로로 탐색해 소스 <code>file:line</code> 인용으로 답합니다. 읽기 전용 — 활성 작업 (STATE.md) 을 바꾸지 않고 답변을 어디에도 저장하지 않으며, 컨텍스트↔소스 불일치를 발견하면 <code>/dp-skills:discover</code> 갱신을 제안합니다. 질문에 가정형 개선 의도가 있으면 개선안과 실행 경로 (issue / create-feature) 도 안내합니다 (<a href="../how-to/ask-implementation/">구현 질의</a>)</li>
@@ -4149,7 +4296,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.35.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.36.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

@@ -2852,6 +2852,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2924,6 +2930,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/context-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context-search.py
   
 
     
@@ -3056,6 +3090,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../tools/domain-pointer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    domain-pointer.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tools/handoff-quality/" class="md-nav__link">
         
   
@@ -3092,6 +3154,34 @@
     
   
     jira.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/migrate-context-frontmatter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    migrate-context-frontmatter.py
   
 
     
@@ -3991,31 +4081,56 @@ NOT_READY 재시도 소진 · plan-level 반려 · wrapper 비정상 종료 · w
   있고 의존성 데이터가 없어 알 길이 없다. 본 정지는 <strong>사용자만 해소할 수 있는
   입력 대기</strong>다 — "완료까지 계속" 류 자율 진행 지침의 예외에 해당하며, 정지
   사유를 모델이 자체 해소·우회해 재개하지 않는다.</li>
-<li>정지 사유·해당 산출물 (REPORT·합의표·critic-lint 출력) 과 <strong>게이트 이력 표</strong>
-  (§4 와 동일 형식 — 정지 시점까지 처리분) 를 출력한다.</li>
 <li>Slack approval 통지 1회: <code>--event approval --message "run-cycle 정지: #{N} {사유}"</code>
   — 개입 요청은 approval, 자동 진행은 progress 로 채널에서 구분된다.</li>
-<li>안내: <strong>사유별 조치</strong>를 제시한 뒤 → 수정 후
-  <strong><code>/dp-skills:run-cycle</code> 재실행(=재개)</strong>. 부분집합·<code>--gated</code> 로 돌렸다면 같은
-  인자를 다시 넘긴다.</li>
+<li>
+<p><strong>정지 보고 — 아래 순서로 출력하며 "다음 행동" 블록이 항상 마지막이다.</strong> 블록 뒤에
+  참고·부수 문단을 덧붙이지 않는다 — 사용자가 마지막에 읽는 것이 행동이어야 한다.</p>
+</li>
+<li>
+<p>정지 사유 · 해당 산출물 (REPORT·합의표·critic-lint 출력) · <strong>게이트 이력 표</strong>
+     (§4 와 동일 형식 — 정지 시점까지 처리분).</p>
+</li>
+<li>부수 정보 — 누적 domain_impact 가 있으면 "도메인 지식 환류 제안 (누적)" 표
+     (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle — 표만 여기
+     두고 기록 여부는 3 의 마지막 질문에 한 줄로 덧붙여 <strong>한 번에</strong> 묻는다) · wrapper 가
+     보고한 드리프트 후보 등 참고 사항.</li>
+<li>
+<p><strong>다음 행동 블록</strong> — 고정 문형. 내용은
+     <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/run-cycle/references/stop-remediation.md"><code>references/stop-remediation.md</code></a> 의 해당 사유 행
+     ("결정 필요"·"대행 호출" 두 열) 에서 가져온다 — <strong>정지가 실제로 발생한 시점에</strong>
+     Read 한다 (정지 없이 완주하는 호출에서는 읽지 않는다).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>⏹ run-cycle 정지 — #{N} {slug} · {사유}
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>결정 필요:
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  {조치표 &quot;결정 필요&quot; 열 — 항목별 1줄. 사용자가 판단할 내용이지 절차 목록이 아니다}
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>다음 행동 (하나 선택):
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>  a) &quot;진행&quot; → 제가 {조치표 &quot;대행 호출&quot; 열} 실행 → 완료 후 `/dp-skills:run-cycle {동일 인자}` 재실행이 재개
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>  b) 다르게 → 결정 내용을 말씀 주시면 반영 (후속 호출에도 남길 결정은 `/dp-skills:focus` 기록)
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  c) 중단
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>어느 쪽으로 할까요?
+</span></code></pre></div>
+<ul>
+<li><strong>사용자 대면 어휘 제한</strong> — 본 스킬 절 번호 (<code>§2.1</code>)·에이전트 절차 번호 (<code>절차 10</code>)·
+   내부 상태 어휘 (<code>합의표 status 갱신</code>·<code>재개 판정</code>·<code>게이트 스텝</code>) 를 쓰지 않는다.
+   산출물 경로·<code>@ag-*</code> 호출명·사용자에게 이미 보인 도구 출력의 도구명은 허용.</li>
+<li>마지막 줄은 답 하나를 요구하는 질문이다 — "원하시면 말씀해 주세요" 류 개방형
+   문장으로 끝내지 않는다.</li>
+<li>"진행" 은 a) 의 <strong>확인 1회</strong>다 — 대행 호출을 실행하고 결과를 보고한 뒤 멈춘다.
+   재개는 사용자의 <code>/dp-skills:run-cycle</code> 재호출이다 (자동 재진입 아님 — description
+   의 자발 발동 금지 유지). 부분집합·<code>--gated</code> 인자는 블록에 그대로 적어 재실행 시
+   복원되게 한다.</li>
 </ul>
-<p>조치표는 <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/run-cycle/references/stop-remediation.md"><code>references/stop-remediation.md</code></a> 에 있다 —
-  <strong>정지가 실제로 발생한 시점에</strong> Read 해서 해당 사유의 행을 제시한다 (정지 없이
-  완주하는 호출에서는 읽지 않는다).</p>
+</li>
+</ul>
 <p><strong>금지</strong> — <code>/dp-skills:fix-review</code> 는 본 정지의 처방이 <strong>아니다</strong> (CODE REVIEW
   REPORT 전용). <strong>OQ 게이트 정지는 <code>/dp-skills:focus</code> 로 안 풀린다</strong> — <code>plan-validate</code>
   의 <code>oq</code> 검증은 feature 체크박스·plan 마커만 본다.</p>
-<ul>
-<li>누적된 domain_impact 항목이 있으면 정지 보고에 "도메인 지식 환류 제안
-  (누적)" 표를 함께 출력한다 — 처리 여부는 사용자 결정
-  (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/knowledge-sync.md">knowledge-sync.md</a> § run-cycle).</li>
-</ul>
 <h2 id="4">4. 큐 완료<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>모든 feature READY → 완료 요약 + <strong>게이트 이력 표</strong> (사후 감사 뷰) 출력:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| ------- | -------------------------------- | ----- | ------- |
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| #3 slug | 0 / 2 / 1                        | 0     | READY   |
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| #4 slug | 0 / 0 / 0                        | 1     | READY   |
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>| feature | critic (blocking/suggestion/nit) | retry | verdict |
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>| ------- | -------------------------------- | ----- | ------- |
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>| #3 slug | 0 / 2 / 1                        | 0     | READY   |
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>| #4 slug | 0 / 0 / 0                        | 1     | READY   |
 </span></code></pre></div>
 <p>누적된 domain_impact 항목이 있으면 "도메인 지식 환류 제안 (누적)" 표를
 출력하고 기록 여부를 질의한다. 승인 시
@@ -4101,7 +4216,7 @@ NOT_READY 재시도 소진 · plan-level 반려 · wrapper 비정상 종료 · w
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.35.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.36.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

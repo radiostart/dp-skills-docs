@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/critic-lint/">
+        <link rel="canonical" href="https://dealicious-inc.github.io/deali-skills-plugin/reference/tools/domain-pointer/">
       
       
-        <link rel="prev" href="../context-search/">
+        <link rel="prev" href="../doctor/">
       
       
-        <link rel="next" href="../cross-ref/">
+        <link rel="next" href="../handoff-quality/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>critic-lint.py - dp-skills</title>
+        <title>domain-pointer.py - dp-skills</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#critic-lintpy" class="md-skip">
+        <a href="#domain-pointerpy" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              critic-lint.py
+              domain-pointer.py
             
           </span>
         </div>
@@ -2801,19 +2801,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../critic-lint/" class="md-nav__link">
         
   
   
@@ -2829,7 +2820,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -2923,10 +2913,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../domain-pointer/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2942,6 +2941,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -3614,30 +3614,33 @@
 
 
 
-<h1 id="critic-lintpy"><code>critic-lint.py</code><a class="headerlink" href="#critic-lintpy" title="Permanent link">&para;</a></h1>
+<h1 id="domain-pointerpy"><code>domain-pointer.py</code><a class="headerlink" href="#domain-pointerpy" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>dp-skills critic-lint — ag-planner-critic 합의표 무결성 검증.</p>
-<p>HOTL (0.26.0) 에서 run-cycle 의 plan 자동 진행 판정자는 critic 합의표다.
-본 도구는 run-cycle 이 표를 판독하기 <strong>전에</strong> 실행되어, 본문 챌린지 ↔ 합의 표의
-결정론 대조로 "행이 없으면 게이트가 거짓 통과한다" (ag-planner-critic.md 합의표
-규약이 명문화한 리스크) 를 봉쇄한다.</p>
-<p>검증 항목:
-- 본문 <code>### C{n}</code> 챌린지 블록의 개수·번호 집합 == <code>## 합의</code> 표 행의 개수·번호 집합
-- 챌린지 블록 severity ↔ 표 행 severity 일치
-- severity enum: blocking | suggestion | nit
-- status enum: open | accepted | rejected | deferred
-- 챌린지 0건: "검출된 결함 없음" 문구가 있으면 합의 표 생략 허용 (critic 규약).
-  문구도 표도 없으면 위반 (fail-closed — 판독 불가 산출물로 자동 진행 금지)</p>
-<p>Usage:
-    python3 tools/critic-lint.py path/to/NN-{slug}.plan.critic.md
-    cat critic.md | python3 tools/critic-lint.py
-    python3 tools/critic-lint.py path --json</p>
+<p>dp-skills domain-pointer — 소스 파일이 속한 도메인의 지식 포인터를 만든다.</p>
+<p>수정하려는 파일이 어느 도메인인지, 그 도메인의 규칙·경계 문서가 어디 있는지를
+<strong>포인터로만</strong> 알린다. 본문은 복사하지 않는다 — 읽을지는 에이전트가 정한다.</p>
+<div class="language-text highlight"><pre><span></span><code>python3 tools/domain-pointer.py --file app/services/order/refund.rb
+</code></pre></div>
+<p>매칭이 없으면 아무것도 출력하지 않고 종료한다 (침묵).</p>
+<p><strong>자동 배선은 하지 않았다 (0.36.0 판정).</strong> 원안은 PostToolUse 훅으로 소스 수정 시마다
+포인터를 주입하는 것이었으나, 이는 모든 세션에서 상시 실행되는 변경이라 기존
+<code>session-context.sh</code> (SessionStart 포괄 포인터)·<code>coding-rule-guard.sh</code> (코딩 규칙 안내) 와
+3중 안내가 될 수 있다. 이득 (구현 단계 규칙 누락 방지) 이 아직 실관측되지 않았으므로
+도구만 두고 발동은 호출자에게 맡긴다 — 판정 축 <em>상시 발동 퇴화</em> · <em>실관측</em>.
+승격 조건과 배선 방법: <code>docs/plans/PLAN-context-retrieval.md</code> §7.</p>
+<p>도메인 판정 — 강한 신호부터:
+    1. <strong>인용 파일 정확 매칭</strong> — 그 지식 문서가 이 파일을 직접 인용했다. 어떤 glob 보다
+       우선한다. frontmatter 도입 전 워크스페이스도 이 경로로 동작한다.
+    2. <code>sources</code> frontmatter glob (discover 기입 · migrate-context-frontmatter 로 소급) —
+       더 깊은 (구체적인) 패턴이 우선한다 (<code>app/services/wms/**</code> &gt; <code>app/**</code>).</p>
+<p>디렉터리 단위로 매칭을 넓히지 않는다 — 실측상 7개 도메인이 모두 <code>app/models/**</code> 를
+인용해, 소매 모델 파일이 무관한 도메인으로 판정됐다. 최대 2 도메인까지 보이고
+나머지는 건수만 알린다.</p>
 <p>Exit:
-    0 — 위반 없음 (PASS)
-    1 — 위반 있음 (FAIL)
-    2 — 입력 오류</p>
+    0 — 성공 (매칭 없음 포함)
+    1 — 워크스페이스·팀을 찾을 수 없음 (훅은 이 경우 침묵한다)</p>
 </blockquote>
-<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/critic-lint.py"><code>tools/critic-lint.py</code></a></p>
+<p>소스: <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/tools/domain-pointer.py"><code>tools/domain-pointer.py</code></a></p>
 
 
 
