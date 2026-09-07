@@ -3824,9 +3824,17 @@
 <p>아래 Bash 명령을 실행해 결과를 사용자에게 그대로 출력한다:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace
 </span></code></pre></div>
-<p>인자로 프로젝트명이 전달되면 <code>--project</code> 플래그로 전달:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--project<span class="w"> </span><span class="o">{</span>PROJECT<span class="o">}</span>
+<p>인자 해석 — <strong><code>-</code> 로 시작하면 플래그, 아니면 프로젝트명</strong>이다. 둘 다 올 수 있다:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 프로젝트명</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--project<span class="w"> </span><span class="o">{</span>PROJECT<span class="o">}</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 플래그 (--fix · --diagnose · --schema · --oq-stats …)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--fix
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 함께</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>python3<span class="w"> </span><span class="si">${</span><span class="nv">CLAUDE_PLUGIN_ROOT</span><span class="si">}</span>/tools/doctor.py<span class="w"> </span>workspace<span class="w"> </span>--project<span class="w"> </span><span class="o">{</span>PROJECT<span class="o">}</span><span class="w"> </span>--diagnose
 </span></code></pre></div>
+<p>플래그를 <code>--project</code> 값으로 넘기지 않는다 — <code>/dp-skills:dp-doctor --fix</code> 가
+<code>--project --fix</code> 로 해석되면 그 실행은 조용히 엉뚱한 프로젝트를 찾는다. 리포트가
+자동 수정 처방으로 안내하는 형태가 바로 이 호출이므로, 안내대로 쳤을 때 동작해야 한다.</p>
 <p>스크립트가 정합성을 검사하고 ANSI 컬러 포함 결과를 stdout 으로 출력한다. exit code:</p>
 <ul>
 <li><code>0</code> — ERROR 없음 (PASS / WARN 만)</li>
@@ -3930,7 +3938,7 @@
 <ul>
 <li>스크립트는 순수 파이썬 stdlib 만 사용 (외부 의존 없음)</li>
 <li>기본 실행 검사는 <strong>비파괴</strong> — 읽기만 함, 파일 수정 안 함 (0.23.2 부터 <code>.gitignore</code> secret 패턴 주입도 기본 실행에서는 WARN 만 — 종전엔 자동 append 로 이 계약을 위반했다)</li>
-<li>실패 시 fix 제안은 출력하되 자동 적용 안 함. auto-fixable 표시가 붙은 항목만 사용자가 <strong><code>doctor --fix</code> 를 명시 실행</strong>했을 때 수정된다.</li>
+<li>실패 시 fix 제안은 출력하되 자동 적용 안 함. auto-fixable 표시가 붙은 항목만 사용자가 <strong><code>/dp-skills:dp-doctor --fix</code> 를 명시 실행</strong>했을 때 수정된다.</li>
 </ul>
 
 
@@ -3987,7 +3995,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.37.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.37.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
