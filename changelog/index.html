@@ -3591,6 +3591,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0382" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0381" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0372" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3900,6 +3933,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0382" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0381" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0380" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.38.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0372" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4202,6 +4268,23 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0382">v0.38.2<a class="headerlink" href="#v0382" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>domain-pointer</code> 가 파일의 도메인을 훨씬 정확히 짚습니다</strong> — 어떤 파일이 어느 도메인인지 알려주는 도구가 <strong>경계 문서의 인용을 소속의 증거로 오해</strong>하고 있었습니다. 경계 계약 <code>A--B.md</code> 는 상호작용을 기술하느라 양쪽 도메인, 때로는 어느 쪽도 아닌 파일까지 인용합니다. 실제로 도매 모델 파일이 <code>global--retail</code> 경계에 인용됐다는 이유로 <code>global</code> 로 판정됐고, 정답인 <code>wholesale</code> 은 Models 표에 <strong>클래스명만</strong> 실려 있어 후보에도 오르지 못했습니다. 이제 신호를 세 층으로 나눕니다 — 도메인 문서의 경로 인용이 가장 강하고, 그다음이 클래스명 매칭 (Rails 명명 규약으로 파일명에서 클래스명을 되돌립니다), 경계 문서의 인용은 한 단계 낮춥니다. 실측으로 <strong>1위 정답률이 80% (68/85) 에서 96% (82/85) 로</strong> 올랐습니다</li>
+<li><strong>근거 없는 2위를 더는 내지 않습니다</strong> — 여러 도메인이 똑같은 강도로 걸리면 그중 앞 두 개만 보였는데, 그 순서는 판정이 아니라 <strong>알파벳순</strong>이었습니다 (실측: 글롭 동점 6개 중 <code>dms</code> 가 2위로 실림). 이제 표시 칸에 동점 그룹이 걸치면 그 그룹은 통째로 빼고, 1위부터 전부 동점이면 이름 대신 <strong>"N개 도메인이 함께 다룹니다 — 판정하지 않습니다"</strong> 와 MANIFEST 확인 안내를 냅니다. 경로 인용 없이 추정한 경우에는 그렇다고 표시합니다</li>
+</ul>
+<h2 id="v0381">v0.38.1<a class="headerlink" href="#v0381" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>코딩 규칙 안내가 드디어 메인 대화에 도착합니다</strong> — 소스 파일 수정 시 규약 문서를 알려주는 훅이 "세션당 1 회" 로 발화하는데, 그 1 회를 <strong>서브에이전트가 먼저 써 버리고 있었습니다</strong>. 훅은 서브에이전트 안에서도 실행되고 그때 세션 식별자가 부모와 같아서, <code>@ag-generator</code> 의 첫 소스 편집이 발화 기록을 남기면 정작 대상인 메인 대화는 조용해집니다. 실측으로 <strong>32 개 세션 중 메인이 안내를 받은 것은 1 개</strong>였습니다. 이제 서브에이전트 안에서 발동한 훅은 침묵하고 (그쪽은 <code>orchestrate-load</code> 이 규약 문서를 이미 넘깁니다) 발화 기록도 남기지 않습니다 — 사이클을 돌린 뒤 메인 대화에서 코드를 손볼 때 안내가 그대로 뜹니다</li>
+</ul>
+<h2 id="v0380">v0.38.0<a class="headerlink" href="#v0380" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>검색 결과에서 고른 섹션의 본문을 한 번에 가져옵니다 — <code>context-search --inject</code></strong> — 종전에는 검색 뒤 <code>read_hint</code> 대로 섹션마다 Read 를 따로 호출했습니다. 이제 <code>select:파일#헤딩,파일#헤딩 --inject</code> 로 고른 섹션들의 본문이 결과에 함께 실립니다 (JSON 은 <code>text</code> 키, md 는 <code>&lt;context-snippet&gt;</code> 블록). <strong>키워드 질의에 바로 <code>--inject</code> 를 붙이면 거부합니다 (exit 2)</strong> — 주입 전에 "결과를 보고 고르는" 단계가 있어야 하며, 이 원칙을 문구가 아니라 도구가 지킵니다. <code>+필수어</code> 로 후보를 좁힌 질의는 허용합니다. 본문은 <code>--max-bytes</code> 예산 (기본 12,000B · 상한 24,000B) 안에서 <strong>섹션 전체 단위</strong>로 실립니다 — 중간에서 자르지 않습니다 (표 하나가 섹션인 경계 문서가 잘리면 뜻이 바뀝니다). 키워드 검색 결과는 예산을 넘는 순간 그 뒤 섹션을 전부 <code>read_hint</code> 만 남기고 (하위 후보로 건너뛰어 채우면 상위가 빠진 사실을 놓치게 됩니다), <code>select:</code> 로 이름을 지정한 결과는 들어가는 것은 싣고 넘치는 것만 생략합니다. 상한 24,000B 를 넘는 섹션 (실코퍼스 최대 24,027B) 은 어떤 예산으로도 실을 수 없으므로 <code>read_hint</code> 로 안내합니다. <code>--inject</code> 를 쓰지 않으면 출력은 종전과 같습니다 (아래 띄어쓰기 폴백이 점수를 더한 경우 제외) (<a href="../reference/tools/context-search/">context-search</a>)</li>
+<li><strong>붙여 쓴 한글 질의가 띄어 쓴 문서를 찾습니다</strong> — <code>출고중단</code> 으로 검색하면 <code>## 출고 중단</code> 을 못 찾았습니다. 실측 (nimda 196 섹션) 으로 헤딩의 띄어 쓴 두 단어를 붙여서 질의한 82 건 중 <strong>73 건이 0 건</strong>이었고, 문서 자체도 <code>출고 중단</code>·<code>출고중단</code> 을 섞어 쓰고 있었습니다. 이제 다른 신호가 빗나간 <strong>순수 한글 4 자 이상</strong> 토큰은 띄어 쓴 형태로 한 번 더 찾습니다 — 헤딩에 있으면 부분 일치 (5), 본문에만 있으면 본문 점수 (2, 감쇠). 좌측 단어 경계는 본문 일치와 같은 규칙이라 <code>선결제 완료</code> 가 <code>결제완료</code> 로 잡히지는 않습니다. 같은 82 건이 전부 top-3 로 복구됩니다. <strong>4 자 이상 한글 토큰이 없는 질의는 점수와 순서가 그대로</strong>이고, 있는 질의는 그 토큰이 다른 신호를 전부 빗나간 섹션에서만 점수가 늘어날 수 있습니다 (줄지 않습니다). 폴백으로 잡힌 토큰은 결과의 <code>matched_via</code> 에 표시됩니다. 원 요청은 반대 방향 (띄어 쓴 질의 → 붙여 쓴 본문) 의 결합어 가산이었는데, 그 방향은 실코퍼스에 사례가 0 건이고 붙여 쓴 본문이 띄어 쓴 본문을 이기는 역전을 만들어 넣지 않았습니다</li>
+<li><strong><code>+필수어</code> 가 순위에도 반영됩니다</strong> — 종전에는 필수어가 후보를 걸러내는 필터일 뿐 점수에는 들어가지 않아, <code>+출고중단 처리</code> 의 1위가 <code>처리</code> 한 단어만 맞은 무관 섹션이 되는 일이 있었습니다 (독립 검토 실측). 이제 필수어도 점수 토큰이며 스니펫도 필수어 주변에 잡힙니다. <code>+필수어</code> 를 쓴 기존 질의의 순서가 바뀔 수 있습니다 (실코퍼스 8 질의 스냅샷 중 <code>+접수 선발송</code> 1 건)</li>
+<li><strong><code>select:</code> 가 공백 있는 헤딩과 여러 섹션을 받습니다</strong> — <code>select:scope/retail.md#선발송 접수</code> 가 종전에는 첫 단어 <code>선발송</code> 까지만 헤딩으로 읽었습니다 (실코퍼스 헤딩 196 개 중 128 개가 공백 포함). 이제 <code>select:</code> 뒤의 단어는 <code>+필수어</code> 를 제외하고 모두 헤딩으로 이어 읽고, 쉼표로 여러 대상을 한 번에 지정할 수 있습니다 (헤딩 안의 쉼표는 경로처럼 보이지 않는 조각을 앞 헤딩에 이어 붙여 처리합니다). 없는 대상은 결과를 비우지 않고 note 로 알립니다</li>
+<li><strong>검토 끝에 넣지 않은 것</strong> — frontmatter <code>type</code>·<code>sources</code> 를 점수에 반영하는 안은 분류축을 점수로 섞지 않는다는 원칙과 충돌하고 실코퍼스의 <code>sources</code> 가 전부 디렉터리 글롭이라 변별력이 없어 기각했습니다. 파일 수정 시각 (mtime) 가산은 0.37.0 에서 신선도 기준으로 폐기한 것과 같은 이유 (clone·일괄 마이그레이션이 시각을 균일화) 로, 그리고 같은 코퍼스가 날짜·체크아웃에 따라 다른 순서를 내게 되어 기각했습니다. 별도 <code>--manifest</code> 형식은 넣지 않았습니다 — md 표만 남기면 검색당 1.5~2KB 를 더 줄일 여지는 있지만, 실사용 호출이 1 회인 지금 세 번째 출력 형식을 유지할 근거가 없습니다. 근거 수치와 독립 에이전트의 2 차 적대 검토 결과는 <code>docs/plans/PLAN-context-search-inject.md</code></li>
+</ul>
 <h2 id="v0372">v0.37.2<a class="headerlink" href="#v0372" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>자동 수정 안내가 실제로 칠 수 있는 명령이 됐습니다</strong> — 리포트가 <code>doctor --fix</code> 를 안내했는데 그런 명령은 없습니다. 0.29.0 에서 내장 <code>/doctor</code> 와 충돌해 스킬을 <code>dp-doctor</code> 로 rename 했으므로, 그대로 치면 Claude Code 의 내장 진단이 뜹니다. 이제 <code>/dp-skills:dp-doctor --fix</code> 로 안내하고, <code>--fix</code> 완료 후 재검증 안내도 슬래시 명령과 셸 절대경로를 함께 보여줍니다</li>
@@ -4384,7 +4467,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.37.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.38.2"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
