@@ -2775,6 +2775,8 @@
       
         
       
+        
+      
     
     
     
@@ -2830,6 +2832,34 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/bash-write-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    bash-write-audit.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3871,9 +3901,9 @@
 </span></code></pre></div>
 <ul>
 <li><strong>합의 표는 critic 이 각 챌린지마다 1 행씩 채워 emit 한다</strong> — <code>C#</code>·<code>severity</code>(챌린지 본문과 동일)·<code>status</code>=<code>open</code>·<code>메모</code>=빈칸. 빈 표(헤더만)로 두지 않는다 — <code>/dp-skills:run-cycle</code> 의 critic 게이트가 이 표에서 <code>severity</code>·<code>status</code> 를 직접 읽어 blocking 미합의를 판정하므로, 행이 없으면 게이트가 거짓 통과한다. (run-cycle 은 판독 전 <code>tools/critic-lint.py</code> 로 본문 <code>### C#</code> ↔ 표 행의 일치를 결정론 검증한다 — 행 누락·severity 불일치 시 자동 진행 대신 정지.)</li>
-<li><code>status</code> 값: <code>open</code>(미합의 — critic 초기값) · <code>accepted</code>(반영) · <code>rejected</code>(기각) · <code>deferred</code>(이월). <code>open</code> → 그 외 전이는 <strong>planner 만</strong> 수행한다 (재호출, ag-planner 절차 10). <strong>재호출 시 critic 은 현재 plan 기준으로 챌린지를 새로 도출해 전 행을 <code>status=open</code> 으로 emit 한다</strong> — 합의 표는 그 회차의 disposition 기록이지 회차 누적기가 아니다. 이전 표의 status 를 <code>C#</code> 번호로 옮겨 적지 않는다 (<code>C#</code> 는 회차별 위치 순번이라 같은 번호가 다른 챌린지를 가리킬 수 있어 오귀속됨). 해소된 챌린지는 재도출에서 사라지고 미해결은 다시 <code>open</code> 으로 잡힌다. 회차 간 이력은 git 으로 추적. run-cycle 등 오케스트레이터는 표를 읽기만 한다.</li>
+<li><code>status</code> 값: <code>open</code>(미합의 — critic 초기값) · <code>accepted</code>(반영) · <code>rejected</code>(기각) · <code>deferred</code>(이월). <code>open</code> → 그 외 전이는 <strong>planner 만</strong> 수행한다 (재호출, ag-planner 절차 10). <strong>재호출 시 critic 은 현재 plan 기준으로 챌린지를 새로 도출해 전 행을 <code>status=open</code> 으로 emit 한다</strong> — 합의 표는 그 회차의 disposition 기록이지 회차 누적기가 아니다. 이전 표의 status 를 <code>C#</code> 번호로 옮겨 적지 않는다 (<code>C#</code> 는 회차별 위치 순번이라 같은 번호가 다른 챌린지를 가리킬 수 있어 오귀속됨). 해소된 챌린지는 재도출에서 사라지고 미해결은 다시 <code>open</code> 으로 잡힌다. 이전 회차는 남지 않는다 (<code>projects/</code> 산출물은 git 추적 금지 — state-schema.md § 금지 사항). run-cycle 등 오케스트레이터는 표를 읽기만 한다.</li>
 <li>챌린지가 0 개면 <code>## 챌린지</code> 아래에 "검출된 결함 없음. plan 통과." 한 줄만 적고 <code>## 합의</code> 표는 생략.</li>
-<li>기존 파일이 있으면 덮어쓴다 — 합의 표·본문 챌린지 모두 <strong>현재 회차의 최신 상태만</strong> 보존 (회차 누적은 git).</li>
+<li>기존 파일이 있으면 <strong>Write 로</strong> 덮어쓴다 — 합의 표·본문 챌린지 모두 <strong>현재 회차의 최신 상태만</strong> 보존. protect-managed 훅은 사이클 산출물의 Write 덮어쓰기를 허용하고 heredoc·<code>cp</code> 같은 Bash 덮어쓰기는 막는다.</li>
 <li>
 <p><strong>[이력 서술 금지]</strong> 회차·버전을 비교하거나 이전 상태를 기술하는 표현 일체를 챌린지 본문에 남기지 않는다 — 예: <code>1회차 대비 정정</code>·<code>N회차 대비 보강</code>·<code>[유지 · 메커니즘 정정]</code> 류. 재검증 결과는 severity·챌린지·제안 필드의 <em>현재 상태 갱신</em> 으로만 반영한다. 재검증 disposition 은 현 회차 합의 표 메모에 planner 가 기록한다 (ag-planner 절차 10) — critic 이 회차 비교를 직접 쓰지 않는다. (근거: 동일 취지 규칙이 있었음에도 이력 서술 누적으로 critic 1개가 96k자까지 비대해진 실사례.)</p>
 </li>
@@ -3966,7 +3996,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.38.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.39.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

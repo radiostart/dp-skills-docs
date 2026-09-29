@@ -2908,6 +2908,8 @@
       
         
       
+        
+      
     
     
     
@@ -2963,6 +2965,34 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/bash-write-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    bash-write-audit.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -4122,7 +4152,7 @@
 <ul>
 <li><strong>절대 금지</strong>: 프로젝트 폴더 내 기존 파일 (managed + 사용자 메모·스크래치 등 모든 파일) 의 덮어쓰기·삭제. 동일 프로젝트명 재호출은 example 재복사·폴더 reset·재초기화 모두 금지.</li>
 <li><strong>허용</strong>: 누락된 <code>.agent-state.yml</code> 신규 생성, <code>STATE.md</code> 의 활성 프로젝트 행 갱신 (3 단계), 기존 파일에 대한 Edit (splice).</li>
-<li>PreToolUse 훅 <code>protect-managed.sh</code> 가 결정론적으로 강제 (Write + destructive Bash 차단). 의도적 reset 은 <code>DP_PROTECT_BYPASS=1</code> 환경변수로 우회 (백업 권장).</li>
+<li>PreToolUse 훅 <code>protect-managed.sh</code> 가 결정론적으로 강제 (Write + destructive Bash 차단 — 사이클 산출물 <code>features/NN-*.{plan,plan.critic,eval}.md</code> 의 Write 덮어쓰기만 예외). 의도적 reset 은 사용자 전용이다: 사용자가 Claude Code 를 <code>DP_PROTECT_BYPASS=1</code> 환경으로 기동한 세션에서만 해제되고 (명령 앞 접두는 훅에 닿지 않음), 에이전트는 스스로 해제하지 않는다 (백업 권장).</li>
 <li><code>.agent-state.yml</code> 이 없거나 <code>schema</code> 가 현행(<code>v1.3</code>, <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/context/lifecycle/state-schema.md">state-schema.md</a> SSOT) 미만이면 <strong>사용자에게 <code>python3 ${CLAUDE_PLUGIN_ROOT}/tools/migrate-state.py workspace --apply</code> 실행을 안내</strong> (구스키마 → v1.3 업그레이드).</li>
 <li><strong>drift 체크</strong> (state 가 v1.1+ 이고 <code>analyzed: true</code>, <code>analyzed_at</code> 존재 시):</li>
 <li><code>docs_last_fetched_at &gt; analyzed_at</code> → "기획서가 analyze 이후 변경됐습니다. 재분석할까요? (y/n)" 질의. <code>y</code> 면 6·7·8단계 수행, <code>n</code> 이면 스킵.</li>
@@ -4251,7 +4281,7 @@ project 행을 <code>| project | {PROJECT} | 진행중 |</code> 로 둔다. stat
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.38.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.39.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

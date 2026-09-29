@@ -2742,6 +2742,8 @@
       
         
       
+        
+      
     
     
     
@@ -2797,6 +2799,34 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/bash-write-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    bash-write-audit.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -3858,7 +3888,7 @@ PM이 작성한 표 중심 기획서를 AI가 읽기 쉬운 형태로 변환한�
 <p>features/ 분석 결과로 <code>agents/planner.md</code>, <code>agents/generator.md</code>, <code>agents/evaluator.md</code> 를 갱신하고 <code>.agent-state.yml</code> 의 <code>analyzed</code> 를 <code>true</code> 로 전환한다 (doctor 정합성·drift 검사의 판정 필드 — 래퍼 로드 분기는 아니다).</p>
 <p>상세 절차 (6-1 ~ 6-5): <a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/analyze/references/agents-update.md"><code>references/agents-update.md</code></a>.</p>
 <blockquote>
-<p><strong>편집물 보존 가드</strong> — 6-1/6-2/6-3 은 <code>[analyze-managed]</code> 섹션을 <strong>Edit</strong> 으로 splice. 기존 파일 Write/Bash destructive 는 PreToolUse 훅 <code>protect-managed.sh</code> 가 차단. <code>--regen-agents</code> 처럼 의도적 재작성은 백업 후 <code>DP_PROTECT_BYPASS=1</code> 로 우회.</p>
+<p><strong>편집물 보존 가드</strong> — 6-1/6-2/6-3 은 <code>[analyze-managed]</code> 섹션을 <strong>Edit</strong> 으로 splice. 기존 파일 Write/Bash destructive 는 PreToolUse 훅 <code>protect-managed.sh</code> 가 차단. <code>--regen-agents</code> 도 Edit splice 로 수행하고, 전체 재작성이 불가피하면 사용자에게 요청한다 — 훅 해제는 사용자 전용 (<a href="https://github.com/dealicious-inc/deali-skills-plugin/blob/main/dp-skills/skills/analyze/references/regen-mode.md">regen-mode</a>).</p>
 </blockquote>
 <h3 id="7">7. 분석 품질 자가 검증<a class="headerlink" href="#7" title="Permanent link">&para;</a></h3>
 <p>6-5 (doctor) 가 끝나면 분석 내용 자체의 품질을 4 항목 (커버리지·구조·정합성·추측 혐의) 으로 자가 점검한다.</p>
@@ -3950,7 +3980,7 @@ PM이 작성한 표 중심 기획서를 AI가 읽기 쉬운 형태로 변환한�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.38.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.39.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
