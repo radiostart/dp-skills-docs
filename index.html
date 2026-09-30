@@ -3777,19 +3777,20 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.40.0 — 구현은 Sonnet 5.5 가 맡습니다</p>
-<p><code>@ag-generator</code> 가 Sonnet 5.5 (effort high) 로 바뀌었습니다. 계획·검증
-에이전트는 opus 그대로입니다. 같은 plan 이면 구현 결과가 Opus 와 같고
-generator 비용은 약 59% 줄었습니다. <strong>Claude Code CLI v2.1.284 이상</strong>이
-필요합니다 (<code>claude update</code>). 그 미만에서는 Sonnet 5 로 돕니다
+<p class="admonition-title">v0.43.0 — 에이전트가 필요한 만큼만 읽습니다</p>
+<p>프로젝트가 커질수록 planner·critic 이 호출마다 읽는 <code>agents/planner.md</code> 가
+feature 마다 쌓여 수만 자가 됐습니다. 이제 대상 feature 와 그것이 참조하는
+feature 의 소절만 읽을 수 있습니다 — <strong>파일럿이라 기본 꺼짐</strong>이고, 켜려면
+<code>project.md</code> 제한사항에 <code>- load_slicing: on</code> 을 넣습니다. 해소된 전달사항 <code>[x]</code>
+는 <code>/dp-skills:dp-doctor --fix</code> 가 <code>archive/</code> 로 옮깁니다
 (<a href="changelog/">변경 이력</a>).</p>
-<p>이미 쌓인 컨텍스트에는 자동 적용되지 않습니다 — frontmatter 는
-<code>migrate-context-frontmatter.py</code> (기본 dry-run), 경계 계약 세분화는
-<code>/dp-skills:discover --boundary</code> 재실행이 필요합니다.</p>
-<p>바로 앞 릴리스에서는 <code>/dp-skills:ask</code> 가 신설돼 <strong>진행중인 작업과 무관하게
-구현 내용을 물을 수 있게</strong> 됐고 (읽기 전용), run-cycle 정지 보고가 판단할
-내용과 선택지로 끝나도록 정리됐습니다
-(<a href="how-to/ask-implementation/">구현 질의</a> · <a href="how-to/run-cycle/">자동 순회</a>).</p>
+<p>같은 날 나온 0.40.1~0.42.0 에서 스킬·에이전트 지시문의 문서↔동작 드리프트
+14곳을 바로잡고, 호출마다 읽히는 공통 문서와 wrapper 에서 실행에 쓰이지 않는
+문장을 덜어냈습니다. evaluator 는 대상 feature 항목만 체크하고, 서브에이전트는
+Glob 도구 없이도 plan 후보를 조사합니다. 서브에이전트가 무엇을 얼마나 읽는지는
+<code>tools/context-load-audit.py</code> 로 잴 수 있습니다.</p>
+<p>바로 앞 릴리스 (0.40.0) 에서는 <code>@ag-generator</code> 가 Sonnet 5.5 (effort high) 로
+바뀌었습니다 — <strong>Claude Code CLI v2.1.284 이상</strong>이 필요합니다 (<code>claude update</code>).</p>
 <p>이전 릴리스는 <a href="changelog/">변경 이력</a> 에 있습니다.</p>
 </div>
 <hr />
