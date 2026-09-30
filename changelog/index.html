@@ -2671,6 +2671,8 @@
       
         
       
+        
+      
     
     
     
@@ -2768,6 +2770,34 @@
     
   
     confluence.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/tools/context-load-audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context-load-audit.py
   
 
     
@@ -3621,6 +3651,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0410" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.41.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0402" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.40.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0401" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3996,6 +4048,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0410" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.41.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v0402" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.40.2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0401" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4364,6 +4438,17 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0410">v0.41.0<a class="headerlink" href="#v0410" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>사이클 서브에이전트가 무엇을 얼마나 읽었는지 잴 수 있습니다 — <code>tools/context-load-audit.py</code></strong> — 세션 트랜스크립트에서 <code>@ag-*</code> 호출마다 도구로 읽은 양을 workspace 산출물·플러그인 파일·소스로 나눠 집계하고, <code>files_to_read</code> 로 지정된 파일을 실제로 전부 읽었는지 (전문·부분·미리보기·안 읽음) 를 봅니다. 절차 후반 단계 (evaluator 체크박스·project.md 목표·Slack·도메인 지식 환류 안내, critic 재호출 이력 누적) 의 수행률도 함께 냅니다. 쓰기는 도구가 아니라 대상 파일로 세서 <code>sed -i</code>·python 으로 고친 경우도 수행으로 잡고, 벤치 실행은 실사용과 따로 셉니다. <code>--since</code>·<code>--until</code> 로 변경 전후를 비교합니다. 출력은 숫자와 분류 라벨뿐이며 프롬프트·명령·경로 원문은 내지 않습니다. 실측 (08-01~09-30, 실사용) 으로 서브에이전트가 도구로 읽은 양의 약 85% 가 project.md·agents 트윈·plan 같은 workspace 산출물이었습니다</li>
+</ul>
+<h2 id="v0402">v0.40.2<a class="headerlink" href="#v0402" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>@ag-planner-critic</code> 가 재호출에서 이전 회차를 덧붙이지 않습니다</strong> — critic 은 <code>.plan.critic.md</code> 를 현재 회차로 덮어쓰는 것이 규칙입니다. 그런데 메인 세션이 호출 프롬프트에 "2라운드 절을 추가하라 (기존 내용 삭제 금지)" 를 넣으면 그 지시를 따라 회차 절을 쌓았습니다 (실측 08-01~09-30: 재호출 5건 중 2건, 둘 다 이 지시가 있던 경우). 이제 critic 절차가 호출 프롬프트보다 우선하고, critic 은 저장 직후 <code>critic-lint</code> 로 스스로 검증합니다. planner 는 critic 재호출을 안내할 때 "보존·추가를 지시하지 말라" 를 함께 전달합니다</li>
+<li><strong><code>critic-lint</code> 가 회차 이력 절을 잡습니다</strong> — <code>## 2라운드 검증</code>·<code>(2회차)</code> 같은 헤딩이 있으면 FAIL <code>history_section</code> 입니다. 본문의 "재검증" 같은 낱말은 대상이 아닙니다. 기존 critic 산출물 232개에 돌리면 4건이 걸리고, 모두 실제로 회차 이력이 쌓인 파일입니다. <code>/dp-skills:run-cycle</code> 에서는 합의표 불일치와 같은 정지 사유로 처리됩니다</li>
+<li><strong>서브에이전트가 <code>files_to_read</code> 를 끝까지 전문으로 읽도록 안내합니다</strong> — 에이전트가 여러 파일을 한 번의 <code>cat</code> 으로 묶어 읽으면, 출력이 약 30KB 를 넘을 때 Claude Code 가 앞 2KB 미리보기만 보여 줍니다. 그 뒤 부분 읽기로 바꾸다 목록 뒷부분이 빠졌습니다. <code>@ag-generator</code> 가 플러그인 <code>coding.md</code> 를 전문으로 읽은 비율은 실사용 24/28, Sonnet 평가 실행 7/14 였습니다. planner·critic·generator·evaluator 4종이 이제 Read 도구로 파일마다 읽고, "부분 로드" 는 목록 밖 파일에만 씁니다</li>
+<li><strong><code>@ag-generator</code> 의 코딩 규약 3종을 먼저 읽습니다</strong> — <code>coding.md</code> (플러그인)·<code>conventions_doc</code>·<code>conventions_evals</code> 가 <code>files_to_read</code> 끝이 아니라 <code>agents/generator.md</code> 바로 뒤에 옵니다. Sonnet 이 목록 앞 4~6개만 읽고 멈추는 사례가 있었습니다</li>
+</ul>
 <h2 id="v0401">v0.40.1<a class="headerlink" href="#v0401" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>문서와 실제 동작이 어긋난 곳을 정정했습니다</strong> — 동작 변경은 없습니다. <code>/dp-skills:team-init</code> 설명은 rules·scope·enums 스켈레톤을 만든다고 적혀 있었지만 실제로는 STATE·MANIFEST·team.config 만 만듭니다 (카테고리 폴더는 도메인 파일을 추가할 때 생깁니다). 커밋 scope 규칙은 <code>MANIFEST.md</code> 에서 읽고 목록 밖은 경고한다고 적혀 있었지만, 실제 훅은 <code>team.config.md</code> → <code>_common/config.md</code> 순으로 읽고 목록 밖 scope 를 <strong>차단</strong>합니다. 그 밖에 feature 명세 필수 섹션, 팀 설정 위치, 인용 신선도 판정 기준 (<code>learned_rev</code>), TDD·characterize 사이클의 critic 단계 등 11곳을 현행대로 맞췄습니다</li>
@@ -4582,7 +4667,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.40.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.41.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
