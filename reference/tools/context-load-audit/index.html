@@ -3700,6 +3700,12 @@
       (<code>sed -i</code>·<code>perl -i</code>·리다이렉트·<code>tee</code>·<code>write_text</code>·<code>open(…,'w')</code>·<code>cp</code>/<code>mv</code>).
     - 호출 프롬프트가 해당 단계를 금지한 호출 (예: "project.md 편집 금지") 은 분모에서
       빼고 <code>excluded_by_prompt</code> 로 따로 센다.
+    - 슬라이스 (orchestrate-load <code>read_ranges</code>): 호출 안에서 읽은 줄 집합을 누적해 판정한다
+      (Read <code>offset</code>·<code>limit</code>, <code>sed -n 'a,bp'</code>, <code>head -n N</code>, 전문 Read·<code>cat</code> = 전체).
+      <code>followed</code> = 지정 범위 전부를 덮음, <code>escaped</code> = 전문, <code>partial</code> = 일부만, <code>none</code>.
+      <strong>결손</strong> (planner 한정) = 대상 plan 이 인용한 feature 중 슬라이스에서 빠진 소절
+      (<code>slices.dropped_ranges</code>) 을 끝내 읽지 않은 것. critic 은 plan 참조가 이미 R 에 들어가
+      구조적으로 0 이라 세지 않는다. 판정 정규식은 orchestrate-load <code>feature_refs</code> 재사용.
     - critic 이력 누적은 재호출 (같은 critic 파일에 앞선 쓰기가 있는 호출) 만 분모로 삼고,
       판정은 critic-lint <code>lint_history</code> (헤딩 기준) 로 한다. 본문을 복원할 수 없는 Bash
       쓰기는 <code>undecidable</code>.</p>
@@ -3771,7 +3777,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.42.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.43.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

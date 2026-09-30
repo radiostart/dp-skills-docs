@@ -3651,6 +3651,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0430" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.43.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0420" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4059,6 +4070,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0430" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.43.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0420" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4460,6 +4482,14 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0430">v0.43.0<a class="headerlink" href="#v0430" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>planner·critic 이 대상 feature 와 관련된 부분만 읽을 수 있습니다 (파일럿 — 기본 꺼짐)</strong> — 프로젝트가 커지면 <code>agents/planner.md</code> 의 <code>## 기능별 사전 확인 사항</code> 이 feature 마다 쌓여 수만 자가 되고, planner·critic 은 호출마다 그 전부를 읽었습니다 (실측: package-calculator 33.5k chars, feature 17개분). 이제 호출 프롬프트에 대상 <code>features/NN-*.md</code> 경로가 있으면 대상 feature 소절과, 그 소절·명세 (critic 은 plan 도) 가 참조하는 feature 소절만 읽습니다. 파일은 바꾸지 않고 읽는 범위만 좁히며, 다른 feature 가 필요하면 그 소절을 추가로 읽습니다. 줄어드는 양이 추가 읽기 비용보다 작으면 좁히지 않습니다. 켜려면 <code>project.md</code> 제한사항에 <code>- load_slicing: on</code> (또는 팀·전사 <code>## 언어·도구 기본값</code> 표의 <code>load_slicing</code> 키). package-calculator 사본 기준 planner 호출당 약 25~33k chars 가 줄었습니다</li>
+<li><strong>해소된 전달사항을 <code>dp-doctor --fix</code> 가 archive 로 옮깁니다</strong> — project.md <code>## 에이전트 간 전달사항</code> 의 <code>[x]</code> 는 어느 에이전트도 다시 쓰지 않는데 호출마다 읽혔습니다. <code>--fix</code> 가 최상위 <code>[x]</code> 항목 (하위 줄 포함) 을 <code>archive/transferred-{날짜}.md</code> 로 옮깁니다. <code>[ ]</code> 는 옮기지 않고, 진행 중인 feature 를 언급하는 <code>[x]</code> 는 남깁니다. 경고 조건에 섹션 크기 (8,000 chars 이상) 도 더했습니다 — <code>[ ]</code> 가 많으면 비율 조건을 비켜가던 문제입니다 (실측: package-calculator project.md 41.8k → 28.6k chars)</li>
+<li><strong>evaluator 가 대상 feature 항목만 체크합니다</strong> — <code>agents/evaluator.md</code> 체크리스트에서 대상 feature 항목 (<code>#NN</code>) 과 공통 항목만 토글하고, 다른 feature 항목은 건드리지 않습니다. 파일 전체를 한 번에 <code>[x]</code> 로 바꾸는 방식도 금지했습니다 — 보지 않은 다른 feature 항목이 검증 없이 체크된 사례가 있었습니다. analyze 는 체크리스트 항목 앞에 <code>#NN</code> 태그를 붙이고, <code>dp-doctor</code> 는 다른 형식 (<code>(#NN)</code>·<code>F{N}</code>·그룹 헤더) 을 INFO 로 알려 줍니다</li>
+<li><strong>"사용자만 결정할 수 있는 질의는 건너뛰지 않는다" 규칙이 에이전트 4종 모두에게 전달됩니다</strong> — 이 규칙은 <code>instincts.yaml</code> 에만 있었고 에이전트는 그 파일을 읽지 않았습니다. 이제 컨텍스트 로드 결과에 <code>[규칙]</code> 으로 들어갑니다</li>
+<li>planner 의 effort (<code>high</code>) 는 그대로 확정했습니다 (속도 실험 종료)</li>
+</ul>
 <h2 id="v0420">v0.42.0<a class="headerlink" href="#v0420" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>스킬 공통 사전 확인 문서가 절반 가까이 가벼워졌습니다</strong> — 거의 모든 스킬이 진입할 때 읽는 <code>preamble.md</code> 에서, 어느 스킬이 어느 절차를 쓰는지 정리한 적용표와 그 설계 근거를 유지보수용 색인 <code>preamble-table.md</code> 로 옮겼습니다 (7,449 → 4,300 chars). 실행 중인 스킬은 자기 SKILL.md 의 선언을 따르므로 표를 읽을 필요가 없었습니다. 대신 표와 각 SKILL.md 선언이 어긋나면 테스트가 막습니다 — 0.40.1 에서 고친 create-feature 불일치 같은 드리프트가 다시 생기지 않습니다</li>
@@ -4697,7 +4727,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.42.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.43.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
