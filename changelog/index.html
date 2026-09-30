@@ -3621,6 +3621,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0401" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.40.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0400" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3985,6 +3996,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0401" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.40.1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0400" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4342,6 +4364,12 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0401">v0.40.1<a class="headerlink" href="#v0401" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>문서와 실제 동작이 어긋난 곳을 정정했습니다</strong> — 동작 변경은 없습니다. <code>/dp-skills:team-init</code> 설명은 rules·scope·enums 스켈레톤을 만든다고 적혀 있었지만 실제로는 STATE·MANIFEST·team.config 만 만듭니다 (카테고리 폴더는 도메인 파일을 추가할 때 생깁니다). 커밋 scope 규칙은 <code>MANIFEST.md</code> 에서 읽고 목록 밖은 경고한다고 적혀 있었지만, 실제 훅은 <code>team.config.md</code> → <code>_common/config.md</code> 순으로 읽고 목록 밖 scope 를 <strong>차단</strong>합니다. 그 밖에 feature 명세 필수 섹션, 팀 설정 위치, 인용 신선도 판정 기준 (<code>learned_rev</code>), TDD·characterize 사이클의 critic 단계 등 11곳을 현행대로 맞췄습니다</li>
+<li><strong><code>archive/</code> 를 git 에 커밋하지 않습니다</strong> — project.md 정리 가이드가 <code>archive/</code> 를 git 추적 대상이라고 안내했는데, <code>projects/</code> 하위는 로컬 전용 정책입니다. 정리 전에 폴더를 따로 백업하도록 고쳤습니다</li>
+<li><strong><code>/dp-skills:create-feature</code> 가 진행 보드와 관련 메모 조회를 수행합니다</strong> — 공통 사전 확인 적용표에는 있었지만 스킬 본문에서 빠져 있었습니다</li>
+</ul>
 <h2 id="v0400">v0.40.0<a class="headerlink" href="#v0400" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>@ag-generator</code> 가 Sonnet 5.5 (effort high) 로 구현합니다</strong> — 나머지 4종 (planner·critic·evaluator·code-reviewer) 은 opus 그대로입니다. 근거는 nimda 실제 feature 3개를 다시 개발시킨 평가입니다. Opus 가 만든 같은 plan 을 받으면 generator 가 Opus 든 Sonnet 이든 18회 모두 재작업 없이 READY 였고, 동작은 원래 머지된 구현과 같았습니다. generator 비용은 약 59%, 출력 토큰은 약 20% 줄었습니다. planner 까지 Sonnet 으로 바꾸면 plan 결함으로 critic 정지가 잦아 (6회 중 4회) planner 는 바꾸지 않았습니다. <strong>Claude Code CLI v2.1.284 이상</strong>이 필요합니다 — 그 미만에서는 <code>sonnet</code> 이 Sonnet 5 로 해석됩니다 (<code>claude update</code>). Bedrock·Vertex·Foundry 에서는 Sonnet 4.5 로 해석됩니다. 어려운 구현에서 opus 가 필요하면 메인 세션에 "이번 구현은 opus 로 돌려줘" 라고 요청합니다</li>
@@ -4554,7 +4582,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.40.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.40.1"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
