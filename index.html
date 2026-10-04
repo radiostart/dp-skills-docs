@@ -1497,6 +1497,8 @@
       
         
       
+        
+      
     
     
     
@@ -1682,6 +1684,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to/bench-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    플러그인 변경 전후 채점
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1793,6 +1823,8 @@
       
         
       
+        
+      
     
     
     
@@ -1845,6 +1877,34 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/agents/ag-bench-scorer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    @ag-bench-scorer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -2755,6 +2815,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -2824,6 +2888,34 @@
     
   
     bash-write-audit.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/tools/bench-cycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    bench-cycle.py
   
 
     
@@ -2964,6 +3056,34 @@
     
   
     cross-ref.py
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/tools/doc-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    doc-metrics.py
   
 
     
@@ -3777,21 +3897,15 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.43.0 — 에이전트가 필요한 만큼만 읽습니다</p>
-<p>프로젝트가 커질수록 planner·critic 이 호출마다 읽는 <code>agents/planner.md</code> 가
-feature 마다 쌓여 수만 자가 됐습니다. 이제 대상 feature 와 그것이 참조하는
-feature 의 소절만 읽을 수 있습니다 — <strong>파일럿이라 기본 꺼짐</strong>이고, 켜려면
-<code>project.md</code> 제한사항에 <code>- load_slicing: on</code> 을 넣습니다. 해소된 전달사항 <code>[x]</code>
-는 <code>/dp-skills:dp-doctor --fix</code> 가 <code>archive/</code> 로 옮깁니다
-(<a href="changelog/">변경 이력</a>).</p>
-<p>같은 날 나온 0.40.1~0.42.0 에서 스킬·에이전트 지시문의 문서↔동작 드리프트
-14곳을 바로잡고, 호출마다 읽히는 공통 문서와 wrapper 에서 실행에 쓰이지 않는
-문장을 덜어냈습니다. evaluator 는 대상 feature 항목만 체크하고, 서브에이전트는
-Glob 도구 없이도 plan 후보를 조사합니다. 서브에이전트가 무엇을 얼마나 읽는지는
-<code>tools/context-load-audit.py</code> 로 잴 수 있습니다.</p>
-<p>바로 앞 릴리스 (0.40.0) 에서는 <code>@ag-generator</code> 가 Sonnet 5.5 (effort high) 로
-바뀌었습니다 — <strong>Claude Code CLI v2.1.284 이상</strong>이 필요합니다 (<code>claude update</code>).</p>
-<p>이전 릴리스는 <a href="changelog/">변경 이력</a> 에 있습니다.</p>
+<p class="admonition-title">v0.44.0 — 플러그인을 고치면 산출물이 좋아졌는지 잴 수 있습니다</p>
+<p>스킬·에이전트 파일을 바꾼 뒤 그 산출물 (plan · critic · eval 문서) 의 품질이
+실제로 좋아졌는지를 같은 잣대로 전후 비교하는 사이클 <code>tools/bench-cycle.py</code> 와
+블라인드 채점자 <code>@ag-bench-scorer</code> 가 생겼습니다. 채점자 둘이 허용 목록 안의
+사본만 읽고 점수와 좌표를 남기며, 전후 차이는 도구가 셉니다
+(<a href="how-to/bench-cycle/">플러그인 변경 전후 채점</a> · <a href="changelog/">변경 이력</a>).</p>
+<p>v0.43.0 에서는 planner·critic 이 대상 feature 와 관련된 부분만 읽을 수 있고
+(파일럿 — 기본 꺼짐, <code>project.md</code> 제한사항 <code>- load_slicing: on</code>), 해소된
+전달사항 <code>[x]</code> 는 <code>/dp-skills:dp-doctor --fix</code> 가 <code>archive/</code> 로 옮깁니다.</p>
 </div>
 <hr />
 <h2 id="_1">처음이라면<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -3891,7 +4005,7 @@ Glob 도구 없이도 plan 후보를 조사합니다. 서브에이전트가 무�
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.43.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.0"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>

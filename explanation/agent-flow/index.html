@@ -682,6 +682,18 @@
   </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../how-to/bench-cycle/">
+<span class="md-ellipsis">
+    
+  
+    플러그인 변경 전후 채점
+  
+
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -742,6 +754,18 @@
 
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/agents/ag-bench-scorer/">
+<span class="md-ellipsis">
+    
+  
+    @ag-bench-scorer
+  
+
+    
+  </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../reference/agents/ag-code-reviewer/">
 <span class="md-ellipsis">
@@ -1127,6 +1151,18 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/tools/bench-cycle/">
+<span class="md-ellipsis">
+    
+  
+    bench-cycle.py
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="../../reference/tools/confluence/">
 <span class="md-ellipsis">
     
@@ -1180,6 +1216,18 @@
     
   
     cross-ref.py
+  
+
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../reference/tools/doc-metrics/">
+<span class="md-ellipsis">
+    
+  
+    doc-metrics.py
   
 
     
@@ -1441,10 +1489,10 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-1">
+<a class="md-nav__link" href="#4-2">
 <span class="md-ellipsis">
       
-        사이클 안의 4개 + 사이클 밖의 1개
+        사이클 안의 4개 + 사이클 밖의 2개
       
     </span>
 </a>
@@ -1468,10 +1516,19 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3">
+<a class="md-nav__link" href="#bench-scorer">
 <span class="md-ellipsis">
       
-        검토자 3종의 책임 경계
+        사이클 밖 — bench-scorer
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4">
+<span class="md-ellipsis">
+      
+        검토자 4종의 책임 경계
       
     </span>
 </a>
@@ -1566,10 +1623,10 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#4-1">
+<a class="md-nav__link" href="#4-2">
 <span class="md-ellipsis">
       
-        사이클 안의 4개 + 사이클 밖의 1개
+        사이클 안의 4개 + 사이클 밖의 2개
       
     </span>
 </a>
@@ -1593,10 +1650,19 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#3">
+<a class="md-nav__link" href="#bench-scorer">
 <span class="md-ellipsis">
       
-        검토자 3종의 책임 경계
+        사이클 밖 — bench-scorer
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#4">
+<span class="md-ellipsis">
+      
+        검토자 4종의 책임 경계
       
     </span>
 </a>
@@ -1618,8 +1684,8 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="_1">에이전트 흐름<a class="headerlink" href="#_1" title="Permanent link">¶</a></h1>
-<p>dp-skills 의 5개 에이전트가 누구이고, 언제 호출되는지입니다.</p>
-<h2 id="4-1">사이클 안의 4개 + 사이클 밖의 1개<a class="headerlink" href="#4-1" title="Permanent link">¶</a></h2>
+<p>dp-skills 의 6개 에이전트가 누구이고, 언제 호출되는지입니다.</p>
+<h2 id="4-2">사이클 안의 4개 + 사이클 밖의 2개<a class="headerlink" href="#4-2" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -1654,9 +1720,14 @@
 <td><code>@ag-code-reviewer</code></td>
 <td>PR 직전 셀프 리뷰 (사이클 밖, 슬래시 진입 없음)</td>
 </tr>
+<tr>
+<td><strong>Bench-Scorer</strong></td>
+<td><code>@ag-bench-scorer</code></td>
+<td>에이전트가 쓴 문서 (plan·critic·eval) 의 블라인드 채점 (사이클 밖, <code>tools/bench-cycle.py</code> 가 부른다)</td>
+</tr>
 </tbody>
 </table>
-<p><code>@ag-generator</code> 만 sonnet(<code>effort: high</code>) 이고 나머지 4개는 opus 입니다. 판단은 critic 합의를 거친 plan 이 확정하고, generator 는 그 plan 을 구현합니다. 같은 plan 이면 opus 와 결과가 같고 비용은 약 60% 낮습니다. 구현 품질은 opus evaluator 가 지킵니다. <code>@ag-planner-critic</code> 은 <code>effort: xhigh</code> 로 사고 예산을 한 단계 더 씁니다. 챌린지 깊이가 plan 검증력을 좌우하기 때문입니다. <code>@ag-planner</code> 는 <code>effort: high</code> 명시입니다 (레이턴시를 줄이고, 품질은 critic 챌린지가 지킵니다). effort 를 명시하지 않은 에이전트는 세션 effort 를 따릅니다. 실제 값의 SSOT 는 각 <code>agents/*.md</code> frontmatter 입니다.</p>
+<p><code>@ag-generator</code> 만 sonnet(<code>effort: high</code>) 이고 나머지 5개는 opus 입니다. 판단은 critic 합의를 거친 plan 이 확정하고, generator 는 그 plan 을 구현합니다. 같은 plan 이면 opus 와 결과가 같고 비용은 약 60% 낮습니다. 구현 품질은 opus evaluator 가 지킵니다. <code>@ag-planner-critic</code> 은 <code>effort: xhigh</code> 로 사고 예산을 한 단계 더 씁니다. 챌린지 깊이가 plan 검증력을 좌우하기 때문입니다. <code>@ag-planner</code> 는 <code>effort: high</code> 명시입니다 (레이턴시를 줄이고, 품질은 critic 챌린지가 지킵니다). effort 를 명시하지 않은 에이전트는 세션 effort 를 따릅니다. 실제 값의 SSOT 는 각 <code>agents/*.md</code> frontmatter 입니다.</p>
 <h2 id="_2">호출 순서<a class="headerlink" href="#_2" title="Permanent link">¶</a></h2>
 <pre class="mermaid"><code>sequenceDiagram
     participant U as 사용자
@@ -1691,8 +1762,10 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>사이클 밖 (PR 전): @ag-code-reviewer [--base &lt;branch&gt;] → CODE REVIEW REPORT → /dp-skills:pr
 </span></code></pre></div>
 <p><code>@ag-code-reviewer</code> 는 사이클 흐름과 무관하게 PR 단위로 호출합니다. 사이클 안 4개 wrapper 는 <code>tools/orchestrate-load.py</code> 로 컨텍스트를 자동 로드하지만, code-reviewer 는 self-contained 라 git diff·언어 감지·룰 파일을 자체 로드합니다 (슬래시 진입점 없음).</p>
-<h2 id="3">검토자 3종의 책임 경계<a class="headerlink" href="#3" title="Permanent link">¶</a></h2>
-<p>critic·evaluator·code-reviewer 모두 검토자지만 대상이 다릅니다.</p>
+<h2 id="bench-scorer">사이클 밖 — bench-scorer<a class="headerlink" href="#bench-scorer" title="Permanent link">¶</a></h2>
+<p><code>@ag-bench-scorer</code> 는 <strong>플러그인 자체</strong>를 고쳤을 때 호출합니다 — 에이전트가 쓴 문서 (plan.md · .plan.critic.md · .eval.md) 가 좋아졌는지를 같은 잣대로 전후 채점합니다. 상태 기계 <code>tools/bench-cycle.py</code> 가 허용 목록 (brief) 을 굳히고, 채점자 둘이 각자 새 맥락에서 그 사본만 읽고 점수와 좌표를 남기며, 전후 차이는 도구가 셉니다. 프로젝트 컨텍스트는 읽지 않습니다 — 그것이 앵커입니다. 절차: <a href="../../how-to/bench-cycle/">플러그인 변경 전후 채점</a>.</p>
+<h2 id="4">검토자 4종의 책임 경계<a class="headerlink" href="#4" title="Permanent link">¶</a></h2>
+<p>critic·evaluator·code-reviewer·bench-scorer 모두 검토자지만 대상이 다릅니다.</p>
 <table>
 <thead>
 <tr>
@@ -1717,12 +1790,17 @@
 <td>누적 <em>코드 변경</em> (git diff) — cross-cutting 일관성·언어 규약·hunk 디테일</td>
 <td>PR <strong>직전</strong> (사이클 밖)</td>
 </tr>
+<tr>
+<td><code>@ag-bench-scorer</code></td>
+<td>에이전트가 쓴 <em>문서</em> (plan·critic·eval 의 사본) — 다음 독자에게 쓸모 있나</td>
+<td>플러그인 변경 <strong>전후</strong> (사이클 밖)</td>
+</tr>
 </tbody>
 </table>
 <p>code-reviewer 는 evaluator 영역(요구사항·TDD 증거·테스트 실행)을 <strong>절대 다루지 않습니다</strong>. 반대로 cross-cutting 일관성·언어 규약·누락 마무리는 code-reviewer 전담입니다.</p>
 <h2 id="_3">다음 단계<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
 <ul>
-<li>How-to: <a href="../../how-to/critic-review/">Critic 으로 계획 챌린지</a> · <a href="../../how-to/self-code-review/">PR 직전 셀프 코드 리뷰</a></li>
+<li>How-to: <a href="../../how-to/critic-review/">Critic 으로 계획 챌린지</a> · <a href="../../how-to/self-code-review/">PR 직전 셀프 코드 리뷰</a> · <a href="../../how-to/bench-cycle/">플러그인 변경 전후 채점</a></li>
 <li>Explanation: <a href="../modes/">모드</a> — 모드별 에이전트 책임 확장</li>
 <li>Reference: <a href="../../reference/agents/">Agents 목록</a></li>
 </ul>
@@ -1753,7 +1831,7 @@
 <div class="md-dialog" data-md-component="dialog">
 <div class="md-dialog__inner md-typeset"></div>
 </div>
-<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.43.0"}</script>
+<script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.0"}</script>
 <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
 <script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
 window.mermaidConfig = {default: {
