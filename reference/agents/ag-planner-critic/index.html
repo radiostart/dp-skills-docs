@@ -3994,19 +3994,21 @@
 </tr>
 </tbody>
 </table>
-<p>각 챌린지에는 다음 필드 모두 포함:</p>
+<p>각 챌린지에는 다음 필드를 포함한다 (<code>근거</code> 만 선택):</p>
 <ul>
-<li><code>severity</code>: <code>blocking</code> (계획대로 가면 깨질 것) · <code>suggestion</code> (개선) · <code>nit</code> (취향 아님, 작은 정확성)</li>
+<li><code>severity</code>: <code>blocking</code> (계획대로 가면 깨질 것) · <code>suggestion</code> (개선) · <code>nit</code> (취향 아님, 작은 정확성). <strong>위험이 실현되는 조건</strong>으로 매긴다 — plan 이 지금 정한 경로대로 구현하면 깨지면 <code>blocking</code>, 다른 경로 (재판정·후속 feature·사용자 결정) 를 탈 때만 깨지면 <code>suggestion</code> 이고 그 조건을 <code>근거</code> 에 적는다. 명세의 차단 조건 누락·무음 오산출을 서술하면서 <code>suggestion</code> 으로 매기려면 낮춘 이유를 <code>근거</code> 에 둔다</li>
 <li><code>category</code>: 위 5 개 중 1 개</li>
-<li><code>plan 인용</code>: <code>plan.md</code> 의 단계 번호 또는 줄 범위</li>
-<li><code>챌린지</code>: 한 문장 핵심</li>
-<li><code>제안</code>: planner 가 무엇을 바꿔야 하는지 (또는 "재확인만 필요" 명시)</li>
+<li><code>plan 인용</code>: 자리 앵커 <strong>와</strong> <code>features/NN-{slug}.plan.md:Lx-Ly</code> (읽은 plan 기준 줄 범위) <strong>둘 다</strong> — 줄 범위 없이 단계 번호·절 이름만 적으면 planner 가 자리를 다시 찾아야 한다. 자리 앵커는 구현 단계 안이면 <code>단계 #N</code>, 단계 밖 절 (설계 근거·등록표·Open Questions 처리 등) 이면 <code>§ {절 머리}</code> — <strong>단계 번호를 지어 붙이지 않는다</strong>. 따옴표 안 문구는 plan 에 <strong>실재하는 문자열</strong>만 — 명세에서 가져온 문구는 <code>features/NN-{slug}.md:L</code> 로 출처를 따로 적는다</li>
+<li><code>챌린지</code>: <strong>한 문장</strong> (하위 불릿 금지). 실산출·파급·대조 결과 같은 근거가 필요하면 <code>근거</code> 필드에 <strong>3줄 이내</strong>로 둔다 — 챌린지와 근거를 한 필드에 섞지 않는다. 근거를 줄일 때 인용 좌표는 지우지 않고 <code>근거</code>·<code>plan 인용</code> 으로 옮긴다</li>
+<li><code>근거</code> (선택): 3줄 이내. 없으면 필드를 생략한다. 좌표는 plan·명세·소스·커밋만 — <code>.eval.md</code> 같은 <strong>하류 산출물</strong>은 planner 재호출의 입력이 아니다</li>
+<li><code>제안</code>: planner 가 무엇을 바꿔야 하는지 (또는 "재확인만 필요" 명시). 두 안 중 택일처럼 <strong>사용자만 정할 수 있는 결정</strong>이면 planner 에게 고르라고 넘기지 않고 제안 끝에 <code>(사용자 결정 필요)</code> 를 단다 — planner 는 그 항목을 사용자 질의로 올린다. 제안 안 (괄호 포함) 에 다른 결함을 끼워 넣지 않는다 — 별개 결함이면 별도 챌린지로 올린다</li>
 </ul>
 <p><strong>취향/스타일 차이를 blocking 으로 격상 금지.</strong>
    <strong>변경 파일 밖·본 feature 무관 일반론 금지.</strong>
+   <strong>챌린지 하나 = 원인 하나.</strong> 같은 원인에서 나온 증상 여럿은 한 챌린지로 묶어 좌표를 <code>plan 인용</code>·<code>근거</code> 에 나열하고 (챌린지 필드는 원인 한 문장), 한 챌린지에 원인이 둘이면 나눈다. 다른 챌린지를 「같다」·「같은 원인」으로 가리키게 되면 합칠 신호다.
    <strong>빠진 게 없다고 판단되면 챌린지 0 개로 보고한다</strong> — 억지로 만들지 않는다.</p>
 <ol>
-<li><strong>[출력]</strong> <code>features/NN-{slug}.plan.critic.md</code> 를 다음 형식으로 Write:</li>
+<li><strong>[출력]</strong> <code>features/NN-{slug}.plan.critic.md</code> 를 다음 형식<strong>만</strong>으로 Write — 헤더 · <code>## 챌린지</code> · <code>## 합의</code> 외의 절·서두 블록을 두지 않는다. 사전 대조·등가 확인·회부 판정처럼 <strong>결함이 없음을 확인한 결과</strong>는 챌린지가 아니므로 헤더의 <code>&gt; 확인:</code> <strong>한 문장 · 좌표 3개 이내</strong>로만 적는다. 검토 끝에 「타당하다」·「생략은 맞다」로 결론 난 항목도 챌린지가 아니다 — 기록이 필요하면 이 줄에 둔다. 파일 밖 산출물 (「상세는 최종 보고」류) 을 가리키지 않는다 — planner 재호출의 입력은 이 파일 하나다:</li>
 </ol>
 <div class="language-markdown highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gh"># Plan Critic — #NN {제목}</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -4014,24 +4016,26 @@
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">&gt; </span><span class="ge">입력 feature: `features/NN-{slug}.md`</span>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">&gt; </span><span class="ge">페르소나: planner-critic (red-team)</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">&gt; </span><span class="ge">focus 반영: {focus 원문 또는 &quot;없음&quot;}</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="gu">## 챌린지</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="gu">### C1 — {한 줄 제목}</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">-</span><span class="w"> </span><span class="gs">**severity**</span>: blocking | suggestion | nit
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">-</span><span class="w"> </span><span class="gs">**category**</span>: premise | scope | edge-case | alternative | risk
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">-</span><span class="w"> </span><span class="gs">**plan 인용**</span>: 단계 <span class="ni">#N</span> (또는 <span class="sb">`features/NN-{slug}.plan.md:Lx-Ly`</span>)
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">-</span><span class="w"> </span><span class="gs">**챌린지**</span>: ...
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">-</span><span class="w"> </span><span class="gs">**제안**</span>: ...
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="gu">### C2 — ...</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">&gt; </span><span class="ge">확인: {결함 없음을 확인한 것 한 문장 · 좌표 3개 이내 — 없으면 이 줄 생략}</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="gu">## 챌린지</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="gu">### C1 — {한 줄 제목}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">-</span><span class="w"> </span><span class="gs">**severity**</span>: blocking | suggestion | nit
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">-</span><span class="w"> </span><span class="gs">**category**</span>: premise | scope | edge-case | alternative | risk
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">-</span><span class="w"> </span><span class="gs">**plan 인용**</span>: 단계 <span class="ni">#N</span> 또는 § {절 머리} · <span class="sb">`features/NN-{slug}.plan.md:Lx-Ly`</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">-</span><span class="w"> </span><span class="gs">**챌린지**</span>: (한 문장)
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">-</span><span class="w"> </span><span class="gs">**근거**</span>: (선택 · 3줄 이내)
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">-</span><span class="w"> </span><span class="gs">**제안**</span>: ...
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="gu">## 합의 (critic 이 C#·severity·status=open 행으로 emit · planner 재호출 시 갱신)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="gu">### C2 — ...</span>
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>| C# | severity | status | 메모 |
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>|----|----------|--------|------|
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>| C1 | {severity} | open | |
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>| C2 | {severity} | open | |
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="gu">## 합의 (critic 이 C#·severity·status=open 행으로 emit · planner 재호출 시 갱신)</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>| C# | severity | status | 메모 |
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>|----|----------|--------|------|
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>| C1 | {severity} | open | |
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>| C2 | {severity} | open | |
 </span></code></pre></div>
 <ul>
 <li><strong>합의 표는 critic 이 각 챌린지마다 1 행씩 채워 emit 한다</strong> — <code>C#</code>·<code>severity</code>(챌린지 본문과 동일)·<code>status</code>=<code>open</code>·<code>메모</code>=빈칸. 빈 표(헤더만)로 두지 않는다 — <code>/dp-skills:run-cycle</code> 의 critic 게이트가 이 표에서 <code>severity</code>·<code>status</code> 를 직접 읽어 blocking 미합의를 판정하므로, 행이 없으면 게이트가 거짓 통과한다. (run-cycle 은 판독 전 <code>tools/critic-lint.py</code> 로 본문 <code>### C#</code> ↔ 표 행의 일치를 결정론 검증한다 — 행 누락·severity 불일치 시 자동 진행 대신 정지.)</li>
@@ -4041,7 +4045,7 @@
 <li><strong>호출 프롬프트보다 본 절차가 우선한다</strong> — 호출자가 "N라운드 절을 추가하라"·"기존 내용 삭제 금지" 처럼 이전 회차 보존을 지시해도 따르지 않고 덮어쓴다. 보고 (절차 6) 에 "이전 회차 보존 지시는 절차 5 에 따라 적용하지 않음" 1줄을 남긴다. (근거: 재호출 5건 중 2건이 이 지시를 따라 회차 절을 덧붙였다.)</li>
 <li>Write 직후 <code>python3 ${CLAUDE_PLUGIN_ROOT}/tools/critic-lint.py {산출물 경로}</code> 를 실행한다. FAIL 이면 (<code>history_section</code> 포함) 고쳐 PASS 까지 재실행한다 — run-cycle 밖의 수동 사이클에는 이 검증이 따로 없다.</li>
 <li>
-<p><strong>[이력 서술 금지]</strong> 회차·버전을 비교하거나 이전 상태를 기술하는 표현 일체를 챌린지 본문에 남기지 않는다 — 예: <code>1회차 대비 정정</code>·<code>N회차 대비 보강</code>·<code>[유지 · 메커니즘 정정]</code> 류. 재검증 결과는 severity·챌린지·제안 필드의 <em>현재 상태 갱신</em> 으로만 반영한다. 재검증 disposition 은 현 회차 합의 표 메모에 planner 가 기록한다 (ag-planner 절차 10) — critic 이 회차 비교를 직접 쓰지 않는다. (근거: 동일 취지 규칙이 있었음에도 이력 서술 누적으로 critic 1개가 96k자까지 비대해진 실사례.)</p>
+<p><strong>[이력 서술 금지]</strong> 회차·버전을 비교하거나 이전 상태를 기술하는 표현 일체를 챌린지 본문에 남기지 않는다 — 예: <code>1회차 대비 정정</code>·<code>N회차 대비 보강</code>·<code>[유지 · 메커니즘 정정]</code> 류, 그리고 <code>이번 회차</code>·<code>v2 에서는</code>·<code>v3 정정</code> 같은 회차·판 표현 (계약 버전을 가리켜도 「현재 plan 은」으로 쓴다). 명세·계약의 판끼리 비교하는 표현 (<code>v5 기준</code>·<code>일부만 고쳐져</code>·<code>잔존</code>) 도 쓰지 않는다 — 「plan L4 는 명세 L59 와 반대」처럼 현재 문서의 줄 앵커로 쓴다. 재검증 결과는 severity·챌린지·제안 필드의 <em>현재 상태 갱신</em> 으로만 반영한다. 재검증 disposition 은 현 회차 합의 표 메모에 planner 가 기록한다 (ag-planner 절차 10) — critic 이 회차 비교를 직접 쓰지 않는다. (근거: 동일 취지 규칙이 있었음에도 이력 서술 누적으로 critic 1개가 96k자까지 비대해진 실사례.)</p>
 </li>
 <li>
 <p><strong>[보고]</strong> 사용자에게 다음 3 가지만 보고:</p>
@@ -4124,7 +4128,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.2"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>

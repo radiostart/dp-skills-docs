@@ -4270,16 +4270,18 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  .state.json           단계 · 해시 · 허용 목록 · 잣대 값 · 플러그인 커밋/버전 — 도구만 쓴다
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  scenario.md           무엇을 · 어느 표본으로 · 어느 축으로 · 무엇이 오르면 성공인가  ← before brief 때 해시로 굳는다
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  rubric.md             채점표 사본                                                 ← 같이 굳는다
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  samples/before/…      표본·참조 사본 (좌표 고정) · samples/after/… · samples/plugin/… (대상 파일 사본 — P 축)
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  brief-before.md       채점자가 읽어도 되는 것의 전부 (허용 목록) · 쓸 파일 양식
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  scores/before-1.md    채점자 1 — 축별 점수 · 근거 좌표 · 발견 표 · inputs: (실제로 연 파일)
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  scores/before-2.md    채점자 2 — 같은 것을 따로
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  scores/before.json    둘의 평균 · 중앙값 · 불일치 표기
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  metrics-before.json   정량 지표 (doc-metrics) + 린트 요약 (plan-validate · handoff-quality · critic-lint · verify-report-lint)
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  plan.md               개선 계획 — 발견 → 변경 집합 (플러그인 파일 · 기대 축 · 되돌리기)
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  inputs/001-answer-apply.md   「적용」 답 원문 · inputs/002-answer-decide.md 「채택·되돌림」 답 원문
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  brief-after.md · scores/after-* · metrics-after.json
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  compare.md            도구가 쓴 전후 대조
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  samples/before/…      표본·참조 사본 (좌표 고정) · samples/after/…
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  samples/plugin/…      대상 파일 사본 — 변경 전 판 (init) · before 의 P 축 대조용
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  samples/plugin-after/… 대상 파일 사본 — 적용 커밋 판 (applied) · after 의 P 축 대조용
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  brief-before.md       채점자가 읽어도 되는 것의 전부 (허용 목록) · 쓸 파일 양식
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  scores/before-1.md    채점자 1 — 축별 점수 · 근거 좌표 · 발견 표 · inputs: (실제로 연 파일)
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  scores/before-2.md    채점자 2 — 같은 것을 따로
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  scores/before.json    둘의 평균 · 중앙값 · 불일치 표기
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  metrics-before.json   정량 지표 (doc-metrics) + 린트 요약 (plan-validate · handoff-quality · critic-lint · verify-report-lint)
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  plan.md               개선 계획 — 발견 → 변경 집합 (플러그인 파일 · 기대 축 · 되돌리기)
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  inputs/001-answer-apply.md   「적용」 답 원문 · inputs/002-answer-decide.md 「채택·되돌림」 답 원문
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  brief-after.md · scores/after-* · metrics-after.json
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  compare.md            도구가 쓴 전후 대조
 </span></code></pre></div>
 <h2 id="_7">무엇이 「블라인드」를 지키나<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
@@ -4335,8 +4337,11 @@
 <li><strong>원본을 채점한다.</strong> 허용 목록에는 <code>samples/</code> 사본만 있습니다. <code>projects/**</code> 원본은 그 사이 재호출로 덮어쓰였을 수 있어 좌표가 어긋납니다.</li>
 <li><strong>after 표본이 before 와 같은 파일이다.</strong> 바뀐 플러그인이 <strong>새로 만든</strong> 산출물이어야 전후입니다 — 내용이 같으면 도구가 거절합니다.</li>
 <li><strong>시나리오를 고치고 같은 사이클을 계속한다.</strong> 해시가 굳어 있습니다. 묻는 것이 바뀌었으면 <code>stop</code> 하고 새 사이클을 엽니다.</li>
+<li><strong>한 축의 ±0.5 를 결론으로 읽는다.</strong> 같은 파일을 다른 채점자 쌍이 다시 재자 축마다 0.5~1.0 씩 달랐습니다 (실사용 사이클 실측 · 시나리오 질문이 바뀐 영향과 섞여 있음). 잡음 띠 ±0.3 은 판정 낱말을 가르는 기준일 뿐입니다 — 여러 축이 같은 방향으로 움직였는지, 발견 건수가 함께 줄었는지를 같이 봅니다.</li>
 <li><strong><code>mixed</code>·<code>unchanged</code> 를 "효과 없음" 으로 읽는다.</strong> 표본 2~5건·채점자 2명의 측정은 거칩니다 — 표본을 늘려 새 사이클을 여는 것이 답입니다.</li>
 <li><strong>설정 값을 사이클 도중 바꾼다.</strong> <code>bench_*</code> 키를 바꿔도 진행 중 사이클은 init 때 굳힌 값으로 끝까지 갑니다.</li>
+<li><strong>after 의 과정 축을 변경 전 wrapper 와 대조한다.</strong> P 축은 그 산출물을 만든 판의 규칙으로 잽니다. <code>applied</code> 가 적용 커밋의 대상 파일을 <code>samples/plugin-after/</code> 로 떠서 after 허용 목록에 넣습니다 — 옛 판과 대조하면 새 규칙을 지킨 줄이 「템플릿에 없는 줄」로 깎입니다.</li>
+<li><strong>채점자가 다른 단계 표본의 크기를 본다.</strong> <code>ls</code>·<code>wc</code> 로 줄 수만 봐도 전후 분량이 드러나 앵커가 됩니다. 사이클 폴더 안에서는 허용 목록 밖 파일의 이름·크기도 보지 않습니다 (<code>inputs:</code> 에 남지 않아 도구가 못 잡습니다 — 채점자 규칙입니다).</li>
 <li><strong>critic 을 채점하는데 참조 plan 이 개정본이다.</strong> planner 가 critic 을 반영하면 <code>plan.md</code> 가 제자리에서 바뀌므로, 그 뒤에 뜬 표본에서는 critic 의 <strong>줄 범위 인용</strong>이 plan 사본과 어긋납니다 (절 앵커는 남습니다). 첫 사이클에서 채점자 둘이 독립적으로 이 표류를 Q4 결함으로 잡았습니다. 채점표는 이 경우 절 앵커로 판정하도록 적어 두었지만, 가능하면 critic 직후 (합의표 <code>status</code> 가 아직 <code>open</code> 일 때) 표본을 뜨는 것이 정확합니다.</li>
 </ul>
 <h2 id="before">첫 사이클 실측 (출하 게이트 · before 까지)<a class="headerlink" href="#before" title="Permanent link">&para;</a></h2>
@@ -4459,7 +4464,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.2"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

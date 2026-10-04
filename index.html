@@ -3897,15 +3897,14 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.44.0 — 플러그인을 고치면 산출물이 좋아졌는지 잴 수 있습니다</p>
-<p>스킬·에이전트 파일을 바꾼 뒤 그 산출물 (plan · critic · eval 문서) 의 품질이
-실제로 좋아졌는지를 같은 잣대로 전후 비교하는 사이클 <code>tools/bench-cycle.py</code> 와
-블라인드 채점자 <code>@ag-bench-scorer</code> 가 생겼습니다. 채점자 둘이 허용 목록 안의
-사본만 읽고 점수와 좌표를 남기며, 전후 차이는 도구가 셉니다
-(<a href="how-to/bench-cycle/">플러그인 변경 전후 채점</a> · <a href="changelog/">변경 이력</a>).</p>
-<p>v0.43.0 에서는 planner·critic 이 대상 feature 와 관련된 부분만 읽을 수 있고
-(파일럿 — 기본 꺼짐, <code>project.md</code> 제한사항 <code>- load_slicing: on</code>), 해소된
-전달사항 <code>[x]</code> 는 <code>/dp-skills:dp-doctor --fix</code> 가 <code>archive/</code> 로 옮깁니다.</p>
+<p class="admonition-title">v0.44.2 — critic 챌린지가 원인 단위로 정리되고 severity 가 실제 위험을 따릅니다</p>
+<p><code>@ag-planner-critic</code> 이 위험이 실제로 생기는 조건으로 severity 를 매기고,
+챌린지 하나에 원인 하나만 담습니다. v0.44.1 의 형식 규칙 (챌린지 한 문장 ·
+근거 분리 · 줄 범위 인용) 과 함께, 둘 다 bench 사이클로 전후를 재서 채택했습니다
+(<a href="changelog/">변경 이력</a>).</p>
+<p>v0.44.0 에서는 플러그인을 고친 뒤 산출물 품질을 같은 잣대로 전후 비교하는 사이클
+<code>tools/bench-cycle.py</code> 와 블라인드 채점자 <code>@ag-bench-scorer</code> 가 생겼습니다
+(<a href="how-to/bench-cycle/">플러그인 변경 전후 채점</a>).</p>
 </div>
 <hr />
 <h2 id="_1">처음이라면<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -4005,7 +4004,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.2"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
