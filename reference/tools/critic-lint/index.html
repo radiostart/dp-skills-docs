@@ -3809,12 +3809,20 @@
 - 챌린지 0건: "검출된 결함 없음" 문구가 있으면 합의 표 생략 허용 (critic 규약).
   문구도 표도 없으면 위반 (fail-closed — 판독 불가 산출물로 자동 진행 금지)
 - 회차 이력 헤딩 부재 (<code>## 2라운드 검증</code> 류) — critic 은 현재 회차만 담아 덮어쓴다</p>
+<p>경고 (exit 코드에 영향 없음 · <code>--json</code> 의 <code>warnings</code>):
+- 따옴표 실재 — 챌린지·근거 줄에서 plan 줄 앵커 (<code>L{n}</code> · <code>L{a}-{b}</code>) 바로 뒤 (20자 안) 의 따옴표 문구를
+  plan 원문 그 줄 ±3줄과 대조한다. 창에 없고 plan 다른 곳에 있으면 <code>quote_anchor_drift</code>, 어디에도 없으면
+  <code>quote_not_in_plan</code>. plan 은 <code>--plan</code> 또는 헤더 <code>&gt; 입력 plan:</code> 의 파일명을 critic 옆에서 찾고, 없으면 검사를
+  건너뛴다. 「따옴표 안 문구는 plan 실재 문자열만」 (ag-planner-critic 절차 4) 이 규칙인데, 산문 규칙만으로는
+  지켜지지 않았다 (bench 실사용 사이클에서 채점자가 확인한 위반 3건 — 원문 단어 누락 · 범례 문구 지어냄).
+  경고인 이유: run-cycle 게이트 (exit 1 → 정지) 를 문구 하나로 멈추지 않는다. critic 은 Write 직후 자기 점검에서 고친다.</p>
 <p>Usage:
     python3 tools/critic-lint.py path/to/NN-{slug}.plan.critic.md
     cat critic.md | python3 tools/critic-lint.py
-    python3 tools/critic-lint.py path --json</p>
+    python3 tools/critic-lint.py path --json
+    python3 tools/critic-lint.py path --plan path/to/NN-{slug}.plan.md   # plan 위치가 critic 옆이 아닐 때</p>
 <p>Exit:
-    0 — 위반 없음 (PASS)
+    0 — 위반 없음 (PASS · 경고는 있을 수 있다)
     1 — 위반 있음 (FAIL)
     2 — 입력 오류</p>
 </blockquote>
@@ -3874,7 +3882,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.44.2"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.45.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
