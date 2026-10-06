@@ -4247,6 +4247,7 @@
 <ul>
 <li>소비 레포에 <code>workspace/TEAM.md</code> 가 있고, 채점할 산출물 (replay) 또는 그 산출물의 입력 (run — plan·명세) 이 <code>workspace/{TEAM}/projects/**</code> 에 있을 것</li>
 <li>플러그인 dev 체크아웃 (git) 의 경로를 알 것 — <code>applied</code> 가 적용 커밋의 diff 를 봅니다. <code>--plugin-repo</code> 인자 또는 <code>workspace/_common/config.md</code> <code>## 언어·도구 기본값</code> 표의 <code>bench_plugin_repo</code></li>
+<li><strong>채점자는 소비 레포 세션에서 부를 것</strong> — 채점자 서브에이전트는 부른 세션의 프로젝트 메모리·<code>CLAUDE.md</code> 를 함께 받습니다. 플러그인 레포 세션의 메모리에는 이전 사이클 판정이 쌓이기 쉬워 채점자에게 앵커로 들어갑니다 (실측: 플러그인 레포 세션에서 부른 채점자 전원이 그 메모리 색인을 받음). 채점자의 <code>show --workspace workspace</code> 도 소비 레포 루트 기준이라, 다른 곳에서 부르면 프롬프트에 경로를 덧붙여야 해 「프롬프트는 둘뿐」 규칙이 깨집니다. 적용 커밋·PR 같은 플러그인 레포 작업은 플러그인 레포에서 합니다</li>
 <li>채점자 (<code>@ag-bench-scorer</code>) 를 <strong>셋</strong> 부를 수 있을 것 (기본 · <code>bench_scorers</code> 로 바꿀 수 있다) — 한 채점자의 점수는 잡음이고, 둘이면 축 평균이 0.5 단위라 잡음 띠 ±0.3 이 뜻을 잃습니다</li>
 </ul>
 <h2 id="_4">한 바퀴<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -4437,11 +4438,12 @@
 </tr>
 </tbody>
 </table>
-<p><strong>못 지키는 것</strong> — 채점자의 <code>inputs:</code> 는 자기 신고입니다. 허용 목록 밖을 읽고 적지 않으면 도구는 모릅니다. 그래서 채점자가 둘이고 (서로 다른 맥락이 같은 오염을 겪을 확률이 낮습니다), <code>verify-blind</code> 가 받은 채점을 지금 허용 목록으로 다시 대조합니다.</p>
+<p><strong>못 지키는 것</strong> — 채점자는 부른 세션의 메모리를 받습니다. 도구는 어느 세션에서 불렀는지 모르므로, 거점 규칙 (위 「전제」) 으로만 막습니다. 채점자의 <code>inputs:</code> 는 자기 신고입니다. 허용 목록 밖을 읽고 적지 않으면 도구는 모릅니다. 그래서 채점자가 둘이고 (서로 다른 맥락이 같은 오염을 겪을 확률이 낮습니다), <code>verify-blind</code> 가 받은 채점을 지금 허용 목록으로 다시 대조합니다.</p>
 <h2 id="_8">흔한 실수<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>채점자에게 힌트를 준다.</strong> "Q6 이 약할 거야" 한 줄이 앵커입니다. 프롬프트는 사이클 ID 와 번호뿐입니다.</li>
 <li><strong>after 표본을 내려고 소비 레포에서 에이전트를 다시 부른다.</strong> 실제 산출물이 덮어쓰입니다 — run 모드 (<code>init --run</code>) 의 분리 트리에서 냅니다.</li>
+<li><strong>「사이클을 연 도구와 지금 도구가 다릅니다」 로 거절된다.</strong> <code>init</code> 이 그 도구 (판 · 파일 해시 · 경로) 를 사이클에 적고, <code>show --for-scorer</code>·<code>ingest</code> 가 대조합니다. 메인 세션은 dev 체크아웃 도구로 열고 채점자는 설치본 도구를 부르면 여기서 멈춥니다 — 같은 도구로 맞추거나 (설치본이면 갱신 뒤 재시작) 새 사이클을 엽니다.</li>
 <li><strong>원본을 채점한다.</strong> 허용 목록에는 <code>samples/</code> 사본만 있습니다. <code>projects/**</code> 원본은 그 사이 재호출로 덮어쓰였을 수 있어 좌표가 어긋납니다.</li>
 <li><strong>after 표본이 before 와 같은 파일이다.</strong> 바뀐 플러그인이 <strong>새로 만든</strong> 산출물이어야 전후입니다 — 내용이 같으면 도구가 거절합니다.</li>
 <li><strong>시나리오를 고치고 같은 사이클을 계속한다.</strong> 해시가 굳어 있습니다. 묻는 것이 바뀌었으면 <code>stop</code> 하고 새 사이클을 엽니다.</li>
@@ -4573,7 +4575,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.46.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.46.1"}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
