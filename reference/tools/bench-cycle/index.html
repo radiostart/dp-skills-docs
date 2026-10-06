@@ -3829,9 +3829,15 @@
 <p><strong>한 호출이 한 단계만 넘긴다.</strong> 채점 (before) → 계획 → 적용 → 채점 (after) → 대조 → 결정이 각각 사용자의 호출이고,
 모든 응답의 <code>다음</code> 이 그다음 명령·멘션이다. 사이클 폴더 밖에는 아무것도 쓰지 않는다.</p>
 <p>단계: init → before → planned → applied → after → compared → decided → closed (어느 단계에서든 stopped)</p>
+<p>표본을 얻는 길은 둘이다. <strong>replay</strong> (<code>--artifacts</code>) 는 이미 있는 산출물을 받는다 — after 는 바뀐 판이 자연히 새로 쓸 때까지
+기다린다. <strong>run</strong> (<code>--run</code>) 은 분리 트리 (소비 레포 최상위 링크 + workspace 사본) 에서 에이전트를 한 번씩 불러 새로 낸다 —
+<code>sandbox</code> 가 트리·단계별 플러그인 판·실행 명령을 만들고, 실행은 사용자·메인 세션이 하며, <code>collect</code> 가 결과를 표본으로 거둔다.
+실제 산출물은 건드리지 않는다. 입력은 init 때 뜬 사본으로 심어 before·after 가 같은 입력을 받는다.</p>
 <p>Usage:
-    bench-cycle.py init --slug SLUG --subject TEXT --artifacts P [P …] [--context P …] [--subject-files P …]
-                        [--axes Q1,Q3,…] [--plugin-repo DIR]
+    bench-cycle.py init --slug SLUG --subject TEXT (--artifacts P [P …] | --run critic|planner --inputs P [P …])
+                        [--context P …] [--subject-files P …] [--axes Q1,Q3,…] [--plugin-repo DIR]
+    bench-cycle.py sandbox --id 001 --phase before|after [--dir D] · collect --id 001 --phase …
+    bench-cycle.py sandbox-remove --id 001 --phase … [--force]
     bench-cycle.py show --id 001 [--for-scorer K] · list [--all]
     bench-cycle.py brief --id 001 --phase before|after [--artifacts P …] [--context P …]
     bench-cycle.py ingest --id 001 --phase before|after · verify-blind --id 001
@@ -3902,7 +3908,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.45.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.46.0"}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
