@@ -1499,6 +1499,8 @@
       
         
       
+        
+      
     
     
     
@@ -1559,6 +1561,34 @@
     
   
     최근 작업 목록·전환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="how-to/dp-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    작업 패널 (dp-panel)
   
 
     
@@ -3897,12 +3927,13 @@
 <p>DP팀 에이전트 오케스트레이션 플러그인 — Claude Code 안에서 <em>plan → critic → generate → evaluate</em> 의 명시적 사이클로 기획서 분석부터 코드 구현·리뷰까지 진행합니다.</p>
 <p><strong>기능 하이라이트</strong> — <a href="how-to/run-cycle/">human-on-the-loop run-cycle</a> · OQ 게이트 · <code>@ag-planner-critic</code> / <code>@ag-code-reviewer</code> · <a href="how-to/plan-gates/">Plan 검증 게이트</a> · <a href="how-to/knowledge-sync/">도메인 지식 환류</a></p>
 <div class="admonition tip">
-<p class="admonition-title">v0.46.1 — bench 채점자는 소비 레포 세션에서, 같은 도구로</p>
-<p>bench 채점자가 사이클을 연 도구와 다른 판의 도구를 부르면 멈추고, 채점자는 이전 판정이
-든 메모리를 받지 않도록 소비 레포 세션에서 부릅니다. 0.46.0 의 run 모드는 분리 트리에서 표본을
-새로 냅니다 (<a href="how-to/bench-cycle/">플러그인 변경 평가 (bench)</a> · <a href="changelog/">변경 이력</a>).</p>
-<p>v0.44.2 에서는 <code>@ag-planner-critic</code> 이 위험이 실제로 생기는 조건으로 severity 를 매기고
-챌린지 하나에 원인 하나만 담습니다.</p>
+<p class="admonition-title">v0.47.0 — 버튼으로 진행하는 작업 패널 (dp-panel)</p>
+<p>새 플러그인 <code>dp-panel</code> 을 함께 설치하면 <code>/dp-panel</code> 로 커밋·PR·셀프 리뷰, 다음에 부를 에이전트,
+응답의 a)/b)/c) 선택지를 버튼으로 진행하고, 지금 모드·focus·내 열린 PR 을 한 화면에서 봅니다.
+<code>/dp-skills:pr</code> 은 만든 PR 에 <code>dp-skills</code> 라벨을 붙입니다 (<a href="how-to/dp-panel/">작업 패널</a> ·
+<a href="changelog/">변경 이력</a>).</p>
+<p>v0.46.x 에서는 bench 채점자가 사이클을 연 도구와 같은 판으로만 채점하고, run 모드가 분리
+트리에서 표본을 새로 냅니다 (<a href="how-to/bench-cycle/">플러그인 변경 평가 (bench)</a>).</p>
 </div>
 <hr />
 <h2 id="_1">처음이라면<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -4002,7 +4033,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.46.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.47.0"}</script>
     
     
       <script src="assets/javascripts/bundle.79ae519e.min.js"></script>

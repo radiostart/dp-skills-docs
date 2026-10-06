@@ -1417,6 +1417,8 @@
       
         
       
+        
+      
     
     
     
@@ -1477,6 +1479,34 @@
     
   
     최근 작업 목록·전환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to/dp-panel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    작업 패널 (dp-panel)
   
 
     
@@ -3771,6 +3801,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0470" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.47.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0461" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4267,6 +4308,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0470" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.47.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0461" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4756,6 +4808,11 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0470">v0.47.0<a class="headerlink" href="#v0470" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>버튼으로 진행하는 작업 패널 <code>dp-panel</code> 을 따로 설치할 수 있습니다</strong> — <code>/plugin install dp-panel@deali-skills</code> 후 <code>/dp-panel</code> 로 켭니다. 커밋·PR·셀프 리뷰 버튼, 첫 미완료 feature 의 산출물로 고른 다음 에이전트 버튼, 응답이 <code>a) b) c)</code> 선택지로 끝나면 프롬프트 위에 뜨는 답 버튼, characterize·TDD·QA 모드와 남은 focus 표시, 현재 레포에서 내가 연 미머지 PR 목록을 한 화면에 모았습니다. 버튼은 스킬·에이전트를 시작만 하고 각 스킬의 확인 게이트는 그대로입니다. Claude Code 2.1.288 이상이 필요합니다 (<a href="../how-to/dp-panel/">작업 패널 (dp-panel)</a>)</li>
+<li><strong><code>/dp-skills:pr</code> 이 만든 PR 에 <code>dp-skills</code> 라벨을 붙입니다</strong> — 패널의 PR 목록이 이 라벨로 dp-skills PR 을 먼저 보여 줍니다. 레포에 라벨이 없으면 라벨 없이 만들고 생성 명령을 한 줄로 알려 줍니다 (라벨을 직접 만들지는 않습니다)</li>
+</ul>
 <h2 id="v0461">v0.46.1<a class="headerlink" href="#v0461" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>bench 채점자가 사이클을 연 도구와 다른 도구를 부르면 멈춥니다</strong> — <code>init</code> 이 그 도구의 판·파일 해시·경로를 사이클에 적고, <code>show --for-scorer</code>·<code>ingest</code> 가 지금 도구와 대조해 다르면 거절합니다. 메인 세션은 개발 체크아웃 도구로, 채점자는 설치본 도구로 같은 사이클을 다루던 어긋남을 막습니다. 이 기록이 없는 옛 사이클은 대조하지 않습니다</li>
@@ -5040,7 +5097,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.46.1"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.47.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
