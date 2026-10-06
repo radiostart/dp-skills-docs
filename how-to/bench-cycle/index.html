@@ -27,7 +27,7 @@
     
     
       
-        <title>플러그인 변경 전후 채점 - dp-skills</title>
+        <title>플러그인 변경 평가 (bench) - dp-skills</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#bench" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              플러그인 변경 전후 채점
+              플러그인 변경 평가 (bench)
             
           </span>
         </div>
@@ -1649,7 +1649,7 @@
   <span class="md-ellipsis">
     
   
-    플러그인 변경 전후 채점
+    플러그인 변경 평가 (bench)
   
 
     
@@ -1667,7 +1667,7 @@
   <span class="md-ellipsis">
     
   
-    플러그인 변경 전후 채점
+    플러그인 변경 평가 (bench)
   
 
     
@@ -1693,6 +1693,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이 문서를 읽는 법
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="이 문서를 읽는 법">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1702,37 +1714,31 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제
+        등장인물
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        한 바퀴
+        두 가지 쓰임
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#replay-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        표본을 얻는 두 길 — replay · run
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1740,12 +1746,34 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        절차
+        한눈에 보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="절차">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시작 전 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단계별 안내
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="단계별 안내">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1760,10 +1788,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-1-run-before-sandbox-collect" class="md-nav__link">
+  <a href="#2-sandbox-collect-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-1. (run 모드) before 표본 내기 — sandbox → 실행 → collect
+        2. 표본 만들기 — sandbox → 실행 → collect (run 모드만)
       
     </span>
   </a>
@@ -1771,10 +1799,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-before-brief-ingest" class="md-nav__link">
+  <a href="#3-scenariomd-3-brief" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. before 채점 — brief → 채점자 셋 → ingest
+        3. 질문 확정 — scenario.md § 3 → brief
       
     </span>
   </a>
@@ -1782,10 +1810,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-planmd-planned" class="md-nav__link">
+  <a href="#4-ingest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 개선 계획 — plan.md → planned
+        4. 채점 — 채점자 셋 → ingest
       
     </span>
   </a>
@@ -1793,10 +1821,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-applied" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 적용 — 답 원문 → 플러그인 가지에서 커밋 → applied
+        5. 결과 읽기
       
     </span>
   </a>
@@ -1804,10 +1832,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-after-brief-phase-after-ingest" class="md-nav__link">
+  <a href="#6-planmd-planned-b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. after 채점 — 새 산출물 → brief --phase after → 채점자 셋 → ingest
+        6. 개선 계획 — plan.md → planned (B)
       
     </span>
   </a>
@@ -1815,10 +1843,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-compare-decide-close" class="md-nav__link">
+  <a href="#7-applied-b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 대조·결정 — compare → 답 원문 → decide → close
+        7. 적용 — 「적용」 답 → 플러그인 가지 커밋 → applied (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sandbox-phase-after-collect-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 다시 표본 — sandbox --phase after → 실행 → collect (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-brief-phase-after-ingest-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 다시 채점 — brief --phase after → 채점자 셋 → ingest (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-compare-decide-close-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 대조와 결정 — compare → 「채택·되돌림」 답 → decide → close (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 출하 (B)
       
     </span>
   </a>
@@ -1831,10 +1903,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        폴더가 말해 주는 것
+        결과 읽는 법
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="결과 읽는 법">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        채점 축
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        숫자를 읽을 때 주의할 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이럴 땐
       
     </span>
   </a>
@@ -1842,7 +1953,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         무엇이 「블라인드」를 지키나
@@ -1853,10 +1964,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        흔한 실수
+        폴더가 말해 주는 것
       
     </span>
   </a>
@@ -1864,10 +1975,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#before" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
-        첫 사이클 실측 (출하 게이트 · before 까지)
+        실제 사례
       
     </span>
   </a>
@@ -1875,7 +1986,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -4022,6 +4133,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이 문서를 읽는 법
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="이 문서를 읽는 법">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4031,37 +4154,31 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제
+        등장인물
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        한 바퀴
+        두 가지 쓰임
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#replay-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        표본을 얻는 두 길 — replay · run
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4069,12 +4186,34 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        절차
+        한눈에 보기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="절차">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시작 전 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        단계별 안내
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="단계별 안내">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4089,10 +4228,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1-1-run-before-sandbox-collect" class="md-nav__link">
+  <a href="#2-sandbox-collect-run" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1-1. (run 모드) before 표본 내기 — sandbox → 실행 → collect
+        2. 표본 만들기 — sandbox → 실행 → collect (run 모드만)
       
     </span>
   </a>
@@ -4100,10 +4239,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-before-brief-ingest" class="md-nav__link">
+  <a href="#3-scenariomd-3-brief" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. before 채점 — brief → 채점자 셋 → ingest
+        3. 질문 확정 — scenario.md § 3 → brief
       
     </span>
   </a>
@@ -4111,10 +4250,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-planmd-planned" class="md-nav__link">
+  <a href="#4-ingest" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 개선 계획 — plan.md → planned
+        4. 채점 — 채점자 셋 → ingest
       
     </span>
   </a>
@@ -4122,10 +4261,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-applied" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 적용 — 답 원문 → 플러그인 가지에서 커밋 → applied
+        5. 결과 읽기
       
     </span>
   </a>
@@ -4133,10 +4272,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-after-brief-phase-after-ingest" class="md-nav__link">
+  <a href="#6-planmd-planned-b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. after 채점 — 새 산출물 → brief --phase after → 채점자 셋 → ingest
+        6. 개선 계획 — plan.md → planned (B)
       
     </span>
   </a>
@@ -4144,10 +4283,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-compare-decide-close" class="md-nav__link">
+  <a href="#7-applied-b" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 대조·결정 — compare → 답 원문 → decide → close
+        7. 적용 — 「적용」 답 → 플러그인 가지 커밋 → applied (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sandbox-phase-after-collect-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 다시 표본 — sandbox --phase after → 실행 → collect (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-brief-phase-after-ingest-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 다시 채점 — brief --phase after → 채점자 셋 → ingest (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-compare-decide-close-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 대조와 결정 — compare → 「채택·되돌림」 답 → decide → close (B)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 출하 (B)
       
     </span>
   </a>
@@ -4160,10 +4343,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        폴더가 말해 주는 것
+        결과 읽는 법
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="결과 읽는 법">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        채점 축
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        숫자를 읽을 때 주의할 것
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이럴 땐
       
     </span>
   </a>
@@ -4171,7 +4393,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         무엇이 「블라인드」를 지키나
@@ -4182,10 +4404,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        흔한 실수
+        폴더가 말해 주는 것
       
     </span>
   </a>
@@ -4193,10 +4415,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#before" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
-        첫 사이클 실측 (출하 게이트 · before 까지)
+        실제 사례
       
     </span>
   </a>
@@ -4204,7 +4426,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -4231,162 +4453,496 @@
 
 
 
-<h1 id="_1">플러그인 변경 전후 채점하기<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="bench">플러그인 변경 평가하기 (bench)<a class="headerlink" href="#bench" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">한 줄 요약</p>
-<p>스킬·에이전트 파일을 고친 뒤, 그 산출물 (plan.md · .plan.critic.md · .eval.md) 이 <strong>정말 좋아졌는지</strong>를 같은 잣대로 두 번 재서 채택·되돌림을 정합니다. <strong>evaluator 는 코드를, bench 는 에이전트가 쓴 문서를 평가합니다.</strong></p>
+<p>스킬·에이전트 파일을 고쳤을 때, 그 에이전트가 쓰는 문서 (plan.md · .plan.critic.md · .eval.md) 가 <strong>정말 좋아졌는지</strong>를 같은 잣대로 두 번 재서 숫자로 비교합니다. 채점은 서로 모르는 채점자 셋이 하고, 좋아졌는지는 도구가 셉니다. 사람은 <strong>무엇을 잴지 · 적용할지 · 채택할지</strong> 세 가지를 정합니다.</p>
 </div>
-<h2 id="_2">언제 쓰나<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>evaluator 는 코드를, bench 는 에이전트가 쓴 문서를 평가합니다.</strong> 코드가 요구사항을 충족하는지는 여기서 보지 않습니다 (<code>@ag-evaluator</code>·<code>@ag-code-reviewer</code> 의 몫).</p>
+<hr />
+<h2 id="_1">이 문서를 읽는 법<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">언제 쓰나<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>agents/ag-*.md</code>·<code>skills/*/SKILL.md</code> 를 고치는 PR 에 "좋아졌다" 의 근거를 붙이고 싶을 때</li>
-<li>다이어트·슬라이스처럼 <strong>읽는 양을 줄이는 변경</strong>이 산출물 품질을 떨어뜨리지 않았는지 확인할 때</li>
-<li>같은 산출물에 대한 두 판 (예: critic 규칙 개정 전후) 을 느낌이 아니라 숫자로 비교할 때</li>
+<li><code>agents/ag-*.md</code>·<code>skills/*/SKILL.md</code> 를 고치는 PR 에 「좋아졌다」 의 근거를 붙이고 싶을 때</li>
+<li>읽는 양을 줄이는 변경 (다이어트·슬라이스) 이 산출물 품질을 떨어뜨리지 않았는지 확인할 때</li>
+<li>지금 판의 에이전트가 어떤 결함을 반복하는지 <strong>측정만</strong> 하고 싶을 때</li>
 </ul>
-<p>코드가 요구사항을 충족하는지는 여기서 보지 않습니다 — 그것은 <code>@ag-evaluator</code> 와 <code>@ag-code-reviewer</code> 의 몫입니다.</p>
-<h2 id="_3">전제<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li>소비 레포에 <code>workspace/TEAM.md</code> 가 있고, 채점할 산출물 (replay) 또는 그 산출물의 입력 (run — plan·명세) 이 <code>workspace/{TEAM}/projects/**</code> 에 있을 것</li>
-<li>플러그인 dev 체크아웃 (git) 의 경로를 알 것 — <code>applied</code> 가 적용 커밋의 diff 를 봅니다. <code>--plugin-repo</code> 인자 또는 <code>workspace/_common/config.md</code> <code>## 언어·도구 기본값</code> 표의 <code>bench_plugin_repo</code></li>
-<li><strong>채점자는 소비 레포 세션에서 부를 것</strong> — 채점자 서브에이전트는 부른 세션의 프로젝트 메모리·<code>CLAUDE.md</code> 를 함께 받습니다. 플러그인 레포 세션의 메모리에는 이전 사이클 판정이 쌓이기 쉬워 채점자에게 앵커로 들어갑니다 (실측: 플러그인 레포 세션에서 부른 채점자 전원이 그 메모리 색인을 받음). 채점자의 <code>show --workspace workspace</code> 도 소비 레포 루트 기준이라, 다른 곳에서 부르면 프롬프트에 경로를 덧붙여야 해 「프롬프트는 둘뿐」 규칙이 깨집니다. 적용 커밋·PR 같은 플러그인 레포 작업은 플러그인 레포에서 합니다</li>
-<li>채점자 (<code>@ag-bench-scorer</code>) 를 <strong>셋</strong> 부를 수 있을 것 (기본 · <code>bench_scorers</code> 로 바꿀 수 있다) — 한 채점자의 점수는 잡음이고, 둘이면 축 평균이 0.5 단위라 잡음 띠 ±0.3 이 뜻을 잃습니다</li>
-</ul>
-<h2 id="_4">한 바퀴<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>init ──brief──▶ @ag-bench-scorer ×2 ──ingest──▶ before
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  │                                                │
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  └ 표본 사본 · 채점표 사본 · scenario § 3 기대       plan.md (사용자·메인 세션) ──planned──▶ planned
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                                   │
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>          사용자 「적용」 답 원문 (inputs/) ──▶ 플러그인 가지에서 변경 집합 적용·커밋 ──applied──▶ applied
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                                   │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>          바뀐 플러그인으로 새 산출물 ──brief --phase after──▶ @ag-bench-scorer ×2 ──ingest──▶ after
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                                                   │
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                 compare (도구가 센다) ──▶ compared ──▶ 사용자 「채택·되돌림」 답 원문 ──decide──▶ close
-</span></code></pre></div>
-<p>한 호출이 한 단계입니다. 모든 명령의 응답에 <code>다음</code> 이 있습니다 — 그대로 복붙해 따라가면 됩니다 (실행한 도구의 절대 경로로 찍힙니다).</p>
-<h2 id="replay-run">표본을 얻는 두 길 — replay · run<a class="headerlink" href="#replay-run" title="Permanent link">&para;</a></h2>
+<p>평소 feature 작업에는 쓰지 않습니다. 스킬도 훅도 아니라서, 누가 명령을 치기 전에는 아무 일도 일어나지 않습니다.</p>
+<h3 id="_3">등장인물<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>replay (<code>--artifacts</code>)</th>
-<th>run (<code>--run</code> critic · planner + <code>--inputs</code>)</th>
+<th>누구</th>
+<th>무엇을 하나</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>before 표본</td>
-<td>이미 있는 산출물</td>
-<td>분리 트리에서 변경 <strong>전</strong> 판으로 새로 낸다</td>
+<td><strong>사람 (당신)</strong></td>
+<td>무엇을 잴지 정하고, 질문 한 줄을 쓰고, 「적용」 과 「채택·되돌림」 을 결정한다. 이 셋은 다른 누구도 대신하지 않는다</td>
 </tr>
 <tr>
-<td>after 표본</td>
-<td>바뀐 판이 새로 쓸 때까지 기다린다</td>
-<td>분리 트리에서 변경 <strong>후</strong> 판으로 새로 낸다</td>
+<td><strong>메인 세션</strong></td>
+<td>소비 레포 (예: nimda) 에서 연 Claude Code 세션. 도구 명령을 치고, 채점자를 부르고, 개선 계획 초안을 쓴다</td>
 </tr>
 <tr>
-<td>입력</td>
-<td>표본마다 다를 수 있다</td>
-<td>init 때 뜬 사본 — before·after 가 같은 plan·명세를 받는다</td>
+<td><strong>채점자</strong> <code>@ag-bench-scorer</code> × 3</td>
+<td>정해진 파일만 읽고 축마다 1~5점과 근거 좌표를 매긴다. 서로의 결과도, 변경 전인지 후인지도 모른다</td>
 </tr>
 <tr>
-<td>실제 산출물</td>
-<td>건드리지 않는다</td>
-<td>건드리지 않는다 (분리 트리에만 쓴다)</td>
-</tr>
-<tr>
-<td>쓸 때</td>
-<td>자연 표본이 이미 있다 · 측정만 한다</td>
-<td>같은 과제로 전후를 비교한다 · 자연 표본이 없다</td>
+<td><strong>도구</strong> <code>bench-cycle.py</code></td>
+<td>단계를 넘길 조건을 세고, 사본을 뜨고, 전후 차이를 계산한다. 「좋아졌다」 는 도구만 말한다</td>
 </tr>
 </tbody>
 </table>
-<p>run 모드의 과제는 <strong>서브에이전트 한 번 호출</strong> (<code>@ag-planner-critic</code> 은 plan 을 검토 · <code>@ag-planner</code> 는 명세를 계획) 입니다. <code>@ag-evaluator</code> 와 run-cycle 순회는 코드 상태·게이트가 얽혀 아직 대상이 아닙니다.</p>
+<h3 id="_4">두 가지 쓰임<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A. 측정만</th>
+<th>B. 개선 사이클 (전후 비교)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>묻는 것</td>
+<td>지금 판이 어떤 결함을 반복하나</td>
+<td>이 변경으로 좋아졌나</td>
+</tr>
+<tr>
+<td>단계</td>
+<td>1 → 5</td>
+<td>1 → 11</td>
+</tr>
+<tr>
+<td>사람의 결정</td>
+<td>무엇을 잴지 · 질문</td>
+<td>+ 적용할지 · 채택할지</td>
+</tr>
+<tr>
+<td>끝</td>
+<td><code>stop</code> (측정 전용)</td>
+<td><code>close</code> (채택 또는 되돌림)</td>
+</tr>
+</tbody>
+</table>
+<p>A 로 시작해 결함이 보이면, 같은 사이클을 그대로 B 로 이어 가도 됩니다 (before 채점을 다시 하지 않아도 됩니다).</p>
+<hr />
+<h2 id="_5">한눈에 보기<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>목적</th>
+<th>사람이 하는 일</th>
+<th>확인할 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 사이클 열기</strong></td>
+<td>무엇을, 어느 표본으로, 어느 잣대로 잴지 고정</td>
+<td>대상 에이전트·표본·축을 고른다</td>
+<td>사이클 번호 · 표본 사본 · <code>다음</code> 안내</td>
+</tr>
+<tr>
+<td><strong>2. 표본 만들기</strong> (run)</td>
+<td>지금 판으로 산출물을 <strong>분리된 곳에서</strong> 새로 낸다</td>
+<td>실행 명령을 돌린다 (또는 메인 세션에 맡긴다)</td>
+<td>새 산출물 수 · 실제 파일 변경 경고 없음</td>
+</tr>
+<tr>
+<td><strong>3. 질문 확정</strong></td>
+<td>채점자가 받는 질문 한 줄을 굳힌다</td>
+<td>「확인하려는 것」 을 쓴다</td>
+<td>brief 에 질문 한 줄만 실렸는지</td>
+</tr>
+<tr>
+<td><strong>4. 채점</strong></td>
+<td>서로 모르는 채점자 셋이 점수를 매긴다</td>
+<td>채점자 셋을 부른다 (프롬프트에 아무것도 덧붙이지 않는다)</td>
+<td><code>ingest</code> 통과 · 축별 평균 · 불일치 · 발견</td>
+</tr>
+<tr>
+<td><strong>5. 결과 읽기</strong></td>
+<td>반복되는 결함을 찾는다</td>
+<td>발견 표를 읽고 다음을 정한다</td>
+<td>두 명 이상이 따로 잡은 결함</td>
+</tr>
+<tr>
+<td><strong>6. 개선 계획</strong></td>
+<td>발견 → 무엇을 고칠지</td>
+<td>계획을 검토한다</td>
+<td><code>planned</code> 통과 · 바꿀 파일 목록</td>
+</tr>
+<tr>
+<td><strong>7. 적용</strong></td>
+<td>계획한 파일만 고쳐 커밋</td>
+<td>「적용」 을 승인한다 (답 원문)</td>
+<td>계획 밖 파일 0 · 적용 커밋 판</td>
+</tr>
+<tr>
+<td><strong>8. 다시 표본</strong></td>
+<td>바뀐 판으로 <strong>같은 입력</strong> 을 다시 돌린다</td>
+<td>실행 명령을 돌린다</td>
+<td>새 산출물 · before 와 다른 내용</td>
+</tr>
+<tr>
+<td><strong>9. 다시 채점</strong></td>
+<td>같은 잣대로 다시 잰다</td>
+<td>채점자 셋을 다시 부른다</td>
+<td><code>ingest</code> 통과</td>
+</tr>
+<tr>
+<td><strong>10. 대조·결정</strong></td>
+<td>전후 차이를 도구가 세고 사람이 정한다</td>
+<td>「채택·되돌림」 을 결정한다 (답 원문)</td>
+<td>판정 낱말 · 오른·내린 축 · 발견 수 변화</td>
+</tr>
+<tr>
+<td><strong>11. 출하</strong></td>
+<td>채택한 변경을 내보낸다</td>
+<td>PR 을 머지한다</td>
+<td>PR 본문에 대조 결과 인용</td>
+</tr>
+</tbody>
+</table>
+<p>모든 명령의 응답 끝에 <code>다음</code> 이 있습니다. <strong>그대로 복사해 다음 명령으로 쓰면 됩니다</strong> (실행한 도구의 절대 경로로 찍힙니다).</p>
+<hr />
+<h2 id="_6">시작 전 준비<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
-<p class="admonition-title">after 표본을 소비 레포 최상위에서 다시 내지 마세요</p>
-<p><code>cd {소비 레포} &amp;&amp; claude -p --plugin-dir …</code> 로 critic 을 다시 부르면 그 feature 의 <strong>실제</strong> <code>.plan.critic.md</code> 가 덮어쓰입니다. 실사용 두 사이클이 이렇게 실제 산출물을 바꿨습니다. 같은 일을 run 모드가 분리 트리에서 합니다.</p>
+<p class="admonition-title">채점은 소비 레포 세션에서</p>
+<p>채점자는 <strong>자기를 부른 세션의 프로젝트 메모리</strong>를 함께 받습니다. 플러그인 레포 세션의 메모리에는 이전 사이클 판정이 쌓이기 쉬워, 그 세션에서 부르면 채점자가 「지난번엔 이 축이 내려갔다」 를 미리 알고 채점합니다. 그래서 <strong>사이클 전체를 소비 레포 (예: nimda) 세션에서</strong> 돌립니다. 플러그인 파일을 고쳐 커밋하는 일 (7단계) 만 플러그인 레포에서 합니다.</p>
 </div>
-<h2 id="_5">절차<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>아래 명령은 <strong>소비 레포 루트</strong> (<code>workspace/</code> 가 보이는 곳) 에서 실행합니다. <code>{PLUGIN}</code> 은 설치된 플러그인 경로 (<code>${CLAUDE_PLUGIN_ROOT}</code> 또는 <code>~/.claude/plugins/cache/deali-skills/dp-skills/{버전}</code>).</p>
+<ul>
+<li><strong>설치본을 최신으로 맞추고 세션을 새로 엽니다.</strong> 사이클은 처음 연 도구의 판을 기억하고, 채점자가 다른 판의 도구를 부르면 거절합니다. <strong>사이클 도중에는 플러그인을 갱신하지 않습니다.</strong></li>
+<li>
+<p><strong>도구 경로</strong> — 아래 명령의 <code>{BC}</code> 는 설치본 도구입니다. 명령은 소비 레포 루트 (<code>workspace/</code> 가 보이는 곳) 에서 칩니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{BC} = python3 ~/.claude/plugins/cache/deali-skills/dp-skills/{설치 버전}/tools/bench-cycle.py
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>플러그인 레포 경로</strong> — 표본을 새로 내거나 (run 모드) 적용 커밋을 대조할 때 <code>--plugin-repo {플러그인 레포}</code> 가 필요합니다. 그 세션이 플러그인 레포에 쓸 수 있어야 하므로 디렉터리를 추가해 둡니다 (<code>/add-dir</code>).</p>
+</li>
+<li><strong>run 모드의 실행 명령은 새 <code>claude</code> 프로세스</strong>입니다 — 로그인이 만료됐으면 먼저 <code>claude auth login</code>.</li>
+</ul>
+<hr />
+<h2 id="_7">단계별 안내<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="1-init">1. 사이클 열기 — <code>init</code><a class="headerlink" href="#1-init" title="Permanent link">&para;</a></h3>
-<p>무엇을 잴지 먼저 정합니다: 표본 (산출물 2~5건) · 참조 (산출물이 가리키는 상위 문서 — critic 을 채점하면 그 plan 과 명세) · 대상 파일 (개선 계획이 고칠 플러그인 파일) · 축.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--slug<span class="w"> </span>critic-quality<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--subject<span class="w"> </span><span class="s2">&quot;@ag-planner-critic 의 챌린지가 planner 에게 쓸모 있는 입력인가&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--artifacts<span class="w"> </span>workspace/dp-team/projects/p1/features/03-x.plan.critic.md<span class="w"> </span>workspace/dp-team/projects/p1/features/05-y.plan.critic.md<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--context<span class="w">  </span>workspace/dp-team/projects/p1/features/03-x.md<span class="w"> </span>workspace/dp-team/projects/p1/features/03-x.plan.md<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">             </span>workspace/dp-team/projects/p1/features/05-y.md<span class="w"> </span>workspace/dp-team/projects/p1/features/05-y.plan.md<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span>--subject-files<span class="w"> </span>dp-skills/agents/ag-planner-critic.md<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span>--axes<span class="w"> </span>Q1,Q3,Q4,Q6,Q8,P1<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>--plugin-repo<span class="w"> </span>~/Projects/deali-skills-plugin<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span>--workspace<span class="w"> </span>workspace
+<p><strong>목적.</strong> 무엇을 (대상 에이전트), 어느 표본으로, 어느 잣대 (채점 축) 로 잴지를 사이클에 고정합니다. 여기서 정한 것은 사이클 끝까지 갑니다 — 도중에 잣대가 바뀌면 전후 비교가 무효가 되기 때문입니다.</p>
+<p><strong>사람이 하는 일.</strong></p>
+<ul>
+<li><strong>대상</strong>: 어느 에이전트의 산출물을 잴지. 처음이라면 <code>@ag-planner-critic</code> (critic) 이 효과가 잘 보입니다.</li>
+<li><strong>표본 얻는 길</strong>:<ul>
+<li><strong>run</strong> (권장) — 입력 (critic 이면 plan, planner 면 명세) 을 주면 도구가 분리된 곳에서 산출물을 새로 냅니다. 같은 입력으로 전후를 비교할 수 있고 실제 파일을 건드리지 않습니다.</li>
+<li><strong>replay</strong> — 이미 있는 산출물을 그대로 채점합니다. 측정만 할 때 편하지만, after 표본은 바뀐 판이 자연히 새로 쓸 때까지 기다려야 합니다.</li>
+</ul>
+</li>
+<li><strong>표본 수</strong>: 2~5건. 많을수록 정확하지만 채점 비용이 늘어납니다.</li>
+<li><strong>축</strong>: critic 이면 보통 <code>Q1,Q3,Q4,Q6,Q8,P1</code>. 축의 뜻은 아래 「결과 읽는 법」.</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>init<span class="w"> </span>--slug<span class="w"> </span>critic-generalization<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--subject<span class="w"> </span><span class="s2">&quot;0.44.2 이후 critic 규칙이 다른 plan 에서도 지켜지는가&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--run<span class="w"> </span>critic<span class="w"> </span>--inputs<span class="w"> </span><span class="o">{</span>plan<span class="w"> </span>경로들<span class="o">}</span><span class="w"> </span>--context<span class="w"> </span><span class="o">{</span>명세<span class="w"> </span>경로들<span class="o">}</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--subject-files<span class="w"> </span>dp-skills/agents/ag-planner-critic.md<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--axes<span class="w"> </span>Q1,Q3,Q4,Q6,Q8,P1<span class="w"> </span>--plugin-repo<span class="w"> </span><span class="o">{</span>플러그인<span class="w"> </span>레포<span class="o">}</span>
 </span></code></pre></div>
-<p>run 모드는 <code>--artifacts</code> 대신 <code>--run critic --inputs {plan.md …}</code> 를 줍니다 (<code>--plugin-repo</code> 필수 — 단계별 판을 그 커밋에서 뜹니다). 입력은 참조로도 복사됩니다.</p>
-<p><code>workspace/{TEAM}/bench/001-critic-quality/</code> 가 생기고 표본·참조·대상 파일이 <code>samples/</code> 에 <strong>복사</strong>됩니다 — 원본은 재호출 때 덮어쓰이므로 좌표는 사본 기준입니다. 그다음 <code>scenario.md § 3 기대</code> 를 <strong>자기 말로</strong> 채웁니다: 확인하려는 것 · 어느 축이 오르면 성공 · 어느 축이 내리면 되돌림. 비워 두면 채점자가 무엇을 묻는지 모릅니다.</p>
-<h3 id="1-1-run-before-sandbox-collect">1-1. (run 모드) before 표본 내기 — <code>sandbox</code> → 실행 → <code>collect</code><a class="headerlink" href="#1-1-run-before-sandbox-collect" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>sandbox<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--phase<span class="w"> </span>before<span class="w"> </span>--workspace<span class="w"> </span>workspace
+<p>replay 는 <code>--run</code>·<code>--inputs</code> 대신 <code>--artifacts {산출물 경로들}</code> 을 줍니다.</p>
+<p><strong>확인할 결과.</strong></p>
+<ul>
+<li><code>id</code> — 사이클 번호 (예: <code>003</code>). 이후 모든 명령에 씁니다.</li>
+<li><code>run.outputs</code> — 새로 낼 산출물 경로. 예상한 feature 가 맞는지.</li>
+<li><code>plugin_version_before</code> — 지금 판. 측정의 기준입니다.</li>
+<li><code>workspace/{TEAM}/bench/003-…/</code> 폴더가 생기고 입력·명세가 사본으로 들어갑니다.</li>
+</ul>
+<h3 id="2-sandbox-collect-run">2. 표본 만들기 — <code>sandbox</code> → 실행 → <code>collect</code> (run 모드만)<a class="headerlink" href="#2-sandbox-collect-run" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 지금 판의 에이전트로 산출물을 <strong>실제 프로젝트와 분리된 곳에서</strong> 새로 냅니다. 소비 레포에서 에이전트를 직접 다시 부르면 실제 산출물이 덮어쓰입니다 — 이 단계가 그걸 막습니다.</p>
+<p><strong>사람이 하는 일.</strong></p>
+<ol>
+<li>
+<p>분리 트리를 만듭니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>sandbox<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--phase<span class="w"> </span>before
 </span></code></pre></div>
-<p>임시 폴더 (<code>{TMPDIR}/dp-bench/{팀}-{id}-{라벨}</code> · <code>--dir</code> 로 바꿀 수 있다 · 소비 레포 밖이어야 한다) 에 분리 트리를 만듭니다 — 소비 레포 최상위 항목은 <strong>읽기용 링크</strong> (소스 존재 확인이 실물과 같다 · <code>.git</code> 은 걸지 않는다), <code>workspace/</code> 는 <strong>사본</strong> (bench 폴더 제외), 입력은 init 사본으로 심고, 같은 feature 의 기존 산출물 (critic 이면 <code>.plan.critic.md</code> · planner 면 <code>.plan.md</code> 와 <code>.plan.critic.md</code>) 과 <code>.focus.md</code> 는 지우고, <code>STATE.md</code> 는 대상 project 한 줄로 둡니다. 플러그인은 이 단계 판의 커밋을 <code>git worktree</code> 로 떠서 <code>--plugin-dir</code> 로 씁니다 — 설치본 캐시를 쓰지 않습니다.</p>
-<p>응답의 <code>인증 확인</code> 을 먼저 돌리고 (새 <code>claude</code> 프로세스는 만료된 로그인을 갱신하지 못합니다 — 실패하면 <code>claude auth login</code>), <code>실행</code> 의 명령을 돌립니다. 프롬프트는 stdin 으로 넘어갑니다 (<code>--allowedTools</code> 뒤에 두면 프롬프트를 삼킵니다). 명령마다 수 분이고 서로 독립이라 병렬로 돌려도 됩니다. 끝나면:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>collect<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--phase<span class="w"> </span>before<span class="w"> </span>--workspace<span class="w"> </span>workspace
+</li>
+<li>
+<p>응답의 <strong><code>인증 확인</code></strong> 명령을 먼저 돌립니다 (아무것도 안 나오면 정상).</p>
+</li>
+<li>
+<p><strong><code>실행</code></strong> 의 명령들을 돌립니다. 표본 하나에 opus 로 7~10분, 서로 독립이라 동시에 돌려도 됩니다. 메인 세션에 「실행 명령을 돌려 줘」 라고 맡겨도 됩니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">화면에서 복사하지 말 것</p>
+<p>일부 화면은 응답 JSON 의 <code>&gt;</code>·<code>&amp;</code> 를 <code>&amp;gt;</code>·<code>&amp;amp;</code> 로 바꿔 보여 주고, 긴 줄 중간에 공백을 끼웁니다. 그대로 복사하면 명령이 깨집니다. 터미널 원문에서 복사하거나 메인 세션에 맡깁니다.</p>
+</div>
+</li>
+<li>
+<p>다 끝나면 거둡니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>collect<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--phase<span class="w"> </span>before
 </span></code></pre></div>
-<p>분리 트리의 새 산출물을 표본 사본으로 거둡니다 — 없으면 거절하고 실행 로그 경로를 알려 줍니다. 분리 중 실제 산출물이 바뀌었거나 대상 밖 프로젝트 파일이 바뀌었으면 경고로 보여 줍니다. 다 쓴 트리는 <code>sandbox-remove --id 001 --phase before</code> 로 지웁니다 (거두기 전에는 <code>--force</code> 가 있어야 합니다 · 링크만 지우므로 소비 레포 원본은 남습니다).</p>
-<p>측정만 할 때 (개선 없이 지금 판의 결함 범주를 볼 때) 는 before 채점 뒤 <code>stop --reason "측정 전용"</code> 으로 닫습니다.</p>
-<h3 id="2-before-brief-ingest">2. before 채점 — <code>brief</code> → 채점자 셋 → <code>ingest</code><a class="headerlink" href="#2-before-brief-ingest" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>brief<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--phase<span class="w"> </span>before<span class="w"> </span>--workspace<span class="w"> </span>workspace
+</li>
+</ol>
+<p><strong>확인할 결과.</strong></p>
+<ul>
+<li><code>samples</code> — 표본 수가 입력 수와 같은가.</li>
+<li><code>실제 산출물 변경 (경고)</code> — <strong>비어 있어야</strong> 합니다. 무언가 있으면 분리가 깨졌거나 그 사이 사람이 실제 파일을 고친 것입니다.</li>
+<li><code>대상 밖 프로젝트 파일 변경</code> — 보통 비어 있습니다. 에이전트가 다른 파일을 건드렸다는 신호입니다.</li>
+<li>「분리 트리에 새 산출물이 없습니다」 로 거절되면 실행이 실패한 것입니다. 응답에 나온 <code>run-N.log</code> 를 봅니다.</li>
+<li>다 쓴 분리 트리는 <code>{BC} sandbox-remove --id 003 --phase before</code> 로 지웁니다.</li>
+</ul>
+<h3 id="3-scenariomd-3-brief">3. 질문 확정 — <code>scenario.md § 3</code> → <code>brief</code><a class="headerlink" href="#3-scenariomd-3-brief" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 채점자가 받는 <strong>질문 한 줄</strong>을 정하고, 채점자가 읽어도 되는 파일 목록 (허용 목록) 과 잣대를 굳힙니다. 채점자는 이 사이클이 무엇을 기대하는지 (성공 조건) 도, 변경 전인지 후인지도 모릅니다 — 기대를 아는 채점은 그쪽으로 기울기 때문입니다.</p>
+<p><strong>사람이 하는 일.</strong> 사이클 폴더의 <code>scenario.md</code> 끝 <code>## 3. 기대</code> 를 <strong>자기 말로</strong> 채웁니다.</p>
+<div class="language-markdown highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gu">## 3. 기대</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">-</span><span class="w"> </span>확인하려는 것: (채점자가 받는 유일한 질문 — 결함 범주를 구체적으로)
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">-</span><span class="w"> </span>성공: (B 만 — 어느 축이 0.3 이상 오르면 채택인가 · A 는 「해당 없음」)
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">-</span><span class="w"> </span>되돌림: (B 만 — 어느 축이 내려가면 되돌리나)
 </span></code></pre></div>
-<p>허용 목록 (<code>brief-{라벨}.md</code>) 이 굳고 시나리오·채점표 해시가 고정됩니다. 라벨은 <code>init</code> 이 단계마다 정한 무작위 이름입니다 — 채점자는 지시·경로·파일 이름 어디에서도 자기가 변경 전인지 후인지 알 수 없고, 시나리오 § 3 의 성공·되돌림 조건도 받지 않습니다 (지시에는 「확인하려는 것」 한 줄만 실립니다). 그다음 메인 세션에서 채점자를 <strong>따로 세 번</strong> 부릅니다. 프롬프트는 이 둘뿐입니다 — 산출물 요약·"어디가 약하다"·다른 채점자의 결과를 넣지 않습니다 (앵커).</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>@ag-bench-scorer 사이클 001 · 채점자 1
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>@ag-bench-scorer 사이클 001 · 채점자 2
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>@ag-bench-scorer 사이클 001 · 채점자 3
+<p>좋은 질문은 <strong>찾을 결함을 이름으로</strong> 적습니다. 예: 「① 챌린지 하나에 원인 하나만 담는가 ② suggestion 으로 낮출 때 이유를 적는가 ③ 따옴표 인용이 plan 원문에 있는가」. 「잘 썼나」 같은 질문은 점수만 흔들립니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>brief<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--phase<span class="w"> </span>before
 </span></code></pre></div>
-<p>셋이 끝나면:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>ingest<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--phase<span class="w"> </span>before<span class="w"> </span>--workspace<span class="w"> </span>workspace
+<p><strong>확인할 결과.</strong></p>
+<ul>
+<li><code>brief-{라벨}.md</code> 가 생깁니다 (라벨은 <code>8edk</code> 같은 무작위 이름 — 단계를 가립니다).</li>
+<li>그 파일의 「이 사이클이 묻는 것」 에 <strong>질문 한 줄만</strong> 있고, <code>before</code>·<code>after</code>·「성공」 이라는 말이 없는지.</li>
+<li><code>allow</code> — 표본·참조·채점표·지시 파일 수. 표본 3건이면 보통 10~12개.</li>
+<li><strong>이 뒤로 <code>scenario.md</code> 를 고치면 그 사이클은 끝까지 갈 수 없습니다</strong> (해시로 굳었습니다). 질문을 바꾸려면 <code>stop</code> 하고 새 사이클을 엽니다.</li>
+</ul>
+<h3 id="4-ingest">4. 채점 — 채점자 셋 → <code>ingest</code><a class="headerlink" href="#4-ingest" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 서로 모르는 채점자 셋이 같은 표본을 따로 채점합니다. 한 사람의 점수는 잡음이라 셋의 평균을 씁니다.</p>
+<p><strong>사람이 하는 일.</strong> <strong>소비 레포 세션</strong>에서 셋을 부릅니다. 한 메시지로 보내도, 하나씩 보내도 됩니다. 세션은 하나면 됩니다 — 부를 때마다 새 맥락의 채점자가 뜹니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>@ag-bench-scorer 사이클 003 · 채점자 1
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>@ag-bench-scorer 사이클 003 · 채점자 2
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>@ag-bench-scorer 사이클 003 · 채점자 3
 </span></code></pre></div>
-<p>거절되면 (허용 목록 밖을 읽음 · 축 누락 · 좌표 없음 · 채점자 부족) <strong>그 채점자만</strong> 같은 번호로 새 맥락에서 다시 부릅니다 (파일은 덮어씁니다). 통과하면 <code>scores/{라벨}.json</code> (평균·불일치) 과 <code>metrics-{라벨}.json</code> (정량 지표 + 린트) 이 생깁니다. 단계 ↔ 라벨 대응은 <code>show --id 001</code> (채점자 번호 없이) 의 <code>labels</code> 에 있습니다.</p>
-<h3 id="3-planmd-planned">3. 개선 계획 — <code>plan.md</code> → <code>planned</code><a class="headerlink" href="#3-planmd-planned" title="Permanent link">&para;</a></h3>
-<p>before 라벨의 <code>scores/{라벨}.json</code> 과 두 채점 파일의 <code>## 2. 발견</code> 을 읽고 사이클 폴더에 <code>plan.md</code> 를 씁니다 (사용자 또는 메인 세션 — 계획은 before 점수를 봐야 하므로 블라인드 대상이 아닙니다). 절 다섯: <code>## 0. 요약</code> · <code>## 1. 발견 → 변경</code> · <code>## 2. 변경 집합</code> (<code>| 파일 | 무엇을 | 기대 축 |</code> — <strong>첫 칸은 플러그인 레포 상대 경로</strong>, 예 <code>dp-skills/agents/ag-planner-critic.md</code>) · <code>## 3. 기대 효과</code> (축별 방향·크기 — 모든 축이 오른다는 계획은 계획이 아닙니다) · <code>## 4. 되돌리기</code>.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>planned<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--workspace<span class="w"> </span>workspace
+<p><strong>프롬프트에 아무것도 덧붙이지 않습니다.</strong> 「#17 이 약할 거야」 한 줄도 채점을 기울게 합니다. 채점자마다 몇 분씩 걸립니다. 셋이 끝나면 수합합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>ingest<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--phase<span class="w"> </span>before
 </span></code></pre></div>
-<h3 id="4-applied">4. 적용 — 답 원문 → 플러그인 가지에서 커밋 → <code>applied</code><a class="headerlink" href="#4-applied" title="Permanent link">&para;</a></h3>
-<p>사용자의 「적용」 답을 <strong>원문 그대로</strong> <code>inputs/001-answer-apply.md</code> 에 둡니다 (요약 금지). 플러그인 레포에서 <code>main</code> 으로부터 가지를 따고 <strong>변경 집합의 파일만</strong> 고쳐 커밋합니다. 그다음:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>applied<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--commit<span class="w"> </span><span class="o">{</span>SHA<span class="o">}</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>--answer-file<span class="w"> </span>workspace/dp-team/bench/001-critic-quality/inputs/001-answer-apply.md<span class="w"> </span>--workspace<span class="w"> </span>workspace
+<p><strong>확인할 결과.</strong></p>
+<ul>
+<li><strong>통과</strong> — 응답에 <code>summary</code> 가 나옵니다 (다음 단계에서 읽습니다). 채점 요약 <code>scores/{라벨}.json</code> 과 정량 지표 <code>metrics-{라벨}.json</code> 이 생깁니다.</li>
+<li><strong>거절</strong> — 사유가 줄마다 나옵니다. 「허용 목록 밖을 읽음」·「축 누락」·「좌표 없음」 이면 <strong>그 번호의 채점자만</strong> 새로 다시 부릅니다 (파일은 덮어씁니다).</li>
+</ul>
+<h3 id="5">5. 결과 읽기<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 숫자보다 <strong>반복되는 결함</strong>을 찾습니다. 다음에 무엇을 고칠지의 재료입니다.</p>
+<p><strong>사람이 하는 일.</strong> 세 군데를 봅니다.</p>
+<ol>
+<li><strong>축별 평균</strong> (<code>summary.axes.{축}.mean</code>) — 3점대 이하인 축이 약점입니다. <code>disagree: true</code> 인 축은 채점자끼리 2점 이상 갈렸다는 뜻이라 평균을 믿지 않습니다.</li>
+<li><strong>발견 수</strong> (<code>summary.findings</code> — Blocker · Major · Minor) — Major 가 많으면 읽는 사람이 되물어야 하는 결함이 많다는 뜻입니다.</li>
+<li><strong>채점 파일의 <code>## 2. 발견</code> 표</strong> (<code>scores/{라벨}-1.md</code>~<code>-3.md</code>) — <strong>두 명 이상이 따로 잡은 결함</strong>이 진짜입니다. 한 명만 잡은 것은 취향일 수 있습니다. 각 채점 파일의 <code>## 0. 요약</code> 에 그 채점자가 본 「가장 큰 결함」 이 한 줄로 있습니다.</li>
+</ol>
+<p><strong>다음을 정합니다.</strong></p>
+<ul>
+<li><strong>측정만 (A)</strong> — 반복 결함을 기록하고 닫습니다: <code>{BC} stop --id 003 --reason "측정 전용"</code>.</li>
+<li><strong>개선 (B)</strong> — 반복 결함을 고칠 계획으로 6단계.</li>
+</ul>
+<h3 id="6-planmd-planned-b">6. 개선 계획 — <code>plan.md</code> → <code>planned</code> (B)<a class="headerlink" href="#6-planmd-planned-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 「무엇이 약했나」 를 「어느 파일을 어떻게 고치나」 로 바꿉니다. 계획은 before 점수를 보고 쓰므로 블라인드 대상이 아닙니다.</p>
+<p><strong>사람이 하는 일.</strong> 메인 세션에 「발견 표로 개선 계획 초안을 써 줘」 라고 맡기고, 초안을 검토합니다. 사이클 폴더의 <code>plan.md</code> 는 절 다섯입니다.</p>
+<table>
+<thead>
+<tr>
+<th>절</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>## 0. 요약</code></td>
+<td>한 단락</td>
+</tr>
+<tr>
+<td><code>## 1. 발견 → 변경</code></td>
+<td>어느 발견을 어떤 변경으로 다루나 (다루지 않는 것도)</td>
+</tr>
+<tr>
+<td><code>## 2. 변경 집합</code></td>
+<td>바꿀 파일 · 무엇을 · 기대 축 표 — 첫 칸은 플러그인 레포 경로 (예: <code>dp-skills/agents/ag-planner-critic.md</code>)</td>
+</tr>
+<tr>
+<td><code>## 3. 기대 효과</code></td>
+<td>축별 방향·크기. <strong>모든 축이 오른다는 계획은 계획이 아닙니다</strong> — 무엇을 잃을 수 있는지도 적습니다</td>
+</tr>
+<tr>
+<td><code>## 4. 되돌리기</code></td>
+<td>되돌리는 방법</td>
+</tr>
+</tbody>
+</table>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>planned<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span>
 </span></code></pre></div>
-<p>도구는 가지가 <code>main</code> 에서 갈라진 자리부터의 diff 를 계획과 대조합니다 — 계획 밖 파일이 섞이면 거절 (사용자가 확인했으면 <code>--allow-extra</code>), 계획 파일을 하나도 안 바꿨으면 거절. 적용 커밋의 <code>plugin.json</code> 버전이 상태에 적힙니다.</p>
-<h3 id="5-after-brief-phase-after-ingest">5. after 채점 — 새 산출물 → <code>brief --phase after</code> → 채점자 셋 → <code>ingest</code><a class="headerlink" href="#5-after-brief-phase-after-ingest" title="Permanent link">&para;</a></h3>
-<p>run 모드는 1-1 과 같은 절차를 <code>--phase after</code> 로 돕니다 — 분리 트리가 적용 커밋 판을 씁니다. 그다음 <code>brief --phase after</code> 는 <code>--artifacts</code> 없이 부릅니다 (표본은 <code>collect</code> 가 정했습니다).</p>
-<p>replay 는 바뀐 플러그인으로 <strong>같은 종류의 산출물을 새로</strong> 만듭니다 — 그 버전을 설치한 뒤 다음 feature 의 사이클을 돌면 생깁니다. 같은 경로라도 <strong>내용이 바뀐</strong> 파일이면 됩니다 (내용이 같으면 거절). 같은 feature 를 다시 내려면 run 모드로 엽니다 (위 경고).</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>brief<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--phase<span class="w"> </span>after<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>--artifacts<span class="w"> </span>workspace/dp-team/projects/p1/features/03-x.plan.critic.md<span class="w"> </span>--workspace<span class="w"> </span>workspace
+<p><strong>확인할 결과.</strong> <code>plan_files</code> (바꿀 파일 목록) 가 의도와 같은지, 「대상 밖」 칸이 비어 있는지. 계획을 고치면 <code>planned</code> 를 다시 돌리면 됩니다.</p>
+<h3 id="7-applied-b">7. 적용 — 「적용」 답 → 플러그인 가지 커밋 → <code>applied</code> (B)<a class="headerlink" href="#7-applied-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 계획한 파일만 고쳐 커밋하고, 그 커밋을 사이클에 기록합니다.</p>
+<p><strong>사람이 하는 일.</strong></p>
+<ol>
+<li>「적용해」 같은 <strong>자기 답을 원문 그대로</strong> 사이클 폴더 <code>inputs/001-answer-apply.md</code> 에 둡니다. 요약하지 않습니다 — 이 파일이 승인의 증거입니다.</li>
+<li>플러그인 레포에서 <code>main</code> 으로부터 가지를 따고, <strong>변경 집합의 파일만</strong> 고쳐 커밋합니다.</li>
+<li>
+<p>기록합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>applied<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--commit<span class="w"> </span><span class="o">{</span>SHA<span class="o">}</span><span class="w"> </span>--answer-file<span class="w"> </span><span class="o">{</span>사이클<span class="w"> </span>폴더<span class="o">}</span>/inputs/001-answer-apply.md
 </span></code></pre></div>
-<p>채점자 셋 (<code>사이클 001 · 채점자 1</code>·<code>2</code>·<code>3</code>) → <code>ingest --phase after</code>. 시나리오·채점표를 그 사이 고쳤으면 after 를 받지 않습니다 — 새 사이클입니다.</p>
-<h3 id="6-compare-decide-close">6. 대조·결정 — <code>compare</code> → 답 원문 → <code>decide</code> → <code>close</code><a class="headerlink" href="#6-compare-decide-close" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python3<span class="w"> </span><span class="o">{</span>PLUGIN<span class="o">}</span>/tools/bench-cycle.py<span class="w"> </span>compare<span class="w"> </span>--id<span class="w"> </span><span class="m">001</span><span class="w"> </span>--workspace<span class="w"> </span>workspace
+</li>
+</ol>
+<p><strong>확인할 결과.</strong></p>
+<ul>
+<li><code>계획 밖 변경</code> — 비어 있어야 합니다. 섞이면 거절됩니다 (계획을 고쳐 <code>planned</code> 를 다시 돌리거나, 확인했으면 <code>--allow-extra</code>).</li>
+<li><code>계획에 있는데 안 바뀐 파일</code> — 빠뜨린 게 없는지.</li>
+<li><code>plugin_version_after</code> — 적용 커밋의 판.</li>
+</ul>
+<h3 id="8-sandbox-phase-after-collect-b">8. 다시 표본 — <code>sandbox --phase after</code> → 실행 → <code>collect</code> (B)<a class="headerlink" href="#8-sandbox-phase-after-collect-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> <strong>바뀐 판</strong>의 에이전트로 <strong>같은 입력</strong>을 다시 돌립니다. 입력은 1단계 때의 사본이라, 그 사이 실제 plan 이 고쳐졌어도 전후가 같은 입력을 받습니다.</p>
+<p><strong>사람이 하는 일.</strong> 2단계와 같습니다. <code>--phase after</code> 로 바꿔 돌립니다.</p>
+<p><strong>확인할 결과.</strong> 2단계와 같고, 하나가 더 있습니다 — before 와 <strong>내용이 같으면 거절</strong>합니다 (바뀐 판이 같은 결과를 냈다는 뜻이라 비교할 것이 없습니다).</p>
+<h3 id="9-brief-phase-after-ingest-b">9. 다시 채점 — <code>brief --phase after</code> → 채점자 셋 → <code>ingest</code> (B)<a class="headerlink" href="#9-brief-phase-after-ingest-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 3~4단계를 같은 잣대로 반복합니다. 채점자는 이것이 두 번째 채점인 줄 모릅니다 (라벨이 다릅니다).</p>
+<p><strong>사람이 하는 일.</strong> <code>{BC} brief --id 003 --phase after</code> (run 모드는 <code>--artifacts</code> 없이) → 4단계와 같은 방식으로 채점자 셋 → <code>{BC} ingest --id 003 --phase after</code>.</p>
+<p><strong>확인할 결과.</strong> 4단계와 같습니다. 「시나리오·채점표가 before 때와 다릅니다」 로 거절되면 그 사이 <code>scenario.md</code> 가 바뀐 것입니다 — 새 사이클입니다.</p>
+<h3 id="10-compare-decide-close-b">10. 대조와 결정 — <code>compare</code> → 「채택·되돌림」 답 → <code>decide</code> → <code>close</code> (B)<a class="headerlink" href="#10-compare-decide-close-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 전후 차이를 <strong>도구가</strong> 세고, <strong>사람이</strong> 채택할지 정합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>compare<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span>
 </span></code></pre></div>
-<p><code>compare.md § 0</code> 이 판정 낱말 (<code>improved</code> · <code>regressed</code> · <code>mixed</code> · <code>unchanged</code>) 과 올라간·내려간 축을 냅니다 — 사람·에이전트가 "좋아졌다" 를 쓰지 않습니다. <code>mixed</code>·<code>unchanged</code> 는 「효과 없음」이 아니라 「이 표본으로는 못 가른다」 입니다.</p>
-<p>채택이면 답 원문을 <code>inputs/002-answer-decide.md</code> 에 두고 <code>decide --result adopt</code> → <code>close</code>. 플러그인 PR 본문에 <code>compare.md § 0</code> 을 그대로 인용합니다. 되돌림이면 <code>decide --result revert</code> → 플러그인 레포에서 <code>git revert {적용 커밋}</code> → <code>close --note {되돌린 SHA}</code>.</p>
-<h2 id="_6">폴더가 말해 주는 것<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>workspace/{TEAM}/bench/001-critic-quality/
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  .state.json           단계 · 해시 · 허용 목록 · 잣대 값 · 플러그인 커밋/버전 — 도구만 쓴다
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  scenario.md           무엇을 · 어느 표본으로 · 어느 축으로 · 무엇이 오르면 성공인가  ← before brief 때 해시로 굳는다 · 채점자는 읽지 않는다
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  rubric.md             채점표 사본                                                 ← 같이 굳는다
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  samples/k7q2/…        before 라벨 — 표본·참조 사본 (좌표 고정) + 대상 파일 사본 (변경 전 판 · P 축 대조용)
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  samples/m4tx/…        after 라벨 — 새 표본 사본 + 대상 파일 사본 (적용 커밋 판)
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  brief-k7q2.md         채점자가 읽어도 되는 것의 전부 (허용 목록) · 쓸 파일 양식
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  scores/k7q2-1.md      채점자 1 — 축별 점수 · 근거 좌표 · 발견 표 · inputs: (실제로 연 파일)
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  scores/k7q2-2.md      채점자 2 — 같은 것을 따로
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  scores/k7q2.json      채점자들의 평균 · 중앙값 · 불일치 표기
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>  metrics-k7q2.json     정량 지표 (doc-metrics) + 린트 요약 (plan-validate · handoff-quality · critic-lint · verify-report-lint)
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>  plan.md               개선 계획 — 발견 → 변경 집합 (플러그인 파일 · 기대 축 · 되돌리기)
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>  inputs/001-answer-apply.md   「적용」 답 원문 · inputs/002-answer-decide.md 「채택·되돌림」 답 원문
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>  brief-m4tx.md · scores/m4tx-* · metrics-m4tx.json
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>  compare.md            도구가 쓴 전후 대조
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>{TMPDIR}/dp-bench/{팀}-001-k7q2/   (run 모드 분리 트리 · 소비 레포 밖)
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>  repo/                 소비 레포 최상위 링크 + workspace 사본 — 에이전트가 여기서 돈다
-</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>  plugin/               그 단계 판의 플러그인 worktree (--plugin-dir)
-</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>  run-1.log …           실행 출력
+<p><strong>확인할 결과.</strong> <code>compare.md</code> 의 <code>## 0. 판정</code> 한 단락.</p>
+<table>
+<thead>
+<tr>
+<th>판정</th>
+<th>뜻</th>
+<th>보통의 결정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>improved</code></td>
+<td>오른 축만 있다</td>
+<td>채택</td>
+</tr>
+<tr>
+<td><code>regressed</code></td>
+<td>내린 축만 있다</td>
+<td>되돌림 (단, 내린 폭이 잡음 범위인지 본다)</td>
+</tr>
+<tr>
+<td><code>mixed</code></td>
+<td>오른 축과 내린 축이 함께 있다</td>
+<td>시나리오가 겨냥한 축이 올랐고 발견 수가 줄었으면 채택 검토</td>
+</tr>
+<tr>
+<td><code>unchanged</code></td>
+<td>움직인 축이 없다</td>
+<td>「효과 없음」 이 아니라 「이 표본으로는 못 가른다」 — 표본을 늘려 새 사이클</td>
+</tr>
+</tbody>
+</table>
+<p>함께 볼 것: <strong>겨냥한 축이 올랐나</strong> · <strong>Major 발견 수가 줄었나</strong> · <code>## 2. 정량 지표</code> 의 분량 변화 · 린트 경고 변화. 한 축의 ±0.5 는 잡음일 수 있습니다 (아래 「결과 읽는 법」).</p>
+<p><strong>사람이 하는 일.</strong> 결정을 <strong>적용 답과 다른 파일</strong>에 원문으로 둡니다 (<code>inputs/002-answer-decide.md</code>) — 적용 승인이 채택 승인이 아니기 때문입니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>decide<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span><span class="w"> </span>--result<span class="w"> </span>adopt<span class="w"> </span>--answer-file<span class="w"> </span><span class="o">{</span>사이클<span class="w"> </span>폴더<span class="o">}</span>/inputs/002-answer-decide.md
 </span></code></pre></div>
-<h2 id="_7">무엇이 「블라인드」를 지키나<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">{</span>BC<span class="o">}</span><span class="w"> </span>close<span class="w"> </span>--id<span class="w"> </span><span class="m">003</span>
+</span></code></pre></div>
+<p>되돌림이면 <code>--result revert</code> → 플러그인 레포에서 <code>git revert {적용 커밋}</code> → <code>close --id 003 --note {되돌린 커밋 SHA}</code>.</p>
+<h3 id="11-b">11. 출하 (B)<a class="headerlink" href="#11-b" title="Permanent link">&para;</a></h3>
+<p><strong>목적.</strong> 채택한 변경을 플러그인 릴리스로 내보냅니다.</p>
+<p><strong>사람이 하는 일.</strong> 적용 가지로 PR 을 열고, 본문에 <code>compare.md § 0</code> 을 그대로 인용합니다. 이후는 평소 릴리스 절차입니다.</p>
+<hr />
+<h2 id="_8">결과 읽는 법<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">채점 축<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>산출물 축 (Q) 은 <strong>다음 독자에게 쓸모 있는가</strong>, 과정 축 (P) 은 <strong>지시를 지켰는가</strong>를 봅니다. 척도는 5 본보기 · 4 작은 흠 · 3 섞임 · 2 뚜렷한 결함 · 1 역할 실패.</p>
+<table>
+<thead>
+<tr>
+<th>축</th>
+<th>critic 기준으로 묻는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1 소비자 적합성</td>
+<td>planner 가 챌린지만 보고 무엇을 고칠지 아는가</td>
+</tr>
+<tr>
+<td>Q2 구체성</td>
+<td>제안이 「재확인」 인지 「변경 요구」 인지 분명한가</td>
+</tr>
+<tr>
+<td>Q3 일관성</td>
+<td>인용한 단계·줄 범위가 plan 과 맞는가 · severity 가 본문과 같은가</td>
+</tr>
+<tr>
+<td>Q4 추적성</td>
+<td>인용한 plan 단계·절이 실제로 있는가</td>
+</tr>
+<tr>
+<td>Q6 밀도</td>
+<td>챌린지끼리 겹치거나 일반론이 있는가</td>
+</tr>
+<tr>
+<td>Q8 크기</td>
+<td>챌린지 수가 plan 크기에 맞는가 · 취향을 blocking 으로 올렸는가</td>
+</tr>
+<tr>
+<td>P1 지시 준수</td>
+<td>wrapper 가 요구한 필드·합의표·형식을 지켰는가</td>
+</tr>
+</tbody>
+</table>
+<p>plan·eval 기준 질문과 P3 (경계) 은 채점표 원본 (<code>skills/context/shared/bench-rubric.md</code>) 에 있습니다.</p>
+<h3 id="_10">숫자를 읽을 때 주의할 것<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>잡음의 크기.</strong> 같은 파일·같은 질문을 다른 채점자 쌍이 다시 재자 축 평균이 평균 0.33, 최대 1.0 달랐습니다. 그래서 채점자가 셋이고, 도구는 ±0.3 안의 차이를 「같음」 으로 셉니다. 한 축의 ±0.5 하나로 결론을 내리지 않습니다.</li>
+<li><strong>발견 수를 함께 봅니다.</strong> 점수가 같아도 Major 가 7 → 2 로 줄었다면 의미 있는 변화입니다.</li>
+<li><strong>표본이 다르면 분량 비교는 뜻이 없습니다.</strong> 정량 지표의 글자 수 차이는 같은 입력 (run 모드) 일 때만 읽습니다.</li>
+</ul>
+<hr />
+<h2 id="_11">이럴 땐<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>메시지</th>
+<th>원인</th>
+<th>할 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사이클을 연 도구와 지금 도구가 다릅니다</td>
+<td>메인 세션과 채점자가 다른 판의 도구를 썼다 · 도중에 플러그인을 갱신했다</td>
+<td>같은 판으로 맞추거나 (설치본 갱신 뒤 재시작), 새 사이클</td>
+</tr>
+<tr>
+<td>분리 트리에 새 산출물이 없습니다</td>
+<td>실행이 실패했다 (로그인 만료 등)</td>
+<td>응답의 <code>run-N.log</code> 를 보고 다시 실행</td>
+</tr>
+<tr>
+<td>허용 목록 밖 / 금지 경로를 읽음</td>
+<td>채점자가 정해진 파일 밖을 열었다</td>
+<td>그 번호의 채점자만 새로 다시 부른다</td>
+</tr>
+<tr>
+<td>시나리오·채점표가 before 때와 다릅니다</td>
+<td>brief 뒤에 <code>scenario.md</code> 를 고쳤다</td>
+<td><code>stop</code> 하고 새 사이클</td>
+</tr>
+<tr>
+<td>after 표본이 before 표본과 내용이 같습니다</td>
+<td>바뀐 판이 같은 결과를 냈다</td>
+<td>변경이 그 산출물에 영향을 주는지 다시 본다</td>
+</tr>
+<tr>
+<td>계획 밖 파일이 바뀌었습니다</td>
+<td>적용 커밋에 계획에 없는 파일이 섞였다</td>
+<td>계획을 고쳐 <code>planned</code> 재실행, 또는 확인 뒤 <code>--allow-extra</code></td>
+</tr>
+<tr>
+<td>적용 커밋이 계획의 파일을 하나도 바꾸지 않았습니다</td>
+<td>다른 커밋을 넘겼다</td>
+<td>커밋 SHA 확인</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_12">무엇이 「블라인드」를 지키나<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4398,126 +4954,100 @@
 <tbody>
 <tr>
 <td>기대를 모르고 채점한다</td>
-<td>단계마다 무작위 라벨 — 지시·표본 경로·채점 파일 이름에 <code>before</code>·<code>after</code> 가 없다 · 지시에 성공·되돌림 조건을 싣지 않고 <code>scenario.md</code> 는 허용 목록 밖</td>
+<td>단계마다 무작위 라벨 · 지시에 질문 한 줄만 · <code>scenario.md</code> 는 허용 목록 밖</td>
 <td>시나리오를 읽은 채점은 받지 않는다</td>
 </tr>
 <tr>
-<td>자기가 쓴 것을 채점하지 않는다</td>
-<td>채점자는 산출물을 쓴 wrapper 와 다른 에이전트 · 메인 세션이 <strong>따로</strong> 부른다 · 프롬프트는 「사이클 · 번호」둘뿐</td>
-<td>(사람 규약 — 도구가 못 본다)</td>
-</tr>
-<tr>
-<td>허용 목록 밖을 읽지 않는다</td>
-<td><code>brief</code> 가 목록을 적고 <code>ingest</code> 가 채점 파일의 <code>inputs:</code> 를 대조 — 다른 채점·계획·대조·지표·답·상태 · 다른 사이클 · 대화 기록 · 원본 (사본만) · 하류 산출물은 <strong>항상</strong> 금지</td>
-<td>그 채점은 받지 않는다 → 같은 번호로 새 맥락에서 다시</td>
+<td>정해진 것만 읽는다</td>
+<td><code>brief</code> 가 목록을 적고 <code>ingest</code> 가 채점 파일의 <code>inputs:</code> 와 대조</td>
+<td>그 채점은 받지 않는다</td>
 </tr>
 <tr>
 <td>전후는 같은 잣대</td>
-<td>시나리오·채점표 <strong>해시</strong>가 before 때 굳고 after 가 대조 · <code>scorers</code>·<code>noise_band</code>·<code>disagree_gap</code> 도 init 때 굳는다</td>
-<td>after 를 받지 않는다 — 새 사이클</td>
+<td>시나리오·채점표 해시 · 잣대 값 · 도구 판을 사이클 시작 때 굳힌다</td>
+<td>after 를 받지 않는다</td>
 </tr>
 <tr>
 <td>눈은 셋</td>
-<td>단계마다 서로 다른 채점자 <code>scorers</code> 명 (기본 3) · 같은 축에서 2점 이상 벌어지면 「불일치」</td>
-<td>모자라면 받지 않는다 · 불일치 축의 평균은 믿지 않는다</td>
+<td>서로 다른 채점자 셋 · 2점 이상 갈리면 「불일치」</td>
+<td>모자라면 받지 않는다</td>
 </tr>
 <tr>
 <td>숫자는 도구가</td>
-<td><code>compare</code> 만 전후를 가른다 (±0.3)</td>
-<td>메인 세션·에이전트가 「좋아졌다」고 쓰지 않는다</td>
+<td><code>compare</code> 만 전후를 가른다</td>
+<td>사람·에이전트가 「좋아졌다」 고 쓰지 않는다</td>
 </tr>
 <tr>
-<td>적용·채택은 답 원문</td>
-<td><code>applied</code>·<code>decide</code> 가 <code>inputs/</code> 의 원문 파일을 요구 · 적용 답과 결정 답은 다른 파일</td>
+<td>결정은 답 원문</td>
+<td>적용·채택 답을 각각 다른 파일로 요구</td>
 <td>받지 않는다</td>
 </tr>
 <tr>
-<td>계획 밖은 고치지 않는다</td>
-<td><code>applied</code> 가 적용 커밋을 변경 집합과 대조 — 계획 밖 파일이 섞이면 거절 (사용자 확인 뒤 <code>--allow-extra</code>)</td>
-<td>거절</td>
+<td>실제 산출물은 건드리지 않는다</td>
+<td>run 모드의 분리 트리 · <code>collect</code> 의 변경 경고</td>
+<td>경고</td>
 </tr>
 </tbody>
 </table>
-<p><strong>못 지키는 것</strong> — 채점자는 부른 세션의 메모리를 받습니다. 도구는 어느 세션에서 불렀는지 모르므로, 거점 규칙 (위 「전제」) 으로만 막습니다. 채점자의 <code>inputs:</code> 는 자기 신고입니다. 허용 목록 밖을 읽고 적지 않으면 도구는 모릅니다. 그래서 채점자가 둘이고 (서로 다른 맥락이 같은 오염을 겪을 확률이 낮습니다), <code>verify-blind</code> 가 받은 채점을 지금 허용 목록으로 다시 대조합니다.</p>
-<h2 id="_8">흔한 실수<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>채점자에게 힌트를 준다.</strong> "Q6 이 약할 거야" 한 줄이 앵커입니다. 프롬프트는 사이클 ID 와 번호뿐입니다.</li>
-<li><strong>after 표본을 내려고 소비 레포에서 에이전트를 다시 부른다.</strong> 실제 산출물이 덮어쓰입니다 — run 모드 (<code>init --run</code>) 의 분리 트리에서 냅니다.</li>
-<li><strong>「사이클을 연 도구와 지금 도구가 다릅니다」 로 거절된다.</strong> <code>init</code> 이 그 도구 (판 · 파일 해시 · 경로) 를 사이클에 적고, <code>show --for-scorer</code>·<code>ingest</code> 가 대조합니다. 메인 세션은 dev 체크아웃 도구로 열고 채점자는 설치본 도구를 부르면 여기서 멈춥니다 — 같은 도구로 맞추거나 (설치본이면 갱신 뒤 재시작) 새 사이클을 엽니다.</li>
-<li><strong>원본을 채점한다.</strong> 허용 목록에는 <code>samples/</code> 사본만 있습니다. <code>projects/**</code> 원본은 그 사이 재호출로 덮어쓰였을 수 있어 좌표가 어긋납니다.</li>
-<li><strong>after 표본이 before 와 같은 파일이다.</strong> 바뀐 플러그인이 <strong>새로 만든</strong> 산출물이어야 전후입니다 — 내용이 같으면 도구가 거절합니다.</li>
-<li><strong>시나리오를 고치고 같은 사이클을 계속한다.</strong> 해시가 굳어 있습니다. 묻는 것이 바뀌었으면 <code>stop</code> 하고 새 사이클을 엽니다.</li>
-<li><strong>채점자가 기대를 안 채로 채점한다.</strong> 0.44.2 까지는 지시에 단계 이름 (<code>before</code>·<code>after</code>) 과 시나리오의 성공 조건이 그대로 실렸고, 표본 경로·채점 파일 이름도 단계를 드러냈습니다. 그 시기 사이클의 전후 차이에는 이 영향이 섞여 있습니다. 지금은 <code>init</code> 이 무작위 라벨을 정해 막습니다 — 라벨 키가 없는 옛 사이클은 종전 이름으로 끝까지 갑니다.</li>
-<li><strong>한 축의 ±0.5 를 결론으로 읽는다.</strong> 같은 파일·같은 질문을 다른 2인 쌍이 다시 재자 축 평균이 평균 0.33, 최대 1.0 달랐습니다 (재검증 실측). 그래서 기본 채점자가 셋입니다. 그래도 한 축의 작은 움직임은 잡음일 수 있습니다 — 시나리오가 겨냥한 축이 움직였는지, 발견 건수가 함께 줄었는지를 같이 봅니다.</li>
-<li><strong><code>mixed</code>·<code>unchanged</code> 를 "효과 없음" 으로 읽는다.</strong> 표본 2~5건·채점자 2명의 측정은 거칩니다 — 표본을 늘려 새 사이클을 여는 것이 답입니다.</li>
-<li><strong>설정 값을 사이클 도중 바꾼다.</strong> <code>bench_*</code> 키를 바꿔도 진행 중 사이클은 init 때 굳힌 값으로 끝까지 갑니다.</li>
-<li><strong>after 의 과정 축을 변경 전 wrapper 와 대조한다.</strong> P 축은 그 산출물을 만든 판의 규칙으로 잽니다. <code>applied</code> 가 적용 커밋의 대상 파일을 after 라벨 폴더로 떠서 after 허용 목록에 넣습니다 — 옛 판과 대조하면 새 규칙을 지킨 줄이 「템플릿에 없는 줄」로 깎입니다.</li>
-<li><strong>채점자가 다른 단계 표본의 크기를 본다.</strong> <code>ls</code>·<code>wc</code> 로 줄 수만 봐도 전후 분량이 드러나 앵커가 됩니다. 사이클 폴더 안에서는 허용 목록 밖 파일의 이름·크기도 보지 않습니다 (<code>inputs:</code> 에 남지 않아 도구가 못 잡습니다 — 채점자 규칙입니다).</li>
-<li><strong>critic 을 채점하는데 참조 plan 이 개정본이다.</strong> planner 가 critic 을 반영하면 <code>plan.md</code> 가 제자리에서 바뀌므로, 그 뒤에 뜬 표본에서는 critic 의 <strong>줄 범위 인용</strong>이 plan 사본과 어긋납니다 (절 앵커는 남습니다). 첫 사이클에서 채점자 둘이 독립적으로 이 표류를 Q4 결함으로 잡았습니다. 채점표는 이 경우 절 앵커로 판정하도록 적어 두었지만, 가능하면 critic 직후 (합의표 <code>status</code> 가 아직 <code>open</code> 일 때) 표본을 뜨는 것이 정확합니다.</li>
-</ul>
-<h2 id="before">첫 사이클 실측 (출하 게이트 · before 까지)<a class="headerlink" href="#before" title="Permanent link">&para;</a></h2>
-<p>package-calculator 의 critic 3건 (#12·#13·#14) 과 그 명세·plan 사본, 대상 파일 <code>agents/ag-planner-critic.md</code>, 축 Q1·Q3·Q4·Q6·Q8·P1 로 돌린 결과입니다. 채점자 둘 (opus · 각자 새 맥락 · 프롬프트는 「사이클 001 · 채점자 k」) 의 <code>inputs:</code> 는 허용 목록 안이었고 <code>ingest</code> 가 둘 다 받았습니다.</p>
+<p><strong>못 지키는 것</strong> — 채점자의 <code>inputs:</code> 는 자기 신고이고, 부른 세션의 메모리는 도구가 볼 수 없습니다. 그래서 채점자가 셋이고, <code>verify-blind</code> 가 받은 채점을 다시 대조하며, 거점을 소비 레포 세션으로 정해 둡니다.</p>
+<hr />
+<h2 id="_13">폴더가 말해 주는 것<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>workspace/{TEAM}/bench/003-critic-generalization/
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  .state.json           단계 · 해시 · 허용 목록 · 도구 판 — 도구만 쓴다 (손대지 않는다)
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  scenario.md           무엇을 · 어느 표본으로 · 어느 축으로 · 무엇을 묻나   ← brief 때 굳는다 · 채점자는 못 읽는다
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  rubric.md             채점표 사본                                         ← 같이 굳는다
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  samples/8edk/…        before 라벨 — 표본 · 입력 · 참조 · 대상 파일 사본
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  samples/m4tx/…        after 라벨 — 새 표본 · 대상 파일 (적용 커밋 판)
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  brief-8edk.md         채점자가 읽어도 되는 것의 전부 · 쓸 파일 양식
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  scores/8edk-1.md …    채점자별 점수 · 근거 좌표 · 발견 표
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  scores/8edk.json      평균 · 중앙값 · 불일치
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  metrics-8edk.json     정량 지표 (분량 · 밀도 · 이력 비율 · 린트)
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  plan.md               개선 계획
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  inputs/               사람의 답 원문 (적용 · 채택)
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  compare.md            도구가 쓴 전후 대조
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>{임시 폴더}/dp-bench/{팀}-003-{라벨}/   (run 모드 분리 트리 · 소비 레포 밖 · sandbox-remove 로 지운다)
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>  repo/                 소비 레포 최상위 링크 + workspace 사본 — 에이전트가 여기서 돈다
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>  plugin/               그 단계 판의 플러그인
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>  run-1.log …           실행 출력
+</span></code></pre></div>
+<hr />
+<h2 id="_14">실제 사례<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>축</th>
-<th>채점자 1</th>
-<th>채점자 2</th>
-<th>평균</th>
-<th>불일치</th>
+<th>사이클</th>
+<th>무엇을</th>
+<th>결과</th>
+<th>배운 것</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Q1</td>
-<td>4</td>
-<td>4</td>
-<td>4.0</td>
-<td>—</td>
+<td>001 · critic 형식</td>
+<td>챌린지 한 문장 · 근거 분리 · 형식 밖 절 금지</td>
+<td><code>mixed</code> → 채택 (0.44.1). 분량 −28%</td>
+<td>블라인드를 고친 도구로 다시 재자 점수 상승은 재현되지 않았다 — 기대를 아는 채점은 기운다</td>
 </tr>
 <tr>
-<td>Q3</td>
-<td>4</td>
-<td>4</td>
-<td>4.0</td>
-<td>—</td>
+<td>002 · critic 일관성</td>
+<td>severity 실현 조건 · 원인 하나 = 챌린지 하나</td>
+<td><code>improved</code> → 채택 (0.44.2). Major 10 → 3</td>
+<td>다시 재도 겨냥한 일관성 축 +1.0 은 재현됐다</td>
 </tr>
 <tr>
-<td>Q4</td>
-<td>4</td>
-<td>3</td>
-<td>3.5</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Q6</td>
-<td>3</td>
-<td>3</td>
-<td>3.0</td>
-<td>—</td>
-</tr>
-<tr>
-<td>Q8</td>
-<td>4</td>
-<td>4</td>
-<td>4.0</td>
-<td>—</td>
-</tr>
-<tr>
-<td>P1</td>
-<td>4</td>
-<td>4</td>
-<td>4.0</td>
-<td>—</td>
+<td>003 · 일반화 확인 (측정)</td>
+<td>처음 보는 plan 3건에서 위 규칙이 지켜지나</td>
+<td>전체 4.11 · 지시 준수 (P1) 3.67 · Major 5 · 불일치 0</td>
+<td>형식 규칙 (한 문장 · 따옴표 실재 · 합의표) 은 지켜졌고, <strong>「suggestion 으로 낮춘 이유 누락」</strong> 과 <strong>「원인 둘을 한 챌린지에」</strong> 는 세 채점자 모두 다시 잡았다 — 다음 개선 사이클의 재료</td>
 </tr>
 </tbody>
 </table>
-<p>전체 3.75 · 발견 B0 M7 m9 · 정량 지표 (3건 묶음): 25,367자 · 평균 문장 79자 · 괄호+가운뎃점 15.4/1,000자 · 파일 간 문장 중복 13% · critic-lint 3/3 통과. 두 채점자가 따로 잡은 같은 결함 — wrapper 의 「챌린지: 한 문장 핵심」 규약을 전 표본이 어김 (Q6·P1) · #12 에 출력 형식에 없는 <code>## 우선 판정</code> 18줄 (Q6·P1) · 분량이 plan 의 65~94% (Q8) · #12 줄 범위 인용 표류 (Q4 — 위 「흔한 실수」). 이것이 다음 단계 (개선 계획) 의 입력입니다.</p>
-<h2 id="_9">다음 단계<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_15">다음 단계<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ul>
-<li>채택했으면 플러그인 PR 본문에 <code>compare.md § 0</code> 인용 → 기존 릴리스 절차</li>
-<li>채점표를 고치고 싶으면 <code>skills/context/shared/bench-rubric.md</code> 의 <code>version</code> 을 올립니다 — 그 뒤 사이클부터 적용됩니다</li>
-<li>에이전트 흐름 안에서의 자리: <a href="../../explanation/agent-flow/">에이전트 흐름</a> § 사이클 밖 — bench-scorer</li>
+<li>채점표를 고치려면 <code>skills/context/shared/bench-rubric.md</code> 의 <code>version</code> 을 올립니다 — 그 뒤 사이클부터 적용됩니다.</li>
+<li>에이전트 흐름 안에서의 자리: <a href="../../explanation/agent-flow/">에이전트 흐름</a></li>
 <li>Reference: <a href="../../reference/tools/bench-cycle/"><code>bench-cycle.py</code></a> · <a href="../../reference/tools/doc-metrics/"><code>doc-metrics.py</code></a> · <a href="../../reference/agents/ag-bench-scorer/"><code>@ag-bench-scorer</code></a></li>
 </ul>
 

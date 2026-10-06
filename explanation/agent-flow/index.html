@@ -687,7 +687,7 @@
 <span class="md-ellipsis">
     
   
-    플러그인 변경 전후 채점
+    플러그인 변경 평가 (bench)
   
 
     
@@ -1763,7 +1763,7 @@
 </span></code></pre></div>
 <p><code>@ag-code-reviewer</code> 는 사이클 흐름과 무관하게 PR 단위로 호출합니다. 사이클 안 4개 wrapper 는 <code>tools/orchestrate-load.py</code> 로 컨텍스트를 자동 로드하지만, code-reviewer 는 self-contained 라 git diff·언어 감지·룰 파일을 자체 로드합니다 (슬래시 진입점 없음).</p>
 <h2 id="bench-scorer">사이클 밖 — bench-scorer<a class="headerlink" href="#bench-scorer" title="Permanent link">¶</a></h2>
-<p><code>@ag-bench-scorer</code> 는 <strong>플러그인 자체</strong>를 고쳤을 때 호출합니다 — 에이전트가 쓴 문서 (plan.md · .plan.critic.md · .eval.md) 가 좋아졌는지를 같은 잣대로 전후 채점합니다. 상태 기계 <code>tools/bench-cycle.py</code> 가 허용 목록 (brief) 을 굳히고, 채점자 셋 (기본) 이 각자 새 맥락에서 그 사본만 읽고 점수와 좌표를 남기며, 전후 차이는 도구가 셉니다. 프로젝트 컨텍스트는 읽지 않습니다 — 그것이 앵커입니다. 절차: <a href="../../how-to/bench-cycle/">플러그인 변경 전후 채점</a>.</p>
+<p><code>@ag-bench-scorer</code> 는 <strong>플러그인 자체</strong>를 고쳤을 때 호출합니다 — 에이전트가 쓴 문서 (plan.md · .plan.critic.md · .eval.md) 가 좋아졌는지를 같은 잣대로 전후 채점합니다. 상태 기계 <code>tools/bench-cycle.py</code> 가 허용 목록 (brief) 을 굳히고, 채점자 셋 (기본) 이 각자 새 맥락에서 그 사본만 읽고 점수와 좌표를 남기며, 전후 차이는 도구가 셉니다. 프로젝트 컨텍스트는 읽지 않습니다 — 그것이 앵커입니다. 절차: <a href="../../how-to/bench-cycle/">플러그인 변경 평가 (bench)</a>.</p>
 <h2 id="4">검토자 4종의 책임 경계<a class="headerlink" href="#4" title="Permanent link">¶</a></h2>
 <p>critic·evaluator·code-reviewer·bench-scorer 모두 검토자지만 대상이 다릅니다.</p>
 <table>
@@ -1800,7 +1800,7 @@
 <p>code-reviewer 는 evaluator 영역(요구사항·TDD 증거·테스트 실행)을 <strong>절대 다루지 않습니다</strong>. 반대로 cross-cutting 일관성·언어 규약·누락 마무리는 code-reviewer 전담입니다.</p>
 <h2 id="_3">다음 단계<a class="headerlink" href="#_3" title="Permanent link">¶</a></h2>
 <ul>
-<li>How-to: <a href="../../how-to/critic-review/">Critic 으로 계획 챌린지</a> · <a href="../../how-to/self-code-review/">PR 직전 셀프 코드 리뷰</a> · <a href="../../how-to/bench-cycle/">플러그인 변경 전후 채점</a></li>
+<li>How-to: <a href="../../how-to/critic-review/">Critic 으로 계획 챌린지</a> · <a href="../../how-to/self-code-review/">PR 직전 셀프 코드 리뷰</a> · <a href="../../how-to/bench-cycle/">플러그인 변경 평가 (bench)</a></li>
 <li>Explanation: <a href="../modes/">모드</a> — 모드별 에이전트 책임 확장</li>
 <li>Reference: <a href="../../reference/agents/">Agents 목록</a></li>
 </ul>
