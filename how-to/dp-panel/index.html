@@ -4211,12 +4211,12 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│  TDD                                                          │
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│  focus  25분 전  소프트 딜리트 빼고 archived_at…    [ 지우기 ] │
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│ 목표 ██████████████░░░░░░ 12/17 · 71%                         │
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ 04-partial-refund                              구현·평가 단계 │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ 04-partial-refund                                  구현 단계 │
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│ ✓  계획        @ag-planner                                    │
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│ ✓  계획 검토   @ag-planner-critic                             │
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│ ○  구현        @ag-generator                             지금 │
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ ·  평가        @ag-evaluator                                  │
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ [ @ag-generator 실행 ]  [ @ag-evaluator 실행 ] [ run-cycle ] │
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ [ @ag-generator 실행 ]                         [ run-cycle ] │
 </span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>╰───────────────────────────────────────────────────────────╯
 </span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
 </span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>╭ 실행 중 에이전트 ─────────────────────────── 실행 중 1 · 완료 1 ╮
@@ -4260,7 +4260,7 @@
 <tr>
 <td><strong>다음 진행</strong></td>
 <td>활성 project·issue · 모드 칩 (옅은 파랑 면, characterize 는 앰버 면) · focus · 목표 진행 막대 · 첫 미완료 feature 의 사이클 4단계</td>
-<td>지금 단계 에이전트 실행 (1, 2) · <strong>run-cycle</strong> (목표를 다 끝내면 숨김) · <strong>지우기</strong> (focus)</td>
+<td>지금 단계 에이전트 실행 (1) · <strong>run-cycle</strong> (목표를 다 끝내면 숨김) · <strong>지우기</strong> (focus)</td>
 </tr>
 <tr>
 <td><strong>실행 중 에이전트</strong></td>
@@ -4315,30 +4315,38 @@
 <h3 id="_8">상태줄<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>프롬프트 아래 상태줄에 <code>dp · {작업명} · characterize · 소스 잠금 · focus 있음 · 에이전트 1 · 셸 1</code> 처럼 지금 작업, 기본값이 아닌 모드, 실행 중인 에이전트·셸 수가 항상 표시됩니다 (실행 중인 것이 없으면 뒤 두 항목은 빠집니다).</p>
 <h3 id="_9">다음 진행 단계를 고르는 기준<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>첫 미완료 feature (<code>project.md</code> <code>## 목표</code> 의 첫 <code>[ ]</code>, 취소선 중단 항목 제외) 의 산출물 <strong>파일 유무만</strong> 봅니다.</p>
+<p>첫 미완료 feature (<code>project.md</code> <code>## 목표</code> 의 첫 <code>[ ]</code>, 취소선 중단 항목 제외) 의 산출물 파일과 <strong>critic 합의표</strong>를 봅니다. 합의표는 run-cycle 과 같은 기준으로 읽습니다 — <code>severity</code> 가 blocking 이고 <code>status</code> 가 <code>open</code>·<code>deferred</code> 인 행이 남아 있으면 구현으로 넘어가지 않습니다.</p>
 <table>
 <thead>
 <tr>
 <th>산출물</th>
-<th>제안 버튼</th>
+<th>지금 단계 · 버튼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>.plan.md</code> 없음</td>
-<td><code>@ag-planner</code></td>
+<td>계획 · <code>@ag-planner</code></td>
 </tr>
 <tr>
 <td>plan 있음 · <code>.plan.critic.md</code> 없음</td>
-<td><code>@ag-planner-critic</code></td>
+<td>계획 검토 · <code>@ag-planner-critic</code></td>
 </tr>
 <tr>
-<td>plan·critic 있음 · <code>.eval.md</code> 없음</td>
-<td><code>@ag-generator</code> · <code>@ag-evaluator</code></td>
+<td>critic 합의표에 풀리지 않은 blocking 이 있음</td>
+<td>계획 (보완) · <code>@ag-planner</code> — critic 지적을 반영해 합의표를 채움</td>
+</tr>
+<tr>
+<td>critic 합의표를 읽을 수 없음 (표도 "결함 없음" 문구도 없음)</td>
+<td>계획 검토 · <code>@ag-planner-critic</code> (다시 검토)</td>
+</tr>
+<tr>
+<td>합의표 통과 · <code>.eval.md</code> 없음</td>
+<td>구현 · <code>@ag-generator</code></td>
 </tr>
 <tr>
 <td><code>.eval.md</code> 가 <code>NOT_READY</code></td>
-<td><code>@ag-generator</code> (재작업)</td>
+<td>구현 (재작업) · <code>@ag-generator</code></td>
 </tr>
 <tr>
 <td><code>.eval.md</code> 가 <code>READY</code></td>
@@ -4346,10 +4354,10 @@
 </tr>
 </tbody>
 </table>
-<p>같은 근거로 카드에 사이클 4단계 (계획 → 계획 검토 → 구현 → 평가) 를 <code>✓</code> 끝남 (흐림) · <code>○</code> 지금 (파랑과 <code>지금</code> 칩) · <code>·</code> 남음 (흐림) · <code>✗</code> 평가 미통과 (빨간 <code>미통과</code> 칩) 로 보여 주고, 지금 단계의 에이전트 버튼만 채운 버튼으로 둡니다. 구현이 끝났는지는 파일로 알 수 없어서, plan·critic 이 있고 eval 이 없으면 구현을 지금 단계로 둡니다.</p>
-<p>다만 <strong>이 세션에서 돌고 있거나 끝난 에이전트로 앞으로 보정</strong>합니다. 평가 에이전트가 돌고 있으면 평가가, 구현 에이전트가 끝났으면 평가가 지금 단계가 되고 그 단계의 버튼이 맨 앞 (1차 버튼·단축키 1) 으로 옵니다. 버튼으로 부르지 않고 세션 창에 직접 입력했거나 run-cycle 이 부른 에이전트도 같습니다. run-cycle 은 한 턴 안에서 여러 에이전트를 돌리므로, 패널은 에이전트가 끝날 때마다 산출물을 다시 읽습니다.</p>
+<p><strong>버튼은 지금 단계 하나만</strong> 나옵니다. 카드에는 사이클 4단계 (계획 → 계획 검토 → 구현 → 평가) 를 <code>✓</code> 끝남 (흐림) · <code>○</code> 지금 (파랑과 <code>지금</code> 칩) · <code>·</code> 남음 (흐림) · <code>✗</code> 미통과 (빨간 <code>미통과</code> 칩 — critic blocking 이 남은 계획 검토, <code>NOT_READY</code> 평가) 로 보여 줍니다.</p>
+<p>구현이 끝났는지는 파일로 알 수 없어서, 합의표를 통과했고 eval 이 없으면 구현을 지금 단계로 둡니다. 다만 <strong>돌고 있거나 끝난 에이전트로 앞으로 보정</strong>합니다. 평가 에이전트가 돌고 있으면 평가가, 구현 에이전트가 끝났으면 평가가 지금 단계가 되고 버튼도 <code>@ag-evaluator</code> 로 바뀝니다. 끝난 단계는 feature 별로 기록해 두므로 세션을 새로 열어도 이어집니다. 미통과 단계는 건너뛰지 않습니다 — critic 이 blocking 을 남겼으면 critic 이 끝났어도 구현으로 가지 않고 계획 보완에 머뭅니다. 버튼으로 부르지 않고 세션 창에 직접 입력했거나 run-cycle 이 부른 에이전트도 같습니다. run-cycle 은 한 턴 안에서 여러 에이전트를 돌리므로, 패널은 에이전트가 끝날 때마다 산출물을 다시 읽습니다.</p>
 <p>목표 진행 막대는 <code>project.md</code> 목표 체크박스 수 (<code>12/17</code>) 로 그립니다. 데스크톱에서는 막대 그림 (채움 파랑·바탕 옅은 파랑) 으로, 터미널에서는 <code>██████░░░░</code> 글자 막대로 나옵니다.</p>
-<p>plan 이 유효한지, critic 의 blocking 이 풀렸는지는 판정하지 않습니다. 정확한 재개 지점은 <strong>run-cycle 이 기준</strong>이니 애매하면 run-cycle 버튼을 쓰세요.</p>
+<p>plan 이 유효한지, 합의표가 본문 챌린지와 맞는지 (critic-lint) 는 판정하지 않습니다. 정확한 재개 지점은 <strong>run-cycle 이 기준</strong>이니 애매하면 run-cycle 버튼을 쓰세요.</p>
 <h3 id="_10">패널이 보여 주지 않는 것<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>다른 세션·다른 창의 Claude</strong> — 패널은 자기 세션만 봅니다.</li>
