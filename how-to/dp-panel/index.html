@@ -1620,7 +1620,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프롬프트 위 버튼
+        실행 중 에이전트
       
     </span>
   </a>
@@ -1631,7 +1631,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        상태줄
+        터미널
       
     </span>
   </a>
@@ -1642,7 +1642,40 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        프롬프트 위 버튼
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상태줄
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         다음 진행 단계를 고르는 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        패널이 보여 주지 않는 것
       
     </span>
   </a>
@@ -1655,7 +1688,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         흔한 실수
@@ -1666,7 +1710,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -3990,7 +4034,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        프롬프트 위 버튼
+        실행 중 에이전트
       
     </span>
   </a>
@@ -4001,7 +4045,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        상태줄
+        터미널
       
     </span>
   </a>
@@ -4012,7 +4056,40 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        프롬프트 위 버튼
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상태줄
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         다음 진행 단계를 고르는 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        패널이 보여 주지 않는 것
       
     </span>
   </a>
@@ -4025,7 +4102,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        업그레이드
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         흔한 실수
@@ -4036,7 +4124,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         다음 단계
@@ -4066,31 +4154,60 @@
 <h1 id="dp-panel">작업 패널 (dp-panel)<a class="headerlink" href="#dp-panel" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">한 줄 요약</p>
-<p><code>/dp-panel</code> 로 켜는 버튼 패널입니다. 커밋·PR·셀프 리뷰, 다음에 부를 에이전트, 응답의 a)/b)/c) 선택지를 프롬프트 입력 없이 버튼으로 진행하고, 지금 모드·focus·내 열린 PR 을 한 화면에서 봅니다.</p>
+<p><code>/dp-panel</code> 로 켜는 버튼 패널입니다. 커밋·PR·셀프 리뷰, 다음에 부를 에이전트, 응답의 a)/b)/c) 선택지를 프롬프트 입력 없이 버튼으로 진행하고, 지금 모드·focus·실행 중인 서브에이전트·백그라운드 셸 출력·내 열린 PR 을 한 화면에서 봅니다.</p>
 </div>
 <h2 id="_1">언제 쓰나<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>/dp-skills:commit</code> → <code>/dp-skills:pr</code> 같은 정해진 다음 단계를 <strong>매번 타이핑하기 번거로울 때</strong></li>
 <li>run-cycle 정지 보고처럼 응답이 <code>a) b) c)</code> 선택지로 끝나서 <strong>답을 고르기만 하면 될 때</strong></li>
 <li>characterize (소스 잠금)·TDD·QA 중 <strong>지금 어떤 모드인지</strong>, 남아 있는 focus 가 있는지 확인하고 싶을 때</li>
+<li>서브에이전트 (<code>@ag-generator</code> 등) 가 <strong>지금 무엇을 하는 중인지</strong>, 백그라운드로 띄운 dev 서버·테스트가 <strong>어떻게 돌고 있는지</strong> 보고 싶을 때</li>
 <li>내가 연 PR 중 <strong>아직 머지되지 않은 것</strong>을 모아 보고 싶을 때</li>
 </ul>
 <p>버튼은 스킬·에이전트를 <strong>시작만</strong> 합니다. <code>/dp-skills:pr</code> 의 사용자 확인 같은 게이트는 그대로 거칩니다.</p>
 <h2 id="_2">전제<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>dp-skills 와 dp-panel 둘 다 설치 (<code>/plugin install dp-panel@deali-skills</code>) — 활성 작업은 설치된 dp-skills 의 <code>tools/switch-scan.py</code> 로 읽습니다</li>
-<li>Claude Code <strong>2.1.288 이상</strong> — 패널은 함수 훅 API (early access) 로 그려서, 그보다 낮은 판에서는 <code>/dp-panel</code> 이 나타나지 않습니다</li>
+<li>Claude Code <strong>2.1.288 이상</strong> — 패널은 함수 훅 API (early access) 로 그려서, 그보다 낮은 버전에서는 <code>/dp-panel</code> 이 나타나지 않습니다</li>
 <li>커밋·PR 영역은 git 저장소, 내 PR 목록은 <code>gh</code> 인증 (<code>gh auth status</code>) 이 필요합니다</li>
 <li>다음 진행·모드·focus 영역은 세션 폴더에 <code>workspace/TEAM.md</code> 가 있을 때만 채워집니다</li>
 </ul>
 <h2 id="_3">절차<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/dp-panel      # 켜기 — 다시 입력하면 끄기. 켜고 끈 상태는 다음 세션에도 유지
 </span></code></pre></div>
-<p>패널은 세 영역으로 나뉩니다. 버튼 옆 글자는 패널을 클릭하거나 포커스했을 때 쓰는 단축키입니다.</p>
+<p>패널은 구역마다 둥근 테두리 카드로 나뉩니다. 카드 제목 줄 오른쪽에 요약 (브랜치·작업명·개수) 이 붙어 카드만 훑어도 핵심이 보입니다. 위에서 아래로 "지금 → 다음 → 돌고 있는 것 → 밖에 나가 있는 것" 순서입니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>╭ 작업 ─────────────────────────────── feature/order-refund ╮
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│ 변경 3  ·  미푸시 1  ·  PR 없음                            │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ [ 커밋 ]  [ PR ]  [ 셀프 리뷰 ]                  새로고침  │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>╰─────────────────────────────────────────────────────────╯
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>╭ 다음 진행 ───────────────────────── 프로젝트 order-refund ╮
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│  TDD   characterize · 소스 잠금                           │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ ⚑ focus · 25분 전  소프트 딜리트 빼고 archived_at…  지우기 │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ 04-partial-refund                          구현·평가 단계 │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ [ @ag-generator ]  [ @ag-evaluator ]           run-cycle │
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>╰─────────────────────────────────────────────────────────╯
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>╭ 실행 중 에이전트 ──────────────────────────── 실행 중 1 ╮
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ ● @ag-generator  #04 partial-refund   3분 12초 · 도구 27 │
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│   Edit app/services/refund_calculator.rb                │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ ✓ @ag-planner-critic  #04 partial-refund       1분 40초 │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>╰─────────────────────────────────────────────────────────╯
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>╭ 터미널 ────────────────────────────────────── 실행 중 1 ╮
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│ [ ● dev 서버 ]  [ ✓ rspec ]                    완료 정리 │
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ ┌─────────────────────────────────────────────────────┐ │
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ │ * Listening on http://localhost:3000                │ │
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│ └─────────────────────────────────────────────────────┘ │
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>│ ● 실행 중 · 2분 0초 전 시작 · bundle exec rails s        │
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>╰─────────────────────────────────────────────────────────╯
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>╭ 내 열린 PR ───────────────────────────────────────── 2 ╮
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>│ #4712 환불 금액 계산 분리               ✓ 승인 · dp  AI리뷰 │
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>│ #4698 정산 배치 재시도 간격 조정          draft       AI리뷰 │
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>╰─────────────────────────────────────────────────────────╯
+</span></code></pre></div>
+<p>버튼 옆 글자는 패널을 클릭하거나 포커스했을 때 쓰는 단축키입니다.</p>
 <table>
 <thead>
 <tr>
-<th>영역</th>
+<th>카드</th>
 <th>보이는 것</th>
 <th>버튼</th>
 </tr>
@@ -4098,32 +4215,56 @@
 <tbody>
 <tr>
 <td><strong>작업</strong></td>
-<td>브랜치 · 변경 파일 수 · 미푸시 커밋 수 · 이 브랜치의 PR 번호</td>
+<td>브랜치 · 변경 수 (있으면 노랑) · 미푸시 커밋 수 (있으면 청록) · 이 브랜치의 PR 번호</td>
 <td><strong>커밋</strong> (c) → <code>/dp-skills:commit</code> · <strong>PR</strong> (p) → <code>/dp-skills:pr</code> · <strong>셀프 리뷰</strong> (v) → <code>@ag-code-reviewer</code> · <strong>새로고침</strong> (r)</td>
 </tr>
 <tr>
 <td><strong>다음 진행</strong></td>
-<td>활성 project·issue 이름 · 모드 배지 · focus · 첫 미완료 feature 와 단계</td>
-<td>단계별 에이전트 (1, 2) · <strong>run-cycle</strong> · <strong>focus 지우기</strong></td>
+<td>활성 project·issue · 모드 칩 (characterize 는 빨강) · focus · 첫 미완료 feature 와 단계</td>
+<td>단계별 에이전트 (1, 2) · <strong>run-cycle</strong> · <strong>지우기</strong> (focus)</td>
+</tr>
+<tr>
+<td><strong>실행 중 에이전트</strong></td>
+<td>돌고 있는 서브에이전트와 최근 완료 5개 — 이름 · feature · 소요 시간 · 도구 횟수 · 마지막 도구</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>터미널</strong></td>
+<td>이 세션의 백그라운드 셸 — 탭마다 최근 30줄과 상태</td>
+<td>셸 탭 · <strong>완료 정리</strong></td>
 </tr>
 <tr>
 <td><strong>내 열린 PR</strong></td>
-<td>현재 레포에서 내가 연 미머지 PR (<code>dp-skills</code> 라벨 먼저)</td>
-<td>제목 링크 · <strong>AI 리뷰 반영</strong></td>
+<td>현재 레포에서 내가 연 미머지 PR 1건 1줄 (<code>dp-skills</code> 라벨 먼저)</td>
+<td>제목 링크 · <strong>AI리뷰</strong></td>
 </tr>
 </tbody>
 </table>
-<p>지금 누를 수 있는 버튼만 강조됩니다. 변경이 없으면 커밋 버튼이, 기본 브랜치에서는 PR 버튼이 흐리게 바뀌고, 눌러도 실행하지 않고 이유를 알려 줍니다.</p>
-<h3 id="_4">프롬프트 위 버튼<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>지금 누를 주 동작 하나만 강조됩니다. 변경이 없으면 커밋 버튼이, 기본 브랜치에서는 PR 버튼이 흐리게 바뀌고, 눌러도 실행하지 않고 이유를 알려 줍니다. 패널 폭이 48칸보다 좁으면 카드 요약을 제목 아래로 내리고 버튼을 세로로 쌓습니다.</p>
+<h3 id="_4">실행 중 에이전트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>실행 중 (<code>●</code> 청록) 이 위, 완료 (<code>✓</code> 초록)·실패 (<code>✗</code> 빨강) 가 아래입니다. 서브에이전트가 띄운 서브에이전트는 한 단계 들여 씁니다.</li>
+<li>dp-skills 에이전트는 호출 프롬프트에서 feature 번호와 slug 를 읽어 함께 보여 줍니다 (<code>#04 partial-refund</code>).</li>
+<li>둘째 줄은 그 에이전트가 마지막으로 쓴 도구입니다 — <code>Edit 파일 경로</code>, <code>Bash 명령 설명</code>, <code>Grep "패턴"</code> 처럼 한 줄로 줄입니다.</li>
+<li>완료는 최근 5개까지 남고, 새 프롬프트를 보내면 1개만 남깁니다. 실행 중인 에이전트가 없고 완료 기록도 없으면 카드가 나타나지 않습니다.</li>
+</ul>
+<h3 id="_5">터미널<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Claude 가 <code>run_in_background</code> 로 띄운 셸 (dev 서버·테스트·빌드 등) 마다 탭이 하나 생깁니다. 탭 이름은 명령 설명입니다.</li>
+<li>선택한 탭의 최근 30줄이 출력 창에 보이고, 셸이 끝나면 <code>✓ 완료</code> · <code>✗ 실패 (코드 N)</code> 로 바뀝니다. 기록이 사라졌는데 종료 줄이 없으면 <code>■ 중단</code> 입니다.</li>
+<li>출력은 2초마다 따라옵니다. 단 <strong>패널이 열려 있고 실행 중인 것이 있을 때만</strong> 읽고, 아니면 멈춥니다.</li>
+<li><strong>완료 정리</strong> 는 끝난 셸 탭만 지웁니다. 출력은 화면에만 그리며 대화나 모델로 보내지 않습니다.</li>
+</ul>
+<h3 id="_6">프롬프트 위 버튼<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>패널을 닫아 두어도 프롬프트 바로 위에 두 종류의 버튼이 뜹니다.</p>
 <ul>
 <li><strong>응답 선택지</strong> — 마지막 응답이 <code>a)</code> 부터 이어지는 선택지 2개 이상으로 끝나면 버튼으로 뜹니다. 누르면 <code>b) …</code> 처럼 그 답이 바로 전송됩니다.</li>
 <li><strong>후속 단계</strong> — 셀프 리뷰 리포트 (<code>CODE REVIEW REPORT</code>) 가 나오면 <strong>처리 경로 추천 (fix-review)</strong> 이 뜹니다.</li>
 </ul>
 <p>무엇이든 새로 입력하면 이 버튼들은 사라집니다.</p>
-<h3 id="_5">상태줄<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>프롬프트 아래 상태줄에 <code>dp · {작업명} · characterize · 소스 잠금 · focus 있음</code> 처럼 지금 작업과 기본값이 아닌 모드가 항상 표시됩니다.</p>
-<h3 id="_6">다음 진행 단계를 고르는 기준<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_7">상태줄<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>프롬프트 아래 상태줄에 <code>dp · {작업명} · characterize · 소스 잠금 · focus 있음 · 에이전트 1 · 셸 1</code> 처럼 지금 작업, 기본값이 아닌 모드, 실행 중인 에이전트·셸 수가 항상 표시됩니다 (실행 중인 것이 없으면 뒤 두 항목은 빠집니다).</p>
+<h3 id="_8">다음 진행 단계를 고르는 기준<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>첫 미완료 feature (<code>project.md</code> <code>## 목표</code> 의 첫 <code>[ ]</code>, 취소선 중단 항목 제외) 의 산출물 <strong>파일 유무만</strong> 봅니다.</p>
 <table>
 <thead>
@@ -4156,14 +4297,33 @@
 </tbody>
 </table>
 <p>plan 이 유효한지, critic 의 blocking 이 풀렸는지는 판정하지 않습니다. 정확한 재개 지점은 <strong>run-cycle 이 기준</strong>이니 애매하면 run-cycle 버튼을 쓰세요.</p>
-<h2 id="_7">흔한 실수<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_9">패널이 보여 주지 않는 것<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong><code>/dp-panel</code> 이 없다고 나온다</strong> — Claude Code 판이 낮거나 dp-panel 을 설치하지 않은 세션입니다. 설치 뒤에는 세션을 새로 열어야 합니다.</li>
+<li><strong>다른 세션·다른 창의 Claude</strong> — 패널은 자기 세션만 봅니다.</li>
+<li><strong>데스크톱 앱 아래쪽 터미널 패널의 탭</strong> — 사용자가 연 셸이라 읽을 수 없습니다. 그 패널은 자체 탭이 있습니다.</li>
+<li><strong>셸·에이전트 중지</strong> — 패널에는 중지 버튼이 없습니다. 멈추려면 Claude 에게 직접 요청하세요.</li>
+<li><strong>서브에이전트의 전체 대화</strong> — 앱이 이미 보여 줍니다. 패널은 "무엇을 하는 중인지" 한 줄만 보여 줍니다.</li>
+<li><strong>세션을 다시 시작하기 전에 띄운 셸의 출력</strong> — 출력 위치를 기록하지 못해 "출력 경로를 읽지 못했습니다" 로 표시됩니다.</li>
+</ul>
+<h2 id="_10">업그레이드<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>새 버전이 나오면 마켓플레이스를 갱신한 뒤 플러그인을 올리고 재시작합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>claude<span class="w"> </span>plugin<span class="w"> </span>marketplace<span class="w"> </span>update<span class="w"> </span>deali-skills
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>claude<span class="w"> </span>plugin<span class="w"> </span>update<span class="w"> </span>dp-panel@deali-skills<span class="w"> </span>--scope<span class="w"> </span>user
+</span></code></pre></div>
+<ul>
+<li>설치된 버전은 <code>claude plugin list</code> 로 확인합니다.</li>
+<li>dp-skills 도 함께 올라왔다면 <code>claude plugin update dp-skills@deali-skills --scope user</code> 도 실행합니다. 레포 폴더에 dp-skills 를 project 스코프로 따로 설치했다면 그 폴더에서 <code>--scope project</code> 로 한 번 더 실행해야 그 레포에서도 새 버전이 돕니다.</li>
+<li>적용하려면 Claude Code 를 재시작합니다. 재시작 전 세션은 이전 버전으로 계속 돕니다.</li>
+</ul>
+<h2 id="_11">흔한 실수<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><code>/dp-panel</code> 이 없다고 나온다</strong> — Claude Code 버전이 낮거나 dp-panel 을 설치하지 않은 세션입니다. 설치 뒤에는 세션을 새로 열어야 합니다.</li>
 <li><strong>다음 진행이 "활성 dp-skills 작업 없음"</strong> — 세션 폴더에 <code>workspace/</code> 가 없거나 (플러그인 레포 등) STATE.md 에 활성 행이 없습니다. <code>/dp-skills:switch</code> 로 전환하세요.</li>
 <li><strong>내 PR 에 <code>dp-skills</code> 표식이 안 붙는다</strong> — 레포에 <code>dp-skills</code> 라벨이 없으면 <code>/dp-skills:pr</code> 은 표식 없이 만들고 생성 명령을 알려 줍니다. 한 번 만들어 두면 이후 PR 부터 붙습니다. 표식이 없는 PR 도 목록에는 나옵니다.</li>
 <li><strong>AI 리뷰 반영을 눌렀는데 확인 창이 뜬다</strong> — 의도된 동작입니다. <code>/dp-skills:ai-review</code> 는 호출 자체가 승인이라 후속 PR 까지 바로 만들기 때문에, 버튼은 한 번 더 묻습니다.</li>
 </ul>
-<h2 id="_8">다음 단계<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_12">다음 단계<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../self-code-review/">PR 직전 셀프 코드 리뷰</a> — 셀프 리뷰 버튼 뒤 흐름</li>
 <li><a href="../ai-review-followup/">PR AI 리뷰 후속 처리</a> — AI 리뷰 반영 버튼 뒤 흐름</li>
