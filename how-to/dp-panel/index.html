@@ -4177,31 +4177,48 @@
 </span></code></pre></div>
 <p>패널은 구역마다 둥근 테두리 카드로 나뉩니다. 카드 제목 줄 오른쪽에 요약 (브랜치·작업명·개수) 이 붙어 카드만 훑어도 핵심이 보입니다. 위에서 아래로 "지금 → 다음 → 돌고 있는 것 → 밖에 나가 있는 것" 순서입니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>╭ 작업 ─────────────────────────────── feature/order-refund ╮
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│ 변경 3  ·  미푸시 1  ·  PR 없음                            │
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ [ 커밋 ]  [ PR ]  [ 셀프 리뷰 ]                  새로고침  │
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>╰─────────────────────────────────────────────────────────╯
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>╭ 다음 진행 ───────────────────────── 프로젝트 order-refund ╮
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│  TDD   characterize · 소스 잠금                           │
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ ⚑ focus · 25분 전  소프트 딜리트 빼고 archived_at…  지우기 │
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│ 04-partial-refund                          구현·평가 단계 │
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│ [ @ag-generator ]  [ @ag-evaluator ]           run-cycle │
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>╰─────────────────────────────────────────────────────────╯
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>╭ 실행 중 에이전트 ──────────────────────────── 실행 중 1 ╮
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ ● @ag-generator  #04 partial-refund   3분 12초 · 도구 27 │
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│   Edit app/services/refund_calculator.rb                │
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ ✓ @ag-planner-critic  #04 partial-refund       1분 40초 │
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>╰─────────────────────────────────────────────────────────╯
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>╭ 터미널 ────────────────────────────────────── 실행 중 1 ╮
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│ [ ● dev 서버 ]  [ ✓ rspec ]                    완료 정리 │
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ ┌─────────────────────────────────────────────────────┐ │
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ │ * Listening on http://localhost:3000                │ │
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│ └─────────────────────────────────────────────────────┘ │
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>│ ● 실행 중 · 2분 0초 전 시작 · bundle exec rails s        │
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>╰─────────────────────────────────────────────────────────╯
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>╭ 내 열린 PR ───────────────────────────────────────── 2 ╮
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>│ #4712 환불 금액 계산 분리               ✓ 승인 · dp  AI리뷰 │
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>│ #4698 정산 배치 재시도 간격 조정          draft       AI리뷰 │
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>╰─────────────────────────────────────────────────────────╯
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│ ┌ 변경 ──┐ ┌ 미푸시 ┐ ┌ PR ────┐                              │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ │ 3      │ │ 1      │ │ 없음   │                              │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│ └────────┘ └────────┘ └────────┘                              │
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ app/services/refund_calculator.rb                 +42 −8   │
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│ spec/services/refund_spec.rb                         +61   │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ [ 커밋 ]  [ PR ]  [ 셀프 리뷰 ]                    새로고침  │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>╰───────────────────────────────────────────────────────────╯
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>╭ 다음 진행 ─────────────────────── 프로젝트 package-calculator ╮
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│  TDD                                                          │
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│ ⚑ focus · 25분 전  소프트 딜리트 빼고 archived_at…      지우기 │
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│ 목표 ██████████████░░░░░░ 12/17 · 71%                         │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│ 04-partial-refund                              구현·평가 단계 │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│ ✓  계획        @ag-planner                                    │
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│ ✓  계획 검토   @ag-planner-critic                             │
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│ ◐  구현        @ag-generator                             지금 │
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ ○  평가        @ag-evaluator                                  │
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ [ @ag-generator 실행 ]  [ @ag-evaluator 실행 ]     run-cycle │
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>╰───────────────────────────────────────────────────────────╯
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>╭ 실행 중 에이전트 ─────────────────────────── 실행 중 1 · 완료 1 ╮
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>│ ● @ag-generator  #04 partial-refund      3분 12초 · 도구 27 │
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>│   └ Edit app/services/refund_calculator.rb                    │
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>│ ✓ @ag-planner-critic  #04 partial-refund           1분 40초 │
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>╰───────────────────────────────────────────────────────────╯
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>╭ 터미널 ─────────────────────────────────────────── ● Live ╮
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>│ [ dev 서버 ]  [ rspec ]                                       │
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>│ ┌─────────────────────────────────────────────────────────┐ │
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>│ │ * Listening on http://localhost:3000                    │ │
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>│ └─────────────────────────────────────────────────────────┘ │
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>│ ● bundle exec rails s                     실행 중  2분 0초 │
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>│ ✓ bundle exec rspec                         완료  48초     │
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>│                                                  완료 정리 │
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>╰───────────────────────────────────────────────────────────╯
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>╭ 내 열린 PR ────────────────────────────────────────────── 2 ╮
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>│ #4712 환불 금액 계산 분리                              AI리뷰 │
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>│   ✓ 승인 · dp · feature/refund-calc                           │
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>│ #4698 정산 배치 재시도 간격 조정                       AI리뷰 │
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>│   draft · feature/batch-retry                                 │
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>╰───────────────────────────────────────────────────────────╯
 </span></code></pre></div>
 <p>버튼 옆 글자는 패널을 클릭하거나 포커스했을 때 쓰는 단축키입니다.</p>
 <table>
@@ -4215,13 +4232,13 @@
 <tbody>
 <tr>
 <td><strong>작업</strong></td>
-<td>브랜치 · 변경 수 (있으면 노랑) · 미푸시 커밋 수 (있으면 청록) · 이 브랜치의 PR 번호</td>
+<td>브랜치 · 변경·미푸시·PR 숫자 타일 (있으면 노랑·청록) · 바뀐 파일 상위 5개와 줄 수 (<code>+</code> 초록·<code>−</code> 빨강)</td>
 <td><strong>커밋</strong> (c) → <code>/dp-skills:commit</code> · <strong>PR</strong> (p) → <code>/dp-skills:pr</code> · <strong>셀프 리뷰</strong> (v) → <code>@ag-code-reviewer</code> · <strong>새로고침</strong> (r)</td>
 </tr>
 <tr>
 <td><strong>다음 진행</strong></td>
-<td>활성 project·issue · 모드 칩 (characterize 는 빨강) · focus · 첫 미완료 feature 와 단계</td>
-<td>단계별 에이전트 (1, 2) · <strong>run-cycle</strong> · <strong>지우기</strong> (focus)</td>
+<td>활성 project·issue · 모드 칩 (characterize 는 빨강) · focus · 목표 진행 막대 · 첫 미완료 feature 의 사이클 4단계</td>
+<td>지금 단계 에이전트 실행 (1, 2) · <strong>run-cycle</strong> (목표를 다 끝내면 숨김) · <strong>지우기</strong> (focus)</td>
 </tr>
 <tr>
 <td><strong>실행 중 에이전트</strong></td>
@@ -4230,17 +4247,17 @@
 </tr>
 <tr>
 <td><strong>터미널</strong></td>
-<td>이 세션의 백그라운드 셸 — 탭마다 최근 30줄과 상태</td>
+<td>이 세션의 백그라운드 셸 — 선택한 탭의 최근 30줄, 모든 셸의 상태·소요 시간 목록, 실행 중이면 <code>● Live</code></td>
 <td>셸 탭 · <strong>완료 정리</strong></td>
 </tr>
 <tr>
 <td><strong>내 열린 PR</strong></td>
-<td>현재 레포에서 내가 연 미머지 PR 1건 1줄 (<code>dp-skills</code> 라벨 먼저)</td>
+<td>현재 레포에서 내가 연 미머지 PR — 제목 줄과 흐린 상태 줄 (리뷰 상태 · <code>dp</code> 표식 · 브랜치), <code>dp-skills</code> 라벨 먼저</td>
 <td>제목 링크 · <strong>AI리뷰</strong></td>
 </tr>
 </tbody>
 </table>
-<p>지금 누를 주 동작 하나만 강조됩니다. 변경이 없으면 커밋 버튼이, 기본 브랜치에서는 PR 버튼이 흐리게 바뀌고, 눌러도 실행하지 않고 이유를 알려 줍니다. 패널 폭이 48칸보다 좁으면 카드 요약을 제목 아래로 내리고 버튼을 세로로 쌓습니다.</p>
+<p>지금 누를 주 동작 하나만 강조됩니다. 변경이 없으면 커밋 버튼이, 기본 브랜치에서는 PR 버튼이 흐리게 바뀌고, 눌러도 실행하지 않고 이유를 알려 줍니다. 카드 사이에는 빈 줄을 하나 두어 테두리가 붙어 보이지 않게 합니다. 패널 폭이 48칸보다 좁으면 카드 요약을 제목 아래로 내리고, 숫자 타일은 한 줄 요약으로 접고, 버튼을 세로로 쌓습니다.</p>
 <h3 id="_4">실행 중 에이전트<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>실행 중 (<code>●</code> 청록) 이 위, 완료 (<code>✓</code> 초록)·실패 (<code>✗</code> 빨강) 가 아래입니다. 서브에이전트가 띄운 서브에이전트는 한 단계 들여 씁니다.</li>
@@ -4251,7 +4268,8 @@
 <h3 id="_5">터미널<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Claude 가 <code>run_in_background</code> 로 띄운 셸 (dev 서버·테스트·빌드 등) 마다 탭이 하나 생깁니다. 탭 이름은 명령 설명입니다.</li>
-<li>선택한 탭의 최근 30줄이 출력 창에 보이고, 셸이 끝나면 <code>✓ 완료</code> · <code>✗ 실패 (코드 N)</code> 로 바뀝니다. 기록이 사라졌는데 종료 줄이 없으면 <code>■ 중단</code> 입니다.</li>
+<li>선택한 탭의 최근 30줄이 출력 창에 보입니다. 그 아래에는 탭과 상관없이 모든 셸이 한 줄씩 <code>● 실행 중</code> · <code>✓ 완료</code> · <code>✗ 실패 (N)</code> 과 소요 시간으로 나옵니다. 기록이 사라졌는데 종료 줄이 없으면 <code>■ 중단</code> 입니다.</li>
+<li>실행 중인 셸이 있으면 카드 제목 오른쪽에 <code>● Live</code> 가 붙고, 모두 끝나면 <code>모두 끝남</code> 으로 바뀝니다.</li>
 <li>출력은 2초마다 따라옵니다. 단 <strong>패널이 열려 있고 실행 중인 것이 있을 때만</strong> 읽고, 아니면 멈춥니다.</li>
 <li><strong>완료 정리</strong> 는 끝난 셸 탭만 지웁니다. 출력은 화면에만 그리며 대화나 모델로 보내지 않습니다.</li>
 </ul>
@@ -4296,6 +4314,8 @@
 </tr>
 </tbody>
 </table>
+<p>같은 근거로 카드에 사이클 4단계 (계획 → 계획 검토 → 구현 → 평가) 를 <code>✓</code> 끝남 · <code>◐</code> 지금 · <code>○</code> 남음 · <code>✗</code> 평가 미통과로 보여 주고, 지금 단계의 에이전트 버튼만 채운 버튼으로 둡니다. 구현이 끝났는지는 파일로 알 수 없어서, plan·critic 이 있고 eval 이 없으면 구현을 지금 단계로 둡니다.</p>
+<p>목표 진행 막대는 <code>project.md</code> 목표 체크박스 수 (<code>12/17</code>) 로 그립니다. 데스크톱에서는 둥근 막대 그림으로, 터미널에서는 <code>██████░░░░</code> 글자 막대로 나옵니다.</p>
 <p>plan 이 유효한지, critic 의 blocking 이 풀렸는지는 판정하지 않습니다. 정확한 재개 지점은 <strong>run-cycle 이 기준</strong>이니 애매하면 run-cycle 버튼을 쓰세요.</p>
 <h3 id="_9">패널이 보여 주지 않는 것<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
