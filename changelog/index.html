@@ -3801,6 +3801,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0480" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.48.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0470" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4308,6 +4319,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#v0480" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        v0.48.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v0470" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4808,6 +4830,12 @@
 체크아웃은 해당 폴더에서 <code>--scope project</code> 로 따로</strong> 갱신해야 합니다.
 적용에는 재시작이 필요합니다.</p>
 </div>
+<h2 id="v0480">v0.48.0<a class="headerlink" href="#v0480" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>기존 프로젝트 파일 보호 훅이 Bash 쓰기를 훨씬 많이 알아봅니다</strong> — <code>protect-managed</code> 가 Bash 명령에서 쓰기·삭제 대상을 찾을 때, 이제 세션의 작업 폴더에서 출발해 <code>cd</code> 를 따라가고, 줄바꿈으로 이은 명령·<code>perl -i</code>·같은 명령 안의 변수 (<code>F=…; sed -i … $F</code>) 도 읽습니다. 지금까지는 대상 낱말에 <code>workspace/</code> 가 그대로 적혀 있어야만 알아봐서, <code>cd 프로젝트 폴더 &amp;&amp; sed -i … plan.md</code> 처럼 상대 경로로 쓰면 그냥 지나갔습니다 (실측 66% → 100%). 그래서 <strong>고친 뒤에는 그동안 새던 Bash 덮어쓰기가 막히기 시작합니다</strong> — 막히는 것은 프로젝트·이슈 폴더의 <em>기존</em> 파일을 Bash 로 고치는 경우뿐이고, 부분 수정은 Edit 도구로, 사이클 산출물 (<code>plan</code>·<code>plan.critic</code>·<code>eval</code>) 전체 교체는 Write 도구로 하면 됩니다</li>
+<li><strong>파이썬 등 인터프리터로 고치는 경우는 직접 쓴 경로만 막습니다</strong> — <code>open('경로', 'w')</code> 처럼 쓰기 호출에 경로를 그대로 적은 경우만 막고 (종전과 같음), 경로를 변수·인자로 넘기는 경우는 알아보되 막지 않습니다. 에이전트가 문서를 고치는 평소 방식이라 막으면 Bash 차단이 크게 늘어나서, 이번에는 측정만 합니다 (<code>tools/bash-write-audit.py --pm-recall</code> 의 「기준 밖」)</li>
+<li>해석이 안 되는 명령 (따옴표가 안 맞는 등) 은 쓰기 연산자·쓰기 명령 뒤의 보호 경로만 글자로 대조해 막습니다. 읽기 명령은 막지 않습니다 — 종전에는 이런 명령에서 경로만 보이면 <code>cat</code>·<code>grep</code> 도 막혔습니다. heredoc 본문에 경로가 적힌 것만으로 막히던 문제도 고쳤습니다</li>
+</ul>
 <h2 id="v0470">v0.47.0<a class="headerlink" href="#v0470" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>버튼으로 진행하는 작업 패널 <code>dp-panel</code> 을 따로 설치할 수 있습니다</strong> — <code>/plugin install dp-panel@deali-skills</code> 후 <code>/dp-panel</code> 로 켭니다. 커밋·PR·셀프 리뷰 버튼, 첫 미완료 feature 의 산출물로 고른 다음 에이전트 버튼, 응답이 <code>a) b) c)</code> 선택지로 끝나면 프롬프트 위에 뜨는 답 버튼, characterize·TDD·QA 모드와 남은 focus 표시, 현재 레포에서 내가 연 미머지 PR 목록을 한 화면에 모았습니다. 버튼은 스킬·에이전트를 시작만 하고 각 스킬의 확인 게이트는 그대로입니다. Claude Code 2.1.288 이상이 필요합니다 (<a href="../how-to/dp-panel/">작업 패널 (dp-panel)</a>)</li>
@@ -5097,7 +5125,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.47.0"}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": "0.48.0"}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
